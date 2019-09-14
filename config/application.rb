@@ -23,5 +23,12 @@ module FreemarketSample54b
       g.helper false
       g.test_framework false
     end
+
+    # 日本語化
+    config.i18n.default_locale = :ja
+
+    # タイムゾーンを日本時間に変更
+    config.time_zone = 'Tokyo'
+
   end
 end
