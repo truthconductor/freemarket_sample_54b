@@ -96,4 +96,4 @@ end
 
 #master keyの指定漏れを防ぐ
 #master keyが指定されていない状態でサーバ起動を実行しようとするとエラーが発生する
-config.require_master_key = true
+#config.require_master_key = true
