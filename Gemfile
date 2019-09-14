@@ -42,6 +42,9 @@ group :development, :test do
   # Debug App
   gem 'pry-rails'
   gem 'pry-byebug'
+  #Test
+  gem 'faker'
+  # Capistrano
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
@@ -59,6 +62,10 @@ group :development do
 end
 
 group :test do
+  # Test
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
