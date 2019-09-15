@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 
 # デプロイするブランチを指定、masterブランチをデプロイする場合この記述は不要
-set :branch, ENV['BRANCH'] || "add-auto-deploy-function#2"
+# set :branch, ENV['BRANCH'] || "add-auto-deploy-function#2"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
