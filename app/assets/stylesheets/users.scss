@@ -15,6 +15,10 @@ html {
   background: #f5f5f5;
 }
 
+body {
+  font-family: 'Source Sans Pro', Helvetica , Arial, '游ゴシック体', 'YuGothic', 'メイリオ', 'Meiryo', sans-serif
+}
+
 //中サイズ
 @media screen and (max-width: 1067px) {
   #user-main
@@ -47,6 +51,10 @@ html {
   } 
 }
 
+.title-user-navitem {
+  margin: 40px 0 8px;
+}
+
 li.user-navitem:hover{
   background: #fafafa;
 }
@@ -58,16 +66,19 @@ li.user-navitem {
   border-top: 1px solid #eee;
   font-size: 14px;
   background: #fff;
+
   &--active {
     background: #eee;
   }
+
+  &--active:hover {
+    background: #eee;
+  }
+
   p.nav-angle-right
   {
     position: absolute;
     right: 16px;
-  }
-  &--active:hover {
-    background: #fff;
   }
 }
 

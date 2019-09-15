@@ -1,5 +1,5 @@
 = link_to path do
-  %li.user-navitem
+  %li.user-navitem{class: [active ? 'user-navitem--active' : nil ]}
     = text
     %p.nav-angle-right
       = fa_icon 'angle-right'
