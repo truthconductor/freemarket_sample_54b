@@ -1,8 +1,4 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.1"
-
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
 
 # デプロイするブランチを指定、masterブランチをデプロイする場合この記述は不要
 set :branch, ENV['BRANCH'] || "master"
