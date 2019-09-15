@@ -29,6 +29,5 @@ module FreemarketSample54b
 
     # タイムゾーンを日本時間に変更
     config.time_zone = 'Tokyo'
-
   end
 end

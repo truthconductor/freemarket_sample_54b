@@ -32,3 +32,9 @@ Style/FrozenStringLiteralComment:
 # Use only ascii symbols in comments.
 AsciiComments:
  Enabled: false
+
+# １つのブロックの行数制限
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/*'
+    - 'spec/**/*'
