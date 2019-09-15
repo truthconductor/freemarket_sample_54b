@@ -60,7 +60,7 @@
 #     # password: "please use keys"
 #   }
 
-server '52.194.143.47', user: 'ec2-user', roles: %w{app db web}
-
+# server '52.194.143.47', , roles: %w{app db web}
+role :app, '52.194.143.47', user: 'ec2-user'
 set :rails_env, "production"
 set :unicorn_rack_env, "production"
