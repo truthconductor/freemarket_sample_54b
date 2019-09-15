@@ -1,8 +1,7 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.1"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+# デプロイするブランチを指定、masterブランチをデプロイする場合この記述は不要
+# set :branch, ENV['BRANCH'] || "add-auto-deploy-function#2"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -72,3 +71,11 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+
+set :default_env, {
+  rbenv_root: "/usr/local/rbenv",
+  path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
+  #以下の2行をcredential.yml仕様に書き換え
+  #AWS_ACCESS_KEY_ID: Rails.application.credentials.dig(:aws, :access_key_id),
+  #AWS_SECRET_ACCESS_KEY: Rails.application.credentials.dig(:aws, :secret_access_key)
+}
