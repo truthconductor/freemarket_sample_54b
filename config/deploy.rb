@@ -49,6 +49,7 @@ set :repo_url,  'git@github.com:Hiro0914/freemarket_sample_54b.git'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1' #カリキュラム通りに進めた場合、2.5.1か2.3.1です
@@ -76,6 +77,7 @@ set :default_env, {
   rbenv_root: "/usr/local/rbenv",
   path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
   #以下の2行をcredential.yml仕様に書き換え
-  #AWS_ACCESS_KEY_ID: Rails.application.credentials.dig(:aws, :access_key_id),
-  #AWS_SECRET_ACCESS_KEY: Rails.application.credentials.dig(:aws, :secret_access_key)
+  AWS_ACCESS_KEY_ID: Rails.application.credentials.dig(:aws, :access_key_id),
+  AWS_SECRET_ACCESS_KEY: Rails.application.credentials.dig(:aws, :secret_access_key)
 }
+
