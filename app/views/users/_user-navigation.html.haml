@@ -1,6 +1,6 @@
 .user-navigation
   %ul
-    = render 'nav-item', { path: '#', text: 'マイページ', active: true }
+    = render 'nav-item', { path: mypage_path, text: 'マイページ', active: current_page?(mypage_path)  }
     = render 'nav-item', { path: '#', text: 'お知らせ', active: false }
     = render 'nav-item', { path: '#', text: 'やることリスト', active: false }
     = render 'nav-item', { path: '#', text: 'いいね！一覧', active: false }
@@ -14,12 +14,12 @@
     = render 'nav-item', { path: '#', text: '評価一覧', active: false }
     = render 'nav-item', { path: '#', text: 'ガイド', active: false }
     = render 'nav-item', { path: '#', text: 'お問い合わせ', active: false }
-  %h2.title-user-navitem
+  %h2.user-navheadline
     メルペイ
   %ul
     = render 'nav-item', { path: '#', text: '売上・振込申請', active: false }
     = render 'nav-item', { path: '#', text: 'ポイント', active: false }
-  %h2.title-user-navitem
+  %h2.user-navheadline
     設定
   %ul
     = render 'nav-item', { path: '#', text: 'プロフィール', active: false }
