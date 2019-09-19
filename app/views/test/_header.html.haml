@@ -1,25 +1,25 @@
 %header.root-menu
-  .root-menu--box
-    .root-menu--box--upper
-      .root-menu--box--upper--icon 
+  .root-menu__box
+    .root-menu__box__upper
+      .root-menu__box__upper__icon 
         = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
           
-      .root-menu--box--upper--form
-        %input.root-menu--box--upper__text
-        .root-menu--box--upper__button
-          = fa_icon "search", class: "root-menu--box--upper--button--icon"
-    .root-menu--box--lower
-      .root-menu--box--lower--left
-        .root-menu--box--lower--left__categoly
-          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu--box--lower--left__categoly" do
-            = fa_icon "list-ul", class: "root-menu--box--lower--left__categoly--icon"
+      .root-menu__box__upper__form
+        %input.root-menu__box__upper--text
+        .root-menu__box__upper--button
+          = fa_icon "search", class: "root-menu__box__upper__button__icon"
+    .root-menu__box__lower
+      .root-menu__box__lower__left
+        .root-menu__box__lower__left--categoly
+          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu__box__lower__left--categoly" do
+            = fa_icon "list-ul", class: "root-menu__box__lower__left--categoly__icon"
             カテゴリーから探す
-        .root-menu--box--lower--left__brand
-          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu--box--lower--left__categoly" do
-            = fa_icon "tag", class: "root-menu--box--lower--left__categoly--icon"
+        .root-menu__box__lower__left--brand
+          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu__box__lower__left--categoly" do
+            = fa_icon "tag", class: "root-menu__box__lower__left--categoly__icon"
             ブランドから探す
-      .root-menu--box--lower--right
-        .root-menu--box--lower--right__sign-in
+      .root-menu__box__lower__right
+        .root-menu__box__lower__right--sign-in
           新規会員登録
-        .root-menu--box--lower--right__log-in
+        .root-menu__box__lower__right--log-in
           ログイン
