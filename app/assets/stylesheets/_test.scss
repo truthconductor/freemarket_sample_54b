@@ -141,15 +141,15 @@ body{
  }
 }}
 .root-campaign{
+  background-size: auto;
   width:100vw;
   height:390px;
   background-image: url(https://www-mercari-jp.akamaized.net/assets/img/rakuraku/ogp.jpg?2482339763);
-  background-position: center center;
-  background-size: auto;
     position: relative;
     top: 0px;
+    left: 50%;
+    margin-left: -50vw;
     overflow: hidden;
-    left:-130px;
     &--arrow--left{
       position: absolute;
       top: 50%;
@@ -225,7 +225,8 @@ body{
 .root-categoly--box{
   padding: 56px 0px 30px;
   background-color: rgb(255, 255, 255);
-    left:-130px;
+  left: 50%;
+  margin-left: -50vw;
     position: relative;
     top: 0px;
     width: 100vw;
@@ -316,8 +317,9 @@ body{
 .root-contents{
   max-width: 1020px;
   padding: 0px;
-  width: 100%;
+  width: 100vw;
   margin: 0px auto;
+  position:relative;
   
 }
 .root-app--dl{
