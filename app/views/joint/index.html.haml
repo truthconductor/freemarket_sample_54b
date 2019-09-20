@@ -11,14 +11,9 @@
       .root-categoly__box--popular
         人気のカテゴリー
       %ul.root-categoly__box__list
-        %li.root-categoly__box__list--label
-          レディース
-        %li.root-categoly__box__list--label
-          メンズ
-        %li.root-categoly__box__list--label
-          家電・スマホ・カメラ
-        %li.root-categoly__box__list--label
-          おもちゃ・ホビー・グッズ
+        - @categolies.each do |categoly|
+          %li.root-categoly__box__list--label
+            = categoly
     .root-new__production
       .root-new__production__box
         .root-new__production__box__upper
