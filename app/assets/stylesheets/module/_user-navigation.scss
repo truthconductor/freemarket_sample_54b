@@ -1,0 +1,63 @@
+//中サイズ
+@media screen and (max-width: 1067px) {
+  .user-navigation {
+    margin-top: 40px;
+  }
+}
+
+// PCサイズ
+@media screen and (min-width: 1068px) {
+  .user-navigation {
+    float: left;
+    width: 280px;
+  }
+  .user-navitem {
+    width: 280px;
+  }
+}
+
+// ナビゲーションヘッドライン
+.user-navheadline {
+  margin: 40px 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+// ナビゲーション項目
+.user-navitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+  transition: padding 0.5s;
+
+  // マウスオーバー時にハイライトとアイコンの移動
+  &:hover {
+    background: #fafafa;
+    padding: 10px 10px 10px 16px;
+    transition: padding 0.5s;
+  }
+  &:hover > &__icon {
+    color: #333;
+    transition: color 0.5s;
+  }
+
+  &--active {
+    background: #eee;
+    font-weight: 600;
+    &:hover {
+      background: #eee;
+    }
+  }
+
+  &__icon
+  {
+    color: #ccc;
+    transition: color 0.5s;
+  }
+}

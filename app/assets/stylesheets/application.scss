@@ -1,3 +1,5 @@
-@import "./reset";
+@import "./common/reset";
 @import "font-awesome";
-@import "users"
+@import "./mixin/clearfix";
+@import "./users";
+@import "./module/user-navigation";

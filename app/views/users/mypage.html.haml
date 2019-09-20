@@ -1,5 +1,8 @@
-%main#user-main
+-# ヘッダ
+.header
+  ヘッダー
 
+%main#user-main
   .user-container
     .user-intro
       = link_to "#", class: "user-intro__link" do
@@ -14,73 +17,15 @@
           %span.user-intro__link__userstatus--count
             XX
 
-    .user-tabcontent
-      .user-tabcontent__tabbar
-        .user-tabcontent__tabbar__tab.user-tabcontent__tabbar__tab--active#tab__notices
-          お知らせ
-        .user-tabcontent__tabbar__tab#tab__todos
-          やることリスト
-      .user-tabcontent__page.user-tabcontent__page--none
-        %ul.user-notification
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  《メルカリからの招待》「MERCARI」を入力してメルペイをはじめると必ずP1,000がもらえる！
-                %time.user-notification__item__headline--time
-                  = fa_icon 'clock-o lg'
-                  １日前
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  事務局から個別メッセージ「ログイン通知」
-                %time.user-notification__item__headline--time
-                  = fa_icon 'clock-o lg'
-                  ３日前
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-        .user-notification__footer
-          = link_to "#", class: "user-notification__footer__button" do
-            一覧を見る
-      .user-tabcontent__page
-        %ul.user-notification
-        = render "nolist", { text: '現在、やることリストはありません' }
+    -# お知らせ・やることリスト
+    = render 'user-notice'
 
-    .user-tabcontent
-      .h2.user-navheadline
-        購入した商品
-      .user-tabcontent__tabbar
-        .user-tabcontent__tabbar__tab#tab__nego
-          取引中
-        .user-tabcontent__tabbar__tab.user-tabcontent__tabbar__tab--active#tab__past
-          過去の取引
-      .user-tabcontent__page
-        %ul.user-notification
-        = render "nolist", { text: '取引中の商品がありません' }
-      .user-tabcontent__page.user-tabcontent__page--none
-        %ul.user-notification
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  「XXXXXX」を購入しました。取引が完了しました
-                %span.user-notification__item__headline--time
-                  取引完了
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  「YYYYYY」を購入しました。取引が完了しました
-                %span.user-notification__item__headline--time
-                  取引完了
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-        .user-notification__footer
-          = link_to "#", class: "user-notification__footer__button" do
-            一覧を見る
+    -# 購入した商品
+    = render 'user-bought'
+
+  -# ナビゲーションバー
   = render 'user-navigation'
+
+-# ヘッダ
+.footer
+  フッター

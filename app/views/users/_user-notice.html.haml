@@ -1,0 +1,34 @@
+.user-tabcontent
+  .user-tabcontent__tabbar
+    #user-notification-tab.user-tabcontent__tabbar__tab.user-tabcontent__tabbar__tab--active
+      お知らせ
+    #user-todo-tab.user-tabcontent__tabbar__tab
+      やることリスト
+  #user-notification-page.user-tabcontent__page
+    %ul.user-notification
+      = link_to "#" do
+        %li.user-notification__item
+          = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
+          .user-notification__item__headline
+            %p.user-notification__item__headline--title
+              《メルカリからの招待》「MERCARI」を入力してメルペイをはじめると必ずP1,000がもらえる！
+            %time.user-notification__item__headline--time
+              = fa_icon 'clock-o lg'
+              １日前
+          = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+      = link_to "#" do
+        %li.user-notification__item
+          = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
+          .user-notification__item__headline
+            %p.user-notification__item__headline--title
+              事務局から個別メッセージ「ログイン通知」
+            %time.user-notification__item__headline--time
+              = fa_icon 'clock-o lg'
+              ３日前
+          = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+    .user-notification__footer
+      = link_to "#", class: "user-notification__footer__button" do
+        一覧を見る
+  #user-todo-page.user-tabcontent__page.user-tabcontent__page--none
+    %ul.user-notification
+    = render "nolist-item", { text: '現在、やることリストはありません' }
