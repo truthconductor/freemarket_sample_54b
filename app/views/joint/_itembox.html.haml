@@ -8,63 +8,10 @@
         .root-new__production__box__upper--detail-path--text
     .root-new__production__box__group
       .root-new__prodcution__box__group__list
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
-        .root-new__production__box__group__list--image
-          = image_tag "https://static.mercdn.net/thumb/photos/m71368804446_1.jpg?1565186711",size:"188x188"
-          %span.root-new__production__box__group__list--text
-            #{@item[:name]}
-          %span.root-new__production__box__group__list--price
-            #{@item[:price]}
+        - @items.each do |item|
+          .root-new__production__box__group__list--image
+            = image_tag @item[:image],size:"188x188"
+            %span.root-new__production__box__group__list--text
+              #{@item[:name]}
+            %span.root-new__production__box__group__list--price
+              #{@item[:price]}
