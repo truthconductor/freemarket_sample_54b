@@ -1,0 +1,19 @@
+class Item < ApplicationRecord
+extend ActiveHash::Associations::ActiveRecordExtensions
+  #Validation
+  validates :name, presence: true
+  validates :name, length: { maximum: 40 }
+  validates :description, presence: true
+  validates :amount, presence: true
+  validates :amount, inclusion: { in: 300..9999999 }
+  #Association
+  belongs_to :item_state
+  belongs_to :deliver_expend
+  belongs_to :deliver_expend
+  belongs_to_active_hash :prefecture
+  belongs_to :deliver_day
+  belongs_to :sales_state
+  belongs_to :category
+  belongs_to :brand, optional: true
+  belongs_to :transaction, optional: true
+end
