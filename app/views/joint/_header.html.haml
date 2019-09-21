@@ -3,7 +3,6 @@
     .root-menu__box__upper
       .root-menu__box__upper__icon 
         = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
-          
       .root-menu__box__upper__form
         %input.root-menu__box__upper--text
         .root-menu__box__upper--button
@@ -11,15 +10,15 @@
     .root-menu__box__lower
       .root-menu__box__lower__left
         .root-menu__box__lower__left--categoly
-          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu__box__lower__left--categoly" do
+          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--categoly" do
             = fa_icon "list-ul", class: "root-menu__box__lower__left--categoly__icon"
             カテゴリーから探す
         .root-menu__box__lower__left--brand
-          =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "root-menu__box__lower__left--categoly" do
+          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--brand" do
             = fa_icon "tag", class: "root-menu__box__lower__left--categoly__icon"
             ブランドから探す
       .root-menu__box__lower__right
         .root-menu__box__lower__right--sign-in
-          新規会員登録
+          =link_to "新規会員登録","https://www.yahoo.co.jp",class: "root-menu__box__lower__right__button",:style=>"color:white";
         .root-menu__box__lower__right--log-in
-          ログイン
+          =link_to "ログイン","https://www.yahoo.co.jp",class: "root-menu__box__lower__right__button",:style=>"color: rgb(0, 149, 238)";

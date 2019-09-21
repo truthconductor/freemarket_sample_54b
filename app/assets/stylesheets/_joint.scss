@@ -35,7 +35,6 @@ body{
   display:flex;
   &__icon{
    margin-right:45px;
-   
   }
   &__form{
     position: relative;
@@ -98,6 +97,9 @@ body{
       text-decoration:none;
       vertical-align: middle;
       color: #333;
+      &:hover{
+        color: #0099e8;
+       }
      }
      &--brand{
       display: block;
@@ -109,11 +111,17 @@ body{
       text-decoration:none;
       vertical-align: middle;
       color: #333;
+      &:hover{
+        color: #0099e8;
+       }
      }
    }
    &__right{
      display:flex;
-     
+     &__button{
+       text-decoration: none;
+       
+     }
      &--sign-in{
       background-color: rgb(234, 53, 45);
       color: rgb(255, 255, 255);
@@ -129,7 +137,6 @@ body{
      &--log-in{
       text-align: center;
       background-color: rgb(255, 255, 255);
-      color: rgb(0, 149, 238);
       display: block;
       font-size: 14px;
       border-width: 1px;
@@ -140,6 +147,7 @@ body{
       padding: 8px 10px;
       transition: all 0.3s ease-out 0s;
       margin-left: 11px;
+      text-decoration:none;
      }
    }
  }
@@ -167,10 +175,6 @@ body{
       width: 31px;
       -webkit-appearance: none;
       background-image: url(arrow-left.png);
-      border-width: initial;
-      border-style: none;
-      border-color: initial;
-      border-image: initial;
       padding: 0px;
       margin-left: 60px;
     }
@@ -187,10 +191,6 @@ body{
     width: 31px;
     -webkit-appearance: none;
     background-image: url(arrow-right.png);
-    border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
     padding: 0px;
     }
     &__slider{
