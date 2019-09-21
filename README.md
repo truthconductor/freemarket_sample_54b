@@ -4,7 +4,6 @@
 
 |属性|Column|Type|Options|
 |---|---|---|---|
-|ニックネーム|nickname|string|null: false, limit:20|
 |メールアドレス|email|string|null: false, unique: true|
 |パスワード|encrypted_password|string|null: false|
 
@@ -17,6 +16,7 @@
 - has_one :profile, dependent: :destroy
 - has_one :personal, dependent: :destroy
 - has_one :deliver_address, dependent: :destroy
+- has_many :providers, dependent: :destroy
 - has_many :items
 - has_many :buyer_transactions, class_name: 'Transaction', foreign_key: 'buyer_id'
 - has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
@@ -28,6 +28,7 @@
 
 |属性|Column|Type|Options|
 |---|---|---|---|
+|ニックネーム|nickname|string|null: false, limit:20|
 |紹介文|introduction|text|limit:1000|
 |プロフィール画像|avatar|string||
 |ユーザー|user_id|reference|null: false, foreign_key: true|
@@ -77,6 +78,16 @@
 
 - belongs_to :user
 - belongs_to_active_hash :prefecture
+
+## providersテーブル（SNS認証プロバイダ）
+
+|属性|Column|Type|Options|
+|---|---|---|---|
+|認証プロバイダ|provider|string|null: false|
+|UID|uid|string|null: false|
+|ユーザー|user_id|reference|null: false, foreign_key: true|
+
+- belongs_to :user
 
 ## categoriesテーブル（カテゴリー）
 
