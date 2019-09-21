@@ -10,7 +10,7 @@
       .root-new__prodcution__box__group__list
         - @items.each do |item|
           .root-new__production__box__group__list--image
-            = image_tag @item[:image],size:"188x188"
+            =link_to image_tag(@item[:image],size:"188x188"),"https://reissuerecords.net/"
             %span.root-new__production__box__group__list--text
               #{@item[:name]}
             %span.root-new__production__box__group__list--price

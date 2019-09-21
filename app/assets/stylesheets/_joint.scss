@@ -148,7 +148,8 @@ body{
   background-size: auto;
   width:100vw;
   height:390px;
-  background-image: url(https://www-mercari-jp.akamaized.net/assets/img/rakuraku/ogp.jpg?2482339763);
+  background-image: url(merukari_campaign.jpg);
+  background-position:center center;
     position: relative;
     top: 0px;
     left: 50%;
@@ -165,7 +166,7 @@ body{
       height: 46px;
       width: 31px;
       -webkit-appearance: none;
-      background-image: url(https://web-jp-assets.mercdn.net/_next/static/images/carousel-prev-af7ca886ce42c4c02610cd15421ddcad.png);
+      background-image: url(arrow-left.png);
       border-width: initial;
       border-style: none;
       border-color: initial;
@@ -185,7 +186,7 @@ body{
     height: 46px;
     width: 31px;
     -webkit-appearance: none;
-    background-image: url(https://web-jp-assets.mercdn.net/_next/static/images/carousel-next-bc3a1438a1435e953bc67d720cd05c61.png);
+    background-image: url(arrow-right.png);
     border-width: initial;
     border-style: none;
     border-color: initial;
@@ -327,7 +328,7 @@ body{
   
 }
 .root-app__dl{
-  background: url(https://web-jp-assets.mercdn.net/_next/static/images/download_app_bg-b57d6f1a32f2aebd89cf6f43bc2e4b39.jpg) center center / cover;
+  background: url("appDL.jpg") center center / cover;
     background-position: center center;
     margin-top:auto;
     display: flex;
