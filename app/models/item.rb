@@ -15,5 +15,6 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :sales_state
   belongs_to :category
   belongs_to :brand, optional: true
-  belongs_to :transaction, optional: true
+  belongs_to :deal, optional: true
+  belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 end

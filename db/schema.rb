@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
     t.index ["category_id"], name: "index_categories_brands_on_category_id"
   end
 
+  create_table "deals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.bigint "buyer_id", null: false
+    t.bigint "seller_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_deals_on_buyer_id"
+    t.index ["seller_id"], name: "index_deals_on_seller_id"
+  end
+
   create_table "deliver_days", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "day", null: false
     t.datetime "created_at", null: false
@@ -80,17 +90,19 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
     t.bigint "sales_state_id", null: false
     t.bigint "category_id", null: false
     t.bigint "brand_id"
-    t.bigint "transaction_id"
+    t.bigint "deal_id"
+    t.bigint "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["deal_id"], name: "index_items_on_deal_id"
     t.index ["deliver_day_id"], name: "index_items_on_deliver_day_id"
     t.index ["deliver_expend_id"], name: "index_items_on_deliver_expend_id"
     t.index ["deliver_method_id"], name: "index_items_on_deliver_method_id"
     t.index ["item_state_id"], name: "index_items_on_item_state_id"
     t.index ["sales_state_id"], name: "index_items_on_sales_state_id"
-    t.index ["transaction_id"], name: "index_items_on_transaction_id"
+    t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -109,16 +121,6 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "date", null: false
-    t.bigint "buyer_id", null: false
-    t.bigint "seller_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["buyer_id"], name: "index_transactions_on_buyer_id"
-    t.index ["seller_id"], name: "index_transactions_on_seller_id"
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -133,16 +135,17 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
 
   add_foreign_key "categories_brands", "brands"
   add_foreign_key "categories_brands", "categories"
+  add_foreign_key "deals", "users", column: "buyer_id"
+  add_foreign_key "deals", "users", column: "seller_id"
   add_foreign_key "item_images", "items"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "categories"
+  add_foreign_key "items", "deals"
   add_foreign_key "items", "deliver_days"
   add_foreign_key "items", "deliver_expends"
   add_foreign_key "items", "deliver_methods"
   add_foreign_key "items", "item_states"
   add_foreign_key "items", "sales_states"
-  add_foreign_key "items", "transactions"
+  add_foreign_key "items", "users", column: "seller_id"
   add_foreign_key "profiles", "users"
-  add_foreign_key "transactions", "users", column: "buyer_id"
-  add_foreign_key "transactions", "users", column: "seller_id"
 end
