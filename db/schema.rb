@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
     t.bigint "item_state_id", null: false
     t.bigint "deliver_expend_id", null: false
     t.bigint "deliver_method_id", null: false
-    t.integer "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.bigint "deliver_day_id", null: false
     t.bigint "sales_state_id", null: false
     t.bigint "category_id", null: false
