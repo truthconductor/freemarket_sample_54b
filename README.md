@@ -17,9 +17,9 @@
 - has_one :personal, dependent: :destroy
 - has_one :deliver_address, dependent: :destroy
 - has_many :providers, dependent: :destroy
-- has_many :items
-- has_many :buyer_transactions, class_name: 'Transaction', foreign_key: 'buyer_id'
-- has_many :seller_transactions, class_name: 'Transaction', foreign_key: 'seller_id'
+- has_many :items, foreign_key: 'seller_id'
+- has_many :buyer_deals, class_name: 'Deal', foreign_key: 'buyer_id'
+- has_many :seller_deals, class_name: 'Deal', foreign_key: 'seller_id'
 - has_many :item_comments
 - has_many :item_likes
 - has_one :credit_card
@@ -46,7 +46,7 @@
 |セイ|last_name_kana|string|null: false, limit:35|
 |メイ|first_name_kana|string|null: false, limit:35|
 |郵便番号|zip-code|string|limit:8|
-|都道府県|prefecture_id|reference||
+|都道府県|prefecture_id|integer||
 |市区町村|city|string|limit:50|
 |番地|address|string|limit:100|
 |建物名|building|string|limit:100|
@@ -67,7 +67,7 @@
 |セイ|last_name_kana|string|null: false, limit:35|
 |メイ|first_name_kana|string|null: false, limit:35|
 |郵便番号|zip_code|string|null: false, limit:8|
-|都道府県|prefecture_id|reference|null: false|
+|都道府県|prefecture_id|integer|null: false|
 |市区町村|city|string|null: false, limit:50|
 |番地|address|string|null: false, limit:100|
 |建物名|building|string|limit:100|
@@ -137,9 +137,9 @@
 |価格|amount|integer|null: false|
 |状態id|item_state_id|reference|null: false, foreign_key: true|
 |配送料負担id|deliver_expend_id|reference|null: false, foreign_key: true|
-|配送方法id|prefecture_id|reference|null: false, foreign_key: true|
-|都道府県id|deliver_day_id|reference|null: false, foreign_key: true|
-|発送日数id|sales_state_id|reference|null: false, foreign_key: true|
+|都道府県id|prefecture_id|integer|null: false, foreign_key: true|
+|発送日数id|deliver_day_id|reference|null: false, foreign_key: true|
+|販売状態id|sales_state_id|reference|null: false, foreign_key: true|
 |カテゴリid|category_id|reference|null: false, foreign_key: true|
 |ブランドid|brand_id|reference|foreign_key: true|
 
@@ -160,7 +160,7 @@
 - belongs_to :sales_state
 - belongs_to :category
 - belongs_to :brand
-- belongs_to :transaction
+- belongs_to :deal
 
 ## item_imagesテーブル（出品画像）
 
@@ -198,7 +198,7 @@
 |属性|Column|Type|Options|
 |---|---|---|---|
 |配送方法|method|string|null: false|
-|着払い可|cod|boolean|null: false|
+|着払い可|cash_on_delivery|boolean|null: false|
 
 ### Association
 
@@ -262,7 +262,7 @@
 - belongs_to :user
 - belongs_to :item
 
-## transactionsテーブル（取引）
+## dealsテーブル（取引）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -287,7 +287,7 @@
 
 ### Association
 
-- belongs_to :transaction
+- belongs_to :deal
 
 ## credit_cardsテーブル（クレジットカード）
 
