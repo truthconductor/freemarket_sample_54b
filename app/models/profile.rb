@@ -1,8 +1,8 @@
 class Profile < ApplicationRecord
   #Validation
-  validates :nickname, {maximum: 20}
+  validates :nickname, length: {maximum: 20}
   validates :nickname, presence: true
-  validates :introduction, {maximum: 1000}
+  validates :introduction, length: {maximum: 1000}
   #Association
   belongs_to :user
 end

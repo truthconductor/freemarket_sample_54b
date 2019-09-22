@@ -9,7 +9,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   #Association
   belongs_to :item_state
   belongs_to :deliver_expend
-  belongs_to :deliver_expend
+  belongs_to :deliver_method
   belongs_to_active_hash :prefecture
   belongs_to :deliver_day
   belongs_to :sales_state
