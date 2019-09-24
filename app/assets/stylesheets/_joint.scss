@@ -8,6 +8,8 @@
 
 body{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
   font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
 } 
 
@@ -369,22 +371,19 @@ body{
 .root-footer__menu{
   background-color: rgb(34, 34, 34);
   color: rgb(255, 255, 255);
-  font-size: 12px;
+  font-size: 0px;
   padding: 0px 20px 10px;
   &--icon{
     margin-top:30px;
   }
   &__nav{
     margin: 0px auto;
+  
     &__list{
       display: inline-block;
       margin-top: 18px;
       vertical-align: top;
-      line-height: 1.4em;
-      margin: 16px 0px 0px;
-      width: 50%;
-      padding: 0px 10px;
-      
+      font-size:12px;
       &--icon{
        font-size:16px;
       }
@@ -421,17 +420,16 @@ body{
       }
     }
     &--base{
-      width:45%;
       display: inline-block;
       vertical-align: top;
       line-height: 1.4em;
       margin: 16px 0px 0px;
       padding: 0px 10px 0px 0px;
+      font-size:12px;
       &--icon{
         font-size:16px;
       }
       &--rule{
-        width:50%;
         float:left;
         margin-top:-15px;
         &__list{
@@ -463,6 +461,7 @@ body{
       text-align: center;
       padding-left: 15px;
       width: 75%;
+      font-size:12px;
     }
   }
 }
@@ -601,6 +600,11 @@ body{
     padding: 0px 40px 0px 0px;
   }
 
+  .root-footer__menu__nav__base{
+    width: auto;
+    padding: 0px 40px 0px 0px;
+  }
+
   .root-footer__menu__copyright{
     width: 1020px;
     margin: 30px auto 20px;
@@ -619,6 +623,17 @@ body{
   .root-footer__menu__nav{
     width: 700px;
   }
+  .root-footer__menu__nav__list{
+    width: 50%;
+  }
+
+  .root-footer__menu__nav--base {
+    width:100%;
+  }
+  .root-footer__menu__nav--base--rule{
+    width: 50%;
+  }
+
   .root-footer__menu__copyright{
     width: 1020px;
     margin: 30px auto 20px;
@@ -634,6 +649,16 @@ body{
   }
   .root-footer__menu__nav{
     width: 700px;
+  }
+
+  .root-footer__menu__nav__list{
+    width: 49%;
+  }
+  .root-footer__menu__nav--base {
+    width:100%;
+  }
+  .root-footer__menu__nav--base--rule{
+    width: 50%;
   }
   .root-footer__menu__copyright{
     width: 700px;
