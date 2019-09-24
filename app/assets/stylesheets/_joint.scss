@@ -375,17 +375,22 @@ body{
     margin-top:30px;
   }
   &__nav{
+    margin: 0px auto;
     &__list{
       display: inline-block;
       margin-top: 18px;
       vertical-align: top;
       line-height: 1.4em;
       margin: 16px 0px 0px;
+      width: 50%;
+      padding: 0px 10px;
+      
       &--icon{
        font-size:16px;
       }
       &--company-outline{
         list-style:none;
+        padding-left:0px;
         &--entity{
           line-height: 1.4em;
           margin: 16px 0px 0px;
@@ -451,8 +456,6 @@ body{
     color: rgb(255, 255, 255);
   }
   &__copyright__box{
-    width: 1020px;
-    margin: 30px auto 20px;
     -webkit-box-align: center;
     align-items: center;
     display: flex;
@@ -592,9 +595,19 @@ body{
   .root-footer__menu__nav{
     width: 1020px;
   }
+  
+  .root-footer__menu__nav__list{
+    width: auto;
+    padding: 0px 40px 0px 0px;
+  }
+
+  .root-footer__menu__copyright{
+    width: 1020px;
+    margin: 30px auto 20px;
+  }
 }
 
-@media screen and (max-width: 1067px){
+@media screen and (max-width: 1067px)and (min-width:768px){
   .root-contens{
     width:700px;
     padding:0px;
@@ -603,7 +616,13 @@ body{
   {
     height:290px;
   }
-  
+  .root-footer__menu__nav{
+    width: 700px;
+  }
+  .root-footer__menu__copyright{
+    width: 1020px;
+    margin: 30px auto 20px;
+  }
 }
 
 @media screen and (max-width:767px){
@@ -615,6 +634,10 @@ body{
   }
   .root-footer__menu__nav{
     width: 700px;
-    margin: 0px auto;
   }
+  .root-footer__menu__copyright{
+    width: 700px;
+    margin: 55px auto 10px;
+  }
+  
 }
