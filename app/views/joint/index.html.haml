@@ -24,7 +24,7 @@
           今すぐ無料ダウンロード
         .root-app__dl__box__left--image
           .root-app__dl__box__left--image--icon
-            =image_tag "mercari_icon.png",size: "68x68"
+            =image_tag "mercari_icon.png",size: "68x68",class:"root-app__dl__box__left--image--icon--image"
           .root-app__dl__box__left--image--appstore
             =image_tag "app_store.svg",size:"144x40"
           .root-app__dl__box__left--image--googleplay
@@ -32,8 +32,5 @@
       .root-app__dl__box__right
         =image_tag "app_koukoku.png",size:"300x260"
   = render partial: 'footer'
-  .root-exhibit__button
-    .root-exhibit__button--text
-      出品
-    =link_to "https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class: "exhibit__button__icon" do
-      = fa_icon "camera 3x", class: "root-exhibit__button__icon"
+  = render partial: 'exhibit__button'
+  
