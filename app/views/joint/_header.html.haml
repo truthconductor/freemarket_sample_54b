@@ -23,5 +23,26 @@
         .root-menu__box__lower__right--log-in
           =link_to "ログイン","https://www.yahoo.co.jp",class: "root-menu__box__lower__right__button";
 
-  .root-short__menu
-    .root-short__menu__box
+  .root-short-menu
+    .root-short-menu__box
+      .root-short-menu__box__upper
+        .root-short-menu__box__upper--left
+          = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
+        .root-short-menu__box__upper--right
+          .root-short-menu__box__upper__right--sign-in
+            =link_to "新規会員登録","https://www.yahoo.co.jp",class: "root-menu__box__upper__right__button",:style=>"color:white";
+          .root-short-menu__box__upper__right--log-in
+            =link_to "ログイン","https://www.yahoo.co.jp",class: "root-menu__box__upper__right__button";
+      .root-short-menu__box__center
+        %input.root-menu__box__upper--text
+        .root-menu__box__upper--button
+          = fa_icon "search", class: "root-menu__box__upper__button__icon"
+      .root-menu__box__lower
+        .root-menu__box__lower--categoly
+          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--categoly" do
+            = fa_icon "list-ul", class: "root-menu__box__lower__left--categoly__icon"
+            カテゴリーから探す
+        .root-menu__box__lower--brand
+          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--brand" do
+            = fa_icon "tag", class: "root-menu__box__lower__left--categoly__icon"
+            ブランドから探す
