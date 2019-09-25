@@ -14,7 +14,7 @@ body{
 } 
 
 .root-wrapper{
-  background-color: rgb(245, 245, 245);
+  background-color: $sub-color;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -28,7 +28,6 @@ body{
   top: 0px;
   background-size: auto;
   overflow: hidden;
-  
   &__arrow__left{
     position: absolute;
     top: 50%;
@@ -84,7 +83,7 @@ body{
 }
 
 .root-categoly__box{
-  background-color: rgb(255, 255, 255);
+  background-color: $main-color;
   position: relative;
   top: 0px;
   width: 100vw;
@@ -134,13 +133,13 @@ body{
       flex-direction: column;
       justify-content: center;
       &--title{
-        color: rgb(255, 255, 255);
+        color: $main-color;
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 15px;
       }
       &--text{
-        color: rgb(255, 255, 255);
+        color: $main-color;
         font-size: 35px;
         margin-bottom: 20px;
       }

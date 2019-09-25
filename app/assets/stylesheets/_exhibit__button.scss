@@ -12,10 +12,10 @@
   &--text{
     padding-top:32px;
     font-size: 22px;
-    color: rgb(255, 255, 255);
+    color: $main-color;
   }
   &__icon{
-    color: rgb(255, 255, 255);
+    color: $main-color;
     display: block;
     margin: 5px auto 0px;
     width:80px;
@@ -25,7 +25,7 @@
 }
 
 .fa.fa-camera.root-exhibit__button__icon{
-  color: rgb(255, 255, 255);
+  color: $main-color;
   display: block;
   margin-top: 8px;
 }
