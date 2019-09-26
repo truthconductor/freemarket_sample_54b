@@ -4,7 +4,6 @@ class Users::CardsController < ApplicationController
 
   def new
     @card = Card.new
-    render layout: 'payjpjs'
   end
 
   def create
