@@ -1,13 +1,29 @@
-.card-container
-  .card-container__header
-    %h2.card-container__header__headline
-      支払方法
-  .card-container__list
-    %h3.card-container__list__headline
-      クレジットカード一覧
-    = link_to mypage_cards_add_path do
-      .card-container__list__button
-        %p クレジットカードを追加する
-  .card-container__footer
-    = link_to '#' do
-      支払方法について
+-# ヘッダ
+.header
+  ヘッダー
+
+%main#user-main
+  .card-container
+    .card-container__header
+      %h2.card-container__header__headline
+        支払い方法
+    .card-container__list
+      %h3.card-container__list__headline
+        クレジットカード一覧
+      .card-container__list__cards
+        = link_to mypage_cards_add_path do
+          .card-container__list__cards__button
+            = fa_icon 'credit-card', class: "card-container__list__cards__button__icon"
+            クレジットカードを追加する
+      %hr.card-container__list--line
+      = link_to '#', class:"card-container__list__help" do
+        %p
+          支払い方法について
+        = fa_icon 'angle-right lg', class: 'card-container__list__help__icon'
+
+  -# ナビゲーションバー
+  = render 'users/user-navigation'
+
+-# フッタ
+.footer
+  フッター
