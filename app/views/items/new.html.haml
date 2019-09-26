@@ -1,0 +1,46 @@
+.form
+  = form_with model: @item do |f|
+    = f.fields_for :item_images do |item_image|
+      = item_image.file_field :image, multiple: false
+    .form__name
+      = f.label :name, "商品名"
+      = f.text_field :name, placeholder: "商品名(必須 40文字まで)"
+    .form__description
+      = f.label :description, "商品の説明"
+      = f.text_field :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。"
+    .form__parent-category
+      = f.label :category_id, "カテゴリー"
+      = f.select :category_id, @category_parent_array, {}
+    .form__item-state
+      = f.label :item_state_id, "商品の状態"
+      = f.collection_select :item_state_id, ItemState.all, :id, :state, include_blank: "---"
+    .form__deliver-expend
+      = f.label :deliver_expend_id, "配送料の負担"
+      = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, include_blank: "---"
+    .form__deliver-method
+      = f.label :deliver_method_id, "配送の方法"
+      = f.collection_select :deliver_method_id, DeliverMethod.all, :id, :method, include_blank: "---"
+    .form__prefecture
+      = f.label :prefecture_id, "発送元の地域"
+      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: "---"
+    .form__deliver-day
+      = f.label :deliver_day_id, "発送までの日数"
+      = f.collection_select :deliver_day_id, DeliverDay.all, :id, :day, include_blank: "---"
+    .form__amount
+      = f.label :amount, "商品名"
+      = f.text_field :amount, placeholder: "例）300"
+    = f.submit "出品する"
+
+    -#配列データを受け取るため、file_fieldのname属性を指定する必要があると思ったが、逆にエラーが出た。
+    -#  name: "item_images[name][]
+
+-#  = form_for @item do |f|
+    -#     <%= form_for @product, html: { multipart: true } do |product|%>
+
+    -#     <%= product.text_field :price # just normal type of field %>
+
+    -#     <%= product.fields_for :product_photos do |photo| # nested fieldss %>
+    -#         <%= photo.file_field :image, :multiple => true, name: "product_photos[image_url][]" %>
+    -#     <% end %>
+    -#     <%= p.submit "Update", class: "btn" %>
+    -# <% end %>

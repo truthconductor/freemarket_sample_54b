@@ -17,4 +17,6 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :brand, optional: true
   belongs_to :deal, optional: true
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
+  has_many :item_images, dependent: :destroy
+  accepts_nested_attributes_for :item_images, allow_destroy: true
 end
