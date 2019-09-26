@@ -94,3 +94,4 @@ gem 'ancestry'
 gem 'jquery-rails'
 # Use pay.jp
 gem 'payjp'
+gem 'font-awesome-rails'

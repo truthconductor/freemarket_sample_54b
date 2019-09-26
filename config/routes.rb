@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'test#index'
 
+  get 'mypage', to: 'users#mypage', as: :mypage
   get 'mypage/cards/', to: 'users/cards#index', as: :mypage_cards
   get 'mypage/cards/create', to: 'users/cards#new', as: :mypage_cards_add
   post 'mypage/cards/', to: 'users/cards#create', as: :mypage_cards_create
