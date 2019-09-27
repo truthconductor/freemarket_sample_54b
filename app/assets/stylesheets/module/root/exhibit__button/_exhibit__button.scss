@@ -9,23 +9,23 @@
   text-align: center;
   background-color: rgb(234, 53, 45);
   border-radius: 50%;
+  text-decoration: none;
   &--text{
     padding-top:32px;
     font-size: 22px;
-    color: $main-color;
+    color: $box-white;
   }
   &__icon{
-    color: $main-color;
+    color: $box-white;
     display: block;
     margin: 5px auto 0px;
     width:80px;
     height: 40px;
-    text-decoration: none;
   }
 }
 
-.fa.fa-camera.root-exhibit__button__icon{
-  color: $main-color;
+.fa-camera.root-exhibit__button__icon{
+  color: $box-white;
   display: block;
   margin-top: 8px;
 }

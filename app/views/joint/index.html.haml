@@ -15,22 +15,7 @@
           %li.root-categoly__box__list--label
             = categoly
     = render partial: 'itembox'
-  .root-app__dl
-    .root-app__dl__box
-      .root-app__dl__box__left
-        .root-app__dl__box__left--title
-          スマホでかんたんアプリ
-        .root-app__dl__box__left--text
-          今すぐ無料ダウンロード
-        .root-app__dl__box__left--image
-          .root-app__dl__box__left--image--icon
-            =image_tag "mercari_icon.png",size: "68x68",class:"root-app__dl__box__left--image--icon--image"
-          .root-app__dl__box__left--image--appstore
-            =image_tag "app_store.svg",size:"144x40"
-          .root-app__dl__box__left--image--googleplay
-            =image_tag "google-play.svg",size:"144x40"
-      .root-app__dl__box__right
-        =image_tag "app_koukoku.png",size:"300x260"
+  = render partial: 'app__dl'
   = render partial: 'footer'
   = render partial: 'exhibit__button'
   

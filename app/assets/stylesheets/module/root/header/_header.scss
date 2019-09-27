@@ -1,5 +1,5 @@
 .root-menu{
-  background-color:$main-color;
+  background-color:$box-white;
   position: relative;
   &__box{
     width:700px; 
@@ -16,8 +16,8 @@
         position: relative;
         width: 100%;
       }
-      &--text{
-        background-color: $sub-color;
+      &--text{ 
+        background-color: $box-white;
         font-size: 16px;
         height: 36px;
         line-height: 1.4em;
@@ -30,25 +30,26 @@
         border-radius: 4px;
         outline: none;
         transition: all 0.3s ease-out 0s;
+        padding-left:10px;
+
       }
       &--button{
         background-color: transparent;
         cursor: pointer;
+        font-size:15px;
+        position: absolute;
+        right:0px;
+        top: 0px;
+        padding: 0px;
+        max-width: 100%;
+        max-height: 100%;
+        color: rgb(34, 34, 34);
         height: 40px;
         position: absolute;
-        right: -10px;
-        top: 10px;
         width: 40px;
-        border-radius: 0px 4px 4px 0px;
+        border-style: none;
         padding: 0px;
-        &__icon{
-          max-width: 100%;
-          max-height: 100%;
-          color: rgb(34, 34, 34);
-          height: 14px;
-          margin-top: 2px;
-          width: 14px;
-        }
+        border-radius: 0px 4px 4px 0px;
       }
     }
     &__lower{
@@ -57,29 +58,24 @@
       margin-top: 8px;
       &__left{
         display:flex;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 36px;
+        white-space: nowrap;
+        vertical-align: middle;
         &--category{
-          display: block;
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 36px;
-          white-space: nowrap;
-          text-decoration:none;
-          vertical-align: middle;
           color: #333;
+          text-decoration:none;
+          display: block;
           &:hover{
             color: $link-hover;
           }
          }
         &--brand{
           display: block;
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 36px;
-          white-space: nowrap;
           padding: 0px 10px;
-          text-decoration:none;
-          vertical-align: middle;
           color: #333;
+          text-decoration:none;
           &:hover{
             color: $link-hover;
           }
@@ -87,12 +83,14 @@
       }
       &__right{
         display:flex;
-        &__button{
+        &__button--log-in{
           text-decoration: none;
           color:rgb(0, 149, 238);
           &:hover{color:white;}
         }
         &--sign-in{
+          text-decoration: none;
+          color:$text-white;
           background-color: rgb(234, 53, 45);
           display: block;
           font-size: 14px;
@@ -114,9 +112,11 @@
           border-radius: 4px;
           padding: 8px 10px;
           margin-left: 11px;
-          text-decoration:none;
+          text-decoration: none;
+          color:rgb(0, 149, 238);
           &:hover{
             background-color: $link-hover; 
+            color:white;
           }
         }
       }
@@ -144,6 +144,7 @@
           color:rgb(0, 149, 238);
         }
         &--sign-in{
+          color:white;
           background-color: rgb(234, 53, 45);
           display: block;
           font-size: 14px;
@@ -153,6 +154,7 @@
           border-image: initial;
           border-radius: 4px;
           padding: 8px 10px;
+          text-decoration:none;
         }
         &--log-in{
           text-align: center;
@@ -166,8 +168,10 @@
           padding: 8px 10px;
           margin-left: 11px;
           text-decoration:none;
+          color:rgb(0, 149, 238);
           &:hover{
-            background-color: $link-hover; 
+            background-color: $link-hover;
+            color:white;
           }
         }
       }
@@ -175,7 +179,7 @@
     &__center{
       padding: 0px 10px 8px;
       &--text{
-        background-color:$sub-color;
+        background-color:$background-white;
         width:100%;
         font-size: 16px;
         height: 40px;
@@ -192,22 +196,41 @@
     &__lower{
       display:flex;
       &--category{
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 36px;
+        white-space: nowrap;
+        text-decoration:none;
+        vertical-align: middle;
+        color: #333;
         align-items: center;
         display: flex;
-        font-size: 0px;
         height: 42px;
         justify-content: center;
         width: 50%;
         padding-bottom: 4px;
+        &:hover{
+          color:$link-hover;
+        }
+
       }
       &--brand{
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 36px;
+        white-space: nowrap;
+        text-decoration:none;
+        vertical-align: middle;
+        color: #333;
         align-items: center;
         display: flex;
-        font-size: 0px;
         height: 42px;
         justify-content: center;
         width: 50%;
         padding-bottom: 4px;
+        &:hover{
+          color:$link-hover;
+        }
       }
     }
   }
@@ -229,3 +252,5 @@
   padding: 0px;
 
 }
+
+

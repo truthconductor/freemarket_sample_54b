@@ -40,7 +40,7 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 20px 20px;
-      &--image{
+      &__box{
         visibility: visible;
         opacity: 1;
         background-color: #fff;

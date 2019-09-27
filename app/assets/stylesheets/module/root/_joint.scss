@@ -14,7 +14,7 @@ body{
 } 
 
 .root-wrapper{
-  background-color: $sub-color;
+  background-color: $box-white;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -83,7 +83,7 @@ body{
 }
 
 .root-categoly__box{
-  background-color: $main-color;
+  background-color: $text-white;
   position: relative;
   top: 0px;
   width: 100vw;
@@ -133,13 +133,13 @@ body{
       flex-direction: column;
       justify-content: center;
       &--title{
-        color: $main-color;
+        color: $text-white;
         font-size: 24px;
         font-weight: 600;
         margin-bottom: 15px;
       }
       &--text{
-        color: $main-color;
+        color: $text-white;
         font-size: 35px;
         margin-bottom: 20px;
       }
@@ -201,7 +201,7 @@ body{
   overflow: hidden;
   position: relative;
 }
-.fa.fa-twitter.fa-3x.footer__menu__box__lower--search--categoly--icon{
+.fa-twitter.fa-3x.footer__menu__box__lower--search--categoly--icon{
   margin-right:15px;
 }
 
