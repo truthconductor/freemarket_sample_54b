@@ -16,9 +16,9 @@
  @import "reset";
  @import "font-awesome";
  @import "./config/color";
- @import "joint";
- @import "header";
- @import "footer";
- @import "item__box";
- @import "exhibit__button";
+ @import "./module/root/joint";
+ @import "./module/root/header/header";
+ @import "./module/root/footer/footer";
+ @import "./module/root/item__box/item__box";
+ @import "./module/root/exhibit__button/exhibit__button";
  @import "media";

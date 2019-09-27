@@ -16,6 +16,7 @@
       font-size:12px;
       &--icon{
        font-size:16px;
+       color:$main-color;
       }
       &--company-outline{
         list-style:none;
@@ -24,7 +25,9 @@
           line-height: 1.4em;
           margin: 16px 0px 0px;
           display: list-item;
-          text-align:-webkit-match-parent
+          text-decoration:none;
+          opacity: 0.7;
+          color:$main-color;
         }
       }
       &--help{
@@ -32,13 +35,9 @@
         &--entity{
           line-height: 1.4em;
           margin: 16px 0px 0px;
-        }
-      }
-      &--rule{
-        list-style: none;
-        &--entity{
-          line-height: 1.4em;
-          margin: 16px 0px 0px;
+          text-decoration:none;
+          opacity: 0.7;
+          color:$main-color;
         }
       }
       &--country{
@@ -46,6 +45,9 @@
         &--entity{
           line-height: 1.4em;
           margin: 16px 0px 0px;
+          text-decoration:none;
+          opacity: 0.7;
+          color:$main-color;
         }
       }
     }
@@ -69,6 +71,9 @@
             line-height: 1.4em;
             margin: 16px 0px 0px;
             display: list-item;
+            text-decoration:none;
+            opacity: 0.7;
+            color:$main-color;
           }
         }
       }
