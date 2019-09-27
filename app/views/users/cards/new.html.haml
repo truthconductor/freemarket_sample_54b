@@ -32,20 +32,27 @@
           = f.label  "有効期限"
           %span.form--required
             必須
-        = f.select :month, @card.month_select
-        = f.label :month
-        = f.select :year, @card.year_select
-        = f.label :year
+        .card-container__form__field__date
+          = f.select :month, @card.month_select, {}, {class: "card-container__form__field__date__select"}
+          = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
+          = f.label :month
+          = f.select :year, @card.year_select, {}, {class: "card-container__form__field__date__select"}
+          = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
+          = f.label :year
       .card-container__form__field
         .card-container__form__field_label
           = f.label :cvc
           %span.form--required
             必須
         = f.text_field :cvc, placeholder: "カード背面4桁もしくは3桁の番号", maxlength:4, class: "card-container__form__field__text_field"
-      .card-container__form__field__help
-        カード裏面の番号とは？
+        %p.card-container__form__field__help
+          = link_to "#", class: "card-container__form__field__help--link" do
+            = fa_icon 'question-circle'
+            カード裏面の番号とは？
       .card-container__form__field
-        = f.submit "追加する", class: "card-container__form__field--btn"
+
+      .card-container__form__field
+        = f.submit "追加する", class: "card-container__form__field__button"
 
   -# ナビゲーションバー
   = render 'users/user-navigation'
