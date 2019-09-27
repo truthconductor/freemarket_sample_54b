@@ -8,7 +8,6 @@
     &__upper{
       padding: 8px 0px 0px;
       justify-content: space-between;
-      -webkit-box-pack: justify;
       display:flex;
       &__icon{
         margin-right:45px;
@@ -24,7 +23,6 @@
         line-height: 1.4em;
         position: relative;
         width: 100%;
-        -webkit-appearance: none;
         border-width: 1px;
         border-style: solid;
         border-color: rgb(204, 204, 204);
@@ -41,11 +39,6 @@
         right: -10px;
         top: 10px;
         width: 40px;
-        -webkit-appearance: none;
-        border-width: initial;
-        border-style: none;
-        border-color: initial;
-        border-image: initial;
         border-radius: 0px 4px 4px 0px;
         padding: 0px;
         &__icon{
@@ -60,7 +53,6 @@
     }
     &__lower{
       display:flex;
-      -webkit-box-pack: justify;
       justify-content: space-between;
       margin-top: 8px;
       &__left{
@@ -121,7 +113,6 @@
           border-image: initial;
           border-radius: 4px;
           padding: 8px 10px;
-          transition: all 0.3s ease-out 0s;
           margin-left: 11px;
           text-decoration:none;
           &:hover{
@@ -131,4 +122,110 @@
       }
     }
   }
+}
+
+.root-short-menu{
+  padding-top:6px;
+  &__box{
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+    &__upper{
+      min-height: 36px;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 0px 10px;
+      &__right{
+        display:flex;
+        &__button{
+          text-decoration: none;
+          color:rgb(0, 149, 238);
+        }
+        &--sign-in{
+          background-color: rgb(234, 53, 45);
+          display: block;
+          font-size: 14px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgb(234, 53, 45);
+          border-image: initial;
+          border-radius: 4px;
+          padding: 8px 10px;
+        }
+        &--log-in{
+          text-align: center;
+          display: block;
+          font-size: 14px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgb(0, 149, 238);
+          border-image: initial;
+          border-radius: 4px;
+          padding: 8px 10px;
+          margin-left: 11px;
+          text-decoration:none;
+          &:hover{
+            background-color: $link-hover; 
+          }
+        }
+      }
+    }
+    &__center{
+      padding: 0px 10px 8px;
+      &--text{
+        background-color:$sub-color;
+        width:100%;
+        font-size: 16px;
+        height: 40px;
+        line-height: 1.4em;
+        position: relative;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(204, 204, 204);
+        border-image: initial;
+        border-radius: 4px;
+        outline: none;
+      }
+    }
+    &__lower{
+      display:flex;
+      &--category{
+        align-items: center;
+        display: flex;
+        font-size: 0px;
+        height: 42px;
+        justify-content: center;
+        width: 50%;
+        padding-bottom: 4px;
+      }
+      &--brand{
+        align-items: center;
+        display: flex;
+        font-size: 0px;
+        height: 42px;
+        justify-content: center;
+        width: 50%;
+        padding-bottom: 4px;
+      }
+    }
+  }
+}
+
+.root-short-menu__box__upper__button__icon{
+  background-color: transparent;
+  cursor: pointer;
+  height: 40px;
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  width: 40px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  border-radius: 0px 4px 4px 0px;
+  padding: 0px;
+
 }

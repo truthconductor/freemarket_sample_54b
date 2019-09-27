@@ -3,6 +3,11 @@
   {
     width: 1020px;
   }
+
+  .root-short-menu{
+    display:none;
+  }
+
   .root-contents
   {
     width:1020px;
@@ -63,6 +68,10 @@
 }
 
 @media screen and (max-width: 1067px)and (min-width:768px){
+
+  .root-short-menu{
+    display:none;
+  }
   .root-contens{
     width:700px;
     padding:0px;
@@ -99,8 +108,20 @@
 }
 
 @media screen and (max-width:767px){
+  .root-menu__box
+  {
+    display:none;
+  }
+
+  .root-campaign
+  {
+    height:290px;
+    background-size:cover;
+    max-width:100vw;
+  }
+
   .root-categoly__box{
-  padding: 40px 20px 20px;
+  padding: 40px 0px 20px;
   }
   .root-categoly__box--popular{
     font-size:20px;
@@ -111,6 +132,9 @@
   .root-new__prodcution__box__group__list{
     grid-template-columns: repeat(3, 1fr);
     gap: 6px 6px;
+  }
+  .root-new__production__box__group__list--image{
+    
   }
   .root-app__dl__box__right{
     display:none;
