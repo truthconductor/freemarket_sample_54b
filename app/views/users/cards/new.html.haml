@@ -1,31 +1,36 @@
-.card-container
-  .card-container__header
-    %h2.card-container__header__headline
-      クレジットカード情報入力
+-# ヘッダ
+.header
+  ヘッダー
+
+%main#user-main
+  .card-container
+    .card-container__header
+      %h2.card-container__header__headline
+        クレジットカード情報入力
     = form_with model: @card, url: mypage_cards_create_path, method: :post, local: true, id: "card_form", class: "card-container__form" do |f|
       .card-container__form__field
         .card-container__form__field__label
           = f.label :number
-          %span.common--required
+          %span.form--required
             必須
-        = f.text_field :number, placeholder: "グループ名を入力してください"
+        = f.text_field :number, placeholder: "半角数字のみ", class: "card-container__form__field__text_field"
         %ul.card-container__form__field__cardlist
-          %li.card-container__form__field__cardlist_cardimg
-            VISA
-          %li.card-container__form__field__cardlist_cardimg
-            マスターカード
-          %li.card-container__form__field__cardlist_cardimg
-            セゾンカード
-          %li.card-container__form__field__cardlist_cardimg
-            JCB
-          %li.card-container__form__field__cardlist_cardimg
-            Diners Club
-          %li.card-container__form__field__cardlist_cardimg
-            Discover
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/visa.svg", class: "card-container__form__field__cardlist__carditem__image"
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/master-card.svg", class: "card-container__form__field__cardlist__carditem__image"
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/saison-card.svg", class: "card-container__form__field__cardlist__carditem__image"
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/jcb.svg", class: "card-container__form__field__cardlist__carditem__image"
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/dinersclub.svg", class: "card-container__form__field__cardlist__carditem__image"
+          %li.card-container__form__field__cardlist__carditem
+            = image_tag "cards/discover.svg", class: "card-container__form__field__cardlist__carditem__image"
       .card-container__form__field
         .card-container__form__field_label
           = f.label  "有効期限"
-          %span.common--required
+          %span.form--required
             必須
         = f.select :month, @card.month_select
         = f.label :month
@@ -34,10 +39,17 @@
       .card-container__form__field
         .card-container__form__field_label
           = f.label :cvc
-          %span.common--required
+          %span.form--required
             必須
-        = f.text_field :cvc, placeholder: "カード背面4桁もしくは3桁の番号", maxlength:4
+        = f.text_field :cvc, placeholder: "カード背面4桁もしくは3桁の番号", maxlength:4, class: "card-container__form__field__text_field"
       .card-container__form__field__help
         カード裏面の番号とは？
       .card-container__form__field
         = f.submit "追加する", class: "card-container__form__field--btn"
+
+  -# ナビゲーションバー
+  = render 'users/user-navigation'
+
+-# フッタ
+.footer
+  フッター
