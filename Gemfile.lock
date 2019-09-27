@@ -54,6 +54,8 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    autoprefixer-rails (9.6.1.1)
+      execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
@@ -374,6 +376,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   ancestry
+  autoprefixer-rails
   bootsnap (>= 1.1.0)
   bullet
   byebug
