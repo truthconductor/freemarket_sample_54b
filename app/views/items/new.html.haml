@@ -1,5 +1,5 @@
 .form
-  = form_with model: @item do |f|
+  = form_with model: @item, local: true do |f|
     = f.fields_for :item_images do |item_image|
       = item_image.file_field :image, multiple: false
     .form__name
@@ -31,16 +31,8 @@
       = f.text_field :amount, placeholder: "例）300"
     = f.submit "出品する"
 
-    -#配列データを受け取るため、file_fieldのname属性を指定する必要があると思ったが、逆にエラーが出た。
-    -#  name: "item_images[name][]
+    - if @item.errors.any?
+      - @item.errors.full_messages.each do |msg|
+        = msg
 
--#  = form_for @item do |f|
-    -#     <%= form_for @product, html: { multipart: true } do |product|%>
-
-    -#     <%= product.text_field :price # just normal type of field %>
-
-    -#     <%= product.fields_for :product_photos do |photo| # nested fieldss %>
-    -#         <%= photo.file_field :image, :multiple => true, name: "product_photos[image_url][]" %>
-    -#     <% end %>
-    -#     <%= p.submit "Update", class: "btn" %>
-    -# <% end %>
+ 
