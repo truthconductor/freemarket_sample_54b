@@ -29,6 +29,19 @@
       margin: 24px auto;
       max-width: 320px;
       text-align: center;
+      &__card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__detail {
+          text-align: left;
+        }
+        &__destroy {
+          color: #ea352d;
+          background: #fff;
+          border: 1px solid #ea352d;
+        }
+      }
       &__button {
         color: #fff;
         background: #ea352d;

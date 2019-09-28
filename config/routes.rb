@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   root 'test#index'
 
   get 'mypage', to: 'users#mypage', as: :mypage
-  get 'mypage/cards/', to: 'users/cards#index', as: :mypage_cards
-  get 'mypage/cards/create', to: 'users/cards#new', as: :mypage_cards_add
-  post 'mypage/cards/', to: 'users/cards#create', as: :mypage_cards_create
-  delete 'mypage/cards/delete', to: 'users/cards#delete'
+  get 'mypage/cards/', to: 'users/payjp_cards#index', as: :mypage_cards
+  get 'mypage/cards/create', to: 'users/payjp_cards#new', as: :mypage_cards_add
+  post 'mypage/cards/', to: 'users/payjp_cards#create', as: :mypage_cards_create
+  delete 'mypage/cards/:id', to: 'users/payjp_cards#destroy', as: :mypage_cards_destroy
 end

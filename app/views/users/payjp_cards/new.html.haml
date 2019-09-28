@@ -7,7 +7,7 @@
     .card-container__header
       %h2.card-container__header__headline
         クレジットカード情報入力
-    = form_with model: @card, url: mypage_cards_create_path, method: :post, local: true, id: "card_form", class: "card-container__form" do |f|
+    = form_with model: @payjp_card, url: mypage_cards_create_path, method: :post, local: true, id: "card_form", class: "card-container__form" do |f|
       .card-container__form__field
         .card-container__form__field__label
           = f.label :number
@@ -33,10 +33,10 @@
           %span.form--required
             必須
         .card-container__form__field__date
-          = f.select :month, @card.month_select, {}, {class: "card-container__form__field__date__select"}
+          = f.select :month, @payjp_card.month_select, {}, {class: "card-container__form__field__date__select"}
           = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
           = f.label :month
-          = f.select :year, @card.year_select, {}, {class: "card-container__form__field__date__select"}
+          = f.select :year, @payjp_card.year_select, {}, {class: "card-container__form__field__date__select"}
           = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
           = f.label :year
       .card-container__form__field

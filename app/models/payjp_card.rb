@@ -1,6 +1,6 @@
-class Card
+class PayjpCard
   include ActiveModel::Model
-  attr_accessor :number, :month, :year, :cvc, :payjpToken
+  attr_accessor :number, :month, :year, :cvc, :brand, :id
 
   #月選択
   @@month_select = []
@@ -21,18 +21,13 @@ class Card
     @@year_select
   end
 
-  #Validation
-  validates :number, presence: true
-  validates :month, presence: true
-  validates :year, presence: true
-  validates :cvc, presence: true
-
   def initialize(attributes={})
     @number = attributes[:number]
     @month = attributes[:month] || 1
     @year = attributes[:year] || Date.today.strftime("%y").to_i
     @code = attributes[:cvc]
-    @payjpToken = attributes[:payjpToken]
+    @brand = attributes[:brand]
+    @id = attributes[:id]
   end
 
 end

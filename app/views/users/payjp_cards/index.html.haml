@@ -1,0 +1,43 @@
+-# ヘッダ
+.header
+  ヘッダー
+
+%main#user-main
+  .card-container
+    .card-container__header
+      %h2.card-container__header__headline
+        支払い方法
+    .card-container__list
+      %h3.card-container__list__headline
+        クレジットカード一覧
+      .card-container__list__cards
+        - if @payjp_cards.length > 0
+          - @payjp_cards.each do |payjp_card|
+            .card-container__list__cards__card
+              .card-container__list__cards__card__detail
+                %p
+                  = payjp_card.brand
+                %p
+                  = payjp_card.number
+                %p
+                  = "#{format('%02d',payjp_card.month)}/#{format('%02d',payjp_card.year%100)}"
+              = form_with model: payjp_card, url: mypage_cards_destroy_path(@creditCard), method: :delete, local: true do |f|
+                = f.hidden_field :id, value: payjp_card.id
+                = f.submit '削除する', class: 'card-container__list__cards__card__destroy'
+        - else
+          = link_to mypage_cards_add_path do
+            .card-container__list__cards__button
+              = fa_icon 'credit-card', class: 'card-container__list__cards__button__icon'
+              クレジットカードを追加する
+      %hr.card-container__list--line
+      = link_to '#', class:"card-container__list__help" do
+        %p
+          支払い方法について
+        = fa_icon 'angle-right lg', class: 'card-container__list__help__icon'
+
+  -# ナビゲーションバー
+  = render 'users/user-navigation'
+
+-# フッタ
+.footer
+  フッター

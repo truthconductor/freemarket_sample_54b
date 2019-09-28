@@ -2,9 +2,9 @@
 ja:
   activemodel:
     models:
-      card: クレジットカード
+      payjp_card: クレジットカード
     attributes:
-      card:
+      payjp_card:
         number: カード番号
         month: 月
         year: 年
