@@ -1,0 +1,74 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//中サイズ
+@media screen and (max-width: 1067px) {
+  #user-main {
+    width: 700px;
+    margin: 24px auto 40px;
+  }
+}
+
+// PCサイズ
+@media screen and (min-width: 1068px) {
+  #user-main {
+    width: 1020px;
+    margin: 40px auto;
+    box-sizing: border-box;
+    @include clearfix();
+  }
+  .user-container {
+    float: right;
+  }
+}
+
+// ユーザーページコンテナ
+.user-container {
+  width: 700px;
+}
+
+// マイページユーザー紹介部
+.user-intro {
+  width: 700px;
+  height: 200px;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  background: asset-url("user/user-bg.jpg");
+
+  &__link {
+    color: #333;
+    &:hover {
+      color: #999;
+    }
+    &__avator {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+    &__username {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: 600;
+    }
+    &__userstatus {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 14px;
+      &__count {
+        margin: 0 8px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.user-tab-headline {
+  padding: 0 12px;
+  font-size: 16px;
+  line-height: 72px;
+  font-weight: 600;
+  background: #fafafa;
+}
