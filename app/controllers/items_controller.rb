@@ -9,13 +9,16 @@ class ItemsController < ApplicationController
     @item = Item.new(create_params)
     #フロント実装して(jsで小カテゴリ作って)ないのでバリデーション突破するため仮データを置いてる。
     @item.category_id = 1
-    @item.deliver_method_id = 1
     #ステータスを販売中にする。
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
     if @item.save
       redirect_to new_item_path
     else
+      binding.pry
+      while @item.item_images.length < 2
+        @item.item_images.build
+      end
       render :new
     end
   end
@@ -25,7 +28,7 @@ class ItemsController < ApplicationController
 
   private
   def create_params
-    params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
+    params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
   end
   #エラー回避のため、newだけでなくcreateにも持たせる必要がある。
   def set_category_parent_array
