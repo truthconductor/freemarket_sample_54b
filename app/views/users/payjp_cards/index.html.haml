@@ -15,12 +15,11 @@
           - @payjp_cards.each do |payjp_card|
             .card-container__list__cards__card
               .card-container__list__cards__card__detail
-                %p
-                  = payjp_card.brand
-                %p
+                = render 'cardbrand', {brand: payjp_card.brand}
+                .card-container__list__cards__card__detail__text
                   = payjp_card.number
-                %p
-                  = "#{format('%02d',payjp_card.month)}/#{format('%02d',payjp_card.year%100)}"
+                .card-container__list__cards__card__detail__text
+                  = "#{format('%02d',payjp_card.month)} / #{format('%02d',payjp_card.year%100)}"
               = form_with model: payjp_card, url: mypage_cards_destroy_path(@creditCard), method: :delete, local: true do |f|
                 = f.hidden_field :id, value: payjp_card.id
                 = f.submit '削除する', class: 'card-container__list__cards__card__destroy'

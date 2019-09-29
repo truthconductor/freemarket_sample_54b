@@ -1,0 +1,13 @@
+- if brand == "Visa"
+  = image_tag "cards/visa.svg", class: "card-container__list__cards__card__detail__image"
+- elsif brand == "MasterCard"
+  = image_tag "cards/master-card.svg", class: "card-container__list__cards__card__detail__image"
+- elsif brand == "JCB"
+  = image_tag "cards/jcb.svg", class: "card-container__list__cards__card__detail__image"
+- elsif brand == "Diners Club"
+  = image_tag "cards/dinersclub.svg", class: "card-container__list__cards__card__detail__image"
+- elsif brand == "Discover"
+  = image_tag "cards/discover.svg", class: "card-container__list__cards__card__detail__image"
+- else
+  .card-container__list__cards__card__detail__text
+    = brand
