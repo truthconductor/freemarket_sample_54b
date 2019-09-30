@@ -28,19 +28,19 @@
           %li.card-container__form__field__cardlist__carditem
             = image_tag "cards/discover.svg", class: "card-container__form__field__cardlist__carditem__image"
       .card-container__form__field
-        .card-container__form__field_label
-          = f.label  "有効期限"
+        .card-container__form__field__label
+          = f.label "有効期限"
           %span.form--required
             必須
         .card-container__form__field__date
           = f.select :month, @payjp_card.month_select, {}, {class: "card-container__form__field__date__select"}
           = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
-          = f.label :month
+          = f.label :month, class: "card-container__form__field__date__text"
           = f.select :year, @payjp_card.year_select, {}, {class: "card-container__form__field__date__select"}
           = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
-          = f.label :year
+          = f.label :year, class: "card-container__form__field__date__text"
       .card-container__form__field
-        .card-container__form__field_label
+        .card-container__form__field__label
           = f.label :cvc
           %span.form--required
             必須

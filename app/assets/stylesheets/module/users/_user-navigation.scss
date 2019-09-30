@@ -2,6 +2,7 @@
 @media screen and (max-width: 1067px) {
   .user-navigation {
     margin-top: 40px;
+    box-sizing: border-box;
   }
 }
 
@@ -13,6 +14,7 @@
   }
   .user-navitem {
     width: 280px;
+    box-sizing: border-box;
   }
 }
 
