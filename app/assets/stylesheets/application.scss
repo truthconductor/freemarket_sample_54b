@@ -13,9 +13,10 @@
  *= require_self
  */
 
- @import "reset";
+ @import "./config/reset";
  @import "font-awesome";
  @import "./config/color";
+ @import "./config/common";
  @import "./module/root/joint";
  @import "./module/root/header/header";
  @import "./module/root/footer/footer";

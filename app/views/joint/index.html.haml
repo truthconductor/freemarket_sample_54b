@@ -7,13 +7,13 @@
       .root-campaign__slider
         %span.root-campaign__slider1
         %span.root-campaign__slider2
-    .root-categoly__box
-      .root-categoly__box--popular
+    .root-category__box
+      .root-category__box--popular
         人気のカテゴリー
-      %ul.root-categoly__box__list
-        - @categolies.each do |categoly|
-          %li.root-categoly__box__list--label
-            = categoly
+      %ul.root-category__box__list
+        - @categolies.each do |category|
+          %li.root-category__box__list--label
+            = category
     = render partial: 'itembox'
   = render partial: 'app__dl'
   = render partial: 'footer'
