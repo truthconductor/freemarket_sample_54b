@@ -1,0 +1,6 @@
+.card-container__list__cards__card__detail
+  = render 'cardbrand', {brand: payjp_card.brand}
+  .card-container__list__cards__card__detail__text
+    = payjp_card.number
+  .card-container__list__cards__card__detail__text
+    = "#{format('%02d',payjp_card.month)} / #{format('%02d',payjp_card.year%100)}"
