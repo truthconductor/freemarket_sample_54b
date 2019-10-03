@@ -1,7 +1,4 @@
--# ヘッダ
-.header
-  ヘッダー
-
+= render 'joint/header'
 %main#user-main
   .user-container
     .user-intro
@@ -16,16 +13,11 @@
           出品数
           %span.user-intro__link__userstatus--count
             XX
-
     -# お知らせ・やることリスト
     = render 'user-notice'
-
     -# 購入した商品
     = render 'user-bought'
-
   -# ナビゲーションバー
   = render 'user-navigation'
-
--# フッタ
-.footer
-  フッター
+= render 'joint/app__dl'
+= render 'joint/footer'

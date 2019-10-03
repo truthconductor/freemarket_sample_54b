@@ -32,28 +32,29 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 16px;
+  background: $background-white;
   border-top: 1px solid #eee;
   font-size: 14px;
-  color: #333;
-  background: #fff;
+  color: $text-deepgray;
+  background: $background-white;
   transition: padding 0.5s;
 
   // マウスオーバー時にハイライトとアイコンの移動
   &:hover {
-    background: #fafafa;
+    background: $link-item-hover;
     padding: 10px 10px 10px 16px;
     transition: padding 0.5s;
   }
   &:hover > &__icon {
-    color: #333;
+    color: $text-deepgray;
     transition: color 0.5s;
   }
 
   &--active {
-    background: #eee;
+    background: $background-lightgray;
     font-weight: 600;
     &:hover {
-      background: #eee;
+      background: $background-lightgray;
     }
   }
 
