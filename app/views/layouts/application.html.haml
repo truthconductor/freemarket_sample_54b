@@ -9,3 +9,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
   =yield
+
+
+= link_to "ログアウト",destroy_user_session_path, method: :delete
