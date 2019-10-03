@@ -39,6 +39,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
+  #amazonに変更
   config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain
@@ -92,3 +93,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+#master keyの指定漏れを防ぐ
+#master keyが指定されていない状態でサーバ起動を実行しようとするとエラーが発生する
+#config.require_master_key = true
