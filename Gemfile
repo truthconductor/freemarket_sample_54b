@@ -90,3 +90,7 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem 'active_hash'
 gem 'ancestry'
+
+gem 'font-awesome-rails'
+
+gem 'autoprefixer-rails'
