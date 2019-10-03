@@ -1,6 +1,5 @@
 @media screen and (min-width: 1068px) {
-  .root-menu__box
-  {
+  .root-menu__box{
     width: 1020px;
   }
 
@@ -8,12 +7,10 @@
     display:none;
   }
 
-  .root-contents
-  {
+  .root-contents{
     width:1020px;
   }
-  .root-campaign
-  {
+  .root-campaign{
     height:390px;
     background-size:auto;
     left: 50%;
@@ -23,48 +20,48 @@
     padding: 56px 0px 30px;
     left: 50%;
     margin-left: -50vw;
-  }
-
-  .root-category__box--popular{
-    font-size:28px;
-  }
-  .root-category__box__list{
-    display: block;
-    text-align: center;
-    width: 100vw;
-    margin: -10px 0px 0px -10px;
-  }
-  .root-new__production__box__upper--name {
+    &--popular{
+      font-size:28px;
+    }
+    &__list{
+      display: block;
+      text-align: center;
+      width: 100vw;
+      margin: -10px 0px 0px -10px;
+    }
+}
+  .root-new__production__box__upper{
+    &--name {
     font-size: 24px;
-  }
-  .root-new__production__box__upper--detail-path {
-    font-size: 14px;
-    padding: 5px 16px 5px 5px;
-    :before {
-      height:10px;
-      width:10px;
+    }
+    &--detail-path{
+      font-size: 14px;
+      padding: 5px 16px 5px 5px;
+      :before {
+        height:10px;
+        width:10px;
+      }
     }
   }
-
-  .root-footer__menu__nav{
-    width: 1020px;
-  }
   
-  .root-footer__menu__nav__list{
-    width: auto;
-    padding: 0px 40px 0px 0px;
-  }
 
-  .root-footer__menu__nav--base--rule{
-    width: auto;
-    padding: 0px 20px 0px 0px;
+  .root-footer__menu{
+    &__nav{
+      width: 1020px;
+      &__list{
+        width: auto;
+        padding: 0px 40px 0px 0px;
+      }
+      &--base--rule{
+        width: auto;
+        padding: 0px 20px 0px 0px;
+      }
+    }
+    &__copyright{
+      width: 1020px;
+      margin: 30px auto 20px;
+    }
   }
-
-  .root-footer__menu__copyright{
-    width: 1020px;
-    margin: 30px auto 20px;
-  }
-  
 }
 
 @media screen and (max-width: 1067px)and (min-width:768px){
@@ -76,8 +73,7 @@
     width:700px;
     padding:0px;
   }
-  .root-campaign
-  {
+  .root-campaign{
     height:290px;
     background-size:cover;
     max-width:100vw;
@@ -86,35 +82,32 @@
     max-width:100vw;
     padding: 56px 0px 30px;
   }
-  .root-footer__menu__nav{
-    width: 700px;
+  .root-footer__menu{
+    &__nav{
+      width: 700px;
+      &__list{
+        width: 50%;
+      }
+      &--base {
+        width:100%;
+        &--rule{
+          width: 50%;
+        }
+      }
+    }
+    &__copyright{
+      width: 1020px;
+      margin: 30px auto 20px;
+    }
   }
-  .root-footer__menu__nav__list{
-    width: 50%;
-  }
-
-  .root-footer__menu__nav--base {
-    width:100%;
-  }
-  .root-footer__menu__nav--base--rule{
-    width: 50%;
-  }
-
-  .root-footer__menu__copyright{
-    width: 1020px;
-    margin: 30px auto 20px;
-  }
-  
 }
 
 @media screen and (max-width:767px){
-  .root-menu__box
-  {
+  .root-menu__box{
     display:none;
   }
 
-  .root-campaign
-  {
+  .root-campaign{
     height:290px;
     background-size:cover;
     max-width:100vw;
@@ -122,40 +115,42 @@
 
   .root-category__box{
   padding: 40px 0px 20px;
+    &--popular{
+      font-size:20px;
+    }
   }
-  .root-category__box--popular{
-    font-size:20px;
-  }
-  .root-new__production__box__upper--name{
+  
+  .root-new__production__box{
+    &__upper--name{
     font-size:17px;
-  }
-  .root-new__production__box__group__list{
+    }
+    &__group__list{
     grid-template-columns: repeat(3, 1fr);
     gap: 6px 6px;
   }
-  .root-new__production__box__group__list--image{
-    
   }
   .root-app__dl__box__right{
     display:none;
   }
-  .root-footer__menu__nav{
+  .root-footer__menu{
+    &__nav{
     width: 700px;
+      &__list{
+        width: 50%;
+      }
+      &--base {
+        width:100%;
+        &--rule{
+          width: 50%;
+        }
+      }
+    }
+    &__copyright{
+      width: 700px;
+      margin: 55px auto 10px;
+    }
   }
-
-  .root-footer__menu__nav__list{
-    width: 49%;
-  }
-  .root-footer__menu__nav--base {
-    width:100%;
-  }
-  .root-footer__menu__nav--base--rule{
-    width: 50%;
-  }
-  .root-footer__menu__copyright{
-    width: 700px;
-    margin: 55px auto 10px;
-  }
+  
   .root-app__dl{
     height:80px;
     &__box{
