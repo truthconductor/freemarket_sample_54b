@@ -1,7 +1,29 @@
-@import "./config/reset";
-@import "font-awesome";
-@import "./config/common";
-@import "./mixin/clearfix";
-@import "./module/users";
-@import "./module/users/user-notice";
-@import "./module/users/user-navigation";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+ @import "./config/reset";
+ @import "font-awesome";
+ @import "./config/color";
+ @import "./config/common";
+ @import "./mixin/clearfix";
+ @import "./module/root/joint";
+ @import "./module/root/header/header";
+ @import "./module/root/footer/footer";
+ @import "./module/root/item__box/item__box";
+ @import "./module/root/exhibit__button/exhibit__button";
+ @import "media";
+ @import "./module/users";
+ @import "./module/users/user-notice";
+ @import "./module/users/user-navigation";
