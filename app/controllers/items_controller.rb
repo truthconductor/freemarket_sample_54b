@@ -15,7 +15,6 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to new_item_path
     else
-      binding.pry
       while @item.item_images.length < 2
         @item.item_images.build
       end
