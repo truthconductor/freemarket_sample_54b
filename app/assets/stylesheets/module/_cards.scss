@@ -9,7 +9,7 @@
 .card-container {
   width: 700px;
   &__header {
-    background: #fff;
+    background: $background-white;
     &__headline {
       text-align: center;
       font-size: 24px;
@@ -19,7 +19,7 @@
   &__list {
     margin-top: 2px;
     padding: 64px;
-    background: #fff;
+    background: $background-white;
     &__headline {
       margin: 0 auto;
       max-width: 320px;
@@ -45,9 +45,9 @@
         }
         &__destroy {
           cursor : pointer;
-          color: #ea352d;
-          background: #fff;
-          border: 1px solid #ea352d;
+          color: $button-background-red;
+          background: $background-white;
+          border: 1px solid $button-background-red;
           border-radius: 3px;
           padding: 6px;
           font-size: 14px;
@@ -55,8 +55,8 @@
         }
       }
       &__button {
-        color: #fff;
-        background: #ea352d;
+        color: $text-white;
+        background: $button-background-red;
         font-size: 14px;
         line-height: 48px;
         &:hover {
@@ -76,7 +76,7 @@
       display: flex;
       justify-content: end;
       align-items: center;
-      color: #0099e8;
+      color: $link-hover;
       &__icon {
         margin: 0 0 0 8px;
       }
@@ -85,7 +85,7 @@
 
   &__form {
     margin-top: 2px;
-    background: #fff;
+    background: $background-white;
     padding: 40px 64px;
     &__field {
       margin: 0 auto 20px;
@@ -106,7 +106,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         &:focus  {
-          border: 1px solid #0099e8;
+          border: 1px solid $form-focus;
         }
       }
       &__cardlist {
@@ -140,7 +140,7 @@
           border-radius: 4px;
           z-index: 2;
           &:focus  {
-            border: 1px solid #0099e8;
+            border: 1px solid $form-focus;
           }
         }
         &__icon {
@@ -166,8 +166,8 @@
       }
       &__button {
         cursor : pointer;
-        color: #fff;
-        background: #ea352d;
+        color: $text-white;
+        background: $button-background-red;
         border: none;
         width: 100%;
         font-size: 14px;
@@ -185,12 +185,12 @@
 // jQueryのセレクタとするため独自クラスで定義
 p.card-error_message {
   margin: 8px 0;
-  color: #ea352d;
+  color: $text-red;
 }
 
 //必須ボタン
 span.form--required {
-  color: #fff;
+  color: $text-white;
   background: #ea352d;
   border-radius: 2px;
   margin: 0 0 0 8px;
