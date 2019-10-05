@@ -1,9 +1,15 @@
 .form
+  -# class: :dropzoneでアップロードフォームの作成
+  = form_with url: items_path, local: true, class: :dropzone, id: :upload_dropzone do
+    .form__image-field
+      = file_field_tag('attachment[file]')
+
   = form_with model: @item, local: true do |f|
     = f.fields_for :item_images do |item_image|
       = item_image.file_field :image, multiple: false
     - if @item.errors.full_messages_for(:item_images).present?
       %p 画像がありません
+
     .form__name
       = f.label :name, "商品名"
       = f.text_field :name, placeholder: "商品名(必須 40文字まで)"
