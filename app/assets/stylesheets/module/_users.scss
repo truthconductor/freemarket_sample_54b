@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // マイページ表示エリア
-#user-main {
+.user-wrapper {
   background: $background-smokewhite;
 }
 
@@ -14,7 +14,7 @@
 
 // 中サイズ
 @media screen and (max-width: 1067px) {
-  #user-main {
+  .user-main {
     width: 700px;
     margin: 24px auto 40px;
   }
@@ -22,7 +22,7 @@
 
 // PCサイズ
 @media screen and (min-width: 1068px) {
-  #user-main {
+  .user-main {
     width: 1020px;
     margin: 40px auto;
     box-sizing: border-box;
