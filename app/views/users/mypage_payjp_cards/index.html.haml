@@ -24,10 +24,10 @@
               = fa_icon 'credit-card', class: 'card-container__list__cards__button__icon'
               クレジットカードを追加する
       %hr.card-container__list--line
-      = link_to '#', class:"card-container__list__help" do
-        %p
+      .card-container__list__help
+        = link_to '#', class: 'card-container__list__help__link' do
           支払い方法について
-        = fa_icon 'angle-right lg', class: 'card-container__list__help__icon'
+          = fa_icon 'angle-right lg', class: 'card-container__list__help__link__icon'
 
   -# ナビゲーションバー
   = render 'users/user-navigation'

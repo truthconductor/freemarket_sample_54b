@@ -74,11 +74,13 @@
     }
     &__help {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       align-items: center;
-      color: $link-hover;
-      &__icon {
-        margin: 0 0 0 8px;
+      &__link {
+        color: $link-hover;
+        &__icon {
+          margin: 0 0 0 8px;
+        }
       }
     }
   }
