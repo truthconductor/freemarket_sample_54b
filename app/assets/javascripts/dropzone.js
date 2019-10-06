@@ -1,43 +1,129 @@
-Dropzone.autoDiscover = false;
+$(document).on('turbolinks:load', function(){
+  var dropzone = $('.dropzone-area');
+  var dropzone2 = $('.dropzone-area2');
+  var dropzone_box = $('.dropzone-box');
+  var images = [];
+  var inputs  =[];
+  var input_area = $('.input_area');
+  var preview = $('#preview');
+  var preview2 = $('#preview2');
 
-var headlineDropzone = new Dropzone("#upload-dropzone", {
-  url: "/api/v1/albums/upload_photo", // You can override url of form in here.
-  params: {
-    album_id: <%= album_id %>,
-  },
-  maxFilesize: 5, // in MB
-  addRemoveLinks: true,
-  parallelUploads: 10,
-  acceptedFiles:'.jpg, .png, .jpeg, .gif', // type of files
+  $(document).on('change', 'input[type= "file"].upload-image',function(event) {
+    var file = $(this).prop('files')[0];
+    var reader = new FileReader();
+    inputs.push($(this));
+    var img = $(`<div class= "img_view"><img></div>`);
+    reader.onload = function(e) {
+      var btn_wrapper = $('<div class="btn_wrapper"><div class="btn edit">編集</div><div class="btn delete">削除</div></div>');
+      img.append(btn_wrapper);
+      img.find('img').attr({
+        src: e.target.result
+      })
+    }
+    reader.readAsDataURL(file);
+    images.push(img);
 
-  init: function(){
-    this.on('addedfile', function(file) {
-      // Called when a file is added to the list.
-    });
-    this.on('sending', function(file, xhr, formData) {
-      // Called just before each file is sent.
-    });
-
-    //json is picture object whitch server return
-    this.on('success', function(file, json) {
-      // Called when file uploaded successfully.
-      console.log(json);
-      $(file.previewTemplate).find('.dz-remove').attr('id', json.id);
-    });
-  },
-
- removedfile: function(file){
-     // grap the id of the uploaded file we set earlier
-     var id = $(file.previewTemplate).find('.dz-remove').attr('id');
-     var delete_file = file
-     // make a DELETE ajax request to delete the file
-     $.ajax({
-         type: 'DELETE',
-         url: '/api/v1/pictures/' + id,
-         success: function(res){
-           $(delete_file.previewTemplate).fadeOut();
-         }
-     });
- }
-
+    if(images.length >= 5) {
+      dropzone2.css({
+        'display': 'block'
+      })
+      dropzone.css({
+        'display': 'none'
+      })
+      $.each(images, function(index, image) {
+        image.attr('data-image', index);
+        preview2.append(image);
+        dropzone2.css({
+          'width': `calc(100% - (135px * ${images.length - 5}))`
+        })
+      })
+      if(images.length == 9) {
+        dropzone2.find('p').replaceWith('<i class="fa fa-camera"></i>')
+      }
+    } else {
+        $('#preview').empty();
+        $.each(images, function(index, image) {
+          image.attr('data-image', index);
+          preview.append(image);
+        })
+        dropzone.css({
+          'width': `calc(100% - (135px * ${images.length}))`
+        })
+      }
+      if(images.length == 4) {
+        dropzone.find('p').replaceWith('<i class="fa fa-camera"></i>')
+      }
+    if(images.length == 10) {
+      dropzone2.css({
+        'display': 'none'
+      })
+      return;
+    }
+    var new_image = $(`<input multiple= "multiple" name="item_images[image][]" class="upload-image" data-image= ${images.length} type="file" id="upload-image">`);
+    input_area.prepend(new_image);
+  });
+  $(document).on('click', '.delete', function() {
+    var target_image = $(this).parent().parent();
+    $.each(inputs, function(index, input){
+      if ($(this).data('image') == target_image.data('image')){
+        $(this).remove();
+        target_image.remove();
+        var num = $(this).data('image');
+        images.splice(num, 1);
+        inputs.splice(num, 1);
+        if(inputs.length == 0) {
+          $('input[type= "file"].upload-image').attr({
+            'data-image': 0
+          })
+        }
+      }
+    })
+    $('input[type= "file"].upload-image:first').attr({
+      'data-image': inputs.length
+    })
+    $.each(inputs, function(index, input) {
+      var input = $(this)
+      input.attr({
+        'data-image': index
+      })
+      $('input[type= "file"].upload-image:first').after(input)
+    })
+    if (images.length >= 5) {
+      dropzone2.css({
+        'display': 'block'
+      })
+      $.each(images, function(index, image) {
+        image.attr('data-image', index);
+        preview2.append(image);
+      })
+      dropzone2.css({
+        'width': `calc(100% - (135px * ${images.length - 5}))`
+      })
+      if(images.length == 9) {
+        dropzone2.find('p').replaceWith('<i class="fa fa-camera"></i>')
+      }
+      if(images.length == 8) {
+        dropzone2.find('i').replaceWith('<p>ココをクリックしてください</p>')
+      }
+    } else {
+      dropzone.css({
+        'display': 'block'
+      })
+      $.each(images, function(index, image) {
+        image.attr('data-image', index);
+        preview.append(image);
+      })
+      dropzone.css({
+        'width': `calc(100% - (135px * ${images.length}))`
+      })
+    }
+    if(images.length == 4) {
+      dropzone2.css({
+        'display': 'none'
+      })
+    }
+    if(images.length == 3) {
+      dropzone.find('i').replaceWith('<p>ココをクリックしてください</p>')
+    }
+  })
 });

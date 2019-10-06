@@ -1,8 +1,24 @@
 .form
   -# class: :dropzoneでアップロードフォームの作成
-  = form_with url: items_path, local: true, class: :dropzone, id: :upload_dropzone do
-    .form__image-field
-      = file_field_tag('attachment[file]')
+  -# = form_for @item, local: true, html: {class: "sell-form dropzone", id: "item-dropzone"} do |f|
+  -#   %h2.sell-form__header
+  -#     商品情報を入力
+  -#   .sell-form-container
+  -#     %label.sell-form-container__label
+  -#       出品画像
+  -#     %span.sell-form-container__require
+  -#       必須
+  -#     = f.fields_for :item_images do |image|
+  -#       #preview
+  -#       .dropzone-area
+  -#         = image.label :image, class: "dropzone-box", for: "upload-image" do
+  -#           .input_area
+  -#             = image.file_field :image, multiple: true, name: 'item_images[image][]', id: "upload-image", class: "upload-image", 'data-image': 0
+  -#           %p ここをクリックしてください
+  -#       #preview2
+  -#       .dropzone-area2
+  -#         = image.label :image, class: "dropzone-box", for: "upload-image" do
+  -#           %p ここをクリックしてください
 
   = form_with model: @item, local: true do |f|
     = f.fields_for :item_images do |item_image|

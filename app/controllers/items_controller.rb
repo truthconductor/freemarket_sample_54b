@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update]
   def new
     @item = Item.new
-    2.times { @item.item_images.build }
+    @item.item_images.build
   end
 
   def create
@@ -12,14 +12,19 @@ class ItemsController < ApplicationController
     #ステータスを販売中にする。
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
+
+    # respond_to do |format|
     if @item.save
-      redirect_to new_item_path
-    else
-      binding.pry
-      while @item.item_images.length < 2
-        @item.item_images.build
+      params[:item_images][:image].each do |image|
+        @item.item_images.create(image: image, item_id: @item.id)
       end
-      render :new
+      redirect_to root_path
+      # format.html{redirect_to root_path}
+    else
+      @item.item_images.build
+      binding.pry
+      format.html{render action: 'new'}
+      # end
     end
   end
 
