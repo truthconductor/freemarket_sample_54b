@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :joint,only:[:index]
   root to: 'joint#index'
   get 'mypage', to: 'users#mypage', as: :mypage
+  resources :test,only:[:index]
 end
