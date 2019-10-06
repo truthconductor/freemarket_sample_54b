@@ -1,6 +1,14 @@
 $(document).on('turbolinks:load', function() {
+ 
   // jQueryとpayjp.jsによるカード情報のトークン化
   $(function() {
+
+    // Railsの通常設定では全てのページでjavascriptが読み込まれるため、
+    // カード情報に関わるページ以外で処理を行わせない
+    if(!document.URL.match('cards')) {
+      return;
+    }
+
     // 自身の公開鍵をセット(テスト公開鍵)
     Payjp.setPublicKey('pk_test_8674f42029f2ad36e1e4a30c');
     // formを取得し追加ボタン処理でpayjpの非同期通信
@@ -38,7 +46,7 @@ $(document).on('turbolinks:load', function() {
         // トークン正常取得
         else {
           var token = response.id;
-          // payjp.jsから送られたカードトークンをformに追加して本来のコントローラへPOST
+          // payjp.jsから送られたカードトークンをformに追加してサーバーへPOST
           form.append($('<input type="hidden" name="card_token" />').val(token));
           form.get(0).submit();
         }
