@@ -14,9 +14,6 @@ class ItemsController < ApplicationController
     @item.seller_id = current_user.id
 
     respond_to do |format|
-      params[:item_images][:image].each do |image|
-        @item.item_images << ItemImage.new(image)
-      end
       if @item.save
         format.html{redirect_to root_path}
       else
