@@ -13,19 +13,31 @@ class ItemsController < ApplicationController
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
 
-    # respond_to do |format|
-    if @item.save
+    respond_to do |format|
       params[:item_images][:image].each do |image|
-        @item.item_images.create(image: image, item_id: @item.id)
+        @item.item_images << ItemImage.new(image)
       end
-      redirect_to root_path
-      # format.html{redirect_to root_path}
-    else
-      @item.item_images.build
-      binding.pry
-      format.html{render action: 'new'}
-      # end
+      if @item.save
+        format.html{redirect_to root_path}
+      else
+        binding.pry
+        @item.item_images.build
+        format.html{render action: 'new'}
+      end
     end
+
+    # respond_to do |format|
+    #   if @item.save
+    #     params[:item_images][:image].each do |image|
+    #       @item.item_images.create(image: image, item_id: @item.id)
+    #     end
+    #     format.html{redirect_to root_path}
+    #   else
+    #     binding.pry
+    #     @item.item_images.build
+    #     format.html{render action: 'new'}
+    #   end
+    # end
   end
 
   def edit
