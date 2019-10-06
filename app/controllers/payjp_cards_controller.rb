@@ -1,4 +1,4 @@
-class Users::PayjpCardsController < ApplicationController
+class PayjpCardsController < ApplicationController
 
   # ログインしていない場合ログインページへ移動する
   before_action :authenticate_user!
