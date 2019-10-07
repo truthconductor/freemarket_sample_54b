@@ -1,0 +1,21 @@
+.root-wrapper
+  = render partial: 'header'
+  .root-contents
+    .root-campaign
+      .root-campaign__arrow__left
+      .root-campaign__arrow__right
+      .root-campaign__slider
+        %span.root-campaign__slider1
+        %span.root-campaign__slider2
+    .root-category__box
+      .root-category__box--popular
+        人気のカテゴリー
+      %ul.root-category__box__list
+        - @categolies.each do |category|
+          %li.root-category__box__list--label
+            = category
+    = render partial: 'itembox'
+  = render partial: 'app__dl'
+  = render partial: 'footer'
+  = render partial: 'exhibit__button'
+  

@@ -1,0 +1,31 @@
+.root-exhibit__button{
+  position: fixed;
+  z-index: 2;
+  bottom: 32px;
+  font-size: 22px;
+  right: 32px;
+  height: 160px;
+  width: 160px;
+  text-align: center;
+  background-color: rgb(234, 53, 45);
+  border-radius: 50%;
+  text-decoration: none;
+  &--text{
+    padding-top:32px;
+    font-size: 22px;
+    color: $box-white;
+  }
+  &__icon{
+    color: $box-white;
+    display: block;
+    margin: 5px auto 0px;
+    width:80px;
+    height: 40px;
+  }
+}
+
+.fa-camera.root-exhibit__button__icon{
+  color: $box-white;
+  display: block;
+  margin-top: 8px;
+}

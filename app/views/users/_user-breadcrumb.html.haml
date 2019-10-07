@@ -1,0 +1,10 @@
+%nav.user-breadcrumb
+  %ul.user-breadcrumb__list
+    %li.user-breadcrumb__item
+      = link_to root_path do
+        %span.user-breadcrumb__item--parent
+          メルカリ
+      = fa_icon 'angle-right 1x', class: 'user-breadcrumb__item__icon'
+    %li.user-breadcrumb__item
+      %span.user-breadcrumb__item--leaf
+        マイページ
