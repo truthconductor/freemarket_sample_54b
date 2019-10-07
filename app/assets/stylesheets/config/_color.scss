@@ -1,9 +1,17 @@
-//塗り潰し背景の時の文字色
-$text-white:rgb(255, 255, 255);
-//トップ画面の背景
-$background-white:rgb(255, 255, 255);
-//検索ボックスの背景
+// 塗り潰し背景の時の文字色
+$text-white: #fff;
+// 濃いグレーの文字色
+$text-deepgray: #333;
+// トップ画面の背景
+$background-white: #fff;
+// マイページなどの背景色
+$background-smokewhite: #f5f5f5;
+// マイページのタブやナビゲーションアイテムの背景色
+$background-lightgray: #eee;
+// 検索ボックスの背景
 $box-white:rgb(245, 245, 245);
-//リンクにカーソルを合わせた時の文字色
+// リンク付きボックスにカーソルを合わせた時の文字色
+$link-item-hover: #fafafa;
+// リンクにカーソルを合わせた時の文字色
 $link-hover:#0099e8;
 

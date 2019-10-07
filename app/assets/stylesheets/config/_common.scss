@@ -1,6 +1,13 @@
-body{
+a {
+  text-decoration: none;
+  text-shadow: none;
+}
+
+body {
   margin:0;
-  padding:0;
-  box-sizing:border-box;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", sans-serif;
-} 
+  font-weight: 500;
+  font-style: normal;
+}
