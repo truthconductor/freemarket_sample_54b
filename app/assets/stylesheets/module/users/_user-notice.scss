@@ -12,17 +12,17 @@
       text-align: center;
       font-size: 16px;
       font-weight: 600;
-      background: #eee;
+      background: $background-lightgray;
       &:hover {
         background: #f0f0f0;
         color: #666;
       }
       &--active {
         border-top: 2px solid #ea352d;
-        background: #fff;
+        background: $background-white;
         &:hover {
           border-top: 2px solid #ED5D58;
-          background: #fff;
+          background: $background-white;
         }
       }
     }
@@ -43,9 +43,9 @@
     align-items: center;
     margin-bottom: 1px;
     padding: 16px;
-    background: #fff;
+    background: $background-white;
     &:hover {
-      background: #fafafa;
+      background: $link-item-hover;
     }
     &__image {
       height: 48px;
@@ -56,7 +56,7 @@
       line-height: 21px;
       flex-grow: 1;
       &--title {
-        color: #333;
+        color: $text-deepgray;
       }
       &--time {
         font-size: 12px;
@@ -64,18 +64,18 @@
       }
     }
     &__icon {
-      color: #333;
+      color: $text-deepgray;
     }
   }
   &__footer {
-    background: #fff;
+    background: $background-white;
     padding: 16px;
     &__button {
       display: block;
       line-height: 56px;
       text-align: center;
-      color: #333;
-      background: #eee;
+      color: $text-deepgray;
+      background: $background-lightgray;
       &:hover {
         background: #f3f3f3;
       }
