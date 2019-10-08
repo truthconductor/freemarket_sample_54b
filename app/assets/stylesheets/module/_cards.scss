@@ -107,7 +107,7 @@
         font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        &:focus  {
+        &:focus {
           border: 1px solid $form-focus;
         }
       }
@@ -167,7 +167,7 @@
         }
       }
       &__button {
-        cursor : pointer;
+        cursor: pointer;
         color: $text-white;
         background: $button-background-red;
         border: none;

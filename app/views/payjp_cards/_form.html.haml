@@ -4,7 +4,7 @@
       = f.label :number
       %span.form--required
         必須
-    = f.text_field :number, placeholder: "半角数字のみ", class: "card-container__form__field__text_field"
+    = f.text_field :number, placeholder: "半角数字のみ", maxlength:16, class: "card-container__form__field__text_field"
     %ul.card-container__form__field__cardlist
       %li.card-container__form__field__cardlist__carditem
         = image_tag "cards/visa.svg", class: "card-container__form__field__cardlist__carditem__image"
