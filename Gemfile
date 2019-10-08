@@ -96,3 +96,6 @@ gem 'ancestry'
 gem 'font-awesome-rails'
 
 gem 'autoprefixer-rails'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'
