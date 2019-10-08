@@ -69,4 +69,7 @@ Rails.application.configure do
   end
   #メール送信機能
   config.action_mailer.default_url_options = { host: 'localhost:3000', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener_web
 end

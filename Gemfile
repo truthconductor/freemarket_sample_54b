@@ -50,6 +50,8 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+#mailer test
+  gem 'letter_opener_web'
 end
 
 group :development do

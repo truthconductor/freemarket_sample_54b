@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :joint,only:[:index]
   root to: 'joint#index'
   resources :test,only:[:index]
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
 end
