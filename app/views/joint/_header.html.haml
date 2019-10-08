@@ -18,9 +18,9 @@
             = fa_icon "tag", class: "root-menu__box__lower__left--category__icon"
             ブランドから探す
       .root-menu__box__lower__right
-        =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__right--sign-in" do
+        =link_to new_user_registration_path,class: "root-menu__box__lower__right--sign-in" do
           新規会員登録
-        =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__right--log-in" do
+        =link_to new_user_session_path,class: "root-menu__box__lower__right--log-in" do
           ログイン
 
   .root-short-menu
