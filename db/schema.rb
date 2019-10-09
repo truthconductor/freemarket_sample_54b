@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_101242) do
+ActiveRecord::Schema.define(version: 2019_09_28_062259) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_categories_brands_on_brand_id"
     t.index ["category_id"], name: "index_categories_brands_on_category_id"
+  end
+
+  create_table "credit_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "customer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "deals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -135,6 +143,7 @@ ActiveRecord::Schema.define(version: 2019_09_21_101242) do
 
   add_foreign_key "categories_brands", "brands"
   add_foreign_key "categories_brands", "categories"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "deals", "users", column: "buyer_id"
   add_foreign_key "deals", "users", column: "seller_id"
   add_foreign_key "item_images", "items"

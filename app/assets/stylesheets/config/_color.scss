@@ -1,5 +1,7 @@
 // 塗り潰し背景の時の文字色
 $text-white: #fff;
+// 警告メッセージの文字色
+$text-red: #ea352d;
 // 濃いグレーの文字色
 $text-deepgray: #333;
 // トップ画面の背景
@@ -14,4 +16,7 @@ $box-white:rgb(245, 245, 245);
 $link-item-hover: #fafafa;
 // リンクにカーソルを合わせた時の文字色
 $link-hover:#0099e8;
-
+// ボタン背景色
+$button-background-red: #ea352d;
+// form選択色
+$form-focus: #0099e8;

@@ -1,5 +1,14 @@
 ---
 ja:
+  activemodel:
+    models:
+      payjp_card: クレジットカード
+    attributes:
+      payjp_card:
+        number: カード番号
+        month: 月
+        year: 年
+        cvc: セキュリティコード
   activerecord:
     errors:
       messages:
