@@ -6,11 +6,7 @@ class PayjpCardsController < ApplicationController
   def index
     #ログインユーザーのカード情報を取得する
     @credit_card = current_user.credit_card
-    if(@credit_card)
-      @payjp_cards = @credit_card.getPayJPCards()
-    else
-      @payjp_cards = []
-    end
+    @payjp_cards = @credit_card ? @credit_card.getPayJPCards() : []
   end
 
   def new
