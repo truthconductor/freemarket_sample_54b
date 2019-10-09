@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post 'mypage/cards/', to: 'users/mypage_payjp_cards#create', as: :mypage_cards_create
   delete 'mypage/cards/:id', to: 'users/mypage_payjp_cards#destroy', as: :mypage_cards_destroy
   resources :test,only:[:index]
+  resources :items, only:[:index, :new, :create, :edit, :update]
 end

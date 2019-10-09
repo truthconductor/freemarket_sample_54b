@@ -96,4 +96,6 @@ gem 'jquery-rails'
 gem 'payjp'
 
 gem 'font-awesome-rails'
+gem 'mini_magick'
+gem 'nokogiri'
 gem 'autoprefixer-rails'

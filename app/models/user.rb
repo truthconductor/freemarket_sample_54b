@@ -12,5 +12,5 @@ class User < ApplicationRecord
   has_many :seller_deals, class_name: 'Deal', foreign_key: 'seller_id'
   has_many :item_comments
   has_many :item_likes
-  has_one :credit_card
+  has_one :credit_card, dependent: :destroy
 end
