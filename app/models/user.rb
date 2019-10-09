@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:confirmable 
 
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
   has_one :personal, dependent: :destroy
   has_one :deliver_address, dependent: :destroy
   has_many :items, class_name: 'Item', foreign_key: 'seller_id'
@@ -13,4 +14,6 @@ class User < ApplicationRecord
   has_many :item_comments
   has_many :item_likes
   has_one :credit_card
+
+  
 end
