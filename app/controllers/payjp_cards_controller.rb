@@ -5,9 +5,9 @@ class PayjpCardsController < ApplicationController
 
   def index
     #ログインユーザーのカード情報を取得する
-    @creditCard = CreditCard.find_by(user_id: current_user.id)
-    if(@creditCard)
-      @payjp_cards = @creditCard.getPayJPCards()
+    @credit_card = current_user.credit_card
+    if(@credit_card)
+      @payjp_cards = @credit_card.getPayJPCards()
     else
       @payjp_cards = []
     end
@@ -25,10 +25,10 @@ class PayjpCardsController < ApplicationController
     # PAY.JP APIの秘密鍵をセット
     Payjp.api_key = Rails.application.credentials.payjp[:api_key]
     # PAY.JPの顧客情報IDを既にデータベースに登録しているかチェック
-    @creditCard = CreditCard.find_by(user_id: current_user.id)
-    if @creditCard
+    @credit_card = current_user.credit_card
+    if @credit_card
       # PAY.JPにカード情報を追加登録
-      customer = Payjp::Customer.retrieve(@creditCard.customer_id)
+      customer = Payjp::Customer.retrieve(@credit_card.customer_id)
       card = customer.cards.create(card: card_token)
       # エラーレスポンスを含んでいないか確認
       if card.respond_to? :error
@@ -44,8 +44,8 @@ class PayjpCardsController < ApplicationController
         return
       end
       # PayJP顧客情報をユーザー情報と紐づけてデータベース登録
-      @creditCard = CreditCard.new(customer_id: customer[:id], user_id: current_user.id)
-      unless @creditCard.save
+      @credit_card = CreditCard.new(customer_id: customer[:id], user_id: current_user.id)
+      unless @credit_card.save
         render :new
         return
       end
@@ -56,9 +56,9 @@ class PayjpCardsController < ApplicationController
 
   def destroy
     # ログインユーザのカード情報を取得
-    creditCard = CreditCard.find_by(user_id: current_user.id)
+    credit_card = current_user.credit_card
     # PAY.JPに登録されたユーザのカードを消去
-    customer = Payjp::Customer.retrieve(creditCard.customer_id)
+    customer = Payjp::Customer.retrieve(credit_card.customer_id)
     card = customer.cards.retrieve(payjp_card_params[:id])
     response = card.delete
     #レスポンスにエラーレスポンスが含まれているか確認

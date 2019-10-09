@@ -14,7 +14,7 @@
             - @payjp_cards.each do |payjp_card|
               .card-container__list__cards__card
                 = render 'card', {payjp_card: payjp_card}
-                = form_with model: payjp_card, url: mypage_cards_destroy_path(@creditCard), method: :delete, local: true do |f|
+                = form_with model: payjp_card, url: mypage_cards_destroy_path(@credit_card), method: :delete, local: true do |f|
                   = f.hidden_field :id, value: payjp_card.id
                   = f.submit '削除する', class: 'card-container__list__cards__card__destroy'
           - else
