@@ -21,10 +21,18 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <%= f.fields_for :profile,@user.build_profile do |profile| %>
+  <%= f.fields_for :personal,@user.build_personal do |personal| %>
     <div class="field">
-      <%= profile.label "名前" %><br />
-      <%= profile.text_field :nickname, autocomplete: "off" %>
+      <%= personal.label "姓" %><br />
+      <%= personal.text_field :last_name, autocomplete: "off" %>
+      <%= personal.label "名" %><br />
+      <%= personal.text_field :first_name, autocomplete: "off" %>
+    </div>
+    <div class="field">
+      <%= personal.label "姓(カナ）" %><br />
+      <%= personal.text_field :last_name_kana, autocomplete: "off" %>
+      <%= personal.label "名（カナ）" %><br />
+      <%= personal.text_field :first_name_kana, autocomplete: "off" %>
     </div>
   <% end %>
   <div class="">

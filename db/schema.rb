@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_154159) do
+ActiveRecord::Schema.define(version: 2019_10_09_160928) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -105,6 +105,23 @@ ActiveRecord::Schema.define(version: 2019_10_07_154159) do
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
+  create_table "personals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "zip_code"
+    t.integer "prefecture_id"
+    t.string "city"
+    t.string "address"
+    t.string "building"
+    t.string "cellular_phone_number"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_personals_on_user_id"
+  end
+
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "introduction"
@@ -152,5 +169,6 @@ ActiveRecord::Schema.define(version: 2019_10_07_154159) do
   add_foreign_key "items", "item_states"
   add_foreign_key "items", "sales_states"
   add_foreign_key "items", "users", column: "seller_id"
+  add_foreign_key "personals", "users"
   add_foreign_key "profiles", "users"
 end
