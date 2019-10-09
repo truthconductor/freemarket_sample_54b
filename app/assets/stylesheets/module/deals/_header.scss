@@ -1,0 +1,11 @@
+.deals-header {
+  width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  &__logo {
+    &__image {
+      height: 50px;
+      box-sizing: border-box;
+    }
+  }
+}
