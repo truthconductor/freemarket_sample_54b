@@ -1,4 +1,5 @@
 class Personal < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   #Validation
   validates :first_name, length: {maximum: 35}
   validates :first_name, presence: true
@@ -13,6 +14,7 @@ class Personal < ApplicationRecord
   validates :address,length: {maximum: 100}
   validates :building,length: {maximum: 100}
   validates :cellular_phone_number,length: {maximum: 35}
+  validates :birthdate, presence: true
   belongs_to :user
-  #belongs_to_active_hash :prefecture
+  belongs_to_active_hash :prefecture
 end
