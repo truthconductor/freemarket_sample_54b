@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   resources :items, only:[:index, :new, :create, :edit, :update]
   # 商品購入ページ
   get 'transaction/:id', to: 'deals/purchase#check_item', as: :purchase_check_item
+  get 'transaction/:id/select_card', to: 'deals/deals_payjp_cards#index', as: :purchase_cards
+  get 'transaction/:id/cards', to: 'deals/deals_payjp_cards#new', as: :purchase_cards_new
+  post 'transaction/:id/cards', to: 'deals/deals_payjp_cards#create', as: :purchase_cards_create
 end
