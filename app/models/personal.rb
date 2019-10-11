@@ -14,7 +14,9 @@ class Personal < ApplicationRecord
   validates :address,length: {maximum: 100}
   validates :building,length: {maximum: 100}
   validates :cellular_phone_number,length: {maximum: 35}
-  validates :birthdate, presence: true
+  validates :birthdate, presence: true 
   belongs_to :user
   belongs_to_active_hash :prefecture
+
+  
 end
