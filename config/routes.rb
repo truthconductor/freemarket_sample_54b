@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get 'transaction/:id/select_card', to: 'deals/deals_payjp_cards#index', as: :purchase_cards
   get 'transaction/:id/cards', to: 'deals/deals_payjp_cards#new', as: :purchase_cards_new
   post 'transaction/:id/cards', to: 'deals/deals_payjp_cards#create', as: :purchase_cards_create
+  get 'transaction/:id/addresses/new', to: 'deals/deals_delivery_addresses#new', as: :purchase_address_new
 end

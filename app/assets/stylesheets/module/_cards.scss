@@ -191,10 +191,20 @@ p.card-error_message {
   color: $text-red;
 }
 
-//必須ボタン
+// 必須ボタン
 span.form--required {
   color: $text-white;
   background: #ea352d;
+  border-radius: 2px;
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  font-size: 12px;
+}
+
+// 任意ボタン
+span.form--optional {
+  color: $text-white;
+  background: #ccc;
   border-radius: 2px;
   margin: 0 0 0 8px;
   padding: 2px 4px;

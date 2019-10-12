@@ -1,17 +1,16 @@
 // 商品購入ページ表示エリア
 .deals-wrapper {
-  padding: 40px;
   background: $background-smokewhite;
   min-height: 100vh;
 }
 
 .deals-main {
   width: 700px;
+  min-height: calc(100vh - 90px - 150px - 60px);
   margin: 30px auto;
 }
 
 .deals-content {
-  width: 700px;
   &__section {
     margin-bottom: 1px;
     color: #333;

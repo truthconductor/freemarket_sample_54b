@@ -1,0 +1,2 @@
+class Deals::DealsDeliveryAddressesController < DeliveryAddressesController
+end
