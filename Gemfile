@@ -92,5 +92,5 @@ gem 'active_hash'
 gem 'ancestry'
 gem 'mini_magick'
 gem 'nokogiri'
-gem 'dropzonejs-rails'
 gem 'jquery-rails'
+gem "font-awesome-rails"
