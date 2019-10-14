@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html{redirect_to root_path}
+        format.html{redirect_to new_item_path}
       else
         @item.item_images.build
         format.html{render action: 'new'}
