@@ -1,20 +1,23 @@
 .form
-  = form_with model: @item, local: true, class: "dropzone-box", id: "item-dropzone" do |f|
-    -# %h2.sell-form__header
-    -#   商品情報を入力
-    -# .sell-form-container
-    -#   %label.sell-form-container__label
-    -#     出品画像
-    -#   %span.sell-form-container__require
-    -#     必須
+  = form_with model: @item, local: true, class: "dropzone", id: "item-dropzone" do |f|
+    %h2.sell-form__header
+      商品情報を入力
+    .sell-form-container
+      %label.sell-form-container__label
+        出品画像
+      %span.sell-form-container__require
+        必須
     = f.fields_for :item_images do |item_image|
       .dropzone-area 
-        = item_image.label :image, class: "dropzone-box", for: "upload-image" do
+        #preview
+        = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
           .input_area
-            = item_image.file_field :image, name: 'item[item_images_attributes][0][image]', id: "upload-image", class: "upload-image", 'data-image': 0
-            -# = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image", class: "upload-image", 'data-image': 0
-            %p.square ここをクリックしてください
-      #preview
+            %p.square ここをクリックして画像をアップロード
+            = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+            - if @item.errors.full_messages_for(:item_images).present?
+              %p 画像がありません
+
+      -# アップされてる画像の枚数によって、枠のサイズを変化させる表示の実装をするときに使用
       -# #preview2
       -# .dropzone-area2
       -#   = item_image.label :image, class: "dropzone-box", for: "upload-image" do
@@ -64,20 +67,3 @@
       - if @item.errors.full_messages_for(:amount).present?
         %p 300以上9999999以下で入力してください
     = f.submit "出品する"
-
-  -# = form_with model: @item, local: true do |f|
-    -# = f.fields_for :item_images do |item_image|
-    -#   = item_image.file_field :image, multiple: false
-    -# - if @item.errors.full_messages_for(:item_images).present?
-    -#   %p 画像がありません
-
--# %form.dropzone
--#   %input name="file" type="file" id="my-awesome-dropzone" multiple
--# action="/file-upload", class="dropzone", id="my-awesome-dropzone"
-
-#drop_zone
-  "ドロップ"
-
-#preview
-
-%button#post{type: "submit"} Submit

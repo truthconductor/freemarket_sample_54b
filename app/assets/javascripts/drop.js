@@ -1,151 +1,82 @@
 $(document).on('turbolinks:load', function() {
-  var dropzone = $('dropzone-area');
   var preview = $('#preview');
-  var images = [];
-  var inputs = [];
   var input_area = $('.input_area')
 
-  // input[type="file"]タグの要素が変化した(画像がアップロードされた)タイミングで発火させる
-  $(document).on('change', 'input[type="file"].upload-image', function(event) {
-    // アップロードされた画像ファイル(ファイルオブジェクト)の属性値(filesプロパティ)を取得する
-    var file = $(this).prop('files')[0];
-    // FileReaderオブジェクトをインスタンス化する
-    var reader = new FileReader();
-    // ファイルオブジェクトをinputsへ代入
-    inputs.push($(this));
-    var img = $(`<div class = "img_view"><img></div>`);
-    // FileReaderオブジェクトに画像ファイルが読み込まれたタイミングで発火させる
-    reader.onload = function(e) {
-      var btn_wrapper = $('<div class="btn_wrapper"><div class="btn edit">編集</div><div class="btn delete">削除</div></div>');
-      // img(親要素)へbtn_wrapperを子要素として追加する
-      img.append(btn_wrapper)
-      // img変数に定義している、divタグ内imgタグを取得する
-      // 取得したimgタグのsrcプロパティへ、アップした画像を入れ込む
-      img.find('img').attr({
-        // 画像を表示するためData URIスキームをsrcプロパティへセットする
-        src: e.target.result
-      })
+  //inputの中身の変更時に発生
+  $(document).on('change', '[type="file"].upload-image', function(event) {
+
+    // 変更を行ったinputを取得する
+    changed_input = $(this);
+    changed_id = changed_input.data('image');
+    // 現時点でのfile用inputタグを全取得する
+    inputs_length = $('[type="file"].upload-image').length;
+    //変更されたinputが末尾のinput（空欄からの追加）の場合、inputを更に追加
+    if(changed_id === inputs_length - 1 && inputs_length <= 10) {
+      var new_input = $(`<input class="upload-image" type="file" style="display: none;">`);
+      input_area.append(new_input);
     }
 
-     // FileReaderオブジェクトへ属性値(filesプロパティ)を代入する
+    //変更されたidに対応するimg_viewを取得
+    var image_view = $(".img_view[data-image="+changed_id+"]").first();
+    //idに対応するimg_viewが存在しないときは追加
+    if(!image_view[0]) {
+      image_view = $(`<div class = "img_view">
+                        <img>
+                        <div class="btn_wrapper">
+                          <div class="btn edit">編集</div>
+                          <div class="btn delete">削除</div>
+                        </div>
+                      </div>`);
+      preview.append(image_view);
+    }
+
+    //input,image_viewそれぞれにindexを再割り当て
+    reorder_data_image();
+
+    // アップロードされた画像ファイル(ファイルオブジェクト)の属性値(filesプロパティ)を取得する
+    var file = changed_input.prop('files')[0];
+    // FileReaderオブジェクトをインスタンス化する
+    var reader = new FileReader();
+    // ファイル読み込み後の処理
+    reader.onload = function(e) {
+      // img_view内のimgタグのsrcプロパティへ、読み込みが完了した画像を入れ込む
+      image_view.find('img').attr('src', e.target.result);
+    };
+
+    // FileReaderオブジェクトへ属性値(filesプロパティ)を代入する
     reader.readAsDataURL(file);
-    images.push(img);
+  });
 
-    // 画像データへもdata-imageを順番に付与して、previewへ追加する
-    $.each(images, function(index, image){
-      image.attr('data-image', index);
-      preview.append(image);
-    })
-    // $.each('input[type="file"]', function(index, input) {
-    //   input.attr('data-image', index);
-    // })
-
-    var new_image = $(`<input name="item[item_images_attributes][${images.length}][image]" id="upload-image" class="upload-image" data-image= ${images.length} type="file">`);
-    // var new_image = $(`<input style="display: none;" name="item[item_images_attributes][${images.length}][image]" id="upload-image" class="upload-image" data-image= ${images.length} type="file">`);
-    // 同じidを持つinputタグがあった場合、先に存在している方のみ読まれるため、input_areaの先頭にinput type=fileを追加するため、appendではなくprependメソッドを使う
-    // input_area.prepend(new_image);
-    input_area.prepend(new_image);
-  })
+  // 削除クリック
   $(document).on('click', '.delete', function() {
+    // イベントが発生したimage_viewのオブジェクトとidを取得する
     var target_image = $(this).parent().parent();
-    // target_image.remove();
-    // // 値が空のinputタグを全て削除する
-    // $.each('input[type="file"]', function(index, input) {
-    //   if ($(input).val() == null){
-    //     input.remove();
-    //   }
-    // })
-    // 現在アップロードされている画像をeachで回して、クリックされた画像がアップされているinputタグを探し出す
-    $.each(inputs, function(index, input){
+    var remove_id = target_image.data('image');
+    // 同じidのinputを取得する
+    var remove_input = $('[type="file"].upload-image[data-image='+remove_id+']');
+    //input,image_view消去
+    remove_input.remove();
+    target_image.remove();
+    //input,image_viewそれぞれにindexを再割り当て
+    reorder_data_image();
+  });
+
+  // data-imageをの番号を再割り当てする
+  function reorder_data_image() {
+    //input,image_viewそれぞれにindexを再割り当て
+    $('[type="file"].upload-image').each(function(index, input) {
+      $(input).attr({
+        'data-image': index,
+        id: 'upload-image-' + index,
+        name: 'item[item_images_attributes][' + index + '][image]',
+      });
       debugger
-      // this = inputs(inputタグが含まれている)
-      if ($(this).data('image') == target_image.data('image')){
-        // inputタグ、ファイルオブジェクトを削除する
-        input.remove();
-        // プレビュー表示する要素を削除する
-        target_image.remove();
-        var num = $(input).data('image');
-        // 配列から該当画像データを削除する
-        images.splice(num, 1);
-        inputs.splice(num, 1);
-        // アップされている画像データの数が0の場合、inputタグへdata-image: 0を付与する
-        if(inputs.length == 0) {
-          $('input[type="file"].upload-image').attr({
-            'name': `item[item_images_attributes][0][image]`,
-            'data-image': 0
-          })
-        }
-      }
+      $(input).prop('disabled', index >= 10);
     })
-    // 指定要素の最初を対象に、data-imageを付与する
-    $('input[type="file"].upload-image').first().attr({
-      'name': `item[item_images_attributes][${images.length}][image]`,
-      'data-image': inputs.length
-    })
-    $.each(inputs, function(index, input) {
-      var input = $(this)
-      input.attr({
-        'name': `item[item_images_attributes][${index}][image]`,
-        'data-image': index
-      })
-      $('input[type="file"].upload-image').first().after(input)
-    })
-  })
+    $('.img_view').each(function(index, image) {
+      $(image).attr('data-image', index);
+    });
+    //dropzone-boxに対応付くinputを末尾のinputに再割り当て
+    $('.dropzone-box').attr('for','upload-image-' + ($('[type="file"].upload-image').length - 1));
+  }
 });
-
-
-// アップロード即時プレビュー画像表示サンプルコード
-// window.onload = function () {
-//   var formData = new FormData();
-//   var dropZone = document.getElementById("drop_zone");
-
-//   dropZone.addEventListener("dragover", function(e) {
-//     e.stopPropagation();
-//     e.preventDefault();
-  
-//     this.style.background = "#ff3399";
-//   }, false);
-
-//   dropZone.addEventListener("dragleave", function(e) {
-//     e.stopPropagation();
-//     e.preventDefault();
-
-//     this.style.background = "#ffffff";
-//   }, false);
-
-//   dropZone.addEventListener("drop", function(e) {
-//     e.stopPropagation();
-//     e.preventDefault();
-
-//     this.style.background = "#ffffff";
-
-//     var files = e.dataTransfer.files;
-//     for (var i = 0; i < files.length; i++) {
-//       (function() {
-//         var fr = new FileReader();
-//         fr.onload = function() {
-//           var div = document.createElement('div');
-
-//           var img = document.createElement('img');
-//           img.setAttribute('src', fr.result);
-//           div.appendChild(img);
-
-//           var preview = document.getElementById("preview");
-//           debugger
-//           preview.appendChild(div);
-//         };
-//         fr.readAsDataURL(files[i]);
-//       })();
-
-//       formData.append("file", files[i]);
-//     }
-//   }, false);
-
-
-//   var postButton = document.getElementById("post");
-//   postButton.addEventListener("click", function() {
-//     var request = new XMLHttpRequest();
-//     request.open("POST", "POST_URL");
-//     request.send(formData);
-//   });
-// };
