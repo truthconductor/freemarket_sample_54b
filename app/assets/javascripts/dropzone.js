@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   var preview = $('#preview');
-  var input_area = $('.input_area')
+  var input_area = $('.input_area');
 
   //inputの中身の変更時に発生
   $(document).on('change', '[type="file"].upload-image', function(event) {

@@ -21,19 +21,6 @@ class ItemsController < ApplicationController
         format.html{render action: 'new'}
       end
     end
-
-    # respond_to do |format|
-    #   if @item.save
-    #     params[:item_images][:image].each do |image|
-    #       @item.item_images.create(image: image, item_id: @item.id)
-    #     end
-    #     format.html{redirect_to root_path}
-    #   else
-    #     binding.pry
-    #     @item.item_images.build
-    #     format.html{render action: 'new'}
-    #   end
-    # end
   end
 
   def edit

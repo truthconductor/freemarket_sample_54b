@@ -7,9 +7,9 @@
         出品画像
       %span.sell-form-container__require
         必須
+    #preview
     = f.fields_for :item_images do |item_image|
       .dropzone-area 
-        #preview
         = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
           .input_area
             %p.square ここをクリックして画像をアップロード
