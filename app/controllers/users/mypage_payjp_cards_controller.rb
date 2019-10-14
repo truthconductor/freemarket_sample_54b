@@ -1,0 +1,4 @@
+# ユーザーマイページ用のpayjpコントローラ
+# マイページ内のカード登録Viewを表示するためにPayjpCardsControllerを継承して別クラス化
+class Users::MypagePayjpCardsController < PayjpCardsController
+end

@@ -1,0 +1,201 @@
+// PCサイズ
+@media screen and (min-width: 1068px) {
+  .card-container {
+    float: right;
+  }
+}
+
+// カード情報ページコンテナ
+.card-container {
+  width: 700px;
+  &__header {
+    background: $background-white;
+    &__headline {
+      text-align: center;
+      font-size: 24px;
+      padding: 12px 24px;
+    }
+  }
+  &__list {
+    margin-top: 2px;
+    padding: 64px;
+    background: $background-white;
+    &__headline {
+      margin: 0 auto;
+      max-width: 320px;
+      font-size: 16px;
+    }
+    &__cards {
+      margin: 24px auto;
+      max-width: 320px;
+      text-align: center;
+      &__card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__detail {
+          text-align: left;
+          &__image {
+            height: 18px;
+          }
+          &__text {
+            padding: 8px 0 0;
+            font-size: 14px;
+          }
+        }
+        &__destroy {
+          cursor : pointer;
+          color: $button-background-red;
+          background: $background-white;
+          border: 1px solid $button-background-red;
+          border-radius: 3px;
+          padding: 6px;
+          font-size: 14px;
+          line-height: 14px;
+        }
+      }
+      &__button {
+        color: $text-white;
+        background: $button-background-red;
+        font-size: 14px;
+        line-height: 48px;
+        &:hover {
+          background: #F28A86;
+          transition: background 0.3s;
+        }
+        &__icon {
+          margin: 0 16px 0 0;
+        }
+      }
+    }
+    &--line {
+      border-top: 1px solid #f6f6f6;
+      margin: 36px 0;
+    }
+    &__help {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      &__link {
+        color: $link-hover;
+        &__icon {
+          margin: 0 0 0 8px;
+        }
+      }
+    }
+  }
+
+  &__form {
+    margin-top: 2px;
+    background: $background-white;
+    padding: 40px 64px;
+    &__field {
+      margin: 0 auto 20px;
+      max-width: 340px;
+      &__label {
+        font-weight: 600;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+      &__text_field {
+        width: 100%;
+        height: 48px;
+        margin: 8px 0 0;
+        padding: 10px 16px;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+      &__cardlist {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin: 8px 0;
+        &__carditem {
+          list-style: none;
+          &__image {
+            height: 18px;
+            margin-right: 12px;
+          }
+        }
+      }
+      &__date {
+        margin: 8px 0;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        &__select {
+          cursor: pointer;
+          height: 48px;
+          width: 35%;
+          padding: 10px 16px;
+          font-size: 16px;
+          appearance: none;
+          outline: none;
+          background: transparent;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          z-index: 2;
+          &:focus  {
+            border: 1px solid $form-focus;
+          }
+        }
+        &__icon {
+          color: #888;
+          position: relative;
+          pointer-events: none;
+          margin-right: -20px;
+          left: -40px;
+          font-size: 2rem;
+          line-height: 48px;
+          z-index: 1;
+        }
+        &__text {
+          padding: 0 8px;
+        }
+      }
+      &__help {
+        margin-top: 8px;
+        text-align: right;
+        &--link {
+          color: #0099e8;
+        }
+      }
+      &__button {
+        cursor: pointer;
+        color: $text-white;
+        background: $button-background-red;
+        border: none;
+        width: 100%;
+        font-size: 14px;
+        line-height: 48px;
+        &:hover {
+          background: #F28A86;
+          transition: background 0.3s;
+        }
+      }
+    }
+  }
+}
+
+// カードエラーメッセージ
+// jQueryのセレクタとするため独自クラスで定義
+p.card-error_message {
+  margin: 8px 0;
+  color: $text-red;
+}
+
+//必須ボタン
+span.form--required {
+  color: $text-white;
+  background: #ea352d;
+  border-radius: 2px;
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  font-size: 12px;
+}

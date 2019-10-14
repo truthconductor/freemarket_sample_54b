@@ -1,0 +1,26 @@
+= render 'joint/header'
+= render 'user-breadcrumb'
+.user-wrapper
+  %main.user-main
+    .user-container
+      .user-intro
+        = link_to "#", class: "user-intro__link" do
+          = image_tag "user/user_photo_noimage.png", class: "user-intro__link__avator"
+          %h2.user-intro__link__username
+            ユーザー名
+          %div.user-intro__link__user-status
+            評価
+            %span.user-intro__link__user-status--count
+              XX
+            出品数
+            %span.user-intro__link__user-status--count
+              XX
+      -# お知らせ・やることリスト
+      = render 'user-notice'
+      -# 購入した商品
+      = render 'user-bought'
+    -# ナビゲーションバー
+    = render 'user-navigation'
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'

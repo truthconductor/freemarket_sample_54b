@@ -1,0 +1,41 @@
+// 中サイズ
+@media screen and (max-width: 1067px) {
+  .user-breadcrumb__list {
+    width: 700px;
+  }
+}
+
+// PCサイズ
+@media screen and (min-width: 1068px) {
+  .user-breadcrumb__list {
+    width: 1020px;
+  }
+}
+
+.user-breadcrumb {
+  background:  $background-white;
+  border-top: 1px solid $background-smokewhite;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px 3px 3px 0 #ccc;
+  &__list {
+    margin: 0 auto;
+    padding: 16px 0;
+    box-sizing: border-box;
+  }
+  &__item {
+    display: inline-block;
+    font-size: 14px;
+    &--parent {
+      color: $text-deepgray;
+    }
+    &--leaf {
+      font-weight: 600;
+      color: $text-deepgray;
+    }
+    &__icon {
+      margin: 0 6px;
+      color: $text-deepgray;
+    }
+  }
+}

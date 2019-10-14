@@ -1,0 +1,99 @@
+// マイページタブ表示エリア
+.user-tabcontent {
+  width: 700px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  &__tabbar {
+    display: flex;
+    &__tab {
+      width: 350px;
+      height: 72px;
+      line-height: 72px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      background: $background-lightgray;
+      &:hover {
+        background: #f0f0f0;
+        color: #666;
+      }
+      &--active {
+        border-top: 2px solid #ea352d;
+        background: $background-white;
+        &:hover {
+          border-top: 2px solid #ED5D58;
+          background: $background-white;
+        }
+      }
+    }
+  }
+  &__page {
+    width: 700px;
+    &--none {
+      display: none;
+    }
+  }
+}
+
+// 通知・リスト項目
+.user-notification {
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1px;
+    padding: 16px;
+    background: $background-white;
+    &:hover {
+      background: $link-item-hover;
+    }
+    &__image {
+      height: 48px;
+      width: 48px;
+    }
+    &__headline {
+      margin: 0 16px;
+      line-height: 21px;
+      flex-grow: 1;
+      &--title {
+        color: $text-deepgray;
+      }
+      &--time {
+        font-size: 12px;
+        color: #888;
+      }
+    }
+    &__icon {
+      color: $text-deepgray;
+    }
+  }
+  &__footer {
+    background: $background-white;
+    padding: 16px;
+    &__button {
+      display: block;
+      line-height: 56px;
+      text-align: center;
+      color: $text-deepgray;
+      background: $background-lightgray;
+      &:hover {
+        background: #f3f3f3;
+      }
+    }
+  }
+}
+
+.user-nolistitem {
+  padding: 40px;
+  background: #fafafa;
+  color: #ccc;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  &--image {
+    margin: 0 auto 20px;
+    width: 78px;
+    height: 85px;
+    box-sizing: border-box;
+  }
+}
