@@ -31,35 +31,47 @@ $(document).on('turbolinks:load', function() {
     reader.readAsDataURL(file);
     images.push(img);
 
+    // 画像データへもdata-imageを順番に付与して、previewへ追加する
     $.each(images, function(index, image){
       image.attr('data-image', index);
       preview.append(image);
     })
+    // $.each('input[type="file"]', function(index, input) {
+    //   input.attr('data-image', index);
+    // })
 
-    var new_image = $(`<input style="display: none;" name="item[item_images_attributes][${images.length}][image]" id="upload-image" class="upload-image" data-image= ${images.length} type="file">`);
+    var new_image = $(`<input name="item[item_images_attributes][${images.length}][image]" id="upload-image" class="upload-image" data-image= ${images.length} type="file">`);
+    // var new_image = $(`<input style="display: none;" name="item[item_images_attributes][${images.length}][image]" id="upload-image" class="upload-image" data-image= ${images.length} type="file">`);
     // 同じidを持つinputタグがあった場合、先に存在している方のみ読まれるため、input_areaの先頭にinput type=fileを追加するため、appendではなくprependメソッドを使う
+    // input_area.prepend(new_image);
     input_area.prepend(new_image);
   })
   $(document).on('click', '.delete', function() {
     var target_image = $(this).parent().parent();
-    // 現在アップロードされている画像をeachで回して、クリックされた画像と一致したものを削除する
+    // target_image.remove();
+    // // 値が空のinputタグを全て削除する
+    // $.each('input[type="file"]', function(index, input) {
+    //   if ($(input).val() == null){
+    //     input.remove();
+    //   }
+    // })
+    // 現在アップロードされている画像をeachで回して、クリックされた画像がアップされているinputタグを探し出す
     $.each(inputs, function(index, input){
+      debugger
+      // this = inputs(inputタグが含まれている)
       if ($(this).data('image') == target_image.data('image')){
-        // Number($(this).parent().parent().attr("data-image"))
-        // ファイルオブジェクトを削除する
-        // $(this).remove();
-        debugger
-        $(this).remove();
+        // inputタグ、ファイルオブジェクトを削除する
+        input.remove();
         // プレビュー表示する要素を削除する
         target_image.remove();
-        var num = $(this).data('image');
+        var num = $(input).data('image');
         // 配列から該当画像データを削除する
         images.splice(num, 1);
         inputs.splice(num, 1);
         // アップされている画像データの数が0の場合、inputタグへdata-image: 0を付与する
         if(inputs.length == 0) {
           $('input[type="file"].upload-image').attr({
-            'name': `item[item_images_attributes][${images.length}][image]`,
+            'name': `item[item_images_attributes][0][image]`,
             'data-image': 0
           })
         }

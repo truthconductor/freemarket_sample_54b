@@ -15,10 +15,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        binding.pry
         format.html{redirect_to root_path}
       else
-        binding.pry
         @item.item_images.build
         format.html{render action: 'new'}
       end
