@@ -25,6 +25,10 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def show
+    @item = Item.find(params[:id]).decorate
+  end
+
   private
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])

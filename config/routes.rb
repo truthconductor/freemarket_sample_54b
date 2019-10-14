@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete 'mypage/cards/:id', to: 'users/mypage_payjp_cards#destroy', as: :mypage_cards_destroy
 
   resources :test,only:[:index]
-  resources :items, only:[:index, :new, :create, :edit, :update]
+  resources :items, only:[:index, :show, :new, :create, :edit, :update]
   # 商品購入ページ
   get 'transaction/:id', to: 'deals/purchase#check_item', as: :purchase_check_item
   get 'transaction/:id/select_card', to: 'deals/deals_payjp_cards#index', as: :purchase_cards

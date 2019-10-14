@@ -14,5 +14,7 @@ CarrierWave.configure do |config|
   }
 
   config.fog_directory  = 'upload-image3'
-  config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/upload-image3'
+  if Rails.env.production?
+    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/upload-image3'
+  end
 end
