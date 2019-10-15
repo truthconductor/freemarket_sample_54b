@@ -1,0 +1,5 @@
+- if resource.errors.any?
+  #error_explanation
+    %ul
+      - resource.errors.messages.each do |attr, msgs|
+        %li= resource.errors.full_messages_for(attr).first

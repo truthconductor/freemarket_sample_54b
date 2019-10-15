@@ -17,6 +17,7 @@ class Personal < ApplicationRecord
   validates :birthdate, presence: true 
   belongs_to :user
   belongs_to_active_hash :prefecture
+  validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  }
+  validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }
 
-  
 end
