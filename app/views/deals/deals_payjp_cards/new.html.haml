@@ -1,7 +1,7 @@
 .deals-wrapper
   = render 'deals/header'
   %main.deals-main
-    = form_with model: @payjp_card, local: true, url: purchase_cards_create_path, method: :post, id: "card_form", class: "deals-content" do |f|
+    = form_with model: @payjp_card, local: true, url: item_purchase_card_index_path, method: :post, id: "card_form", class: "deals-content" do |f|
       %section.deals-content__section
         .deals-content__section__w320
           %h2.deals-content__section__w320__headline

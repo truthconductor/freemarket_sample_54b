@@ -9,7 +9,7 @@
         .card-container__list
           %h3.card-container__list__headline
             クレジットカード一覧
-          = form_with url: purchase_check_item_path, method: :get, local: true do |f|
+          = form_with url: new_item_purchase_path, method: :get, local: true do |f|
             .card-container__list__cards
               - if @payjp_cards.length > 0
                 - @payjp_cards.each do |payjp_card|

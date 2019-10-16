@@ -38,7 +38,7 @@
               XX県 YYY市 ZZ町 1-2-3 ABCマンション101
               %br
               XX XX
-            = link_to purchase_address_new_path, class: "deals-content__section__w320__method__change" do
+            = link_to new_item_purchase_delivery_address_path, class: "deals-content__section__w320__method__change" do
               変更する
               = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
       %section.deals-content__section
@@ -48,13 +48,13 @@
               支払い方法
             - if @payjp_card
               = render 'payjp_cards/card', {payjp_card: @payjp_card}
-              = link_to purchase_cards_path, class: "deals-content__section__w320__method__change" do
+              = link_to item_purchase_card_index_path, class: "deals-content__section__w320__method__change" do
                 変更する
                 = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
             - else
               .deals-content__section__w320__method__content
                 カードを登録してください
-              = link_to purchase_cards_new_path, class: "deals-content__section__w320__method__change" do
+              = link_to new_item_purchase_card_path, class: "deals-content__section__w320__method__change" do
                 変更する
                 = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
   = render 'deals/footer'

@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   delete 'mypage/cards/:id', to: 'users/mypage_payjp_cards#destroy', as: :mypage_cards_destroy
 
   resources :test,only:[:index]
-  resources :items, only:[:index, :show, :new, :create, :edit, :update]
-  # 商品購入ページ
-  get 'transaction/:id', to: 'deals/purchase#check_item', as: :purchase_check_item
-  get 'transaction/:id/select_card', to: 'deals/deals_payjp_cards#index', as: :purchase_cards
-  get 'transaction/:id/cards', to: 'deals/deals_payjp_cards#new', as: :purchase_cards_new
-  post 'transaction/:id/cards', to: 'deals/deals_payjp_cards#create', as: :purchase_cards_create
-  get 'transaction/:id/addresses/new', to: 'deals/deals_delivery_addresses#new', as: :purchase_address_new
+  resources :items, only:[:index, :show, :new, :create, :edit, :update] do
+    # 商品購入ページ
+    scope module: :deals do
+      resources :purchase, only: [:new, :create], path: 'transaction'
+      resources :deals_payjp_cards, only: [:index, :new, :create], path: "transaction/cards", as: :purchase_card
+      resources :deals_delivery_addresses, only: [:new, :create], path: "transaction/delivery_addresses", as: :purchase_delivery_addresses
+    end
+  end
 end
