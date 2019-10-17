@@ -4,7 +4,8 @@
     = f.label :email
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
-    = f.object.errors.full_messages_for(:email).join(',')
+    - if resource.errors.full_messages_for(:email).present?
+      %p メールアドレスを入力してください
   .field
     = f.label :password
     - if @minimum_password_length
@@ -12,22 +13,26 @@
         (#{@minimum_password_length} characters minimum)
     %br/
     = f.password_field :password, autocomplete: "new-password"
-    = f.object.errors.full_messages_for(:password).join(',')
+    - if resource.errors.full_messages_for(:password).present?
+      %p パスワードを入力してください
   .field
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation, autocomplete: "new-password"
-    = render "devise/shared/error_messages", resource: resource
+    - if resource.errors.full_messages_for(:password).present?
+      %p パスワード(確認)を入力してください
   = f.fields_for :personal,@user.build_personal do |personal|
     .field
       = personal.label "姓"
       %br/
       = personal.text_field :last_name, autocomplete: "off"
-      = resource.errors.full_messages_for(:last_name).join(',')
+      - if  @user.build_personal.errors.full_messages_for(:last_name).present?
+        %p 姓を入力してください
       = personal.label "名"
       %br/
       = personal.text_field :first_name, autocomplete: "off"
-      = f.object.errors.full_messages_for(:last_name).join(',')
+      - if personal.object.errors.full_messages_for(:last_name).present?
+        %p 姓を入力してください
     .field
       = personal.label "姓(カナ）"
       %br/
