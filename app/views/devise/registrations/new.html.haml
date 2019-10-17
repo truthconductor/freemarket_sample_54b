@@ -1,11 +1,11 @@
 %h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+= form_with(model: resource,as: resource_name, url: registration_path(resource_name),local: true) do |f|
   .field
     = f.label :email
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
-    - if resource.errors.full_messages_for(:email).present?
-      %p メールアドレスを入力してください
+    - if resource.errors.full_messages_for(:email).any?
+      = resource.errors[:email]
   .field
     = f.label :password
     - if @minimum_password_length
@@ -13,33 +13,34 @@
         (#{@minimum_password_length} characters minimum)
     %br/
     = f.password_field :password, autocomplete: "new-password"
-    - if resource.errors.full_messages_for(:password).present?
-      %p パスワードを入力してください
+    = resource.errors.full_messages_for(:password)
   .field
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation, autocomplete: "new-password"
-    - if resource.errors.full_messages_for(:password).present?
-      %p パスワード(確認)を入力してください
+    - if resource.errors.full_messages_for(:password).any?
+      = resource.errors.full_messages_for(:password)
   = f.fields_for :personal,@user.build_personal do |personal|
     .field
-      = personal.label "姓"
+      = personal.label "姓"  
       %br/
       = personal.text_field :last_name, autocomplete: "off"
-      - if  @user.build_personal.errors.full_messages_for(:last_name).present?
-        %p 姓を入力してください
+      = resource.errors.full_messages_for(:"personal.last_name")
+    .field
       = personal.label "名"
       %br/
       = personal.text_field :first_name, autocomplete: "off"
-      - if personal.object.errors.full_messages_for(:last_name).present?
-        %p 姓を入力してください
+      = resource.errors.full_messages_for(:"personal.first_name")
     .field
       = personal.label "姓(カナ）"
       %br/
       = personal.text_field :last_name_kana, autocomplete: "off"
+      = resource.errors.full_messages_for(:"personal.last_name_kana")
+    .field
       = personal.label "名（カナ）"
       %br/
       = personal.text_field :first_name_kana, autocomplete: "off"
+      = resource.errors.full_messages_for(:"personal.first_name_kana")
     .field
       = personal.label "生年月日"
       %br/
