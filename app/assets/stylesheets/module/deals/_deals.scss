@@ -85,11 +85,14 @@
           }
         }
         &__button {
-          color: #fff;
-          background: #ea352d;
+          cursor: pointer;
+          color: $text-white;
+          background: $button-background-red;
+          border: none;
+          width: 100%;
           font-size: 14px;
-          font-weight: 600;
           line-height: 48px;
+          font-weight: 600;
           text-align: center;
           &:hover {
             background: #F28A86;
