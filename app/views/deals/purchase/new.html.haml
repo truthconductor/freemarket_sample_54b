@@ -34,14 +34,14 @@
                 配送先
               .deals-content__section__w320__method__content
                 - if current_user&.delivery_address
-                  〒XXX-XXXX
+                  = "〒#{current_user.delivery_address.zip_code}"
                   %br
-                  XX県 YYY市 ZZ町 1-2-3 ABCマンション101
+                  = current_user.delivery_address.decorate.full_address
                   %br
-                  XX XX
+                  = current_user.delivery_address.decorate.full_name
                 - else
                   配送先を登録してください
-              = link_to new_item_purchase_delivery_address_path, class: "deals-content__section__w320__method__change" do
+              = link_to current_user.delivery_address ? edit_item_purchase_delivery_address_path(@item, current_user.delivery_address) : new_item_purchase_delivery_address_path, class: "deals-content__section__w320__method__change" do
                 変更する
                 = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
         %section.deals-content__section
