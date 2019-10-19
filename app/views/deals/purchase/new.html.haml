@@ -1,0 +1,60 @@
+.deals-wrapper
+  = render 'deals/header'
+  %main.deals-main
+    .deals-content
+      %section.deals-content__section
+        .deals-content__section__w320
+          %h2.deals-content__section__w320__headline
+            購入内容の確認
+      %section.deals-content__section
+        .deals-content__section__w320
+          .deals-content__section__w320__order
+            .deals-content__section__w320__order__item
+              = image_tag 'item-sample.jpg', class: "deals-content__section__w320__order__item__image"
+              %p.deals-content__section__w320__order__item__name
+                【オススメ‼】チャンピオン プルオーバー パーカー 星条旗 ビックロゴ 総柄
+              %p.deals-content__section__w320__order__item__cost
+                %span.deals-content__section__w320__order__item__cost--price
+                  ¥X,XXX
+                %span.deals-content__section__w320__order__item__cost--deliverymethod
+                  送料込み
+            .deals-content__section__w320__order__point
+              ポイントはありません
+            .deals-content__section__w320__order__payment
+              .deals-content__section__w320__order__payment__left
+                支払い金額
+              .deals-content__section__w320__order__payment__right
+                ¥X,XXX
+            .deals-content__section__w320__order__button
+              購入する
+      %section.deals-content__section
+        .deals-content__section__w320
+          .deals-content__section__w320__method
+            %h3.deals-content__section__w320__method__headline
+              配送先
+            .deals-content__section__w320__method__content
+              〒XXX-XXXX
+              %br
+              XX県 YYY市 ZZ町 1-2-3 ABCマンション101
+              %br
+              XX XX
+            = link_to new_item_purchase_delivery_address_path, class: "deals-content__section__w320__method__change" do
+              変更する
+              = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+      %section.deals-content__section
+        .deals-content__section__w320
+          .deals-content__section__w320__method
+            %h3.deals-content__section__w320__method__headline
+              支払い方法
+            - if @payjp_card
+              = render 'payjp_cards/card', {payjp_card: @payjp_card}
+              = link_to item_purchase_card_index_path, class: "deals-content__section__w320__method__change" do
+                変更する
+                = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+            - else
+              .deals-content__section__w320__method__content
+                カードを登録してください
+              = link_to new_item_purchase_card_path, class: "deals-content__section__w320__method__change" do
+                変更する
+                = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+  = render 'deals/footer'
