@@ -7,10 +7,13 @@ class DeliveryAddress < ApplicationRecord
   validates :first_name, length: {maximum: 35}
   validates :last_name_kana, presence: true
   validates :last_name_kana, length: {maximum: 35}
+  validates :last_name_kana, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー]+\z/ }
   validates :first_name_kana, presence: true
   validates :first_name_kana, length: {maximum: 35}
+  validates :first_name_kana, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}－]+\z/ }
   validates :zip_code, presence: true
   validates :zip_code, length: {maximum: 8}
+  validates :zip_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
   validate :check_prefecture
   validates :city, presence: true
   validates :city, length: {maximum: 50}
@@ -24,7 +27,7 @@ class DeliveryAddress < ApplicationRecord
 
   def check_prefecture
     if prefecture_id.nil?
-      errors.add(:prefecture, "選択してください")
+      errors.add(:prefecture_id, "選択してください")
     end
   end
 end
