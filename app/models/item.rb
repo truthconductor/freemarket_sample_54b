@@ -30,7 +30,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
 
   def image_size
     item_images.each do |i|
-      if i.image.size > 2.megabytes
+      if i.image.size > 3.megabytes
         errors.add(:item_images, "サイズは3MB以下にしてください")
         break
       end

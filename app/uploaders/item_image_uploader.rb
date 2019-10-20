@@ -45,10 +45,6 @@ class ItemImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg png)
   end
 
-  # def size_range
-  #   1..2.megabytes
-  # end
-
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename

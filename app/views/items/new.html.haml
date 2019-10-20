@@ -7,23 +7,9 @@
         出品画像
       %span.sell-form-container__require
         必須
-    -# #preview
-    -#   .dropzone-area 
-    -#     .input_area
-    -#       %p.square ここをクリックして画像をアップロード
-    -#       = f.fields_for :item_images do |item_image|
-    -#         = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
-    -#           = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
-    -#           - if @item.errors.full_messages_for(:item_images).length == 2
-    -#             = @item.errors.full_messages_for(:item_images)[1]
-    -#           - else
-    -#             = @item.errors.full_messages_for(:item_images)[0]
-    -#           - if @item.errors.details[:"item_images.image"][0]
-    -#             = @item.errors.details[:"item_images.image"][0][:error] 
 
     #preview
     = f.fields_for :item_images, class: "image-field" do |item_image|
-      -# .dropzone-area 
       .input_area
         = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
           %p.square ここをクリックして画像をアップロード
