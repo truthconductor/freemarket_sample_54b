@@ -35,7 +35,7 @@ module FreemarketSample54b
       if instance.kind_of?(ActionView::Helpers::Tags::Label)
         html_tag.html_safe
       else
-        Nokogiri::HTML.fragment(html_tag).search('input', 'textarea', 'select').add_class('is-error').to_html.html_safe
+        Nokogiri::HTML.fragment(html_tag).search('input', 'textarea', 'select').add_class('validation-error').to_html.html_safe
       end
     end
   end
