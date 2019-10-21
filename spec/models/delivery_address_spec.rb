@@ -10,7 +10,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:last_name]).to include("を入力してください")
       end
-      it "is valid a last_name that has less than　or equal to 35 characters" do
+      it "is valid a last_name that has less than or equal to 35 characters" do
         delivery_address = build(:delivery_address, last_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえお")
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -30,7 +30,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:first_name]).to include("を入力してください")
       end
-      it "is valid a first_name that has less than　or equal to 35 characters" do
+      it "is valid a first_name that has less than or equal to 35 characters" do
         delivery_address = build(:delivery_address, first_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえお")
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -50,7 +50,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:last_name_kana]).to include("を入力してください")
       end
-      it "is valid a last_name_kana that has less than　or equal to 35 characters" do
+      it "is valid a last_name_kana that has less than or equal to 35 characters" do
         delivery_address = build(:delivery_address, last_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオ")
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -93,7 +93,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:first_name_kana]).to include("を入力してください")
       end
-      it "is valid a first_name_kana that has less than　or equal to 35 characters" do
+      it "is valid a first_name_kana that has less than or equal to 35 characters" do
         delivery_address = build(:delivery_address, first_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオ")
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -176,7 +176,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:city]).to include("を入力してください")
       end
-      it "is valid a city that has less than　or equal to 50 characters" do
+      it "is valid a city that has less than or equal to 50 characters" do
         delivery_address = build(:delivery_address, city:Faker::String.random(length: 50))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -196,7 +196,7 @@ describe DeliveryAddress do
         delivery_address.valid?
         expect(delivery_address.errors[:address]).to include("を入力してください")
       end
-      it "is valid a address that has less than　or equal to 100 characters" do
+      it "is valid a address that has less than or equal to 100 characters" do
         delivery_address = build(:delivery_address, address:Faker::String.random(length: 100))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -210,7 +210,7 @@ describe DeliveryAddress do
     end
     # 建物名
     describe "building" do
-      it "is valid a building that has less than　or equal to 100 characters" do
+      it "is valid a building that has less than or equal to 100 characters" do
         delivery_address = build(:delivery_address, building:Faker::String.random(length: 100))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
@@ -224,16 +224,33 @@ describe DeliveryAddress do
     end
     # 電話番号
     describe "phone_number" do
-      it "is valid a building that has less than　or equal to 35 characters" do
+      it "is valid a phone_number that has less than or equal to 35 characters" do
         delivery_address = build(:delivery_address, phone_number:Faker::Number.leading_zero_number(digits: 35))
         delivery_address.user = build(:user)
-        expect(delivery_address).to be_valid
+        delivery_address.valid?
+        expect(delivery_address.errors[:phone_number]).not_to include("は35文字以内で入力してください")
       end
       it "is invalid a phone_number that has more than 35 characters" do
         delivery_address = build(:delivery_address, phone_number:Faker::Number.leading_zero_number(digits: 36))
         delivery_address.user = build(:user)
         delivery_address.valid?
         expect(delivery_address.errors[:phone_number]).to include("は35文字以内で入力してください")
+      end
+      it "is valid a phone_number" do
+        delivery_address = build(:delivery_address, phone_number:"0527412222")
+        delivery_address.user = build(:user)
+        expect(delivery_address).to be_valid
+      end
+      it "is valid a phone_number with hyphen" do
+        delivery_address = build(:delivery_address, phone_number:"052-741-2222")
+        delivery_address.user = build(:user)
+        expect(delivery_address).to be_valid
+      end
+      it "is invalid a phone_number random 10 characters" do
+        delivery_address = build(:delivery_address, phone_number:Faker::String.random(length: 10))
+        delivery_address.user = build(:user)
+        delivery_address.valid?
+        expect(delivery_address.errors[:phone_number]).to include("を正しく入力してください")
       end
     end
   end

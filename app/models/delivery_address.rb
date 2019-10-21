@@ -20,7 +20,8 @@ class DeliveryAddress < ApplicationRecord
   validates :address, presence: true
   validates :address, length: {maximum: 100}
   validates :building, length: {maximum: 100}
-  validates :phone_number,length: {maximum: 35}
+  validates :phone_number, length: {maximum: 35}
+  validate :check_phone_number
   #Association
   belongs_to :user
   belongs_to_active_hash :prefecture
@@ -28,6 +29,13 @@ class DeliveryAddress < ApplicationRecord
   def check_prefecture
     if prefecture_id.nil?
       errors.add(:prefecture_id, "を選択してください")
+    end
+  end
+
+  # 空欄を許容した上で日本国内の電話番号形式かバリデーションを行う
+  def check_phone_number
+    unless phone_number.blank? || Phonelib.valid_for_country?(phone_number, :jp)
+      errors.add(:phone_number, "を正しく入力してください")
     end
   end
 end

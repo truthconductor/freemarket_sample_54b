@@ -10,6 +10,7 @@ FactoryBot.define do
     city                    {Faker::Address.city}
     address                 {Faker::Address.street_name}
     building                {Faker::Address.secondary_address}
-    phone_number            {Faker::PhoneNumber.phone_number}
+    # Faker::PhoneNumber.phone_numberではphonelibの日本電話番号形式に準拠しない電話番号を生成するためテスト用番号はテストコードで作成する
+    phone_number            {''}
   end
 end
