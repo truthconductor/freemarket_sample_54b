@@ -1,0 +1,48 @@
+@mixin form-box {
+  height: 48px;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@mixin required-sign {
+  color: #fff;
+  background: #ea352d;
+  border-radius: 2px;
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  font-size: 12px;
+}
+
+@mixin optional-sign {
+  color: #fff;
+  background: #ccc;
+  border-radius: 2px;
+  margin: 0 0 0 8px;
+  padding: 2px 4px;
+  font-size: 12px;
+}
+
+@mixin red-button {
+  cursor: pointer;
+  color: #fff;
+  background: $button-background-red;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  line-height: 48px;
+}
+
+@mixin gray-button {
+  cursor: pointer;
+  color: #fff;
+  background: $button-background-gray;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  line-height: 48px;
+}

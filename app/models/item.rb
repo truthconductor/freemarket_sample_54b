@@ -28,7 +28,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   
   def check_prefecture
     if prefecture_id.nil?
-      errors.add(:prefecture, "選択してください")
+      errors.add(:prefecture_id, "選択してください")
     end
   end
 end

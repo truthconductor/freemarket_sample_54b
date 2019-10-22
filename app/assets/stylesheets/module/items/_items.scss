@@ -1,0 +1,48 @@
+.items-sell-wrapper {
+  background: $background-smokewhite;
+  min-height: 100vh;
+}
+
+.items-sell-main {
+  width: 700px;
+  min-height: calc(100vh - 90px - 150px - 60px);
+  margin: 30px auto;
+}
+
+.items-sell-content {
+  &__section {
+    padding: 30px;
+    margin-bottom: 1px;
+    color: #333;
+    background: #fff;
+    &__header {
+      text-align: center;
+      line-height: 30px;
+      font-size: 22px;
+    }
+  }
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#drop_zone {
+  min-height: 150px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  background: white;
+  padding: 20px 20px;
+}
+
+#preview {
+  overflow: hidden;
+}
+
+#preview img {
+  width: 100px;
+  float: left;
+  margin: 10px;
+  cursor: move;
+}

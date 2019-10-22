@@ -1,69 +1,114 @@
-.form
-  = form_with model: @item, local: true, class: "dropzone", id: "item-dropzone" do |f|
-    %h2.sell-form__header
-      商品情報を入力
-    .sell-form-container
-      %label.sell-form-container__label
-        出品画像
-      %span.sell-form-container__require
-        必須
-    #preview
-    = f.fields_for :item_images do |item_image|
-      .dropzone-area 
-        = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
-          .input_area
-            %p.square ここをクリックして画像をアップロード
-            = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
-            - if @item.errors.full_messages_for(:item_images).present?
-              %p 画像がありません
+.items-sell-wrapper
+  = render "items/header"
+  %main.items-sell-main
+    %section.items-sell-content__section
+      %h2.items-sell-content__section__header
+        商品の情報を入力
+    .items-sell-container
+      = form_with model: @item, local: true, class: "dropzone", id: "item-dropzone" do |f|
+        %section.items-sell-content__section
+          .items-sell-container__form__description
+            .items-sell-container__form__description__label
+              = f.label "出品画像"
+              %span.form--required
+                必須
+            %p 最大10枚までアップロードできます
+            #preview
+            = f.fields_for :item_images do |item_image|
+              .dropzone-area 
+                = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
+                  .input_area.items-sell-container__dropzone
+                    %p ここをクリックして画像をアップロード
+                    = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+                    - if @item.errors.full_messages_for(:item_images).present?
+                      %p 画像がありません
 
-      -# アップされてる画像の枚数によって、枠のサイズを変化させる表示の実装をするときに使用
-      -# #preview2
-      -# .dropzone-area2
-      -#   = item_image.label :image, class: "dropzone-box", for: "upload-image" do
-      -#     %p ここをクリックしてください
+            -# アップされてる画像の枚数によって、枠のサイズを変化させる表示の実装をするときに使用
+            -# #preview2
+            -# .dropzone-area2
+            -#   = item_image.label :image, class: "dropzone-box", for: "upload-image" do
+            -#     %p ここをクリックしてください
+        %section.items-sell-content__section
+          .items-sell-container__form__description
+            .items-sell-container__form__description__label
+              = f.label :name, "商品名"
+              %span.form--required
+                必須
+            = f.text_field :name, placeholder: "商品名(必須 40文字まで)", class:"items-sell-container__form__field__input_field"
+            - if @item.errors.full_messages_for(:name).present?
+              %p 入力してください
+          .items-sell-container__form__description
+            .items-sell-container__form__description__label
+              = f.label :description, "商品の説明"
+              %span.form--required
+                必須
+            = f.text_area :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class:"items-sell-container__form__description__text_field"
+            - if @item.errors.full_messages_for(:description).present?
+              %p 入力してください
 
-    .form__name
-      = f.label :name, "商品名"
-      = f.text_field :name, placeholder: "商品名(必須 40文字まで)"
-      - if @item.errors.full_messages_for(:name).present?
-        %p 入力してください
-    .form__description
-      = f.label :description, "商品の説明"
-      = f.text_field :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。"
-      - if @item.errors.full_messages_for(:description).present?
-        %p 入力してください
-    .form__parent-category
-      = f.label :category_id, "カテゴリー"
-      = f.select :category_id, @category_parent_array, {}
-    .form__item-state
-      = f.label :item_state_id, "商品の状態"
-      = f.collection_select :item_state_id, ItemState.all, :id, :state, include_blank: "---"
-      - if @item.errors.full_messages_for(:item_state).present?
-        %p 入力してください
-    .form__deliver-expend
-      = f.label :deliver_expend_id, "配送料の負担"
-      = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, include_blank: "---"
-      - if @item.errors.full_messages_for(:deliver_expend).present?
-        %p 選択してください
-    .form__deliver-method
-      = f.label :deliver_method_id, "配送の方法"
-      = f.collection_select :deliver_method_id, DeliverMethod.all, :id, :method, include_blank: "---"
-      - if @item.errors.full_messages_for(:deliver_method).present?
-        %p 選択してください
-    .form__prefecture
-      = f.label :prefecture_id, "発送元の地域"
-      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: "---"
-      - if @item.errors.full_messages_for(:prefecture).present?
-        %p 選択してください
-    .form__deliver-day
-      = f.label :deliver_day_id, "発送までの日数"
-      = f.collection_select :deliver_day_id, DeliverDay.all, :id, :day, include_blank: "---"
-      - if @item.errors.full_messages_for(:deliver_day).present?
-        %p 選択してください
-    .form__amount
-      = f.label :amount, "価格"
-      = f.text_field :amount, placeholder: "例）300"
-      - if @item.errors.full_messages_for(:amount).present?
-        %p 300以上9999999以下で入力してください
-    = f.submit "出品する"
+        %section.items-sell-content__section.clearfix
+          %h3 商品の詳細
+          .items-sell-container__box
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :category_id, "カテゴリー"
+                %span.form--required
+                  必須
+              = f.select :category_id, @category_parent_array, {}, class:"items-sell-container__form__field__input_field"
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :item_state_id, "商品の状態"
+                %span.form--required
+                  必須
+              = f.collection_select :item_state_id, ItemState.all, :id, :state, {include_blank: "---"}, {class:"items-sell-container__form__field__input_field"}
+              - if @item.errors.full_messages_for(:item_state).present?
+                %p 入力してください
+
+        %section.items-sell-content__section.clearfix
+          .items-sell-container__box
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :deliver_expend_id, "配送料の負担"
+                %span.form--required
+                  必須
+              = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, {include_blank: "---"}, {class:"items-sell-container__form__field__input_field"}
+              - if @item.errors.full_messages_for(:deliver_expend).present?
+                %p 選択してください
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :deliver_method_id, "配送の方法"
+                %span.form--required
+                  必須
+              = f.collection_select :deliver_method_id, DeliverMethod.all, :id, :method, {include_blank: "---"}, {class:"items-sell-container__form__field__input_field"}
+              - if @item.errors.full_messages_for(:deliver_method).present?
+                %p 選択してください
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :prefecture_id, "発送元の地域"
+                %span.form--required
+                  必須
+              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, {class:"items-sell-container__form__field__input_field"}
+              - if @item.errors.full_messages_for(:prefecture_id).present?
+                %p 選択してください
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :deliver_day_id, "発送までの日数"
+                %span.form--required
+                  必須
+              = f.collection_select :deliver_day_id, DeliverDay.all, :id, :day, {include_blank: "---"}, {class:"items-sell-container__form__field__input_field"}
+              - if @item.errors.full_messages_for(:deliver_day).present?
+                %p 選択してください
+
+        %section.items-sell-content__section.clearfix
+          .items-sell-container__box
+            .items-sell-container__form__field
+              .items-sell-container__form__field__label
+                = f.label :amount, "価格"
+                %span.form--required
+                  必須
+              = f.number_field :amount, placeholder: "例）300", class:"items-sell-container__form__field__input_field"
+              - if @item.errors.full_messages_for(:amount).present?
+                %p 300以上9999999以下で入力してください
+        %section.items-sell-content__section.clearfix
+          = f.submit "出品する"
+  = render 'items/footer'
