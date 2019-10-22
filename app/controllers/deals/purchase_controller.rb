@@ -59,7 +59,6 @@ class Deals::PurchaseController < ApplicationController
           raise ActiveRecord::Rollback
         end
       rescue => error
-        binding.pry
         # 例外発生時は購入画面に戻りロールバックする
         render :new
         raise ActiveRecord::Rollback

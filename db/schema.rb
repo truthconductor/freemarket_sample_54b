@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_060200) do
   create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", null: false
     t.integer "point", null: false
-    t.bigint "deal_id"
+    t.bigint "deal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deal_id"], name: "index_payments_on_deal_id"
