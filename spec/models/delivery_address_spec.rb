@@ -11,12 +11,12 @@ describe DeliveryAddress do
         expect(delivery_address.errors[:last_name]).to include("を入力してください")
       end
       it "is valid a last_name that has less than or equal to 35 characters" do
-        delivery_address = build(:delivery_address, last_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえお")
+        delivery_address = build(:delivery_address, last_name:Faker::String.random(length: 35))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
       end
       it "is invalid a last_name that has more than 35 characters" do
-        delivery_address = build(:delivery_address, last_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえおか")
+        delivery_address = build(:delivery_address, last_name:Faker::String.random(length: 36))
         delivery_address.user = build(:user)
         delivery_address.valid?
         expect(delivery_address.errors[:last_name]).to include("は35文字以内で入力してください")
@@ -31,12 +31,12 @@ describe DeliveryAddress do
         expect(delivery_address.errors[:first_name]).to include("を入力してください")
       end
       it "is valid a first_name that has less than or equal to 35 characters" do
-        delivery_address = build(:delivery_address, first_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえお")
+        delivery_address = build(:delivery_address, first_name:Faker::String.random(length: 35))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
       end
       it "is invalid a first_name that has more than 35 characters" do
-        delivery_address = build(:delivery_address, first_name:"あいうえおかきくけこあいうえおかきくけこあいうえおかきくけこあいうえおか")
+        delivery_address = build(:delivery_address, first_name:Faker::String.random(length: 36))
         delivery_address.user = build(:user)
         delivery_address.valid?
         expect(delivery_address.errors[:first_name]).to include("は35文字以内で入力してください")
@@ -51,12 +51,12 @@ describe DeliveryAddress do
         expect(delivery_address.errors[:last_name_kana]).to include("を入力してください")
       end
       it "is valid a last_name_kana that has less than or equal to 35 characters" do
-        delivery_address = build(:delivery_address, last_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオ")
+        delivery_address = build(:delivery_address, last_name_kana:('ァ'..'ヴ').to_a.sample(35).join)
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
       end
       it "is invalid a last_name_kana that has more than 35 characters" do
-        delivery_address = build(:delivery_address, last_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオカ")
+        delivery_address = build(:delivery_address, last_name_kana:('ァ'..'ヴ').to_a.sample(36).join)
         delivery_address.user = build(:user)
         delivery_address.valid?
         expect(delivery_address.errors[:last_name_kana]).to include("は35文字以内で入力してください")
@@ -94,12 +94,12 @@ describe DeliveryAddress do
         expect(delivery_address.errors[:first_name_kana]).to include("を入力してください")
       end
       it "is valid a first_name_kana that has less than or equal to 35 characters" do
-        delivery_address = build(:delivery_address, first_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオ")
+        delivery_address = build(:delivery_address, first_name_kana:('ァ'..'ヴ').to_a.sample(35).join)
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
       end
       it "is invalid a first_name_kana that has more than 35 characters" do
-        delivery_address = build(:delivery_address, first_name_kana:"アイウエオカキクケコアイウエオカキクケコアイウエオカキクケコアイウエオカ")
+        delivery_address = build(:delivery_address, first_name_kana:('ァ'..'ヴ').to_a.sample(36).join)
         delivery_address.user = build(:user)
         delivery_address.valid?
         expect(delivery_address.errors[:first_name_kana]).to include("は35文字以内で入力してください")
@@ -157,7 +157,7 @@ describe DeliveryAddress do
     # 都道府県
     describe "prefecture" do
       it "is valid a prefecture is selected" do
-        delivery_address = build(:delivery_address, prefecture_id:"20")
+        delivery_address = build(:delivery_address, prefecture_id:Faker::Number.between(from: 1, to: 47))
         delivery_address.user = build(:user)
         expect(delivery_address).to be_valid
       end

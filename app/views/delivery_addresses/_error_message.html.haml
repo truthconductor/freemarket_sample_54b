@@ -1,3 +1,7 @@
-- full_messages.each do |full_message|
+- if errors.added?(symbol, :blank)
   .validation-error__text
-    = full_message
+    = errors.full_messages_for(symbol).first
+- else
+  - errors.full_messages_for(symbol).each do |full_message|
+    .validation-error__text
+      = full_message

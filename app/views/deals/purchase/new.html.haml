@@ -60,7 +60,7 @@
                 支払い方法
               - if @payjp_card
                 = render 'payjp_cards/card', {payjp_card: @payjp_card}
-                = link_to item_purchase_card_index_path, class: "deals-content__section__w320__method__change" do
+                = link_to item_purchase_card_index_path, class: "deals-content__section__w320__method__change", data: {"turbolinks": false} do
                   変更する
                   = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
               - else
