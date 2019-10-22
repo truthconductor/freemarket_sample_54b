@@ -63,7 +63,7 @@ if Category.count == 0
     elsif row[1]
       category2 = category1.children.create(name: row[1])
     elsif row[2]
-      category2.children.create(name: row[2])
+      category3 = category2.children.create(name: row[2])
     end
   end
 end
