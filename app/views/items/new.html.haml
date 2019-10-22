@@ -7,15 +7,19 @@
         出品画像
       %span.sell-form-container__require
         必須
+
     #preview
-    = f.fields_for :item_images do |item_image|
-      .dropzone-area 
+    = f.fields_for :item_images, class: "image-field" do |item_image|
+      .input_area
         = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
-          .input_area
-            %p.square ここをクリックして画像をアップロード
-            = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
-            - if @item.errors.full_messages_for(:item_images).present?
-              %p 画像がありません
+          %p.square ここをクリックして画像をアップロード
+          = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+          - if @item.errors.full_messages_for(:item_images).length == 2
+            = @item.errors.full_messages_for(:item_images)[1]
+          - else
+            = @item.errors.full_messages_for(:item_images)[0]
+          - if @item.errors.details[:"item_images.image"][0]
+            = @item.errors.details[:"item_images.image"][0][:error] 
 
       -# アップされてる画像の枚数によって、枠のサイズを変化させる表示の実装をするときに使用
       -# #preview2

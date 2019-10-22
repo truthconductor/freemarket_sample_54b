@@ -4,7 +4,7 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   validates :name, :description, :amount, presence: true
   validates :name, length: { maximum: 40 }
   validates :amount, inclusion: { in: 300..9999999 }
-  validate :check_image, :check_prefecture
+  validate :check_image, :check_prefecture, :image_size
   #Association
   belongs_to :item_state
   belongs_to :deliver_expend
@@ -20,9 +20,20 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   accepts_nested_attributes_for :item_images, allow_destroy: true
   # scope
   scope :recent, -> (count) { order(id: :desc).limit(count) }
+
+  private
   def check_image
     if item_images.empty?
-      errors.add(:item_images, "画像がありません")
+      errors.add(:item_images, "がありません")
+    end
+  end
+
+  def image_size
+    item_images.each do |i|
+      if i.image.size > 3.megabytes
+        errors.add(:item_images, "サイズは3MB以下にしてください")
+        break
+      end
     end
   end
   

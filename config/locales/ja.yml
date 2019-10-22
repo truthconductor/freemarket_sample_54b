@@ -31,6 +31,9 @@ ja:
         brand: ブランド
         deal: 取引状況
         seller: 出品者
+        item_images: 画像
+      item/item_images: 
+        image: ''
       delivery_address:
         last_name: お名前（姓）
         first_name: お名前（名）
@@ -168,6 +171,7 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      extension_whitelist_error: "ファイル形式はjpg、jpeg、またはpngが使用できます"
     template:
       body: 次の項目を確認してください
       header:
