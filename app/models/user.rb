@@ -13,4 +13,9 @@ class User < ApplicationRecord
   has_many :item_comments
   has_many :item_likes
   has_one :credit_card, dependent: :destroy
+
+  # 購入可能な情報を保持しているか判定する
+  def can_purchase?
+    return delivery_address != nil && credit_card&.getPayjpDefaultCard != nil
+  end
 end

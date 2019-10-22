@@ -26,7 +26,16 @@
                   支払い金額
                 .deals-content__section__w320__order__payment__right
                   = @item.amount_text
-              = f.submit "購入する", class: "deals-content__section__w320__order__button"
+              -if current_user&.can_purchase? && @item.seller != current_user
+                = f.submit "購入する", data: {confirm: "商品を購入します。よろしいですか？"}, class: "deals-content__section__w320__order__button--enable"
+              - else
+                .validation-error__text
+                  - if @item.seller == current_user
+                    出品した商品は購入できません
+                  - else
+                    配送先と支払い方法の入力を完了してください。
+                .deals-content__section__w320__order__button--disenable
+                  購入する
         %section.deals-content__section
           .deals-content__section__w320
             .deals-content__section__w320__method

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_151613) do
+ActiveRecord::Schema.define(version: 2019_10_22_060200) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -130,6 +130,15 @@ ActiveRecord::Schema.define(version: 2019_10_11_151613) do
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "amount", null: false
+    t.integer "point", null: false
+    t.bigint "deal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deal_id"], name: "index_payments_on_deal_id"
+  end
+
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "introduction"
@@ -174,5 +183,6 @@ ActiveRecord::Schema.define(version: 2019_10_11_151613) do
   add_foreign_key "items", "item_states"
   add_foreign_key "items", "sales_states"
   add_foreign_key "items", "users", column: "seller_id"
+  add_foreign_key "payments", "deals"
   add_foreign_key "profiles", "users"
 end

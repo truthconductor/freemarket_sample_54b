@@ -2,16 +2,75 @@ class Deals::PurchaseController < ApplicationController
 
   # ログインしていない場合ログインページへ移動する
   before_action :authenticate_user!
+  # APIキーを使ってPayjpクラスを初期化する
+  before_action :set_api_key, only:[:create]
 
   def new
     # 購入確認商品を取得する
     @item = Item.find(params[:item_id]).decorate
+    # 商品が出品中でないのにリクエストが来た時商品詳細ページへリダイレクト
+    unless @item.sales_state_id == 1
+      redirect_to item_path(id: @item.id)
+      return
+    end
     # ログインユーザーのカード情報を取得する
     @credit_card = current_user.credit_card
     @payjp_card = @credit_card&.getPayjpDefaultCard
   end
 
   def create
-    @deals = Deal.new(date: Date.today)
+    # 購入確認商品を取得する
+    @item = Item.find(params[:item_id]).decorate
+    # 商品が出品中でないのに購入リクエストが来た時商品詳細ページへリダイレクト
+    unless @item.sales_state_id == 1
+      redirect_to item_path(id: @item.id)
+      return
+    end
+    # 自分の出品商品なのに購入リクエストが来た時商品詳細ページへリダイレクト
+    if @item.seller == current_user
+      redirect_to item_path(id: @item.id)
+      return
+    end
+
+    #トランザクション開始
+    ActiveRecord::Base.transaction do
+      begin
+        # 取引作成
+        @deal = Deal.new(date: Time.now)
+        @deal.item = @item
+        @deal.buyer = current_user
+        @deal.seller = @item.seller
+        # 支払い金額の登録（現時点ではポイント管理機能がないためポイント支払いを０とする）
+        @deal.build_payment(amount: @item.amount, point: 0)
+        @deal.save!
+        # 商品の販売状況を売り切れに変更
+        @item.sales_state_id = 3
+        @item.save!
+        # ユーザーのpayjp顧客情報を取得
+        customer = Payjp::Customer.retrieve(current_user.credit_card.customer_id)
+        # デフォルトカードで支払いを行う
+        charge = Payjp::Charge.create(
+          :amount => @item.amount,
+          :customer => customer.id,
+          :currency => 'jpy',
+        )
+        # 支払い結果のエラーレスポンスを確認しエラー発生時は例外を発生
+        if charge.respond_to? :error
+          raise ActiveRecord::Rollback
+        end
+      rescue => error
+        binding.pry
+        # 例外発生時は購入画面に戻りロールバックする
+        render :new
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
+  private
+  # PAY.JP APIの秘密鍵をセット
+  def set_api_key
+    require "payjp"
+    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
   end
 end

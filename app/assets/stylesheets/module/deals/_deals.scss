@@ -85,18 +85,31 @@
           }
         }
         &__button {
-          cursor: pointer;
-          color: $text-white;
-          background: $button-background-red;
-          border: none;
-          width: 100%;
-          font-size: 14px;
-          line-height: 48px;
-          font-weight: 600;
-          text-align: center;
-          &:hover {
-            background: #F28A86;
-            transition: background 0.3s;
+          &--enable {
+            border: none;
+            width: 100%;
+            font-size: 14px;
+            line-height: 48px;
+            text-align: center;
+            cursor: pointer;
+            color: $text-white;
+            background: $button-background-red;
+            font-weight: 600;
+            &:hover {
+              background: #F28A86;
+              transition: background 0.3s;
+            }
+          }
+          &--disenable {
+            border: none;
+            width: 100%;
+            font-size: 14px;
+            line-height: 48px;
+            text-align: center;
+            cursor: not-allowed;
+            color: $text-white;
+            background: #888;
+            font-weight: 600;
           }
         }
       }
@@ -121,6 +134,14 @@
           &__icon {
             margin: 0 0 0 6px;
           }
+        }
+      }
+      // 住所・カード確認
+      &__notice {
+        padding: 24px 0 40px;
+        text-align: center;
+        &--link {
+          color: #0099e8;
         }
       }
     }

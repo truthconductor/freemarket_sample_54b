@@ -2,6 +2,8 @@ class PayjpCardsController < ApplicationController
 
   # ログインしていない場合ログインページへ移動する
   before_action :authenticate_user!
+  # APIキーを使ってPayjpクラスを初期化する
+  before_action :set_api_key, only:[:index, :create, :destroy]
 
   def index
     #ログインユーザーのカード情報を取得する
@@ -17,14 +19,14 @@ class PayjpCardsController < ApplicationController
     # formのパラメータとpayjp.jsのカードtokenを取得
     @payjp_card = PayjpCard.new(payjp_card_params)
     card_token = token_params[:card_token]
-    require "payjp"
-    # PAY.JP APIの秘密鍵をセット
-    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
     # PAY.JPの顧客情報IDを既にデータベースに登録しているかチェック
     @credit_card = current_user.credit_card
     if @credit_card
       # PAY.JPにカード情報を追加登録
       customer = Payjp::Customer.retrieve(@credit_card.customer_id)
+      if card_token.blank?
+        return
+      end
       card = customer.cards.create(card: card_token)
       # エラーレスポンスを含んでいないか確認
       if card.respond_to? :error
@@ -60,12 +62,18 @@ class PayjpCardsController < ApplicationController
     #レスポンスにエラーレスポンスが含まれているか確認
     if response.respond_to? :error
       render :index
+    else
+      # カード一覧画面に戻る
+      redirect_to action: :index
     end
-    # カード一覧画面に戻る
-    redirect_to action: :index
   end
 
   private
+  # PAY.JP APIの秘密鍵をセット
+  def set_api_key
+    require "payjp"
+    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
+  end
 
   def payjp_card_params
     params.require(:payjp_card).permit(:number, :year, :month, :cvc, :id)
