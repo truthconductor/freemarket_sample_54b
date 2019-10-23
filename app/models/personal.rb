@@ -4,6 +4,7 @@ class Personal < ApplicationRecord
   validates :first_name, length: {maximum: 35}
   validates :first_name, presence: true
   validates :last_name, length: {maximum: 35}
+  validates :last_name, presence: true
   validates :first_name, presence: true
   validates :first_name_kana, length: {maximum: 35}
   validates :first_name_kana, presence: true
@@ -16,8 +17,12 @@ class Personal < ApplicationRecord
   validates :cellular_phone_number,length: {maximum: 35}
   validates :birthdate, presence: true 
   belongs_to :user
+  
   belongs_to_active_hash :prefecture
-  validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  }
-  validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }
+  validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "ひらがなかカタカナで入力してください"}
+  validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "ひらがなかカタカナで入力してください"}
+
+ 
+  
 
 end
