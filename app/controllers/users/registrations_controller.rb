@@ -17,14 +17,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       
       build_resource(sign_up_params)
       #resource[:user][:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
-      #binding.pry
+      
       resource.save
       yield resource if block_given?
       if resource.persisted?
         if resource.active_for_authentication?
           set_flash_message! :notice, :signed_up
-          #sign_up(resource_name, resource)
-          sign_up(resource_name, current_user) # current_user = 新規作成を行っているユーザー
+          sign_up(resource_name, current_user) 
           respond_with resource, location: after_sign_up_path_for(resource)
           
         else
@@ -64,6 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def to_katakana
+    #ひらがなで入力されたものをカタカナに変換する（未実装）
     sign_up_params[:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
   end
   # protected

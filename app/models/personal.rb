@@ -14,11 +14,13 @@ class Personal < ApplicationRecord
   validates :city,length: {maximum: 50}
   validates :address,length: {maximum: 100}
   validates :building,length: {maximum: 100}
-  validates :cellular_phone_number,length: {maximum: 35}
+  #phonelibで電話番号の正規化を実装
+  validates :cellular_phone_number,phone: {allow_blank: true, countries: [:jp]}
   validates :birthdate, presence: true 
   belongs_to :user
   
   belongs_to_active_hash :prefecture
+  #カタカナとひらがな以外のデータを制限
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "ひらがなかカタカナで入力してください"}
   validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "ひらがなかカタカナで入力してください"}
 
