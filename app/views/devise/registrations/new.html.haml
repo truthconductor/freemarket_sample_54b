@@ -5,7 +5,8 @@
     %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
     - if resource.errors.full_messages_for(:email).any?
-      = resource.errors[:email]
+      - resource.errors.full_messages_for(:email).each do |msg|
+        =msg
   .field
     = f.label :password
     - if @minimum_password_length
@@ -13,38 +14,49 @@
         (#{@minimum_password_length} characters minimum)
     %br/
     = f.password_field :password, autocomplete: "new-password"
-    = resource.errors.full_messages_for(:password)
+    - if resource.errors.full_messages_for(:password).any?
+      - resource.errors.full_messages_for(:password).each do |msg|
+        =msg
   .field
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation, autocomplete: "new-password"
-    - if resource.errors.full_messages_for(:password).any?
-      = resource.errors.full_messages_for(:password)
+    - if resource.errors.full_messages_for(:password_confirmation).any?
+      - resource.errors.full_messages_for(:password_confirmation).each do |msg|
+        =msg
   = f.fields_for :personal,@user.build_personal do |personal|
     .field
       = personal.label "姓"  
       %br/
       = personal.text_field :last_name, autocomplete: "off"
-      = resource.errors.full_messages_for(:"personal.last_name")
+      - if resource.errors.full_messages_for(:"personal.last_name").any?
+        - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
+          =msg
     .field
       = personal.label "名"
       %br/
       = personal.text_field :first_name, autocomplete: "off"
-      = resource.errors.full_messages_for(:"personal.first_name")
+      - if resource.errors.full_messages_for(:"personal.first_name").any?
+        %ul 
+          - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
+            %li 
+              = msg
     .field
       = personal.label "姓(カナ）"
       %br/
       = personal.text_field :last_name_kana, autocomplete: "off"
-      = resource.errors.full_messages_for(:"personal.last_name_kana")
+      - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
+        - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
+          =msg
     .field
       = personal.label "名（カナ）"
       %br/
       = personal.text_field :first_name_kana, autocomplete: "off"
-      = resource.errors.full_messages_for(:"personal.first_name_kana")
+      = resource.errors.full_messages[5]
     .field
       = personal.label "生年月日"
       %br/
-      != sprintf(personal.date_select(:birthdate,:include_blank => true,:use_month_numbers => true,:start_year=>Time.now.year,:end_year=>1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
+      != sprintf(personal.date_select(:birthdate,prompt: "---",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
   %div
     .actions
       = f.submit "Sign up"

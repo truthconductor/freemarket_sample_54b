@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       
       build_resource(sign_up_params)
       #resource[:user][:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
+      #binding.pry
       resource.save
       yield resource if block_given?
       if resource.persisted?
