@@ -2,9 +2,15 @@ class CreditCard < ApplicationRecord
   #Association
   belongs_to :user
 
+  # インスタンス化された際に実行
+  after_initialize do
+    require "payjp"
+    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
+  end
+
   #PayJPのカード情報を取得する
   def getPayJPCards()
-    set_api_key
+    return [] if customer_id.nil?
     customer = Payjp::Customer.retrieve(customer_id)
     payjpCards = []
     customer.cards.all().each do |card|
@@ -22,7 +28,7 @@ class CreditCard < ApplicationRecord
 
   #PayJPの顧客デフォルトカード情報を取得する
   def getPayjpDefaultCard()
-    set_api_key
+    return nil if customer_id.nil?
     customer = Payjp::Customer.retrieve(customer_id)
     if customer.default_card
       card = customer.cards.retrieve(customer.default_card)
@@ -35,12 +41,5 @@ class CreditCard < ApplicationRecord
     else
       payjpCard = nil
     end
-  end
-
-  private
-  # PAY.JP APIの秘密鍵をセット
-  def set_api_key
-    require "payjp"
-    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
   end
 end
