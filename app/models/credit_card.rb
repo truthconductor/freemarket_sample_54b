@@ -4,7 +4,6 @@ class CreditCard < ApplicationRecord
 
   # インスタンス化された際に実行
   after_initialize do
-    require "payjp"
     Payjp.api_key = Rails.application.credentials.payjp[:api_key]
   end
 

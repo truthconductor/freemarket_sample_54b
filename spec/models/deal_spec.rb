@@ -2,58 +2,65 @@ require 'rails_helper'
 
 describe Deal do
   describe '#create' do
-    # 購入テスト用のitem(商品)を作成
-    before do
-      @item = build(:item,
-                    id: 1,
-                    category_id: 3,
-                    item_state_id: 1,
-                    deliver_expend_id: 2,
-                    deliver_method_id: 1,
-                    deliver_day_id: 2,
-                    sales_state_id: 1)
-      @item.item_images << build(:item_image)
-      # 販売者を作成
-      @item.seller = build(:user, id: 1)
-      @item.save
-      # 購入者を作成
-      ＠buyer = build(:user, id: 2)
-      ＠buyer.save
+    # 必要なデータをletで用意
+    let(:seller) { create(:user, id: 1) }
+    let(:buyer) { create(:user, id: 2) }
+    let(:item) {
+      item = build(:item,
+            id: 1,
+            category_id: 3,
+            item_state_id: 1,
+            deliver_expend_id: 2,
+            deliver_method_id: 1,
+            deliver_day_id: 2,
+            sales_state_id: 1)
+      item.item_images << build(:item_image)
+      item.seller = seller
+      item.save
+      return item
+    }
+    let(:payment) { build(:payment) }
+    let(:deal) { build(:deal, buyer:buyer, seller:seller, item:item, payment:payment) }
+
+    # バリデーションをテストする
+    subject { deal.valid? }
+
+    context 'member is not nil' do
+      it "is valid" do
+        is_expected.to eq true
+      end
     end
 
-    it "is invalid" do
-      deal = build(:deal, buyer_id:2, seller_id:1)
-      deal.payment = build(:payment)
-      deal.item = build(:item)
-      expect(deal).to be_valid
+    context 'item is nil' do
+      let(:item) { nil }
+      it "is invalid without a item" do
+        is_expected.to eq false
+        expect(deal.errors[:item]).to include("を入力してください")
+      end
     end
 
-    it "is invalid without a item" do
-      deal = build(:deal, buyer_id:2, seller_id:1)
-      deal.payment = build(:payment)
-      deal.valid?
-      expect(deal.errors[:item]).to include("を入力してください")
+    context 'payment is nil' do
+      let(:payment) { nil }
+      it "is invalid without a payment" do
+        is_expected.to eq false
+        expect(deal.errors[:payment]).to include("を入力してください")
+      end
     end
 
-    it "is invalid without a payment" do
-      deal = build(:deal, buyer_id:2, seller_id:1)
-      deal.item = build(:item)
-      deal.valid?
-      expect(deal.errors[:payment]).to include("を入力してください")
+    context 'buyer is nil' do
+      let(:buyer) { nil }
+      it "is invalid without a buyer" do
+        is_expected.to eq false
+        expect(deal.errors[:buyer]).to include("を入力してください")
+      end
     end
 
-    it "is invalid without a buyer" do
-      deal = build(:deal, buyer_id:nil, seller_id:1)
-      deal.item = build(:item)
-      deal.valid?
-      expect(deal.errors[:buyer]).to include("を入力してください")
-    end
-    
-    it "is invalid without a seller" do
-      deal = build(:deal, buyer_id:2, seller_id:nil)
-      deal.item = build(:item)
-      deal.valid?
-      expect(deal.errors[:seller]).to include("を入力してください")
+    context 'seller is nil' do
+      let(:seller) { nil }
+      it "is invalid without a seller" do
+        is_expected.to eq false
+        expect(deal.errors[:seller]).to include("を入力してください")
+      end
     end
   end
 end
