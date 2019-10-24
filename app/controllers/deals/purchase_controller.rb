@@ -9,7 +9,7 @@ class Deals::PurchaseController < ApplicationController
 
   def new
     # 商品が出品中でないのにリクエストが来た時商品詳細ページへリダイレクト
-    return redirect_to item_path(id: @item.id) unless @item.sales_state_id == 1
+    return redirect_to item_path(@item) unless @item.sales_state_id == 1
     # ログインユーザーのカード情報を取得する
     @credit_card = current_user.credit_card
     @payjp_card = @credit_card&.getPayjpDefaultCard
@@ -17,9 +17,9 @@ class Deals::PurchaseController < ApplicationController
 
   def create
     # 商品が出品中でないのに購入リクエストが来た時商品詳細ページへリダイレクト
-    return redirect_to item_path(id: @item.id) unless @item.sales_state_id == 1
+    return redirect_to item_path(@item) unless @item.sales_state_id == 1
     # 自分の出品商品なのに購入リクエストが来た時商品詳細ページへリダイレクト
-    return redirect_to item_path(id: @item.id) if @item.seller == current_user
+    return redirect_to item_path(@item) if @item.seller == current_user
     #トランザクション開始
     ActiveRecord::Base.transaction do
       begin

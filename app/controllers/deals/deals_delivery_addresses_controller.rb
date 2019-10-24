@@ -2,7 +2,7 @@ class Deals::DealsDeliveryAddressesController < DeliveryAddressesController
   def new
     # 既に発送先が登録されているのにnewページを表示した時はeditページにリダイレクトする
     if current_user.delivery_address
-      redirect_to edit_item_purchase_delivery_address_path(params[:id], current_user.delivery_address)
+      redirect_to edit_item_purchase_delivery_address_path(params[:item_id], current_user.delivery_address)
     else
       super
     end
