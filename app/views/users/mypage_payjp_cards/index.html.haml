@@ -18,7 +18,7 @@
                   = f.hidden_field :id, value: payjp_card.id
                   = f.submit '削除する', class: 'card-container__list__cards__card__destroy'
           - else
-            = link_to mypage_cards_add_path do
+            = link_to mypage_cards_add_path, data: {"turbolinks": false} do
               .card-container__list__cards__button
                 = fa_icon 'credit-card', class: 'card-container__list__cards__button__icon'
                 クレジットカードを追加する

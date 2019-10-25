@@ -12,10 +12,10 @@
           = form_with url: new_item_purchase_path, method: :get, local: true do |f|
             .card-container__list__cards
               - if @payjp_cards.length > 0
-                - @payjp_cards.each do |payjp_card|
+                - @payjp_cards.each_with_index do |payjp_card, i|
                   .card-container__list__cards__card
                     = render 'payjp_cards/card', {payjp_card: payjp_card}
-                    = f.radio_button :id, value: payjp_card.id
+                    = f.radio_button :id, payjp_card.id, checked: i == 0
               %hr.card-container__list--line
               = f.submit "次に進む", class: "card-container__form__field__button"
   = render 'deals/footer'

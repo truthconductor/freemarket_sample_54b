@@ -7,8 +7,8 @@
           発送元・お届け先住所入力
     %section.deals-content__section
       .delivery-address-container
-        = form_with model: @delivery_address, local: true, url: item_purchase_delivery_addresses_path, method: :post, id: "card_form", class: "delivery-address-container__form" do |f|
-          = render 'delivery_addresses/form_input',  {f: f, delivery_address: @delivery_address}
+        = form_with model: @delivery_address, local: true, url: item_purchase_delivery_address_path(), method: :patch, class: "delivery-address-container__form" do |f|
+          = render 'delivery_addresses/form_input', {f: f, delivery_address: @delivery_address}
           .delivery-address-container__form__field
             = f.submit "変更する", class: "delivery-address-container__form__field__button"
   = render 'deals/footer'

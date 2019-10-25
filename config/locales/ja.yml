@@ -34,7 +34,17 @@ ja:
         item_images: 画像
       item/item_images: 
         image: ''
-        
+      delivery_address:
+        last_name: お名前（姓）
+        first_name: お名前（名）
+        last_name_kana: お名前カナ（姓）
+        first_name_kana: お名前カナ（名）
+        zip_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        building: 建物名
+        phone_number: 電話番号
   date:
     abbr_day_names:
     - 日
