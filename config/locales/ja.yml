@@ -1,5 +1,14 @@
 ---
 ja:
+  activemodel:
+    models:
+      payjp_card: クレジットカード
+    attributes:
+      payjp_card:
+        number: カード番号
+        month: 月
+        year: 年
+        cvc: セキュリティコード
   activerecord:
     errors:
       messages:
@@ -16,6 +25,34 @@ ja:
         birthdate: 生年月日
      
         
+      item:
+        name: 商品名
+        description: 商品の説明
+        amount: 価格
+        item_state: 商品の状態
+        deliver_expend: 配送料の負担
+        deliver_method: 配送の方法
+        prefecture: 発送元の地域
+        deliver_day: 発送までの日数
+        sales_state: 販売状態
+        category: カテゴリー
+        brand: ブランド
+        deal: 取引状況
+        seller: 出品者
+        item_images: 画像
+      item/item_images: 
+        image: ''
+      delivery_address:
+        last_name: お名前（姓）
+        first_name: お名前（名）
+        last_name_kana: お名前カナ（姓）
+        first_name_kana: お名前カナ（名）
+        zip_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        building: 建物名
+        phone_number: 電話番号
   date:
     abbr_day_names:
     - 日
@@ -142,6 +179,7 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      extension_whitelist_error: "ファイル形式はjpg、jpeg、またはpngが使用できます"
     template:
       body: 次の項目を確認してください
       header:

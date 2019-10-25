@@ -92,8 +92,14 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem 'active_hash'
 gem 'ancestry'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Use pay.jp
+gem 'payjp'
 
 gem 'font-awesome-rails'
+gem 'mini_magick'
+gem 'nokogiri'
 
 gem 'autoprefixer-rails'
 
@@ -102,4 +108,7 @@ gem 'devise-i18n-views'
 
 gem 'nokogiri'
 
+gem 'phonelib'
+
+gem 'draper'
 gem 'phonelib'

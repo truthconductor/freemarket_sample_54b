@@ -1,0 +1,72 @@
+.deals-wrapper
+  = render 'deals/header'
+  %main.deals-main
+    = form_with model: @item, local: true, url: item_purchase_index_path, method: :post, id: 'deal_form' do |f|
+      .deals-content
+        %section.deals-content__section
+          .deals-content__section__w320
+            %h2.deals-content__section__w320__headline
+              購入内容の確認
+        %section.deals-content__section
+          .deals-content__section__w320
+            .deals-content__section__w320__order
+              .deals-content__section__w320__order__item
+                = image_tag @item.item_images.first.image.url, class: "deals-content__section__w320__order__item__image"
+                %p.deals-content__section__w320__order__item__name
+                  = @item.name
+                %p.deals-content__section__w320__order__item__cost
+                  %span.deals-content__section__w320__order__item__cost--price
+                    = @item.amount_text
+                  %span.deals-content__section__w320__order__item__cost--deliverymethod
+                    = @item.cash_on_delevery_text
+              .deals-content__section__w320__order__point
+                ポイントはありません
+              .deals-content__section__w320__order__payment
+                .deals-content__section__w320__order__payment__left
+                  支払い金額
+                .deals-content__section__w320__order__payment__right
+                  = @item.amount_text
+              -if current_user&.can_purchase? && @item.seller != current_user
+                = f.submit "購入する", data: {confirm: "商品を購入します。よろしいですか？"}, class: "deals-content__section__w320__order__button--enable"
+              - else
+                .validation-error__text
+                  - if @item.seller == current_user
+                    出品した商品は購入できません
+                  - else
+                    配送先と支払い方法の入力を完了してください。
+                .deals-content__section__w320__order__button--disenable
+                  購入する
+        %section.deals-content__section
+          .deals-content__section__w320
+            .deals-content__section__w320__method
+              %h3.deals-content__section__w320__method__headline
+                配送先
+              .deals-content__section__w320__method__content
+                - if current_user&.delivery_address
+                  = "〒#{current_user.delivery_address.zip_code}"
+                  %br
+                  = current_user.delivery_address.decorate.full_address
+                  %br
+                  = current_user.delivery_address.decorate.full_name
+                - else
+                  配送先を登録してください
+              = link_to current_user.delivery_address ? edit_item_purchase_delivery_address_path(@item, current_user.delivery_address) : new_item_purchase_delivery_address_path, class: "deals-content__section__w320__method__change" do
+                変更する
+                = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+        %section.deals-content__section
+          .deals-content__section__w320
+            .deals-content__section__w320__method
+              %h3.deals-content__section__w320__method__headline
+                支払い方法
+              - if @payjp_card
+                = render 'payjp_cards/card', {payjp_card: @payjp_card}
+                = link_to item_purchase_card_index_path, class: "deals-content__section__w320__method__change", data: {"turbolinks": false} do
+                  変更する
+                  = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+              - else
+                .deals-content__section__w320__method__content
+                  カードを登録してください
+                = link_to new_item_purchase_card_path, class: "deals-content__section__w320__method__change", data: {"turbolinks": false} do
+                  変更する
+                  = fa_icon 'angle-right lg', class: 'deals-content__section__w320__method__change__icon'
+  = render 'deals/footer'

@@ -18,7 +18,7 @@
 
 .root-campaign{
   width:100vw;
-  background-image: url(merukari_campaign.jpg);
+  background-image: image-url("merukari_campaign.jpg");
   background-position:center center;
   position: relative;
   top: 0px;
@@ -33,7 +33,7 @@
     cursor: pointer;
     height: 46px;
     width: 31px;
-    background-image: url(arrow-left.png);
+    background-image: image-url("arrow-left.png");
     padding: 0px;
     margin-left: 60px;
   }
@@ -47,7 +47,7 @@
     cursor: pointer;
     height: 46px;
     width: 31px;
-    background-image: url(arrow-right.png);
+    background-image: image-url("arrow-right.png");
     padding: 0px;
   }
   &__slider{
@@ -112,7 +112,7 @@
   position:relative;
 }
 .root-app__dl{
-  background: url("appDL.jpg") center center / cover;
+  background: image-url("appDL.jpg") center center / cover;
   background-position: center center;
   margin-top:auto;
   display: flex;
