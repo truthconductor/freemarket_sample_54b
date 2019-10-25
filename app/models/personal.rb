@@ -17,14 +17,13 @@ class Personal < ApplicationRecord
   #phonelibで電話番号の正規化を実装
   validates :cellular_phone_number,phone: {allow_blank: true, countries: [:jp]}
   validates :birthdate, presence: true 
+  #カタカナとひらがな以外のデータを制限
+  validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "はひらがなかカタカナで入力してください"}
+  validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "はひらがなかカタカナで入力してください"}
+
   belongs_to :user
   
   belongs_to_active_hash :prefecture
-  #カタカナとひらがな以外のデータを制限
-  validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "ひらがなかカタカナで入力してください"}
-  validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "ひらがなかカタカナで入力してください"}
-
- 
   
 
 end

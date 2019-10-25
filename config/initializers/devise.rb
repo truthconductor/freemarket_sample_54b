@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '3d5ecf6c25a1de2af88746c790627afac4c21fac05abff2516975cc8906c12ea16435da8a8c9e114962059e40374215a60e23d8935a57a4d8b12c37c30497f0f'
+  #config.secret_key = '3d5ecf6c25a1de2af88746c790627afac4c21fac05abff2516975cc8906c12ea16435da8a8c9e114962059e40374215a60e23d8935a57a4d8b12c37c30497f0f'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -147,7 +147,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -299,6 +299,5 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
-  # 送信用メールアドレスの設定
-  config.mailer_sender = "メールアドレス"
+  
 end

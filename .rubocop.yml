@@ -35,9 +35,6 @@ Metrics/LineLength:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# Use only ascii symbols in comments.
-AsciiComments:
- Enabled: false
 
 # １つのブロックの行数制限
 Metrics/BlockLength:
