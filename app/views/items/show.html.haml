@@ -64,7 +64,7 @@
       = @item.amount_text
       (税込)
       = @item.cash_on_delevery_text
-    = link_to "#", class: "item-purchace" do
+    = link_to new_item_purchase_path(@item), class: "item-purchace" do
       .item-purchace__button
         購入画面に進む
     .item-description

@@ -17,7 +17,8 @@ class ItemsController < ApplicationController
       if @item.save
         format.html{redirect_to new_item_path}
       else
-        @item.item_images.build
+        #画像がアップロードされずにRollbackした場合、ネストしているitem_imagesモデるが消えるため、新たにbuildする。
+        @item.item_images.build if @item.item_images.empty?
         format.html{render action: 'new'}
       end
     end

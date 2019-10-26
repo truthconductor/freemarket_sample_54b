@@ -19,8 +19,12 @@
                   .input_area.items-sell-container__dropzone0
                     %p.image-upload-text ここをクリックして画像をアップロード
                     = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image {validation-error if @item.errors.full_messages_for(:item_images).present?}", 'data-image': 0
-                  - if @item.errors.full_messages_for(:item_images).present?
-                    %p 画像がありません
+                  - if @item.errors.full_messages_for(:item_images).length == 2
+                    = @item.errors.full_messages_for(:item_images)[1]
+                  - else
+                    = @item.errors.full_messages_for(:item_images)[0]
+                  - if @item.errors.details[:"item_images.image"][0]
+                    = @item.errors.details[:"item_images.image"][0][:error] 
 
         %section.items-sell-content__section
           .items-sell-container__form__description

@@ -50,6 +50,8 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+#mailer test
+  gem 'letter_opener_web'
 end
 
 group :development do
@@ -100,4 +102,13 @@ gem 'mini_magick'
 gem 'nokogiri'
 
 gem 'autoprefixer-rails'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
+gem 'nokogiri'
+
+gem 'phonelib'
+
 gem 'draper'
+

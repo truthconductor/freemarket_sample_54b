@@ -2,12 +2,12 @@ $(document).on('turbolinks:load', function() {
   var preview = $('#preview');
   var input_area = $('.input_area');
 
-    // DB保存に失敗(Rollback)した際に残っている、動的に生成したinputタグを削除する(whileで繰り返すと無限ループに陥るためforを使用)
-    $(document).ready(function(){
-      for (var i = input_area.length; i > 1; i--) {
-        input_area[i-1].remove();
-      } 
-    });
+  // DB保存に失敗(Rollback)した際に残っている、動的に生成したinputタグを削除する(whileで繰り返すと無限ループに陥るためforを使用)
+  $(document).ready(function(){
+    for (var i = input_area.length; i > 1; i--) {
+      input_area[i-1].remove();
+    } 
+  });
 
   //inputの中身の変更時に発生
   $(document).on('change', '[type="file"].upload-image', function(event) {
