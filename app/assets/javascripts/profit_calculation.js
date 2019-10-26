@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  $(document).on('keyup', '.product-value', function(event) {
+  $(document).on('keyup', '.item-value', function(event) {
     var price = $(this).val();
 
     if(price >= 300 && price <= 9999999) {

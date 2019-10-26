@@ -41,7 +41,7 @@
               %p 入力してください
 
         %section.items-sell-content__section.clearfix
-          %h3 商品の詳細
+          %h3.item__heading 商品の詳細
           .items-sell-container__box
             .items-sell-container__form__field
               .items-sell-container__form__field__label
@@ -106,7 +106,7 @@
                 = f.label :amount, "価格"
                 %span.form--required
                   必須
-              = f.number_field :amount, placeholder: "例）300", class: "items-sell-container__form__field__input-field product-value"
+              = f.number_field :amount, placeholder: "例）300", class: "items-sell-container__form__field__input-field item-value"
               - if @item.errors.full_messages_for(:amount).present?
                 %p 300以上9999999以下で入力してください
             .margin-calculation

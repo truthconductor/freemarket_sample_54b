@@ -104,12 +104,19 @@
   transform: translate(0, -50%);
 }
 
+.item__heading {
+  float: left;
+  color: #888;
+}
+
 .delivery__heading {
   float: left;
+  color: #888;
 }
 
 .price__heading {
   float: left;
+  color: #888;
 }
 
 .margin-calculation {
@@ -138,6 +145,10 @@
   line-height: 14px;
   font-size: 12px;
   text-align: center;
+}
+
+.item-value {
+  text-align: right;
 }
 
 .submit {
