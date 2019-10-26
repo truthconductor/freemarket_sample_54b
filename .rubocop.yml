@@ -1,14 +1,16 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   # 除外するディレクトリ（自動生成されたファイル）
   # デフォルト設定にある"vendor/**/*"が無効化されないように記述
   Exclude:
     - bin/*
     - db/schema.rb
+    - db/seeds.rb
     - node_modules/**/*
     - db/migrate/*
     - vendor/**/*
+    - Gemfile
+    - config/routes.rb
+    - config/**/*
   # Rails向けのRails copsを実行。"rubocop -R"と同じ
   Rails:
     enabled: true
@@ -21,6 +23,10 @@ Style/Documentation:
 Style/StringLiterals:
   Enabled: false
 
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
 # "Line is too long"を無効
 Metrics/LineLength:
   Enabled: false
@@ -29,12 +35,10 @@ Metrics/LineLength:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# Use only ascii symbols in comments.
-AsciiComments:
- Enabled: false
 
 # １つのブロックの行数制限
 Metrics/BlockLength:
   Exclude:
     - 'config/environments/*'
     - 'spec/**/*'
+

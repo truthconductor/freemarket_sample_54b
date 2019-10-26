@@ -26,10 +26,10 @@ module FreemarketSample54b
 
     # 日本語化
     config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
 
     # タイムゾーンを日本時間に変更
     config.time_zone = 'Tokyo'
-
     # バリデーションエラーが発生した際に、エラー発生箇所のビューが崩れるのを防ぐ
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       if instance.kind_of?(ActionView::Helpers::Tags::Label)
