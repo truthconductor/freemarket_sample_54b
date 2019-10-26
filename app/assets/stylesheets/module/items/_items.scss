@@ -37,12 +37,118 @@
 }
 
 #preview {
-  overflow: hidden;
+  display: inline-block;
+  width: 100%;
 }
 
 #preview img {
-  width: 100px;
+  width: 100%;
   float: left;
-  margin: 10px;
   cursor: move;
+}
+
+.image-upload-explanation {
+  padding: 10px 0px 10px;
+}
+
+.img-view {
+  width: 116px;
+  height: 162px;
+  margin: 0 10px 10px 0;
+  display: inline-block;
+}
+
+.img {
+  margin: 0px;
+}
+
+.btn-wrapper {
+  height: 44px;
+}
+
+.btn-edit {
+  display: inline-block;
+  width: 50%;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  line-height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+}
+
+.btn-delete {
+  display: inline-block;
+  width: 50%;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  line-height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+}
+
+.image-upload-text {
+  position: absolute;
+  top: 50%;
+  z-index: 0;
+  width: 100%;
+  transform: translate(0, -50%);
+}
+
+.delivery__heading {
+  float: left;
+}
+
+.price__heading {
+  float: left;
+}
+
+.margin-calculation {
+  border-top: 1px solid #ccc;
+  padding: 20px 30px;
+  &__result {
+    float: right;
+  }
+}
+.profit-calculation {
+  border-top: 1px solid #ccc;
+  padding: 20px 30px;
+  font-weight: bold;
+  &__result {
+    float: right;
+
+  }
+}
+.form--question {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0099e8;
+  color: #fff;
+  line-height: 14px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.submit {
+  @include red-button;
+  margin-top: 40px;
+}
+
+.return {
+  @include gray-button;
+  display: block;
+  text-align: center;
+  width: 45%;
+  margin: 20px auto;
 }

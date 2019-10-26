@@ -17,6 +17,7 @@
  @import "font-awesome";
  @import "./config/color";
  @import "./config/common";
+ @import "./mixin/common_style";
  @import "./mixin/clearfix";
  @import "./module/root/joint";
  @import "./module/root/header/header";
@@ -37,4 +38,3 @@
  @import "./module/items/items_sell_container";
  @import "./module/items/header";
  @import "./module/items/footer";
-
