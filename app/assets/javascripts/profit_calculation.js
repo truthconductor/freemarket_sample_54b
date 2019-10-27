@@ -10,7 +10,8 @@ $(document).on('turbolinks:load', function() {
       $('.margin-calculation__result').html(margin);
       $('.profit-calculation__result').html(profit);
 
-    } else {
+    } 
+    else {
       $('.margin-calculation__result').html("-");
       $('.profit-calculation__result').html("-");
     }
