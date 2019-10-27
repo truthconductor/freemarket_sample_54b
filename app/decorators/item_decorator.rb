@@ -20,7 +20,7 @@ class ItemDecorator < Draper::Decorator
     if deliver_method.cash_on_delivery
       "着払い"
     else
-      "送料込"
+      "送料込み"
     end
   end
 
