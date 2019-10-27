@@ -1,99 +1,140 @@
+= render 'joint/header'
 .item-wrapper
-  .item-detail
-    %h2
-      = @item.name
-    = image_tag @item.item_images.first.image.url, width: "100"
-    %table
-      %tbody
-        %tr
-          %th
-            出品者
-          %td
-            %p
-              = @item.seller.profile&.nickname
-        %tr
-          %th
-            カテゴリー
-          %td
-            = link_to "#" do
-              %p
-                = @item.category&.parent&.parent&.name
-            = link_to "#" do
-              %p
-                = @item.category.parent&.name
-            = link_to "#" do
-              %p
-                = @item.category.name
-        %tr
-          %th
-            ブランド
-          %td
-            = link_to "#" do
-              %p
-                = @item.brand&.name
-        %tr
-          %th
-            商品の状態
-          %td
-            = @item.item_state.state
-        %tr
-          %th
-            配送料の負担
-          %td
-            = @item.deliver_expend.expend
-        %tr
-          %th
-            配送の方法
-          %td
-            = @item.deliver_method.method
-        %tr
-          %th
-            配送元地域
-          %td
-            = link_to "#" do
-              %p
-                = @item.prefecture.name
-        %tr
-          %th
-            配送日の目安
-          %td
-            = link_to "#" do
-              %p
-                = @item.deliver_day.day
-    .item-amount
-      = @item.amount_text
-      (税込)
-      = @item.cash_on_delevery_text
-    = link_to new_item_purchase_path(@item), class: "item-purchace" do
-      .item-purchace__button
-        購入画面に進む
-    .item-description
-      = @item.description
-    .item-like
-      いいね！
-    .item-report
-      不適切な商品の報告
-    = link_to "#" do
-      あんしん・あんぜんへの取り組み
-  -# コメント機能は必須でないため暫定的に見た目だけ用意
-  .item-comment
-    .item-comment__notice
-      相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
-    .item-comment__notice
-    .item-comment__button
-      コメントする
-  -# SNSシェアボタン
-  .item-sns_share
-    = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}", target: :_blank do
-      F
-    = link_to "https://twitter.com/intent/tweet?url=#{request.url}", target: :_blank do
-      T
-    = link_to "http://www.pinterest.com/pin/create/button/?url=#{request.url}", target: :_blank do
-      P
-  .item-user
-    %h2
-      = link_to "#" do
-        = "#{@item.seller.profile&.nickname}さんのその他の商品"
+  %main.item-main
+    .item-detail
+      %h2.item-detail__headline
+        = @item.name
+      .item-detail__infomation
+        -# 商品画像
+        .item-detail__infomation__images
+          .item-detail__infomation__images__top
+            = image_tag @item.item_images.first.image.url, class: "item-detail__infomation__images__top__image"
+          .item-detail__infomation__images__flex
+            - @item.item_images.each_with_index do |image, index|
+              %div{class: "item-detail__infomation__images__flex__box box-image-#{index}" }
+                - if index == 0
+                  = image_tag image.image.url,
+                  class: "item-detail__infomation__images__flex__box__image item-detail__infomation__images__flex__box__image--selected"
+                - else
+                  = image_tag image.image.url, class: "item-detail__infomation__images__flex__box__image"
+        -# 商品詳細テーブル
+        %table.item-detail__infomation__table
+          %tbody
+            %tr
+              %th.item-detail__infomation__table__th
+                出品者
+              %td.item-detail__infomation__table__td
+                = link_to '#', class: "item-detail__infomation__table__td__link" do
+                  = @item.seller.profile&.nickname
+            %tr
+              %th.item-detail__infomation__table__th
+                カテゴリー
+              %td.item-detail__infomation__table__td
+                %p
+                  = link_to "#", class: "item-detail__infomation__table__td__link" do
+                    = @item.category&.parent&.parent&.name
+                %p
+                  = link_to "#", class: "item-detail__infomation__table__td__caterogy" do
+                    = fa_icon 'angle-right', class: "item-detail__infomation__table__td__caterogy__icon"
+                    = @item.category.parent&.name
+                %p
+                  = link_to "#", class: "item-detail__infomation__table__td__caterogy" do
+                    = fa_icon 'angle-right', class: "item-detail__infomation__table__td__caterogy__icon"
+                    = @item.category.name
+            %tr
+              %th.item-detail__infomation__table__th
+                ブランド
+              %td.item-detail__infomation__table__td
+                = link_to "#", class: "item-detail__infomation__table__td__link" do
+                  = @item.brand&.name
+            %tr
+              %th.item-detail__infomation__table__th
+                商品の状態
+              %td.item-detail__infomation__table__td
+                = @item.item_state.state
+            %tr
+              %th.item-detail__infomation__table__th
+                配送料の負担
+              %td.item-detail__infomation__table__td
+                = @item.deliver_expend.expend
+            %tr
+              %th.item-detail__infomation__table__th
+                配送の方法
+              %td.item-detail__infomation__table__td
+                = @item.deliver_method.method
+            %tr
+              %th.item-detail__infomation__table__th
+                配送元地域
+              %td.item-detail__infomation__table__td
+                %p
+                  = link_to "#", class: "item-detail__infomation__table__td__link" do
+                    = @item.prefecture.name
+            %tr
+              %th.item-detail__infomation__table__th
+                配送日の目安
+              %td.item-detail__infomation__table__td
+                %p
+                  = link_to "#", class: "item-detail__infomation__table__td__link" do
+                    = @item.deliver_day.day
+      -# 商品金額
+      .item-detail__amount
+        %span.item-detail__amount--amount
+          = @item.amount_text
+        %span.item-detail__amount--tax
+          (税込)
+        %span.item-detail__amount--tax
+        = @item.cash_on_delevery_text
+      -# 購入ボタン
+      .item-detail__purchace
+        - if @item.sales_state_id == 1
+          = link_to new_item_purchase_path(@item), class: "item-detail__purchace__button" do
+            .item-detail__purchace__button--enable
+              購入画面に進む
+        - else
+          .item-detail__purchace__button--disenable
+            売り切れです
+      -# 説明文
+      .item-detail__description
+        = simple_format(@item.description, class:"item-detail__description__text")
+      .item-detail__footer
+        %ul.item-detail__footer__button-list
+          %li.item-detail__footer__button-list__button
+            = fa_icon 'heart-o', class: "item-detail__footer__button-list__button__icon"
+            いいね！ 0
+          %li.item-detail__footer__button-list__button
+            = fa_icon 'flag-o', class: "item-detail__footer__button-list__button__icon"
+            不適切な商品の報告
+        = link_to "#", class:"item-detail__footer__link" do
+          = fa_icon 'lock', class: "item-detail__footer__link__icon"
+          あんしん・あんぜんへの取り組み
+    -# コメント機能は必須でないため暫定的に見た目だけ用意
+    .item-chat
+      .item-chat__notice
+        相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      = form_with url: "" do |f|
+        = f.text_area :message, class: "item-chat__textarea"
+      .item-chat__button--disenable
+        コメントする
+    -# SNSシェアボタン
+    .item-share
+      %ul.item-share__icon-list
+        = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+          %li.item-share__icon-list__icon--facebook
+            = fa_icon 'facebook-square 3x'
+        = link_to "https://twitter.com/intent/tweet?url=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+          %li.item-share__icon-list__icon--twitter
+            = fa_icon 'twitter-square 3x'
+        = link_to "http://www.pinterest.com/pin/create/button/?url=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+          %li.item-share__icon-list__icon--pinterest
+            = fa_icon 'pinterest-square -square 3x'
+    -# 出品者が販売中の商品
+    .item-others
+      %h2.item-others__headline
+        = link_to "#", class: "item-others__headline--link" do
+          = "#{@item.seller.profile&.nickname}さんのその他の商品"
+
+      .item-others__display
+        -# 同じユーザーの直近出品商品を最大６つ取得
         - @item.seller.items.where.not(id: @item.id).recent(6).each do |other_item|
           = link_to item_path(other_item) do
             .item_list
@@ -102,18 +143,23 @@
                 = other_item.name
               .item_amount
                 = other_item.decorate.amount_text
-  .item-category
-    %h2
-      = link_to "#" do
-        = "#{@item.category.name}その他の商品"
-        - @item.category.items.where.not(id: @item.id).recent(6).each do |other_item|
-          - if @item.id != other_item.id
-            = link_to item_path(other_item) do
-              .item_list
-                = image_tag(other_item.item_images.first.image.url, width: "200")
-                .item_text
-                  = other_item.name
-                .item_amount
-                  = other_item.decorate.amount_text
+
+    .item-others
+      %h2.item-others__headline
+        = link_to "#", class: "item-others__headline--link" do
+          = "#{@item.category.name}その他の商品"
+
+      - @item.category.items.where.not(id: @item.id).recent(6).each do |other_item|
+        - if @item.id != other_item.id
+          = link_to item_path(other_item) do
+            .item_list
+              = image_tag(other_item.item_images.first.image.url, width: "200")
+              .item_text
+                = other_item.name
+              .item_amount
+                = other_item.decorate.amount_text
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'
 
 
