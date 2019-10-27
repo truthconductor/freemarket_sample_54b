@@ -23,19 +23,23 @@ $(document).on('turbolinks:load', function() {
       input_area.append(new_input);
     }
 
-    //変更されたidに対応するimg_viewを取得
-    var image_view = $(".img_view[data-image="+changed_id+"]").first();
+    $(`.items-sell-container__dropzone${inputs_length - 1}`).attr('class',`items-sell-container__dropzone${inputs_length}`);
+
+    //変更されたidに対応するimg-viewを取得
+    var image_view = $(".img-view[data-image="+changed_id+"]").first();
     //idに対応するimg_viewが存在しないときは追加
     if(!image_view[0]) {
-      image_view = $(`<div class = "img_view">
+      image_view = $(`<div class = "img-view">
                         <img>
-                        <div class="btn_wrapper">
-                          <div class="btn edit">編集</div>
-                          <div class="btn delete">削除</div>
+                        <div class="btn-wrapper">
+                          <div class="btn-edit">編集</div><!--
+                          --><div class="btn-delete">削除</div>
                         </div>
                       </div>`);
       preview.append(image_view);
     }
+    
+    $('.dropzone-box').before($('.img-view'))
 
     //input,image_viewそれぞれにindexを再割り当て
     reorder_data_image();
@@ -55,7 +59,7 @@ $(document).on('turbolinks:load', function() {
   });
 
   // 削除クリック
-  $(document).on('click', '.delete', function() {
+  $(document).on('click', '.btn-delete', function() {
     // イベントが発生したimage_viewのオブジェクトとidを取得する
     var target_image = $(this).parent().parent();
     var remove_id = target_image.data('image');
@@ -79,10 +83,11 @@ $(document).on('turbolinks:load', function() {
       });
       $(input).prop('disabled', index >= 10);
     })
-    $('.img_view').each(function(index, image) {
+    $('.img-view').each(function(index, image) {
       $(image).attr('data-image', index);
     });
     //dropzone-boxに対応付くinputを末尾のinputに再割り当て
     $('.dropzone-box').attr('for','upload-image-' + ($('[type="file"].upload-image').length - 1));
+    $('.items-sell-container__dropzone' + ($('[type="file"].upload-image').length)).attr('class', 'items-sell-container__dropzone' + ($('[type="file"].upload-image').length - 1));
   }
 });

@@ -1,0 +1,12 @@
+.items-sell-footer
+  %nav.items-sell-footer__agreement
+    = link_to "#", class:"items-sell-footer__agreement__item" do
+      プライバシーポリシー
+    = link_to "#", class:"items-sell-footer__agreement__item" do
+      メルカリ利用規約
+    = link_to "#", class:"items-sell-footer__agreement__item" do
+      特定商取引に関する表記
+  = link_to root_path, class: "items-sell__logo" do
+    = image_tag "mercari/logo-gray.svg", class: "items-sell-footer__logo__image"
+  %p.items-sell-footer__copyright
+    &copy; 2019 Mercari

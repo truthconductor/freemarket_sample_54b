@@ -17,6 +17,7 @@
  @import "font-awesome";
  @import "./config/color";
  @import "./config/common";
+ @import "./mixin/common_style";
  @import "./mixin/clearfix";
  @import "./module/root/joint";
  @import "./module/root/header/header";
@@ -33,9 +34,11 @@
  @import "./module/deals/deals";
  @import "./module/deals/header";
  @import "./module/deals/footer";
+ @import "./module/items/items";
+ @import "./module/items/items_sell_container";
+ @import "./module/items/header";
+ @import "./module/items/footer";
  @import "./module/items/detail";
  @import "./module/items/item-display-box";
- @import "item";
 // バリデーション装飾なので最後に定義して他の上書きを防ぐ
  @import "./config/validation"
-
