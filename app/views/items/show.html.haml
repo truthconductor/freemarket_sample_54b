@@ -132,34 +132,20 @@
       %h2.item-others__headline
         = link_to "#", class: "item-others__headline--link" do
           = "#{@item.seller.profile&.nickname}さんのその他の商品"
-
       .item-others__display
         -# 同じユーザーの直近出品商品を最大６つ取得
-        - @item.seller.items.where.not(id: @item.id).recent(6).each do |other_item|
-          = link_to item_path(other_item) do
-            .item_list
-              = image_tag(other_item.item_images.first.image.url, width: "200")
-              .item_text
-                = other_item.name
-              .item_amount
-                = other_item.decorate.amount_text
-
+        = render partial: "items/item-display-box", collection: @item.seller.items.where.not(id: @item.id).recent(6), as: "item"
+    -# 同じカテゴリーの商品
     .item-others
       %h2.item-others__headline
         = link_to "#", class: "item-others__headline--link" do
-          = "#{@item.category.name}その他の商品"
-
-      - @item.category.items.where.not(id: @item.id).recent(6).each do |other_item|
-        - if @item.id != other_item.id
-          = link_to item_path(other_item) do
-            .item_list
-              = image_tag(other_item.item_images.first.image.url, width: "200")
-              .item_text
-                = other_item.name
-              .item_amount
-                = other_item.decorate.amount_text
+          - if @item.category.name == "その他"
+            = "#{@item.category.parent.name}その他の商品"
+          - else
+            = "#{@item.category.name}その他の商品"
+      .item-others__display
+        = render partial: "items/item-display-box", collection: @item.category.items.where.not(id: @item.id).recent(6), as: "item"
 = render 'joint/app__dl'
 = render 'joint/footer'
-= render 'joint/exhibit__button'
 
 

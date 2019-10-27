@@ -12,8 +12,8 @@
 .item-detail {
   padding: 24px 40px 40px;
   margin-bottom: 8px;
-  color: #333;
-  background: #fff;
+  color: $text-deepgray;
+  background: $background-white;
   &__headline {
     text-align: center;
     line-height: 33px;
@@ -40,6 +40,7 @@
           transform: translateY(-50%) translateX(-50%);
           max-width: 300px;
           max-height: 300px;
+          box-sizing: border-box;
         }
       }
       &__flex {
@@ -86,14 +87,13 @@
         padding: 16px 8px;
         border: 1px $table-border solid;
         &__link {
-          color: #0099e8;
+          color: $link-hover;
         }
         &__caterogy {
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          color: #0099e8;
-
+          color: $link-hover;
           &__icon {
             margin: 0 3px 0 0;
           }
@@ -115,7 +115,7 @@
   }
   // 商品購入
   &__purchace {
-    margin: 0 0 16px;
+    margin: 0 0 32px;
     &__button {
       &--enable {
         border: none;
@@ -177,7 +177,7 @@
     }
     &__link {
       float: right;
-      color: #0099e8;
+      color: $link-hover;
       font-size: 14px;
       position: absolute;
       top: 50%;
@@ -193,8 +193,8 @@
 .item-chat {
   padding: 24px;
   margin-bottom: 8px;
-  color: #333;
-  background: #fff;
+  color: $text-deepgray;
+  background: $background-white;
   &__notice {
     padding: 8px;
     margin: 0 0 8px;
@@ -249,8 +249,8 @@
 .item-share {
   padding: 40px 24px 24px;
   margin-bottom: 24px;
-  color: #333;
-  background: #fff;
+  color: $text-deepgray;
+  background: $background-white;
   &__icon-list {
     list-style: none;
     display: flex;
@@ -276,8 +276,15 @@
   &__headline {
     font-size: 22px;
     line-height: 33px;
+    margin: 0 0 8px 0;
     &--link {
-      color: #0099e8;
+      color: $link-hover;
     }
+  }
+  &__display {
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 }

@@ -34,6 +34,7 @@
  @import "./module/deals/header";
  @import "./module/deals/footer";
  @import "./module/items/detail";
+ @import "./module/items/item-display-box";
  @import "item";
 // バリデーション装飾なので最後に定義して他の上書きを防ぐ
  @import "./config/validation"
