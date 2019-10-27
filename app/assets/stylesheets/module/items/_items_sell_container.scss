@@ -1,0 +1,156 @@
+
+.items-sell-container {
+  &__dropzone0 {
+    @include dropzone;
+    width: 100%;
+  }
+  &__dropzone1 {
+    @include dropzone;
+    width: calc(100% - 135px);
+  }
+  &__dropzone2 {
+    @include dropzone;
+    width: calc(100% - 270px);
+  }
+  &__dropzone3 {
+    @include dropzone;
+    width: calc(100% - 405px);
+  }
+  &__dropzone4 {
+    @include dropzone;
+    width: calc(100% - 540px);
+  }
+  &__dropzone5 {
+    @include dropzone;
+    width: 100%;
+  }
+  &__dropzone6 {
+    @include dropzone;
+    width: calc(100% - 135px);
+  }
+  &__dropzone7 {
+    @include dropzone;
+    width: calc(100% - 270px);
+  }
+  &__dropzone8 {
+    @include dropzone;
+    width: calc(100% - 405px);
+  }
+  &__dropzone9 {
+    @include dropzone;
+    width: calc(100% - 540px);
+  }
+  &__dropzone10 {
+    display: none
+  }
+  &__box {
+    float: right;
+    width: 400px;
+    margin: 0;
+  }
+  &__form {
+    margin-top: 2px;
+    background: $background-white;
+    padding: 40px 64px;
+    &__image {
+      padding: 0px;
+      &__label {
+        font-weight: 600;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+    }
+    &__description {
+      padding: 0 30px 30px;
+      &__label {
+        font-weight: 600;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+      &__text_field {
+        width: 100%;
+        min-height: 104px;
+        margin: 8px 0 0;
+        padding: 10px 16px;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+    }
+    &__field {
+      padding: 0 30px 30px;
+      max-width: 340px;
+      &__label {
+        font-weight: 600;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+      &__input-field {
+        width: 100%;
+        height: 48px;
+        margin: 8px 0 0;
+        padding: 10px 16px;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+      &__prefecture {
+        margin: 8px 0;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        &__select {
+          cursor: pointer;
+          height: 48px;
+          width: 100%;
+          padding: 10px 16px;
+          font-size: 16px;
+          appearance: none;
+          outline: none;
+          background: transparent;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          z-index: 2;
+          &:focus  {
+            border: 1px solid $form-focus;
+          }
+        }
+        &__icon {
+          color: #888;
+          position: relative;
+          pointer-events: none;
+          margin-right: -20px;
+          left: -40px;
+          font-size: 2rem;
+          line-height: 48px;
+          z-index: 1;
+        }
+      }
+      &__button {
+        cursor: pointer;
+        color: $text-white;
+        background: $button-background-red;
+        border: none;
+        width: 100%;
+        font-size: 14px;
+        line-height: 48px;
+        &:hover {
+          background: #F28A86;
+          transition: background 0.3s;
+        }
+      }
+    }
+  }
+}
