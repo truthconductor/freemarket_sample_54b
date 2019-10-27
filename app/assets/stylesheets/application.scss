@@ -38,6 +38,5 @@
  @import "./module/items/items_sell_container";
  @import "./module/items/header";
  @import "./module/items/footer";
- @import "item";
 // バリデーション装飾なので最後に定義して他の上書きを防ぐ
  @import "./config/validation"
