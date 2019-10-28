@@ -5,9 +5,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   #before_action :to_katakana,only: [:create]
   #GET /resource/sign_up
-  #def new
-  #super
-  #end
+  def new
+    build_resource
+    @user.build_personal
+    yield resource if block_given?
+    respond_with resource
+  end
 
   #POST /resource
   def create
