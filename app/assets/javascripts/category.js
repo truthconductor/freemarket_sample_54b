@@ -14,6 +14,7 @@ $(document).on('turbolinks:load', function() {
                                 </select>
                               </div>
                             </div>`);
+    debugger
     $('.items-sell-detail__category').append(childSelectHtml);
   }
   // 孫カテゴリーの表示を作成する
@@ -21,6 +22,7 @@ $(document).on('turbolinks:load', function() {
   // 親カテゴリー選択後のイベント
   $('#parent_category').on('change', function() {
     var parentCategory = $('#parent_category').val();
+    debugger
     if (parentCategory != "---") {
       $.ajax({
         url: 'get_category_children',
@@ -29,13 +31,15 @@ $(document).on('turbolinks:load', function() {
         dataType: 'json'
       })
       .done(function(children) {
+        debugger
         $('#children_wrapper').remove();
         // $('#children_wrapper').remove();
         // $('#brand_wrapper').remove();
         var insertHTML = '';
-        $(children).each(function(child) {
+        children.forEach(function(child) {
           insertHTML += appendOption(child);
         });
+        debugger
         appendChildrenBox(insertHTML);
       })
       .fail(function() {
