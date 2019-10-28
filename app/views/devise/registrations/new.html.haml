@@ -1,98 +1,82 @@
-.registration-wrapper
-  = render partial: 'registrations-header'
-  .registration-contents
-    %p.registration_title 会員情報入力
-    .registration-form
-      = form_with(model: resource,as: resource_name, url: registration_path(resource_name),local: true) do |f|
-        = f.fields_for :profile,@user.profile do |profile|
-          = profile.label "ニックネーム"
-          %br/
-          = profile.text_field :nickname, autocomplete: "off"
-          %br/
-          - if resource.errors.full_messages_for(:"profile.nickname").any?
-            %ul
-              - resource.errors.full_messages_for(:"profile.nickname").each do |msg|
-                %li.validation-error__text
-                  =msg
-        .registration-form__field
-          = f.label :email
-          %br/
-          = f.email_field :email, autofocus: true, autocomplete: "email"
-          %br/
-          - if resource.errors.full_messages_for(:email).any?
-            %ul
-              - resource.errors.full_messages_for(:"email").each do |msg|
-                %li.validation-error__text
-                  =msg
-        .registration-form__field
-          = f.label :password
-          %br/
-          = f.password_field :password, autocomplete: "new-password"
-          %br/
-          - if resource.errors.full_messages_for(:password).any?
-            %ul
-              - resource.errors.full_messages_for(:"password").each do |msg|
-                %li.validation-error__text
-                  =msg
-        .registration-form__field
-          = f.label :password_confirmation
-          %br/
-          = f.password_field :password_confirmation, autocomplete: "new-password"
-          %br/
-          - if resource.errors.full_messages_for(:password_confirmation).any?
-            - resource.errors.full_messages_for(:password_confirmation).each do |msg|
+%h2 Sign up
+= form_with(model: resource,as: resource_name, url: registration_path(resource_name),local: true) do |f|
+  .registrations-field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+    %br/
+    - if resource.errors.full_messages_for(:email).any?
+      - resource.errors.full_messages_for(:email).each do |msg|
+        =msg
+  .registrations-field
+    = f.label :password
+    - if @minimum_password_length
+      %em
+        (#{@minimum_password_length} characters minimum)
+    %br/
+    = f.password_field :password, autocomplete: "new-password"
+    %br/
+    - if resource.errors.full_messages_for(:password).any?
+      - resource.errors.full_messages_for(:password).each do |msg|
+        =msg
+  .registrations-field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+    %br/
+    - if resource.errors.full_messages_for(:password_confirmation).any?
+      - resource.errors.full_messages_for(:password_confirmation).each do |msg|
+        =msg
+  = f.fields_for :personal,@user.build_personal do |personal|
+    .registrations-field
+      = personal.label "姓"  
+      %br/
+      = personal.text_field :last_name, autocomplete: "off"
+      %br/
+      - if resource.errors.full_messages_for(:"personal.last_name").any?
+        %ul.validation-error
+          - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
+            %li
               =msg
-        = f.fields_for :personal,@user.personal do |personal|
-          .registration-form__field
-            = personal.label "姓"  
-            %br/
-            = personal.text_field :last_name, autocomplete: "off"
-            %br/
-            - if resource.errors.full_messages_for(:"personal.last_name").any?
-              %ul
-                - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
-                  %li.validation-error__text
-                    =msg
-          .registration-form__field
-            = personal.label "名"
-            %br/
-            = personal.text_field :first_name, autocomplete: "off"
-            %br/
-            - if resource.errors.full_messages_for(:"personal.first_name").any?
-              %ul
-                - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
-                  %li.validation-error__text
-                    = msg
-          .registration-form__field
-            = personal.label "姓(カナ）"
-            %br/
-            = personal.text_field :last_name_kana, autocomplete: "off"
-            %br/
-            - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
-              %ul
-              - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
-                %li.validation-error__text
-                  =msg
-          .registration-form__field
-            = personal.label "名（カナ）"
-            %br/
-            = personal.text_field :first_name_kana, autocomplete: "off"
-            - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
-              %ul
-              - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
-                %li.validation-error__text
-                  =msg
-          .registration-form__field
-            = personal.label "生年月日"
-            %br/
-            != sprintf(personal.date_select(:birthdate,prompt: "---",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
-            %br/
-            - if resource.errors.full_messages_for(:"personal.birthdate").any?
-              %ul
-              - resource.errors.full_messages_for(:"personal.birthdate").each do |msg|
-                %li.validation-error__text
-                  =msg
-        %div
-          .registration-actions
-            = f.submit "Sign up"
-  = render 'deals/footer'
+    .registrations-field
+      = personal.label "名"
+      %br/
+      = personal.text_field :first_name, autocomplete: "off"
+      %br/
+      - if resource.errors.full_messages_for(:"personal.first_name").any?
+        %ul.validation-error
+          - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
+            %li 
+              = msg
+    .registrations-field
+      = personal.label "姓(カナ）"
+      %br/
+      = personal.text_field :last_name_kana, autocomplete: "off"
+      %br/
+      - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
+        %ul.validation-error
+        - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
+          %li
+            =msg
+    .registrations-field
+      = personal.label "名（カナ）"
+      %br/
+      = personal.text_field :first_name_kana, autocomplete: "off"
+      - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
+        %ul.validation-error
+        - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
+          %li
+            =msg
+    .registrations-field
+      = personal.label "生年月日"
+      %br/
+      != sprintf(personal.date_select(:birthdate,prompt: "---",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
+      %br/
+      - if resource.errors.full_messages_for(:"personal.birthdate").any?
+        %ul.validation-error
+        - resource.errors.full_messages_for(:"personal.birthdate").each do |msg|
+          %li
+            =msg
+  %div
+    .registrations-actions
+      = f.submit "Sign up"
