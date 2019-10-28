@@ -5,4 +5,6 @@ class Profile < ApplicationRecord
   validates :introduction, length: {maximum: 1000}
   #Association
   belongs_to :user
+
+  
 end

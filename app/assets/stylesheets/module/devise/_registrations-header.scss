@@ -1,0 +1,44 @@
+@media screen and (min-width: 768px) {
+  .registaration-header{
+    height: 128px;
+  }
+
+  .registration_title {
+    font-size: 22px;
+    padding: 32px;
+    font-weight:800;
+  }
+  .registaration-header__image{
+    width: 185px;
+    height: 49px;
+    margin: 40px 0 0;
+  }
+  .registration-form{
+    padding: 40px 40px 64px;
+  }
+
+  .registration-form__field{
+    max-width:320px;
+    margin:0 auto;
+  }
+}
+.registaration-header{
+  text-align: center;
+}
+.registration-wrapper{
+  background-color:$background-smokewhite;
+}
+
+
+.registration-contents{
+  width:700px;
+  margin:0 auto;
+  background-color:$background-white ;
+  text-align: center
+}
+
+.registration-form{
+  border-top: 1px solid #f5f5f5;
+  
+}
+
