@@ -1,82 +1,130 @@
-%h2 Sign up
-= form_with(model: resource,as: resource_name, url: registration_path(resource_name),local: true) do |f|
-  .registrations-field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-    %br/
-    - if resource.errors.full_messages_for(:email).any?
-      - resource.errors.full_messages_for(:email).each do |msg|
-        =msg
-  .registrations-field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    %br/
-    - if resource.errors.full_messages_for(:password).any?
-      - resource.errors.full_messages_for(:password).each do |msg|
-        =msg
-  .registrations-field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-    %br/
-    - if resource.errors.full_messages_for(:password_confirmation).any?
-      - resource.errors.full_messages_for(:password_confirmation).each do |msg|
-        =msg
-  = f.fields_for :personal,@user.build_personal do |personal|
-    .registrations-field
-      = personal.label "姓"  
-      %br/
-      = personal.text_field :last_name, autocomplete: "off"
-      %br/
-      - if resource.errors.full_messages_for(:"personal.last_name").any?
-        %ul.validation-error
-          - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
-            %li
-              =msg
-    .registrations-field
-      = personal.label "名"
-      %br/
-      = personal.text_field :first_name, autocomplete: "off"
-      %br/
-      - if resource.errors.full_messages_for(:"personal.first_name").any?
-        %ul.validation-error
-          - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
-            %li 
-              = msg
-    .registrations-field
-      = personal.label "姓(カナ）"
-      %br/
-      = personal.text_field :last_name_kana, autocomplete: "off"
-      %br/
-      - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
-        %ul.validation-error
-        - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
-          %li
-            =msg
-    .registrations-field
-      = personal.label "名（カナ）"
-      %br/
-      = personal.text_field :first_name_kana, autocomplete: "off"
-      - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
-        %ul.validation-error
-        - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
-          %li
-            =msg
-    .registrations-field
-      = personal.label "生年月日"
-      %br/
-      != sprintf(personal.date_select(:birthdate,prompt: "---",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
-      %br/
-      - if resource.errors.full_messages_for(:"personal.birthdate").any?
-        %ul.validation-error
-        - resource.errors.full_messages_for(:"personal.birthdate").each do |msg|
-          %li
-            =msg
-  %div
-    .registrations-actions
-      = f.submit "Sign up"
+.registration-wrapper
+  = render partial: 'registrations-header'
+  .registration-contents
+    %p.registration_title 会員情報入力
+    .registration-form
+      = form_with(model: resource,as: resource_name, url: registration_path(resource_name),local: true) do |f|
+        = f.fields_for :profile,@user.profile do |profile|
+          .registration-form__field
+            = profile.label "ニックネーム"
+            %span.form--required
+              必須
+            %br/
+            = profile.text_field :nickname, autocomplete: "off",class:"registration-input",placeholder: "例)メルカリ太郎"
+            %br/
+            - if resource.errors.full_messages_for(:"profile.nickname").any?
+              %ul
+                - resource.errors.full_messages_for(:"profile.nickname").each do |msg|
+                  %li.validation-error__text
+                    =msg
+        .registration-form__field
+          = f.label :email
+          %span.form--required
+            必須
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email",class:"registration-input",placeholder: "PC・携帯どちらでも可"
+          %br/
+          - if resource.errors.full_messages_for(:email).any?
+            %ul
+              - resource.errors.full_messages_for(:"email").each do |msg|
+                %li.validation-error__text
+                  =msg
+        .registration-form__field
+          = f.label :password
+          %span.form--required
+            必須
+          %br/
+          = f.password_field :password, autocomplete: "new-password",class:"registration-input",placeholder: "7文字以上"
+          %br/
+          - if resource.errors.full_messages_for(:password).any?
+            %ul
+              - resource.errors.full_messages_for(:"password").each do |msg|
+                %li.validation-error__text
+                  =msg
+        .registration-form__field
+          = f.label :password_confirmation
+          %span.form--required
+            必須
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "new-password",class:"registration-input",placeholder: "7文字以上"
+          %br/
+          - if resource.errors.full_messages_for(:password_confirmation).any?
+            %ul
+              - resource.errors.full_messages_for(:"password_confirmation").each do |msg|
+                %li.validation-error__text
+                  =msg
+        .registration-form__center__text
+          %h3.registration-form__center__text--title
+            本人確認
+          %p.registration-form__center__text--form__caution
+            安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+        = f.fields_for :personal,@user.personal do |personal|
+          .registration-form--personal
+            .registration-form--personal--section
+              = personal.label "お名前(全角)" 
+              %span.form--required
+                必須
+              %br/
+              = personal.text_field :last_name, autocomplete: "off",class:"registration-personal__input",placeholder: "例)山田"
+              %br/
+              - if resource.errors.full_messages_for(:"personal.last_name").any?
+                %ul
+                  - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
+                    %li.validation-error__text
+                      =msg
+            .registration-form--personal--section
+              = personal.text_field :first_name, autocomplete: "off",class:"registration-personal__input",placeholder: "例)彩"
+              %br/
+              - if resource.errors.full_messages_for(:"personal.first_name").any?
+                %ul
+                  - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
+                    %li.validation-error__text
+                      = msg
+          .registration-form--personal
+            = personal.label "お名前カナ(カナ）",class:"registration-form--personal__label"
+            %span.form--required
+              必須
+            %br/
+            .registration-form--personal--section
+              = personal.text_field :last_name_kana, autocomplete: "off",class:"registration-personal__input",placeholder: "例)ヤマダ"
+              %br/
+              - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
+                %ul
+                - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
+                  %li.validation-error__text
+                    =msg
+            .registration-form--personal--section
+              = personal.text_field :first_name_kana, autocomplete: "off",class:"registration-personal__input",placeholder: "例)アヤ"
+              - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
+                %ul
+                - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
+                  %li.validation-error__text
+                    =msg
+          .registration-form__field
+            = personal.label "生年月日"
+            %span.form--required
+              必須
+            %br/
+            .registration-form_select
+              != sprintf(personal.date_select(:birthdate,prompt: "--",with_css_classes:"a",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
+            %br/
+            - if resource.errors.full_messages_for(:"personal.birthdate").any?
+              %ul
+              - resource.errors.full_messages_for(:"personal.birthdate").each do |msg|
+                %li.validation-error__text
+                  =msg
+        %p.registration-form__caution
+          ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
+        %p.registration-form__caution__text
+          「次へ進む」のボタンを押すことにより、
+          %span 
+            =link_to "利用規約","https://www.yahoo.co.jp",class:"registration-form__right--link" 
+          に同意したものとみなします
+        %div
+          .registration-actions
+            = f.submit "次へ進む",class:"registration-btn"
+        .registration-form__right
+          =link_to "https://www.yahoo.co.jp",class:"registration-form__right--link" do
+            本人情報の登録について
+            = fa_icon "angle-right", class: "registration-form__right--icon"
+  = render 'deals/footer' 

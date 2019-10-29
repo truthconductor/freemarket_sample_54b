@@ -11,4 +11,13 @@ select.validation-error {
   color: $text-red;
   line-height: 1.5;
   font-size: 14px;
+  list-style:none;
 }
+
+input[type="email"].validation-error{
+  border: solid 1px #ea352d;
+}
+
+input[type="password"].validation-error{
+  border: solid 1px #ea352d;
+} 
