@@ -67,3 +67,159 @@ if Category.count == 0
     end
   end
 end
+
+# ブランド
+if Brand.count == 0
+
+  category_ladies = Category.find_by(name: "レディース")
+  CSV.foreach("db/brand-ladies.csv") do |row|
+    brand = Brand.create(first_letter: row[0], name: row[1])
+    CategoriesBrand.create(category_id: category_ladies.id, brand_id: brand.id)
+  end
+
+  category_mens = Category.find_by(name: "メンズ")
+  CSV.foreach("db/brand-mens.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_mens.id, brand_id: brand.id)
+  end
+
+  category_kids = Category.find_by(name: "ベビー・キッズ")
+  CSV.foreach("db/brand-baby.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_kids.id, brand_id: brand.id)
+  end
+
+  category_interior = Category.find_by(name: "インテリア・住まい・小物")
+  CSV.foreach("db/brand-interior.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_interior.id, brand_id: brand.id)
+  end
+
+  category_kitchen = Category.find_by(name: "キッチン/食器")
+  CSV.foreach("db/brand-kitchen.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_kitchen.id, brand_id: brand.id)
+  end
+
+  category_watches = Category.where(name: "時計")
+  CSV.foreach("db/brand-watch.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    # 男女それぞれの時計カテゴリーとブランドを紐付ける
+    category_watches.each do |category_watch|
+      CategoriesBrand.create(category_id: category_watch.id, brand_id: brand.id)
+    end
+  end
+
+  category_cosme = Category.find_by(name: "コスメ・香水・美容")
+  CSV.foreach("db/brand-cosme.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_cosme.id, brand_id: brand.id)
+  end
+
+  category_videogame= Category.find_by(name: "テレビゲーム")
+  CSV.foreach("db/brand-videogame.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_videogame.id, brand_id: brand.id)
+  end
+
+  category_sports = Category.find_by(name: "スポーツ・レジャー")
+  CSV.foreach("db/brand-sports.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_sports.id, brand_id: brand.id)
+  end
+
+  category_smartphone = Category.find_by(name: "スマートフォン/携帯電話")
+  CSV.foreach("db/brand-smartphone.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_smartphone.id, brand_id: brand.id)
+  end
+
+  category_bike = Category.find_by(name: "オートバイ車体")
+  category_bike_parts = Category.find_by(name: "オートバイパーツ")
+  category_bike_accessory = Category.find_by(name: "オートバイアクセサリー")
+  CSV.foreach("db/brand-bike.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_bike.id, brand_id: brand.id)
+    CategoriesBrand.create(category_id: category_bike_parts.id, brand_id: brand.id)
+    CategoriesBrand.create(category_id: category_bike_accessory.id, brand_id: brand.id)
+  end
+
+  category_instruments= Category.find_by(name: "楽器/器材")
+  CSV.foreach("db/brand-instruments.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_instruments.id, brand_id: brand.id)
+  end
+
+  category_car_wheel = Category.find_by(name: "自動車タイヤ/ホイール")
+  category_car_parts = Category.find_by(name: "自動車パーツ")
+  CSV.foreach("db/brand-instruments.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_car_wheel.id, brand_id: brand.id)
+    CategoriesBrand.create(category_id: category_car_parts.id, brand_id: brand.id)
+  end
+
+  category_food = Category.find_by(name: "食品")
+  category_drink = Category.find_by(name: "飲料/酒")
+  CSV.foreach("db/brand-food.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_food.id, brand_id: brand.id)
+    CategoriesBrand.create(category_id: category_drink.id, brand_id: brand.id)
+  end
+
+  category_japanesecar = Category.find_by(name: "国内自動車本体")
+  CSV.foreach("db/brand-japanesecar.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_japanesecar.id, brand_id: brand.id)
+  end
+
+  category_foreigncar = Category.find_by(name: "外国自動車本体")
+  CSV.foreach("db/brand-foreigncar.csv") do |row|
+    brand = Brand.find_by(name: row[1])
+    unless brand
+      brand = Brand.create(first_letter: row[0], name: row[1])
+    end
+    CategoriesBrand.create(category_id: category_foreigncar.id, brand_id: brand.id)
+  end
+end
