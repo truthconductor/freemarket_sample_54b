@@ -61,7 +61,7 @@
         = f.fields_for :personal,@user.personal do |personal|
           .registration-form--personal
             .registration-form--personal--section
-              = personal.label "お名前(全角)" 
+              = personal.label "お名前(全角)" ,class:"registration-form--personal__label"
               %span.form--required
                 必須
               %br/
@@ -105,7 +105,7 @@
             %span.form--required
               必須
             %br/
-            .registration-form_select
+            .registration-form__select
               != sprintf(personal.date_select(:birthdate,prompt: "--",with_css_classes:"a",:use_month_numbers => true,start_year:Time.now.year,end_year:1900,autocomplete: "off", date_separator:'%s'),'年','月')+'日'
             %br/
             - if resource.errors.full_messages_for(:"personal.birthdate").any?
