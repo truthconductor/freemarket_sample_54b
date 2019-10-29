@@ -150,12 +150,11 @@
     text-align:center;
   }
   .registration-contents{
-    margin-bottom:32px;
+    box-sizing:border-box;
   }
   
   .registration-form{
-    padding: 40px 40px 128px;
-    margin-bottom:50px;
+    padding: 40px 40px 100px;
     &__center__text{
       margin-top:32px;
     }
