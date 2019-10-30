@@ -67,19 +67,18 @@
               %br/
               = personal.text_field :last_name, autocomplete: "off",class:"registration-personal__input",placeholder: "例)山田"
               %br/
-              - if resource.errors.full_messages_for(:"personal.last_name").any?
-                %ul
-                  - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
-                    %li.validation-error__text
-                      =msg
             .registration-form--personal--section
               = personal.text_field :first_name, autocomplete: "off",class:"registration-personal__input",placeholder: "例)彩"
               %br/
-              - if resource.errors.full_messages_for(:"personal.first_name").any?
-                %ul
-                  - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
-                    %li.validation-error__text
-                      = msg
+            - if resource.errors.full_messages_for((:"personal.first_name")||(:"personal.last_name")).any?
+              %ul
+                - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
+                  %li.validation-error__text
+                    = msg
+              %ul
+                - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
+                  %li.validation-error__text
+                    = msg
           .registration-form--personal
             = personal.label "お名前カナ(カナ）",class:"registration-form--personal__label"
             %span.form--required
@@ -87,19 +86,17 @@
             %br/
             .registration-form--personal--section
               = personal.text_field :last_name_kana, autocomplete: "off",class:"registration-personal__input",placeholder: "例)ヤマダ"
-              %br/
-              - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
-                %ul
-                - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
-                  %li.validation-error__text
-                    =msg
             .registration-form--personal--section
               = personal.text_field :first_name_kana, autocomplete: "off",class:"registration-personal__input",placeholder: "例)アヤ"
-              - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
-                %ul
+            - if resource.errors.full_messages_for((:"personal.first_name_kana")||(:"personal.last_name_kana")).any?
+              %ul
                 - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
                   %li.validation-error__text
-                    =msg
+                    = msg
+              %ul
+                - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
+                  %li.validation-error__text
+                    = msg
           .registration-form__field
             = personal.label "生年月日"
             %span.form--required

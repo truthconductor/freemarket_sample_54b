@@ -12,6 +12,8 @@ select.validation-error {
   line-height: 1.5;
   font-size: 14px;
   list-style:none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 input[type="email"].validation-error{
