@@ -1,4 +1,7 @@
 = render 'joint/header'
+-# 出品者の場合パンくずリストを表示
+- if @item.seller == current_user
+  = render 'users/user-breadcrumb'
 .item-wrapper
   %main.item-main
     .item-detail
@@ -84,15 +87,16 @@
           (税込)
         %span.item-detail__amount--tax
         = @item.cash_on_delevery_text
-      -# 購入ボタン
-      .item-detail__purchace
-        - if @item.sales_state_id == 1
-          = link_to new_item_purchase_path(@item), class: "item-detail__purchace__button" do
-            .item-detail__purchace__button--enable
-              購入画面に進む
-        - else
-          .item-detail__purchace__button--disenable
-            売り切れです
+      -# 出品者以外のユーザーは購入ボタンを表示
+      - if @item.seller != current_user
+        .item-detail__purchace
+          - if @item.sales_state_id == 1
+            = link_to new_item_purchase_path(@item), class: "item-detail__purchace__button" do
+              .item-detail__purchace__button--enable
+                購入画面に進む
+          - else
+            .item-detail__purchace__button--disenable
+              売り切れです
       -# 説明文
       .item-detail__description
         = simple_format(@item.description, class:"item-detail__description__text")
@@ -107,6 +111,25 @@
         = link_to "#", class:"item-detail__footer__link" do
           = fa_icon 'lock', class: "item-detail__footer__link__icon"
           あんしん・あんぜんへの取り組み
+    -# 出品者のみ商品状態変更ボタンを表示
+    - if @item.seller == current_user && @item.sales_state_id != 3
+      .item-seller-edit
+        = link_to edit_item_path(@item) do
+          .item-seller-edit__button--enable
+            商品の編集
+        .item-seller-edit__or
+          or
+        - if @item.sales_state_id == 1
+          = link_to "#" do
+            .item-seller-edit__button--disenable
+              出品を一旦停止する
+        - elsif @item.sales_state_id == 2
+          = link_to "#" do
+            .item-seller-edit__button--enable
+              出品を再開する
+        = link_to item_path(@item), method: :destroy, data: {confirm: "削除すると二度と復活できません。\n削除する代わりに停止することもできます。\n\n本当に削除しますか？ "} do
+          .item-seller-edit__button--disenable
+            この商品を削除する
     -# コメント機能は必須でないため暫定的に見た目だけ用意
     .item-chat
       .item-chat__notice
@@ -114,7 +137,10 @@
       = form_with url: "" do |f|
         = f.text_area :message, class: "item-chat__textarea"
       .item-chat__button--disenable
-        コメントする
+        - if @item.sales_state_id == 1
+          コメントする
+        - else
+          売り切れのためコメントできません
     -# SNSシェアボタン
     .item-share
       %ul.item-share__icon-list

@@ -190,6 +190,45 @@
   }
 }
 
+.item-seller-edit {
+  padding: 24px 12px;
+  margin-bottom: 8px;
+  color: $text-deepgray;
+  background: $background-white;
+  &__or {
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  &__button {
+    &--enable {
+      border: none;
+      margin: 0 0 16px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      cursor: pointer;
+      color: $text-white;
+      background: $button-background-red;
+      font-weight: 500;
+      &:hover {
+        background: #F28A86;
+        transition: background 0.3s;
+      }
+    }
+    &--disenable {
+      border: none;
+      margin: 0 0 16px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      color: $text-white;
+      background: #888;
+    }
+  }
+}
+
 .item-chat {
   padding: 24px;
   margin-bottom: 8px;
