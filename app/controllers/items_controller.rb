@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     #ステータスを販売中にする。
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
-
+    binding.pry
     respond_to do |format|
       if @item.save
         format.html{redirect_to new_item_path}

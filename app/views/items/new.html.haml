@@ -52,8 +52,7 @@
                 = f.label :category_id, "カテゴリー"
                 %span.form--required
                   必須
-              = f.select :category_id, @category_parent_array, {}, id:"parent_category", class:"items-sell-container__form__field__input-field"
-            // カテゴリーを追加するための要素
+              = f.select :category, @category_parent_array, {}, id:"parent_category", class:"items-sell-container__form__field__input-field"
             .items-sell-detail__category
             .items-sell-container__form__field
               .items-sell-container__form__field__label
