@@ -1,0 +1,329 @@
+// 商品購入ページ表示エリア
+.item-wrapper {
+  background: $background-smokewhite;
+}
+
+.item-main {
+  width: 700px;
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.item-detail {
+  padding: 24px 40px 40px;
+  margin-bottom: 8px;
+  color: $text-deepgray;
+  background: $background-white;
+  &__headline {
+    text-align: center;
+    line-height: 33px;
+    font-size: 22px;
+    padding: 16px;
+  }
+  &__infomation {
+    @include clearfix();
+    margin: 0 0 15px;
+
+    // 商品画像
+    &__images {
+      width: 300px;
+      float: left;
+      background: #fafafa;
+      &__top {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        &__image {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          max-width: 300px;
+          max-height: 300px;
+          box-sizing: border-box;
+        }
+      }
+      &__flex {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        &__box {
+          position: relative;
+          width: 60px;
+          height: 60px;
+          overflow:hidden;
+          &__image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            width: 100%;
+            height: auto;
+            opacity: 0.25;
+            &--selected {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+    // 商品詳細テーブル
+    &__table {
+      float: right;
+      min-width: 300px;
+      border: 1px $table-border solid;
+      &__th {
+        text-align: left;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 500;
+        padding: 16px 8px;
+        border: 1px $table-border solid;
+        background: #fafafa;
+      }
+      &__td {
+        font-size: 14px;
+        line-height: 18px;
+        padding: 16px 8px;
+        border: 1px $table-border solid;
+        &__link {
+          color: $link-hover;
+        }
+        &__caterogy {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          color: $link-hover;
+          &__icon {
+            margin: 0 3px 0 0;
+          }
+        }
+      }
+    }
+  }
+  // 商品金額
+  &__amount {
+    text-align: center;
+    margin: 0 0 16px;
+    &--amount {
+      font-size: 50px;
+      font-weight: 600;
+    }
+    &--tax {
+      font-size: 10px;
+    }
+  }
+  // 商品購入
+  &__purchace {
+    margin: 0 0 32px;
+    &__button {
+      &--enable {
+        border: none;
+        width: 100%;
+        font-size: 14px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        color: $text-white;
+        background: $button-background-red;
+        font-weight: 600;
+        &:hover {
+          background: #F28A86;
+          transition: background 0.3s;
+        }
+      }
+      &--disenable {
+        border: none;
+        width: 100%;
+        font-size: 14px;
+        line-height: 48px;
+        text-align: center;
+        cursor: not-allowed;
+        color: $text-white;
+        background: #888;
+        font-weight: 600;
+      }
+    }
+  }
+  // 商品説明
+  &__description {
+    margin: 0 0 16px;
+    &__text {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+  &__footer {
+    @include clearfix();
+    position: relative;
+    margin: 0 0 15px;
+    // ボタン
+    &__button-list {
+      float: left;
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      &__button {
+        cursor: pointer;
+        background-color:#efefef;
+        border-radius: 40px;
+        margin: 0 16px 0 0;
+        padding: 8px 16px;
+        font-size: 14px;
+        &__icon {
+          margin: 0 8px 0 0;
+        }
+      }
+    }
+    &__link {
+      float: right;
+      color: $link-hover;
+      font-size: 14px;
+      position: absolute;
+      top: 50%;
+      right: 0%;
+      transform: translateY(-50%);
+      &__icon {
+        margin: 0 8px 0 0;
+      }
+    }
+  }
+}
+
+.item-seller-edit {
+  padding: 24px 12px;
+  margin-bottom: 8px;
+  color: $text-deepgray;
+  background: $background-white;
+  &__or {
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  &__button {
+    &--enable {
+      border: none;
+      margin: 0 0 16px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      cursor: pointer;
+      color: $text-white;
+      background: $button-background-red;
+      font-weight: 500;
+      &:hover {
+        background: #F28A86;
+        transition: background 0.3s;
+      }
+    }
+    &--disenable {
+      border: none;
+      margin: 0 0 16px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      color: $text-white;
+      background: #888;
+    }
+  }
+}
+
+.item-chat {
+  padding: 24px;
+  margin-bottom: 8px;
+  color: $text-deepgray;
+  background: $background-white;
+  &__notice {
+    padding: 8px;
+    margin: 0 0 8px;
+    background: #fff6de;
+    font-size: 14px;
+  }
+  &__textarea {
+    margin: 0 0 8px;
+    padding: 10px;
+    width: 100%;
+    min-height: 100px;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    &:focus {
+      border: 1px solid $form-focus;
+    }
+  }
+  &__button {
+    &--enable {
+      border: none;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      cursor: pointer;
+      color: $text-white;
+      background: $button-background-red;
+      font-weight: 600;
+      &:hover {
+        background: #F28A86;
+        transition: background 0.3s;
+      }
+    }
+    &--disenable {
+      border: none;
+      width: 100%;
+      font-size: 14px;
+      line-height: 48px;
+      text-align: center;
+      cursor: not-allowed;
+      color: $text-white;
+      background: #888;
+      font-weight: 600;
+    }
+  }
+}
+
+.item-share {
+  padding: 40px 24px 24px;
+  margin-bottom: 24px;
+  color: $text-deepgray;
+  background: $background-white;
+  &__icon-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    &__icon {
+      margin: 0 8px 0 0;
+      &--facebook {
+        color: #385185;
+      }
+      &--twitter {
+        color: #5d9dc9;
+      }
+      &--pinterest {
+        color: #aa262a
+      }
+    }
+  }
+}
+
+.item-others {
+  &__headline {
+    font-size: 22px;
+    line-height: 33px;
+    margin: 0 0 8px 0;
+    &--link {
+      color: $link-hover;
+    }
+  }
+  &__display {
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
