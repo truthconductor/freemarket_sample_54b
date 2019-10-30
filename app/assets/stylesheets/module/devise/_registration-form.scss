@@ -77,7 +77,6 @@
   padding: 10px 16px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background: #fff;
   line-height: 1.5;
   font-size: 16px;
 }
@@ -122,9 +121,9 @@
   transition: all ease-out .3s;
   cursor: pointer;
   text-align: center;
-  background: #ea352d;
-  border: 1px solid #ea352d;
-  color: #fff;
+  background: $button-background-red;
+  border: 1px solid $button-background-red;
+  color:$text-white;
   margin-top: 32px;
 }
 
