@@ -1,0 +1,10 @@
+= render partial: 'devise/registrations/registrations-header'
+.phone_number-wrapper
+  .phone_number-contents
+    %p.registration_title 電話番号の確認
+    = form_with model: @phone_numer, local: true, url: phone_number_index_path, method: :post, id: "phone_number-form", class: "phone_number-form" do |f|
+      %section.phone_number__section
+        =f.label :cellular_phone_number
+        %br
+        = f.text_field :cellular_phone_number, placeholder: "半角数字のみ", maxlength:16, class: "phone_number-form__input"
+        = f.submit "SMSを送信する",class:"registration-btn"

@@ -18,6 +18,12 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
+  scope module: :personal do
+    resources :phone_number, only:[:new,:create]
+    resources :zip_code, only:[:new,:create]
+    resources :payment, only:[:new,:create]
+  end
+
   resources :items do
     # 商品購入ページ
     scope module: :deals do
