@@ -29,7 +29,29 @@
         height: 12px;
         margin: 8px auto 0;
         background: #ccc;
-        border-radius: 50%; 
+        border-radius: 50%;
+        &:before{
+          position: absolute;
+          bottom: 5px;
+          z-index: -1;
+          display: block;
+          content: '';
+          width: 100%;
+          height: 2px;
+          background-color: #ccc;
+          right: 50%;
+        }
+        &:after {
+          position: absolute;
+          bottom: 5px;
+          z-index: -1;
+          display: block;
+          content: '';
+          width: 100%;
+          height: 2px;
+          background-color: #ccc;
+          left: 50%;
+        }
       }
       &--status--start{
         width: 12px;
@@ -37,67 +59,41 @@
         margin: 8px auto 0;
         background: #ccc;
         border-radius: 50%;
+        &:after {
+          position: absolute;
+          bottom: 5px;
+          z-index: -1;
+          display: block;
+          content: '';
+          width: 100%;
+          height: 2px;
+          background: #ccc;
+          left: 50%;
+        }
       }
       &--status--end{
         width: 12px;
         height: 12px;
         margin: 8px auto 0;
         background: #ccc;
-        border-radius: 50%;   
+        border-radius: 50%; 
+         &:before {
+          position: absolute;
+          bottom: 5px;
+          z-index: -1;
+          display: block;
+          content: '';
+          width: 100%;
+          height: 2px;
+          background: #ccc;
+          min-width: 60px;
+          right: 50%;
+        }
       }
     }
   }
 }
 
-.registaration-header__list--progress--status:before {
-  position: absolute;
-  bottom: 5px;
-  z-index: -1;
-  display: block;
-  content: '';
-  width: 100%;
-  height: 2px;
-  background-color: #ccc;
-  right: 50%;
-}
-
-  .registaration-header__list--progress--status:after {
-    position: absolute;
-    bottom: 5px;
-    z-index: -1;
-    display: block;
-    content: '';
-    width: 100%;
-    height: 2px;
-    background-color: #ccc;
-    left: 50%;
-}
-
-.registaration-header__list--progress--status--start:after {
-  position: absolute;
-  bottom: 5px;
-  z-index: -1;
-  display: block;
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: #ccc;
-  left: 50%;
-}
-
-
-.registaration-header__list--progress--status--end:before {
-  position: absolute;
-  bottom: 5px;
-  z-index: -1;
-  display: block;
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: #ccc;
-  min-width: 60px;
-  right: 50%;
-}
 
 
 @media screen and (min-width: 768px) {
