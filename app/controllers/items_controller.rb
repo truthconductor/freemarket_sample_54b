@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update, :destroy]
+  # 商品を取得する
+  before_action :get_item, only:[:show, :destroy]
   def new
     @item = Item.new
     @item.item_images.build
@@ -28,7 +30,17 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id]).decorate
+  end
+
+  def destroy
+    # 出品者以外から削除リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) unless @item.seller == current_user
+    # 商品が購入済なのに削除リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.sales_state_id == 3
+    # 商品を消去したらマイページへリダイレクト
+    return redirect_to mypage_path if @item.delete
+    # 消去に失敗した時商品詳細ページリダイレクト
+    render redirect_to item_path(@item)
   end
 
   private
@@ -41,5 +53,9 @@ class ItemsController < ApplicationController
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
+  end
+  # 商品を取得する
+  def get_item
+    @item = Item.find(params[:id]).decorate
   end
 end
