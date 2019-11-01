@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update, :destroy]
   # 商品を取得する
-  before_action :get_item, only:[:show, :destroy]
+  before_action :get_item, only:[:show, :destroy, :activate, :deactivate]
   def new
     @item = Item.new
     @item.item_images.build
@@ -41,6 +41,30 @@ class ItemsController < ApplicationController
     return redirect_to mypage_path if @item.delete
     # 消去に失敗した時商品詳細ページリダイレクト
     render redirect_to item_path(@item)
+  end
+
+  # 商品を販売中にする
+  def activate
+    # 出品者以外から削除リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) unless @item.seller == current_user
+    # 商品が公開停止中でないのに変更リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) unless @item.sales_state_id == 2
+    # 商品を公開中に切り替えて保存する
+    @item.sales_state_id = 1
+    @item.save
+    redirect_to item_path(@item)
+  end
+
+  # 商品を一旦停止中にする
+  def deactivate
+    # 出品者以外から削除リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) unless @item.seller == current_user
+    # 商品販売中でないのに変更リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) unless @item.sales_state_id == 1
+    # 商品を一旦停止中に切り替えて保存する
+    @item.sales_state_id = 2
+    @item.save
+    redirect_to item_path(@item)
   end
 
   private

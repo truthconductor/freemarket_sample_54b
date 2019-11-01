@@ -127,11 +127,11 @@
         .item-seller-edit__or
           or
         - if @item.sales_state_id == 1
-          = link_to "#" do
+          = link_to deactivate_item_path(@item), method: :patch do
             .item-seller-edit__button--disenable
               出品を一旦停止する
         - elsif @item.sales_state_id == 2
-          = link_to "#" do
+          = link_to activate_item_path(@item), method: :patch do
             .item-seller-edit__button--enable
               出品を再開する
         = link_to item_path(@item), method: :delete, data: {confirm: "削除すると二度と復活できません。\n削除する代わりに停止することもできます。\n\n本当に削除しますか？ "} do
