@@ -10,8 +10,15 @@
       .item-detail__infomation
         -# 商品画像
         .item-detail__infomation__images
-          .item-detail__infomation__images__top
-            = image_tag @item.item_images.first.image.url, class: "item-detail__infomation__images__top__image"
+          - if @item.sales_state_id == 2
+            .item-detail__infomation__images__top.item-detail__infomation__images__top--suspension
+              = image_tag @item.item_images.first.image.url, class: "item-detail__infomation__images__top__image"
+          - elsif @item.sales_state_id == 3
+            .item-detail__infomation__images__top.item-detail__infomation__images__top--soldout
+              = image_tag @item.item_images.first.image.url, class: "item-detail__infomation__images__top__image"
+          - else
+            .item-detail__infomation__images__top
+              = image_tag @item.item_images.first.image.url, class: "item-detail__infomation__images__top__image"
           .item-detail__infomation__images__flex
             - @item.item_images.each_with_index do |image, index|
               %div{class: "item-detail__infomation__images__flex__box box-image-#{index}" }
@@ -127,7 +134,7 @@
           = link_to "#" do
             .item-seller-edit__button--enable
               出品を再開する
-        = link_to item_path(@item), method: :destroy, data: {confirm: "削除すると二度と復活できません。\n削除する代わりに停止することもできます。\n\n本当に削除しますか？ "} do
+        = link_to item_path(@item), method: :delete, data: {confirm: "削除すると二度と復活できません。\n削除する代わりに停止することもできます。\n\n本当に削除しますか？ "} do
           .item-seller-edit__button--disenable
             この商品を削除する
     -# コメント機能は必須でないため暫定的に見た目だけ用意
