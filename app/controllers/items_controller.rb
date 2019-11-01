@@ -43,9 +43,9 @@ class ItemsController < ApplicationController
     render redirect_to item_path(@item)
   end
 
-  # 商品を販売中にする
+  # 商品販売状態を販売中にする
   def activate
-    # 出品者以外から削除リクエストが来た時商品詳細ページへリダイレクト
+    # 出品者以外から変更リクエストが来た時商品詳細ページへリダイレクト
     return redirect_to item_path(@item) unless @item.seller == current_user
     # 商品が公開停止中でないのに変更リクエストが来た時商品詳細ページへリダイレクト
     return redirect_to item_path(@item) unless @item.sales_state_id == 2
@@ -55,9 +55,9 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item)
   end
 
-  # 商品を一旦停止中にする
+  # 商品販売状態を一旦停止中にする
   def deactivate
-    # 出品者以外から削除リクエストが来た時商品詳細ページへリダイレクト
+    # 出品者以外から変更リクエストが来た時商品詳細ページへリダイレクト
     return redirect_to item_path(@item) unless @item.seller == current_user
     # 商品販売中でないのに変更リクエストが来た時商品詳細ページへリダイレクト
     return redirect_to item_path(@item) unless @item.sales_state_id == 1
