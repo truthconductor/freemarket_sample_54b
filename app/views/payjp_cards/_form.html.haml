@@ -1,4 +1,4 @@
-= form_with model: payjp_card, local: true, url: mypage_cards_create_path, method: :post, id: "card_form", class: "card-container__form" do |f|
+= form_with model: payjp_card, local: true, url: mypage_cards_path, method: :post, id: "card_form", class: "card-container__form" do |f|
   .card-container__form__field
     .card-container__form__field__label
       = f.label :number

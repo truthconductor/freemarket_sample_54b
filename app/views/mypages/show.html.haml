@@ -1,5 +1,5 @@
 = render 'joint/header'
-= render 'user-breadcrumb'
+= render 'users/user-breadcrumb'
 .user-wrapper
   %main.user-main
     .user-container
@@ -16,11 +16,11 @@
             %span.user-intro__link__user-status--count
               XX
       -# お知らせ・やることリスト
-      = render 'user-notice'
+      = render 'users/user-notice'
       -# 購入した商品
-      = render 'user-bought'
+      = render 'users/user-bought'
     -# ナビゲーションバー
-    = render 'user-navigation'
+    = render 'users/user-navigation'
 = render 'joint/app__dl'
 = render 'joint/footer'
 = render 'joint/exhibit__button'
