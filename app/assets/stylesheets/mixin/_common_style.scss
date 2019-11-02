@@ -47,6 +47,16 @@
   line-height: 48px;
 }
 
+@mixin gray-button-disenable {
+  cursor: not-allowed;
+  color: #fff;
+  background: $button-disenable-background-gray;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  line-height: 48px;
+}
+
 @mixin dropzone {
   position: relative;
   min-height: 162px;

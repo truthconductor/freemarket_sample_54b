@@ -1,0 +1,13 @@
+.item-display-box
+  = link_to item_path(item) do
+    - if item.sales_state_id == 3
+      .item-display-box__imagebox.item-display-box__imagebox--soldout
+        = image_tag item.item_images.first.image.url, class: "item-display-box__imagebox__image"
+    - else
+      .item-display-box__imagebox
+        = image_tag item.item_images.first.image.url, class: "item-display-box__imagebox__image"
+    .item-display-box__text
+      %h3.item-display-box__text__name
+        = item.name
+      .item-display-box__text__amount
+        = item.decorate.amount_text

@@ -87,14 +87,8 @@
         }
         &__button {
           &--enable {
-            border: none;
-            width: 100%;
-            font-size: 14px;
-            line-height: 48px;
+            @include red-button;
             text-align: center;
-            cursor: pointer;
-            color: $text-white;
-            background: $button-background-red;
             font-weight: 600;
             &:hover {
               background: #F28A86;
@@ -102,14 +96,8 @@
             }
           }
           &--disenable {
-            border: none;
-            width: 100%;
-            font-size: 14px;
-            line-height: 48px;
+            @include gray-button-disenable;
             text-align: center;
-            cursor: not-allowed;
-            color: $text-white;
-            background: #888;
             font-weight: 600;
           }
         }

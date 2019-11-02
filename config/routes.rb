@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
+
   resources :items, only:[:index, :show, :new, :create, :edit, :update] do
 
     collection do
@@ -26,7 +27,14 @@ Rails.application.routes.draw do
       get 'get_deliver_method', defaults: { format: 'json' }
       get 'get_deliver_method_cash_on_delivery', defaults: { format: 'json' }
     end
-    
+
+  resources :items do
+    member do
+      # 商品販売状態の変更
+      patch :deactivate
+      patch :activate
+    end
+
     # 商品購入ページ
     scope module: :deals do
       resources :purchase, only: [:new, :create], path: 'transaction'

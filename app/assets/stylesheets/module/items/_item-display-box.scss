@@ -1,0 +1,67 @@
+.item-display-box {
+  width: 220px;
+  margin: 0 20px 20px 0;
+  background: $background-white;
+  // 3商品表示する度に改行するためmartginを調整
+  &:nth-child(3n) {
+    margin: 0 0 20px 0;
+  }
+  // 商品画像
+  &__imagebox {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      border-bottom: 70px solid transparent;
+      position: absolute;
+      z-index: 2;
+    }
+    &::after {
+      display: block;
+      width: 80px;
+      height: 50px;
+      left: -15px;
+      line-height: 50px;
+      font-weight: 600;
+      text-align: center;
+      transform: rotate(-45deg);
+      color: $text-white;
+      position: absolute;
+      z-index: 3;
+    }
+    &--soldout {
+      &::before {
+        border-left: 70px solid #ea352d;
+      }
+      &::after {
+        font-size: 16px;
+        content: "SOLD";
+      }
+    }
+    &__image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      max-width: 220px;
+      max-height: 220px;
+    }
+  }
+  &__text {
+    color: $text-deepgray;
+    padding: 16px;
+    &__name {
+      font-size: 16px;
+      height: 48px;
+      font-weight: 500;
+      overflow: hidden;
+      margin: 0 0 8px 0;
+    }
+    &__amount {
+      font-weight: 600;
+    }
+  }
+}

@@ -14,14 +14,7 @@
         align-items: center;
       }
       &__text_field {
-        width: 100%;
-        height: 48px;
-        margin: 8px 0 0;
-        padding: 10px 16px;
-        box-sizing: border-box;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        @include form-box;
         &:focus {
           border: 1px solid $form-focus;
         }
@@ -59,13 +52,8 @@
         }
       }
       &__button {
-        cursor: pointer;
-        color: $text-white;
-        background: $button-background-red;
-        border: none;
-        width: 100%;
-        font-size: 14px;
-        line-height: 48px;
+        @include red-button;
+        text-align: center;
         &:hover {
           background: #F28A86;
           transition: background 0.3s;
