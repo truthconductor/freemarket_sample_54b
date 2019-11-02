@@ -1,0 +1,75 @@
+// PCサイズ
+@media screen and (min-width: 1068px) {
+  .profile-container {
+    float: right;
+  }
+}
+
+// カード情報ページコンテナ
+.profile-container {
+  width: 700px;
+  &__header {
+    background: $background-white;
+    &__headline {
+      text-align: center;
+      font-size: 24px;
+      padding: 12px 24px;
+    }
+  }
+  &__form {
+    background: $background-white;
+    &__icon {
+      width: 700px;
+      height: 160px;
+      margin: 0 0 40px;
+      padding: 75px 40px 25px;
+      box-sizing: border-box;
+      background: asset-url("user/user-bg.jpg");
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &__avator {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+      }
+      &__nickname {
+        height: 48px;
+        width: 240px;
+        margin: 5px 8px;
+        padding: 10px 16px;
+        box-sizing: border-box;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+    }
+    &__info {
+      padding: 0 16px;
+      &__introduction {
+        margin: 0 0 16px;
+        padding: 10px;
+        width: 100%;
+        min-height: 200px;
+        font-size: 16px;
+        line-height: 24px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-sizing: border-box;
+        resize: vertical;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+    }
+    &__footer {
+      padding: 0 16px 40px;
+      &__button {
+        @include red-button;
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@
   %h2.user-navheadline
     設定
   %ul
-    = render 'users/nav-item', { path: '#', text: 'プロフィール', active: false }
+    = render 'users/nav-item', { path: current_user.profile ? edit_mypage_profiles_path : new_mypage_profiles_path, text: 'プロフィール',  active: current_page?(new_mypage_profiles_path) || current_page?(edit_mypage_profiles_path)  }
     = render 'users/nav-item', { path: '#', text: '発送元・お届け先住所変更', active: false }
     = render 'users/nav-item', { path: mypage_cards_path, text: '支払い方法', active: current_page?(mypage_cards_path) || current_page?(new_mypage_card_path)  }
     = render 'users/nav-item', { path: '#', text: 'メール/パスワード', active: false }
