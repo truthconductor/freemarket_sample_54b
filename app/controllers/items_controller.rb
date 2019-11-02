@@ -7,15 +7,12 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(create_params)
-    #フロント実装して(jsで小カテゴリ作って)ないのでバリデーション突破するため仮データを置いてる。
-    @item.category_id = 1
     #ステータスを販売中にする。
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
-    binding.pry
     respond_to do |format|
       if @item.save
-        format.html{redirect_to new_item_path}
+        format.html{redirect_to root_path}
       else
         #画像がアップロードされずにRollbackした場合、ネストしているitem_imagesモデるが消えるため、新たにbuildする。
         @item.item_images.build if @item.item_images.empty?
@@ -39,6 +36,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def get_deliver_method
+    @deliver_methods = DeliverMethod.all
+  end
+
+  def get_deliver_method_cash_on_delivery
+    @deliver_methods = DeliverMethod.where(cash_on_delivery: true)
+  end
+
   def get_category_children
     @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
   end
@@ -51,5 +56,4 @@ class ItemsController < ApplicationController
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
   end
-
 end

@@ -1,12 +1,13 @@
 $(document).on('turbolinks:load', function() {
-  var preview = $('#preview');
+  var preview = $('.preview');
   var input_area = $('.input_area');
 
-  // DB保存に失敗(Rollback)した際に残っている、動的に生成したinputタグを削除する(whileで繰り返すと無限ループに陥るためforを使用)
+  // DB保存に失敗(Rollback)した際に残っている、動的に生成したinputタグを削除する
   $(document).ready(function(){
-    for (var i = input_area.length; i > 1; i--) {
-      input_area[i-1].remove();
-    } 
+    for (var i = preview.length; i > 1; i--) {
+      preview[i-1].remove();
+    }
+    preview = $('.preview');
   });
 
   //inputの中身の変更時に発生

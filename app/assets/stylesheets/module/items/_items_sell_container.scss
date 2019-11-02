@@ -93,6 +93,9 @@
         justify-content: start;
         align-items: center;
       }
+      &-detail{
+        padding: 0px;
+      }
       &__input-field {
         width: 100%;
         height: 48px;

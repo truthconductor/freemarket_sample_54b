@@ -36,12 +36,12 @@
   padding: 20px 20px;
 }
 
-#preview {
+.preview {
   display: inline-block;
   width: 100%;
 }
 
-#preview img {
+.preview img {
   width: 100%;
   float: left;
   cursor: move;
@@ -146,6 +146,10 @@
   font-size: 12px;
   text-align: center;
 }
+
+// #parent_wrapper {
+//   padding: -15px;
+// }
 
 .item-value {
   text-align: right;

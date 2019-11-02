@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     collection do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
+      get 'get_deliver_method', defaults: { format: 'json' }
+      get 'get_deliver_method_cash_on_delivery', defaults: { format: 'json' }
     end
     
     # 商品購入ページ
