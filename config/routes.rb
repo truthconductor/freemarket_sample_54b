@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   resources :items do
+    member do
+      # 商品販売状態の変更
+      patch :deactivate
+      patch :activate
+    end
     # 商品購入ページ
     scope module: :deals do
       resources :purchase, only: [:new, :create], path: 'transaction'

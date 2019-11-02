@@ -33,6 +33,45 @@
         position: relative;
         width: 300px;
         height: 300px;
+        &::before {
+          content: "";
+          top: 0;
+          left: 0;
+          border-bottom: 100px solid transparent;
+          position: absolute;
+          z-index: 2;
+        }
+        &::after {
+          display: block;
+          width: 100px;
+          height: 70px;
+          left: -15px;
+          line-height: 70px;
+          font-weight: 600;
+          text-align: center;
+          transform: rotate(-45deg);
+          color: $text-white;
+          position: absolute;
+          z-index: 3;
+        }
+        &--soldout {
+          &::before {
+            border-left: 100px solid #ea352d;
+          }
+          &::after {
+            font-size: 24px;
+            content: "SOLD";
+          }
+        }
+        &--suspension {
+          &::before {
+            border-left: 100px solid #888888;
+          }
+          &::after {
+            font-size: 16px;
+            content: "公開停止中";
+          }
+        }
         &__image {
           position: absolute;
           top: 50%;
