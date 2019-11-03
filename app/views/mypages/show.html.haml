@@ -1,13 +1,14 @@
+
 = render 'joint/header'
 = render 'users/user-breadcrumb'
 .user-wrapper
   %main.user-main
     .user-container
       .user-intro
-        = link_to "#", class: "user-intro__link" do
+        = link_to user_path(current_user), class: "user-intro__link" do
           = image_tag "user/user_photo_noimage.png", class: "user-intro__link__avator"
           %h2.user-intro__link__username
-            ユーザー名
+            = current_user.profile&.nickname
           %div.user-intro__link__user-status
             評価
             %span.user-intro__link__user-status--count

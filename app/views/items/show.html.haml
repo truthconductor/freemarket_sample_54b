@@ -34,7 +34,7 @@
               %th.item-detail__infomation__table__th
                 出品者
               %td.item-detail__infomation__table__td
-                = link_to '#', class: "item-detail__infomation__table__td__link" do
+                = link_to user_path(@item.seller), class: "item-detail__infomation__table__td__link" do
                   = @item.seller.profile&.nickname
             %tr
               %th.item-detail__infomation__table__th
@@ -163,7 +163,7 @@
     -# 出品者が販売中の商品
     .item-others
       %h2.item-others__headline
-        = link_to "#", class: "item-others__headline--link" do
+        = link_to user_path(@item.seller), class: "item-others__headline--link" do
           = "#{@item.seller.profile&.nickname}さんのその他の商品"
       .item-others__display
         -# 同じユーザーの直近出品商品を最大６つ取得

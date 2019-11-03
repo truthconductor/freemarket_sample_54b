@@ -2,11 +2,11 @@
 = render 'users/user-breadcrumb'
 .user-wrapper
   %main.user-main
-    .profile-container
-      .profile-container__header
-        %h2.profile-container__header__headline
+    .profile-edit-container
+      .profile-edit-container__header
+        %h2.profile-edit-container__header__headline
           プロフィール
-      .profile-container__form
+      .profile-edit-container__form
         = form_with model: @profile, local: true, url: mypage_profiles_path, method: :patch do |f|
           = render "mypage/profiles/form", {f: f}
     -# ナビゲーションバー

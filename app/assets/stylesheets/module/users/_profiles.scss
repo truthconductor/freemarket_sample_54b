@@ -1,12 +1,113 @@
-// PCサイズ
+// プロフィールページコンテナ
+.profile-container {
+  width: 700px;
+  margin: 0 auto;
+  &__top {
+    background: $background-white;
+    width: 700px;
+    height: 320px;
+    padding: 60px 30px 30px;
+    box-sizing: border-box;
+    text-align: center;
+    background: asset-url("user/user_show_bg.jpg");
+
+    &__avator {
+      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+    }
+    &__username {
+      margin-top: 8px;
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    &__status {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 14px;
+      &--lcount {
+        margin: 0 16px 0 4px;
+        font-weight: 600;
+      }
+      &--rcount {
+        margin: 0 0 0 4px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__review {
+    background: $background-white;
+    margin: 0 0 2px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__icon {
+      &--smile {
+        color: #ef5185;
+      }
+      &--meh {
+        color: #fba933;
+      }
+      &--frown {
+        color: #6ab5d8;
+      }
+    }
+    &--score {
+      margin: 0 40px;
+      font-size: 14px;
+    }
+  }
+
+  &__content {
+    background: $background-white;
+    &__introduction {
+      padding: 30px 50px;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    &__share {
+      padding: 50px;
+      color: $text-deepgray;
+      background: $background-white;
+      &__icon-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        &__icon {
+          margin: 0 8px 0 0;
+          &--facebook {
+            color: #385185;
+          }
+          &--twitter {
+            color: #5d9dc9;
+          }
+          &--pinterest {
+            color: #aa262a
+          }
+        }
+      }
+    }
+  }
+  &__items {
+    background: $background-white;
+  }
+}
+
+// プロフィール編集ページコンテナ・PCサイズ
 @media screen and (min-width: 1068px) {
-  .profile-container {
+  .profile-edit-container {
     float: right;
   }
 }
 
-// カード情報ページコンテナ
-.profile-container {
+// プロフィール編集ページコンテナ
+.profile-edit-container {
   width: 700px;
   &__header {
     background: $background-white;
