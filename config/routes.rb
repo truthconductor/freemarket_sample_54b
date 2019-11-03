@@ -32,13 +32,11 @@ Rails.application.routes.draw do
       get 'get_deliver_method_cash_on_delivery', defaults: { format: 'json' }
     end
 
-  resources :items do
     member do
       # 商品販売状態の変更
       patch :deactivate
       patch :activate
     end
-  end
 
     # 商品購入ページ
     scope module: :deals do
