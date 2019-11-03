@@ -91,6 +91,7 @@ class ItemsController < ApplicationController
   private
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
+  end
 
   # 商品を取得する
   def get_item

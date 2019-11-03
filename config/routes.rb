@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       patch :deactivate
       patch :activate
     end
+  end
 
     # 商品購入ページ
     scope module: :deals do
