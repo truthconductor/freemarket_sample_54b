@@ -44,7 +44,7 @@
             #{@user == current_user ? "出品した商品" : "この出品者の商品"}
           .item-others__display
             -# 同じユーザーの直近出品商品を最大３０取得
-            = render partial: "items/item-display-box", collection: @user.items.recent(30), as: "item"
+            = render partial: "items/item-display-box", collection: @user.items.showable.recent(30), as: "item"
 = render 'joint/app__dl'
 = render 'joint/footer'
 = render 'joint/exhibit__button'

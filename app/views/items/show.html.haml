@@ -167,7 +167,7 @@
           = "#{@item.seller.profile&.nickname}さんのその他の商品"
       .item-others__display
         -# 同じユーザーの直近出品商品を最大６つ取得
-        = render partial: "items/item-display-box", collection: @item.seller.items.where.not(id: @item.id).recent(6), as: "item"
+        = render partial: "items/item-display-box", collection: @item.seller.items.showable.where.not(id: @item.id).recent(6), as: "item"
     -# 同じカテゴリーの商品
     .item-others
       %h2.item-others__headline
@@ -177,7 +177,7 @@
           - else
             = "#{@item.category.name}その他の商品"
       .item-others__display
-        = render partial: "items/item-display-box", collection: @item.category.items.where.not(id: @item.id).recent(6), as: "item"
+        = render partial: "items/item-display-box", collection: @item.category.items.showable.where.not(id: @item.id).recent(6), as: "item"
 = render 'joint/app__dl'
 = render 'joint/footer'
 
