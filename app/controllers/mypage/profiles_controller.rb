@@ -5,10 +5,14 @@ class Mypage::ProfilesController < ApplicationController
   before_action :get_profile, only:[:edit, :update]
 
   def new
+    # プロフィールを作成したのに新規作成リクエストが来た際にはeditアクションにリダイレクト
+    return redirect_to edit_mypage_profiles_path if current_user.profile
     @profile = current_user.build_profile
   end
 
   def create
+    # プロフィールを作成したのに新規作成リクエストが来た際にはeditアクションにリダイレクト
+    return redirect_to edit_mypage_profiles_path if current_user.profile
     @profile = current_user.build_profile(profile_param)
     if @profile.save
       redirect_to mypage_path
