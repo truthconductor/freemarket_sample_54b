@@ -8,7 +8,7 @@
     .root-new__production__box__group
       .root-new__production__box__group__list
         - items.each do |item|
-          =link_to "https://reissuerecords.net/",class:"root-new__production__box__group__list__box" do
+          =link_to "/items/#{item.id}",class:"root-new__production__box__group__list__box" do
             .root-new__production__box__group__list--image
               - unless item.item_images.empty?
                 = image_tag item.item_images.first.image.url, size:"188x188"
