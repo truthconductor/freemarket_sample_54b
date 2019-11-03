@@ -67,6 +67,7 @@
       padding: 30px 50px;
       box-sizing: border-box;
       font-size: 16px;
+      line-height: 24px;
       font-weight: 400;
     }
     &__share {
@@ -123,35 +124,36 @@
       width: 700px;
       height: 160px;
       margin: 0 0 40px;
-      padding: 75px 40px 25px;
+      padding: 50px 40px 50px;
       box-sizing: border-box;
       background: asset-url("user/user-bg.jpg");
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &__avator {
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-      }
-      &__nickname {
-        height: 48px;
-        width: 240px;
-        margin: 5px 8px;
-        padding: 10px 16px;
-        box-sizing: border-box;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        &:focus {
-          border: 1px solid $form-focus;
+      &__flexbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__avator {
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+        }
+        &__nickname {
+          height: 48px;
+          width: 240px;
+          margin: 5px 8px;
+          padding: 10px 16px;
+          box-sizing: border-box;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          &:focus {
+            border: 1px solid $form-focus;
+          }
         }
       }
     }
     &__info {
-      padding: 0 16px;
+      padding: 0 16px 16px;
       &__introduction {
-        margin: 0 0 16px;
         padding: 10px;
         width: 100%;
         min-height: 200px;
