@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     #resource[:user][:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
     
+    binding.pry
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -38,6 +39,34 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
+  def identification
+    session[:email] = sign_up_params[:email]
+    session[:password] = sign_up_params[:password]
+    session[:password_confirmation]= sign_up_params[:password_confirmation]
+    session[:last_name]= sign_up_params[:personal_attributes][:last_name]
+    session[:first_name]= sign_up_params[:personal_attributes][:first_name]
+    session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
+    session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
+  end
+
+
+  def phone_number
+    session[:phone_number]=sign_up_params[:personal_attributes][:celluer_phone_number]
+  end
+
+  def zip_code
+    session[:zip_code]=sign_up_params[:personal_attributes][:zip_code]
+    session[:prefecuture_id]=sign_up_params[:personal_attributes][:prefecuture_id]
+    session[:city]=sign_up_params[:personal_attributes][:city]
+    session[:address]=sign_up_params[:personal_attributes][:address]
+    session[:building]=sign_up_params[:personal_attributes][:building]
+  end
+
+  def payment
+    
+  end
+
 
   # GET /resource/edit
   # def edit
@@ -63,10 +92,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  def to_katakana
+  #def to_katakana
     #ひらがなで入力されたものをカタカナに変換する（未実装）
-    sign_up_params[:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
-  end
+    #sign_up_params[:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
+  #end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
