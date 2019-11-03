@@ -8,7 +8,7 @@
     .root-new__production__box__group
       .root-new__production__box__group__list
         - items.each do |item|
-          =link_to "/items/#{item.id}",class:"root-new__production__box__group__list__box" do
+          =link_to item_path(item), class:"root-new__production__box__group__list__box" do
             .root-new__production__box__group__list--image
               - unless item.item_images.empty?
                 = image_tag item.item_images.first.image.url, size:"188x188"
@@ -19,5 +19,5 @@
                   = item.decorate.amount_text  
             .root-new__production__box__group__list--text
               %span.root-new__production__box__group__list--text--span
-                #{item[:name]}
+                = item.name
                 

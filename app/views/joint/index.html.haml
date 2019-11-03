@@ -11,12 +11,12 @@
       .root-category__box--popular
         人気のカテゴリー
       %ul.root-category__box__list
-        - @categories.each do |category|
+        - @category_names.each do |category|
           %li.root-category__box__list--label
             = category
     -# 表示するカテゴリーの数だけ繰り返し処理
     - for i in 0..3 do
-      = render partial: 'itembox', locals: { category: @categories[i], items: @items[i] }
+      = render partial: 'itembox', locals: { category: @category_names[i], items: @items[i] }
   = render partial: 'app__dl'
   = render partial: 'footer'
   = render partial: 'exhibit__button'
