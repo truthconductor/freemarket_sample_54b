@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
 
-  resources :items, only:[:index, :show, :new, :create, :edit, :update] do
+  resources :items do
 
     collection do
       get 'get_category_children', defaults: { format: 'json' }
