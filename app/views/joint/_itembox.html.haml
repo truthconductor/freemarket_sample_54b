@@ -2,19 +2,22 @@
   .root-new__production__box
     .root-new__production__box__upper
       .root-new__production__box__upper--name
-        #{@categoly}新着アイテム
+        #{category}新着アイテム
       .root-new__production__box__upper--detail-path
         =link_to "もっと見る","https://reissuerecords.net/",class:"root-new__production__box__upper--detail-path" 
     .root-new__production__box__group
       .root-new__production__box__group__list
-        - @items.each do |item|
+        - items.each do |item|
           =link_to "https://reissuerecords.net/",class:"root-new__production__box__group__list__box" do
             .root-new__production__box__group__list--image
-              = image_tag(item[:image],size:"188x188")
+              - unless item.item_images.empty?
+                = image_tag item.item_images.first.image.url, size:"188x188"
+              - else
+                = image_tag "no_image.png", size:"188x188"
               .root-new__production__box__group__list--price
                 %span.root-new__production__box__group__list--price--span
-                  #{item[:price]}  
+                  = item.decorate.amount_text  
             .root-new__production__box__group__list--text
               %span.root-new__production__box__group__list--text--span
                 #{item[:name]}
-            
+                

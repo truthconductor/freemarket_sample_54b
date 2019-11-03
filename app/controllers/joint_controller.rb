@@ -1,9 +1,14 @@
 class JointController < ApplicationController
 
   def index
-   @item ={name:"メルカリさん",price:"1,500",image:"item-sample.jpg"}
-   @items={name:"メルカリ",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"},{name:"メルカリさん",price:"1,500",image:"item-sample.jpg"}
-   @categoly="レディース"
-   @categolies=["レディース","メンズ","家電・スマホ・カメラ","おもちゃ・ホビー・グッズ"]
+    @categories = ["レディース","メンズ","家電・スマホ・カメラ","おもちゃ・ホビー・グッズ"]
+
+    @items = []
+    @categories.each do |category|
+      @category = category
+      @parent_category = Category.find_by(name: @category)
+      @subtree_ids = @parent_category.subtree_ids
+      @items << Item.includes([:item_images]).where(category_id: @subtree_ids).order("updated_at DESC").limit(10)
+    end
   end
 end
