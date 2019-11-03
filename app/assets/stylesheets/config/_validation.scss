@@ -6,7 +6,19 @@ select.validation-error {
   border: solid 1px #ea352d;
 }
 
+textarea.validation-error {
+  border: solid 1px #ea352d;
+}
+
 .validation-error__text {
+  margin: 8px 0;
+  color: $text-red;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.validation-error__text--center {
+  text-align: center;
   margin: 8px 0;
   color: $text-red;
   line-height: 1.5;

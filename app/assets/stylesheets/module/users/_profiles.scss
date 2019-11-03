@@ -1,0 +1,178 @@
+// プロフィールページコンテナ
+.profile-container {
+  width: 700px;
+  margin: 0 auto;
+  &__top {
+    background: $background-white;
+    width: 700px;
+    height: 320px;
+    padding: 60px 30px 30px;
+    box-sizing: border-box;
+    text-align: center;
+    background: asset-url("user/user_show_bg.jpg");
+
+    &__avator {
+      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+    }
+    &__username {
+      margin-top: 8px;
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    &__status {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 14px;
+      &--lcount {
+        margin: 0 16px 0 4px;
+        font-weight: 600;
+      }
+      &--rcount {
+        margin: 0 0 0 4px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__review {
+    background: $background-white;
+    margin: 0 0 2px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__icon {
+      &--smile {
+        color: #ef5185;
+      }
+      &--meh {
+        color: #fba933;
+      }
+      &--frown {
+        color: #6ab5d8;
+      }
+    }
+    &--score {
+      margin: 0 40px;
+      font-size: 14px;
+    }
+  }
+
+  &__content {
+    background: $background-white;
+    &__introduction {
+      padding: 30px 50px;
+      box-sizing: border-box;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    &__share {
+      padding: 50px;
+      color: $text-deepgray;
+      background: $background-white;
+      &__icon-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        &__icon {
+          margin: 0 8px 0 0;
+          &--facebook {
+            color: #385185;
+          }
+          &--twitter {
+            color: #5d9dc9;
+          }
+          &--pinterest {
+            color: #aa262a
+          }
+        }
+      }
+    }
+  }
+  &__items {
+    background: $background-white;
+  }
+}
+
+// プロフィール編集ページコンテナ・PCサイズ
+@media screen and (min-width: 1068px) {
+  .profile-edit-container {
+    float: right;
+  }
+}
+
+// プロフィール編集ページコンテナ
+.profile-edit-container {
+  width: 700px;
+  &__header {
+    background: $background-white;
+    &__headline {
+      text-align: center;
+      font-size: 24px;
+      padding: 12px 24px;
+    }
+  }
+  &__form {
+    background: $background-white;
+    &__icon {
+      width: 700px;
+      height: 160px;
+      margin: 0 0 40px;
+      padding: 50px 40px 50px;
+      box-sizing: border-box;
+      background: asset-url("user/user-bg.jpg");
+      &__flexbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__avator {
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+        }
+        &__nickname {
+          height: 48px;
+          width: 240px;
+          margin: 5px 8px;
+          padding: 10px 16px;
+          box-sizing: border-box;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          &:focus {
+            border: 1px solid $form-focus;
+          }
+        }
+      }
+    }
+    &__info {
+      padding: 0 16px 16px;
+      &__introduction {
+        padding: 10px;
+        width: 100%;
+        min-height: 200px;
+        font-size: 16px;
+        line-height: 24px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-sizing: border-box;
+        resize: vertical;
+        &:focus {
+          border: 1px solid $form-focus;
+        }
+      }
+    }
+    &__footer {
+      padding: 0 16px 40px;
+      &__button {
+        @include red-button;
+      }
+    }
+  }
+}

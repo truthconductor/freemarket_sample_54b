@@ -1,0 +1,50 @@
+= render 'joint/header'
+= render 'users/user-breadcrumb'
+.user-wrapper
+  %main.user-main
+    .profile-container
+      .profile-container__top
+        = image_tag "user/user_photo_noimage.png", class: "profile-container__top__avator"
+        %h2.profile-container__top__username
+          = @user.profile&.nickname
+        %div.profile-container__top__status
+          評価
+          %span.profile-container__top__status--lcount
+            XX
+          出品数
+          %span.profile-container__top__status--rcount
+            XX
+      .profile-container__review
+        = fa_icon "smile-o 2x", class:"profile-container__review__icon profile-container__review__icon--smile"
+        %span.profile-container__review--score
+          XX
+        = fa_icon "meh-o 2x", class:"profile-container__review__icon profile-container__review__icon--meh"
+        %span.profile-container__review--score
+          XX
+        = fa_icon "frown-o 2x", class:"profile-container__review__icon profile-container__review__icon--frown"
+        %span.profile-container__review--score
+          XX
+      .profile-container__content
+        = simple_format(@user.profile&.introduction, class:"profile-container__content__introduction")
+        .profile-container__content__share
+          %ul.item-share__icon-list
+            = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+              %li.item-share__icon-list__icon--facebook
+                = fa_icon 'facebook-square 3x'
+            = link_to "https://twitter.com/intent/tweet?url=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+              %li.item-share__icon-list__icon--twitter
+                = fa_icon 'twitter-square 3x'
+            = link_to "http://www.pinterest.com/pin/create/button/?url=#{request.url}", class: "item-share__icon-list__icon", target: :_blank do
+              %li.item-share__icon-list__icon--pinterest
+                = fa_icon 'pinterest-square -square 3x'
+      -# 出品商品
+      .profile-container__items
+        .item-others
+          %h2.item-others__headline
+            #{@user == current_user ? "出品した商品" : "この出品者の商品"}
+          .item-others__display
+            -# 同じユーザーの直近出品商品を最大３０取得
+            = render partial: "items/item-display-box", collection: @user.items.showable.recent(30), as: "item"
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'
