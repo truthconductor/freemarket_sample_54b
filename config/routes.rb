@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
     scope module: :mypage do
       resource :profiles, only:[:new, :create, :edit, :update]
-      resource :mypage_personals, only:[:new, :create, :edit, :update], path: "personals", as: :personals
+      resource :personals, only:[:new, :create, :edit, :update]
       resources :mypage_payjp_cards, only:[:index, :new, :create, :destroy], path: "cards", as: :cards
     end
   end
