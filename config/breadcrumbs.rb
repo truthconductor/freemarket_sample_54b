@@ -21,6 +21,18 @@ crumb :edit_mypage_profiles do
   parent :mypage
 end
 
+# トップページ > マイページ >  本人情報の登録
+crumb :new_mypage_personals do
+  link " 本人情報の登録", new_mypage_personals_path
+  parent :mypage
+end
+
+# トップページ > マイページ >  本人情報の登録
+crumb :edit_mypage_personals do
+  link " 本人情報の登録", edit_mypage_personals_path
+  parent :mypage
+end
+
 # NOTE: 本来は（出品中・取引中・売却済）が上位リンクに存在するが現時点で未実装のためマイページの下位に置いている
 # トップページ > マイページ > 出品商品画面
 crumb :item do |item|
@@ -38,6 +50,12 @@ end
 crumb :new_mypage_card do
   link "クレジットカード情報入力", new_mypage_card_path
   parent :mypage_cards
+end
+
+# トップページ > マイページ > ログアウト
+crumb :logout_mypage do
+  link "ログアウト", logout_mypage_path
+  parent :mypage
 end
 
 # トップページ > ユーザー
