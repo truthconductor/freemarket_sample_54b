@@ -1,7 +1,7 @@
 = render 'joint/header'
 -# 出品者の場合パンくずリストを表示
 - if @item.seller == current_user
-  = render 'users/user-breadcrumb'
+  = render 'users/user-breadcrumb', {symbol: :item, model: @item}
 .item-wrapper
   %main.item-main
     .item-detail
