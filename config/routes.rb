@@ -10,8 +10,13 @@ Rails.application.routes.draw do
 
   # マイページ
   resource :mypage, only:[:show] do
+    member do
+      # ログアウト画面の表示
+      get :logout
+    end
     scope module: :mypage do
       resource :profiles, only:[:new, :create, :edit, :update]
+      resource :personals, only:[:new, :create, :edit, :update]
       resources :mypage_payjp_cards, only:[:index, :new, :create, :destroy], path: "cards", as: :cards
     end
   end
