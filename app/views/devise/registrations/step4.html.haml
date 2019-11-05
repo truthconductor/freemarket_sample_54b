@@ -4,23 +4,6 @@
     %h2.registration_title 
       支払い方法
     = form_with model: resource,as: resource_name,local: true, url: registration_path(resource_name), method: :post, id: "zip-code-form", class: "zip-code-form" do |f|
-      .zip-code-section
-        =f.label "カード番号"
-        %span.form--required
-          必須
-        %br
-        = f.text_field :zip_code, placeholder: "半角数字のみ", maxlength:16, class: "zip-code-form__input"
-      .zip-code-section
-        =f.label "都道府県"
-        %span.form--required
-          必須
-        %br
-        = f.text_field :prefecture_id, placeholder: "北海道", maxlength:16, class: "zip-code-form__input"
-      .zip-code-section
-        =f.label "セキュリティ番号"
-        %span.form--required
-          必須
-        %br
-        = f.text_field :city, placeholder: "北海道", maxlength:16, class: "zip-code-form__input"
+      
       = f.submit "次へ進む",class:"registration-btn"
   = render 'deals/footer'  

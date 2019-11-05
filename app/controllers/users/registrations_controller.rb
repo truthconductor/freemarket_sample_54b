@@ -8,7 +8,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #before_action :validates_step1, only: :step2 # step1のバリデーション
   #before_action :validates_step2, only: :step3 # step2のバリデーション
   
+  require "date"
+
   def new
+    session.clear
     build_resource
     @user.build_personal
     @user.build_profile
@@ -20,28 +23,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
     @user.build_personal
     @user.build_profile
-    binding.pry
   end
 
   def step2
-    binding.pry
     session[:nickname]=sign_up_params[:profile_attributes][:nickname]
     session[:email] = sign_up_params[:email]
     session[:password] = sign_up_params[:password]
     session[:password_confirmation]= sign_up_params[:password_confirmation]
-    session[:last_name]= sign_up_params[:personal_attributes]
+    session[:last_name]= sign_up_params[:personal_attributes][:last_name]
     session[:first_name]= sign_up_params[:personal_attributes][:first_name]
     session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
     session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
-    #session[:birthday_y]= sign_up_params[:personal_attributes][:birthdate(1i)]
+    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i)
     build_resource
     @user.build_personal
     @user.build_profile
     binding.pry
   end
-
+  
   def step3
-   binding.pry
    session[:phone_number]=params[:user][:cellular_phone_number]
    build_resource
    @user.build_personal
@@ -50,7 +50,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def step4
-    binding.pry
     session[:zip_code]=params[:user][:zip_code]
     session[:prefecuture_id]=params[:user][:prefecuture_id]
     session[:city]=params[:user][:city]
@@ -65,18 +64,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-
-    build_resource(
-      :email = session[:email],
-      :password = session[:password],
-      :password_confirmation=session[:password_confirmation],
-      
-    )
-    resource.build_personal
-    resource.build_profile 
-
-    #resource[:user][:personal_attributes][:first_name_kana].tr('ぁ-ん','ァ-ン')
     
+      
+    build_resource(
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation])
+
+    resource.build_profile(
+      nickname: session[:nickname]
+    )
+    resource.build_personal(
+      first_name: session[:first_name],
+      last_name: session[:last_name],
+      first_name_kana: session[:first_name_kana],
+      last_name_kana: session[:last_name_kana],
+      birthdate: session[:birthdate],
+      cellular_phone_number: session[:phone_number]
+    )
+    
+    
+
     binding.pry
     resource.save
     yield resource if block_given?
@@ -99,22 +107,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   
-
-  def phone_number
-    session[:phone_number]=sign_up_params[:personal_attributes][:celluer_phone_number]
-  end
-
-  def zip_code
-    session[:zip_code]=sign_up_params[:personal_attributes][:zip_code]
-    session[:prefecuture_id]=sign_up_params[:personal_attributes][:prefecuture_id]
-    session[:city]=sign_up_params[:personal_attributes][:city]
-    session[:address]=sign_up_params[:personal_attributes][:address]
-    session[:building]=sign_up_params[:personal_attributes][:building]
-  end
-
-  def payment
-    
-  end
 
 
   # GET /resource/edit
@@ -166,6 +158,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
+  def user_params
+    params.require(:user).permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :name,
+      pesonal_attributes: [:last_name, :first_name,:last_name_lana,:first_name_kana,:cellular_phone_number]
+    )
+  end
  
 end
