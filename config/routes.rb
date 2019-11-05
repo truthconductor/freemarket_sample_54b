@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users,controllers: {
     registrations: 'users/registrations',
-    
-  }
+  } 
+  devise_scope :user do
+      get 'step1' => 'users/registrations#step1'
+      get 'step2' => 'users/registrations#step2'
+      get 'step3' => 'users/registrations#step3'
+      get 'step4' => 'users/registrations#step4'
+  end
+  
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :joint,only:[:index]
@@ -18,11 +24,6 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
-  scope module: :personal do
-    resources :phone_number, only:[:new,:create]
-    resources :zip_code, only:[:new,:create]
-    resources :payment, only:[:new,:create]
-  end
 
   resources :items do
     # 商品購入ページ

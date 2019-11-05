@@ -3,7 +3,7 @@
   .zip-code-contents
     %h2.registration_title 
       支払い方法
-    = form_with model: @phone,local: true, url: zip_code_index_path, method: :post, id: "zip-code-form", class: "zip-code-form" do |f|
+    = form_with model: resource,as: resource_name,local: true, url: registration_path(resource_name), method: :post, id: "zip-code-form", class: "zip-code-form" do |f|
       .zip-code-section
         =f.label "カード番号"
         %span.form--required
