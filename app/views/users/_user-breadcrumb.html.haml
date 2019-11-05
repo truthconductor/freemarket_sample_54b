@@ -9,11 +9,11 @@
       - breadcrumbs do |links|
         - links.each do |link|
           %li.user-breadcrumb__item
-            - unless link.current?
+            - if link.current?
+              %span.user-breadcrumb__item--leaf
+                = link.text
+            - else
               = link_to link.url do
                 %span.user-breadcrumb__item--parent
                   = link.text
               = fa_icon 'angle-right 1x', class: 'user-breadcrumb__item__icon'
-            - else
-              %span.user-breadcrumb__item--leaf
-                = link.text
