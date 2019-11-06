@@ -5,9 +5,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   #before_action :to_katakana,only: [:create]
   #GET /resource/sign_up
-  #before_action :validates_step1, only: :step2 # step1のバリデーション
-  #before_action :validates_step2, only: :step3 # step2のバリデーション
-  
+  before_action :validates_step1, only: :step2 
+  before_action :validates_step2, only: :step3 
+  before_action :validates_step3, only: :step4 
+
   require "date"
 
   def new
@@ -173,4 +174,76 @@ class Users::RegistrationsController < Devise::RegistrationsController
     )
   end
  
+
+  def validates_step1
+    # step1で入力された値をsessionに保存
+    session[:nickname]=sign_up_params[:profile_attributes][:nickname]
+    session[:email] = sign_up_params[:email]
+    session[:password] = sign_up_params[:password]
+    session[:password_confirmation]= sign_up_params[:password_confirmation]
+    session[:last_name]= sign_up_params[:personal_attributes][:last_name]
+    session[:first_name]= sign_up_params[:personal_attributes][:first_name]
+    session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
+    session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
+    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i)
+    @user = User.new(
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation]
+    )
+    @profile=@user.build_profile(
+      nickname: session[:nickname]
+  )
+    @personal=@user.build_personal(
+      last_name: session[:last_name], 
+      first_name: session[:first_name], 
+      last_name_kana: session[:last_name_kana], 
+      first_name_kana: session[:first_name_kana],
+      birthdate: session[:birthdate] 
+    )
+    render action: :step1 unless @user.valid?
+  end
+
+  def validates_step2
+    session[:phone_number]=params[:user][:cellular_phone_number]
+    @user = User.new(
+      nickname: session[:nickname],
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation],
+      last_name: session[:last_name], 
+      first_name: session[:first_name], 
+      last_name_kana: session[:last_name_kana], 
+      first_name_kana: session[:first_name_kana], 
+      birthdate: session[:birthdate] ,
+      cellular_phone_number: session[:phone_number]
+    )
+    render action: :step2  unless @user.valid?
+  end
+
+  def validates_step3
+    session[:zip_code]=params[:user][:zip_code]
+    session[:prefecture_id]=params[:user][:prefecture_id]
+    session[:city]=params[:user][:city]
+    session[:address]=params[:user][:address]
+    session[:building]=params[:user][:building]
+    @user = User.new(
+      nickname: session[:nickname],
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation],
+      last_name: session[:last_name], 
+      first_name: session[:first_name], 
+      last_name_kana: session[:last_name_kana], 
+      first_name_kana: session[:first_name_kana], 
+      birthdate: session[:birthdate] ,
+      cellular_phone_number: session[:phone_number],
+      zip_code: session[:zip_code],
+      prefecture_id: session[:prefecture_id],
+      city: session[:city],
+      address: session[:address],
+      building: session[:building]
+    )
+    render action: :step3 unless @user.valid?
+  end  
 end
