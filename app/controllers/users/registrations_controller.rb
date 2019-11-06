@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def step4
     session[:zip_code]=params[:user][:zip_code]
-    session[:prefecuture_id]=params[:user][:prefecuture_id]
+    session[:prefecture_id]=params[:user][:prefecture_id]
     session[:city]=params[:user][:city]
     session[:address]=params[:user][:address]
     session[:building]=params[:user][:building]
@@ -80,7 +80,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_name_kana: session[:first_name_kana],
       last_name_kana: session[:last_name_kana],
       birthdate: session[:birthdate],
-      cellular_phone_number: session[:phone_number]
+      #cellular_phone_number: session[:phone_number],
+      zip_code: session[:zip_code],
+      prefecture_id: session[:prefecture_id],
+      city: session[:city],
+      address: session[:address],
+      building: session[:building]
     )
     
     
