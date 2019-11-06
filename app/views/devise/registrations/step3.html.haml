@@ -9,28 +9,50 @@
           必須
         %br
         = f.text_field :zip_code, placeholder: "例)123-456", maxlength:16, class: "zip-code-form__input"
+        %br/
+        - if resource.errors.full_messages_for(:"personal.zip_code").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.zip_code").each do |msg|
+              %li.validation-error__text
+                =msg
       .zip-code-section
         =f.label "都道府県"
         %span.form--required
           必須
         %br
         = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "---"}, {class: "zip-code-form__input"}  
+        %br/
+        - if resource.errors.full_messages_for(:"personal.prefecture_id").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.prefecture_id").each do |msg|
+              %li.validation-error__text
+                =msg
       .zip-code-section
         =f.label "市区町村"
         %span.form--required
           必須
         %br
         = f.text_field :city, placeholder: "名古屋市", maxlength:16, class: "zip-code-form__input"
+        %br/
+        - if resource.errors.full_messages_for(:"personal.city").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.city").each do |msg|
+              %li.validation-error__text
+                =msg
       .zip-code-section
         =f.label "番地"
         %span.form--required
           必須
         %br
-        = f.text_field :adress, placeholder: "栄", maxlength:16, class: "zip-code-form__input"
+        = f.text_field :address, placeholder: "栄", maxlength:16, class: "zip-code-form__input"
+        %br/
+        - if resource.errors.full_messages_for(:"personal.address").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.address").each do |msg|
+              %li.validation-error__text
+                =msg
       .zip-code-section
         =f.label "建物名"
-        %span.form--required
-          必須
         %br
         = f.text_field :building, placeholder: "○○ビル", maxlength:16, class: "zip-code-form__input"
       = f.submit "次へ進む",class:"registration-btn"

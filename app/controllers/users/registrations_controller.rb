@@ -35,7 +35,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:first_name]= sign_up_params[:personal_attributes][:first_name]
     session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
     session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
-    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i)
+    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i) unless sign_up_params[:personal_attributes][:"birthdate(1i)"].blank? || sign_up_params[:personal_attributes][:"birthdate(2i)"].blank? || sign_up_params[:personal_attributes][:"birthdate(3i)"].blank? 
     build_resource
     @user.build_personal
     @user.build_profile
@@ -199,7 +199,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_name: session[:first_name], 
       last_name_kana: session[:last_name_kana], 
       first_name_kana: session[:first_name_kana],
-      birthdate: session[:birthdate] 
+      birthdate: session[:birthdate], 
+      cellular_phone_number: "08012129090",
+      zip_code: "あ",
+      prefecture_id: "1",
+      city: "あ",
+      address: "あ",
+      building: "あ"
     )
     render action: :step1 unless @user.valid?
   end
@@ -207,18 +213,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def validates_step2
     session[:phone_number]=params[:user][:cellular_phone_number]
     @user = User.new(
-      nickname: session[:nickname],
       email: session[:email],
       password: session[:password],
-      password_confirmation: session[:password_confirmation],
+      password_confirmation: session[:password_confirmation]
+    )
+    @profile=@user.build_profile(
+      nickname: session[:nickname]
+  )
+    @personal=@user.build_personal(
       last_name: session[:last_name], 
       first_name: session[:first_name], 
       last_name_kana: session[:last_name_kana], 
-      first_name_kana: session[:first_name_kana], 
-      birthdate: session[:birthdate] ,
-      cellular_phone_number: session[:phone_number]
+      first_name_kana: session[:first_name_kana],
+      birthdate: session[:birthdate],
+      cellular_phone_number: session[:phone_number],
+      zip_code: "あ",
+      prefecture_id: "1",
+      city: "あ",
+      address: "あ",
+      building: "あ"
     )
-    render action: :step2  unless @user.valid?
+    render action: :step2  unless @personal.valid?
   end
 
   def validates_step3
@@ -228,15 +243,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:address]=params[:user][:address]
     session[:building]=params[:user][:building]
     @user = User.new(
-      nickname: session[:nickname],
       email: session[:email],
       password: session[:password],
-      password_confirmation: session[:password_confirmation],
+      password_confirmation: session[:password_confirmation]
+    )
+    @profile=@user.build_profile(
+      nickname: session[:nickname]
+  )
+    @personal=@user.build_personal(
       last_name: session[:last_name], 
       first_name: session[:first_name], 
       last_name_kana: session[:last_name_kana], 
-      first_name_kana: session[:first_name_kana], 
-      birthdate: session[:birthdate] ,
+      first_name_kana: session[:first_name_kana],
+      birthdate: session[:birthdate],
       cellular_phone_number: session[:phone_number],
       zip_code: session[:zip_code],
       prefecture_id: session[:prefecture_id],
@@ -244,6 +263,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       address: session[:address],
       building: session[:building]
     )
-    render action: :step3 unless @user.valid?
+    render action: :step3 unless @personal.valid?
   end  
 end

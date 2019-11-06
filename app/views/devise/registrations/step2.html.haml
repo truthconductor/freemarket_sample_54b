@@ -7,6 +7,12 @@
         =f.label "携帯電話の番号"
         %br
         = f.text_field :cellular_phone_number, placeholder: "携帯電話の番号を入力", maxlength:16, class: "phone_number-form__input"
+        %br
+        - if resource.errors.full_messages_for(:"personal.cellular_phone_number").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.cellular_phone_number").each do |msg|
+              %li.validation-error__text
+                =msg
         %p.phone_number-caution 本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
       = f.submit "SMSを送信する",class:"registration-btn"
       %p.phone_number-caution※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。

@@ -11,12 +11,16 @@ class Personal < ApplicationRecord
   validates :last_name_kana, length: {maximum: 35}
   validates :first_name_kana, presence: true
   validates :zip_code,length: {maximum: 8}
+  validates :zip_code,presence: true
   validates :city,length: {maximum: 50}
+  validates :city,presence: true
   validates :address,length: {maximum: 100}
+  validates :address,presence: true
   validates :building,length: {maximum: 100}
   #phonelibで電話番号の正規化を実装
   validates :cellular_phone_number,length: {maximum: 35}
-  validate :cellular_phone_number
+  validates :cellular_phone_number, presence: true
+  validate :check_phone_number
   validates :birthdate, presence: true 
   #カタカナとひらがな以外のデータを制限
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "はひらがなかカタカナで入力してください"}
