@@ -9,7 +9,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validates_step2, only: :step3 
   before_action :validates_step3, only: :step4 
 
+  before_action :set_api_key, only:[:step4,:create, :destroy]
+
   require "date"
+
+  layout "registration"
 
   def new
     session.clear
@@ -66,7 +70,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-   
+    # formのパラメータとpayjp.jsのカードtokenを取得
+    @payjp_card = PayjpCard.new(payjp_card_params)
+    card_token = token_params[:card_token]
+    
+    if @credit_card
+      # PAY.JPにカード情報を追加登録
+      customer = Payjp::Customer.retrieve(@credit_card.customer_id)
+      if card_token.blank?
+        return
+      end
+      card = customer.cards.create(card: card_token)
+      # エラーレスポンスを含んでいないか確認
+      if card.respond_to? :error
+        render :new
+        return
+      end
+    else
+      # PAY.JPにカードと顧客情報を新規登録
+      customer = Payjp::Customer.create(email: current_user.email, card: card_token)
+      # エラーレスポンスを含んでいないか確認
+      if customer.respond_to? :error
+        render :new
+        return
+      end
+      # PayJP顧客情報をユーザー情報と紐づけてデータベース登録
+      @credit_card = CreditCard.new(customer_id: customer[:id], user_id: session[:id])
+      unless @credit_card.save
+        render :new
+        return
+      end
+    end
       
     build_resource(
       email: session[:email],
@@ -165,16 +199,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def user_params
-    params.require(:user).permit(
-      :email,
-      :password,
-      :password_confirmation,
-      :name,
-      pesonal_attributes: [:last_name, :first_name,:last_name_lana,:first_name_kana,:cellular_phone_number]
-    )
-  end
- 
 
   def validates_step1
     # step1で入力された値をsessionに保存
@@ -265,5 +289,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
       building: session[:building]
     )
     render action: :step3 unless @personal.valid?
-  end  
+  end
+
+  # PAY.JP APIの秘密鍵をセット
+  def set_api_key
+    require "payjp"
+    Payjp.api_key = Rails.application.credentials.payjp[:api_key]
+  end
+
+  def payjp_card_params
+    params.require(:payjp_card).permit(:number, :year, :month, :cvc, :id)
+  end
+
+  def token_params
+    params.permit(:card_token)
+  end
+
 end
