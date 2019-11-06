@@ -15,7 +15,8 @@ class Personal < ApplicationRecord
   validates :address,length: {maximum: 100}
   validates :building,length: {maximum: 100}
   #phonelibで電話番号の正規化を実装
-  validates :cellular_phone_number,phone: {possible: true,allow_blank: true, countries: [:jp]}
+  validates :cellular_phone_number,length: {maximum: 35}
+  validate :cellular_phone_number
   validates :birthdate, presence: true 
   #カタカナとひらがな以外のデータを制限
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "はひらがなかカタカナで入力してください"}
@@ -24,6 +25,10 @@ class Personal < ApplicationRecord
   belongs_to :user
   
   belongs_to_active_hash :prefecture
-  
 
+  def check_phone_number
+    unless cellular_phone_number.blank? || Phonelib.valid_for_country?(cellular_phone_number, :jp)
+      errors.add(:cellular_phone_number, "を正しく入力してください")
+    end
+  end
 end

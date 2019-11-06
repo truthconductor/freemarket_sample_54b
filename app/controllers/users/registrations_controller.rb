@@ -80,7 +80,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_name_kana: session[:first_name_kana],
       last_name_kana: session[:last_name_kana],
       birthdate: session[:birthdate],
-      #cellular_phone_number: session[:phone_number],
+      cellular_phone_number: session[:phone_number].to_s,
       zip_code: session[:zip_code],
       prefecture_id: session[:prefecture_id],
       city: session[:city],
