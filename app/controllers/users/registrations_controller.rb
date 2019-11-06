@@ -59,13 +59,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
     @user.build_personal
     @user.build_profile
+    @payjp_card = PayjpCard.new
     binding.pry
   end
 
 
   #POST /resource
   def create
-    
+   
       
     build_resource(
       email: session[:email],

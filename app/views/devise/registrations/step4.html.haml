@@ -3,6 +3,5 @@
   .zip-code-contents
     %h2.registration_title 
       支払い方法
-    = form_with model: resource,as: resource_name,local: true, url: registration_path(resource_name), method: :post, id: "zip-code-form", class: "zip-code-form" do |f|  
-      = f.submit "次へ進む",class:"registration-btn"
+    = render 'payjp_cards/devise_form', {payjp_card: @payjp_card}
   = render 'deals/footer'  
