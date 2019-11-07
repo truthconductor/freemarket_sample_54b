@@ -70,38 +70,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-    # formのパラメータとpayjp.jsのカードtokenを取得
-    @payjp_card = PayjpCard.new(payjp_card_params)
-    card_token = token_params[:card_token]
-    
-    if @credit_card
-      # PAY.JPにカード情報を追加登録
-      customer = Payjp::Customer.retrieve(@credit_card.customer_id)
-      if card_token.blank?
-        return
-      end
-      card = customer.cards.create(card: card_token)
-      # エラーレスポンスを含んでいないか確認
-      if card.respond_to? :error
-        render :new
-        return
-      end
-    else
-      # PAY.JPにカードと顧客情報を新規登録
-      customer = Payjp::Customer.create(email: current_user.email, card: card_token)
-      # エラーレスポンスを含んでいないか確認
-      if customer.respond_to? :error
-        render :new
-        return
-      end
-      # PayJP顧客情報をユーザー情報と紐づけてデータベース登録
-      @credit_card = CreditCard.new(customer_id: customer[:id], user_id: session[:id])
-      unless @credit_card.save
-        render :new
-        return
-      end
-    end
-      
     build_resource(
       email: session[:email],
       password: session[:password],
@@ -123,11 +91,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
       address: session[:address],
       building: session[:building]
     )
-    
-    
 
     binding.pry
+
     resource.save
+    
+    # formのパラメータとpayjp.jsのカードtokenを取得
+    @payjp_card = PayjpCard.new(payjp_card_params)
+    card_token = token_params[:card_token]
+    binding.pry
+    # PAY.JPの顧客情報IDを既にデータベースに登録しているかチェック
+    
+    binding.pry
+    customer = Payjp::Customer.create(card: card_token)
+    #card = customer.cards.create(card: card_token)
+    @credit_card = CreditCard.new(customer_id: customer[:id], user_id: @user.id)
+    @credit_card.save
+    unless @credit_card.save
+      render :new
+      return
+    end
+   
+    
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
