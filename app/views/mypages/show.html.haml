@@ -15,7 +15,7 @@
               XX
             出品数
             %span.user-intro__link__user-status--count
-              XX
+              = current_user.items.showable.count
       -# お知らせ・やることリスト
       = render 'users/user-notice'
       -# 購入した商品
