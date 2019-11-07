@@ -30,6 +30,8 @@ class Deals::PurchaseController < ApplicationController
         @deal.seller = @item.seller
         # 支払い金額の登録（現時点ではポイント管理機能がないためポイント支払いを０とする）
         @deal.build_payment(amount: @item.amount, point: 0)
+        # 取引状態を配送待ちにして保存する
+        @deal.deal_state_id = 2
         @deal.save!
         # 商品の販売状況を売り切れに変更
         @item.sales_state_id = 3

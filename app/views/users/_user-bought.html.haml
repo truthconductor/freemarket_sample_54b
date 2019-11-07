@@ -7,28 +7,38 @@
     #user-past-transaction-tab.user-tabcontent__tabbar__tab
       過去の取引
   #user-in-transaction-page.user-tabcontent__page.user-tabcontent__page
-    %ul.user-notification
-    = render "users/nolist-item", { text: '取引中の商品がありません' }
+    - if current_user.buyer_deals.in_progress.count > 0
+      %ul.user-notification
+        - current_user.buyer_deals.in_progress.recent(5).each do |deal|
+          = link_to "#" do
+            %li.user-notification__item
+              = image_tag deal.item.item_images.first.image.url, class: "user-notification__item__image"
+              .user-notification__item__headline
+                %p.user-notification__item__headline--title
+                  = "「#{deal.item.name}」を購入しました。"
+                %span.user-notification__item__headline--time
+                  = deal.deal_state.state
+              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+      .user-notification__footer
+        = link_to "#", class: "user-notification__footer__button" do
+          一覧を見る
+    - else
+      = render "users/nolist-item", { text: '取引中の商品がありません' }
   #user-past-transaction-page.user-tabcontent__page--none
-    %ul.user-notification
-      = link_to "#" do
-        %li.user-notification__item
-          = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-          .user-notification__item__headline
-            %p.user-notification__item__headline--title
-              「XXXXXX」を購入しました。取引が完了しました
-            %span.user-notification__item__headline--time
-              取引完了
-          = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-      = link_to "#" do
-        %li.user-notification__item
-          = image_tag "mercari/mercari_profile.png", class: "user-notification__item__image"
-          .user-notification__item__headline
-            %p.user-notification__item__headline--title
-              「YYYYYY」を購入しました。取引が完了しました
-            %span.user-notification__item__headline--time
-              取引完了
-          = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
-    .user-notification__footer
-      = link_to "#", class: "user-notification__footer__button" do
-        一覧を見る
+    - if current_user.buyer_deals.finished.count > 0
+      %ul.user-notification
+        - current_user.buyer_deals.finished.recent(5).each do |deal|
+          = link_to "#" do
+            %li.user-notification__item
+              = image_tag deal.item.item_images.first.image.url, class: "user-notification__item__image"
+              .user-notification__item__headline
+                %p.user-notification__item__headline--title
+                  = "「#{deal.item.name}」を購入しました。取引が完了しました。"
+                %span.user-notification__item__headline--time
+                  = deal.deal_state.state
+              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+      .user-notification__footer
+        = link_to "#", class: "user-notification__footer__button" do
+          一覧を見る
+    - else
+      = render "users/nolist-item", { text: '過去に取引した商品がありません' }
