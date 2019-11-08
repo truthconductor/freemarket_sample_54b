@@ -24,6 +24,73 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+    gon.item = @item
+    gon.item_images = @item.item_images
+    gon.grandchild_category = Category.find_by(id: @item.category_id).name
+
+    # 子カテゴリの取得
+    get_ancestry = Category.find_by(id: @item.category_id).ancestry
+    child_id = gon.child_id = get_ancestry[get_ancestry.index("/") + 1..get_ancestry.length - 1]
+    set_category_grandchild_array(child_id)
+
+    # 親カテゴリの取得
+    parent_id = get_ancestry[0..get_ancestry.index("/") - 1]
+    parent_name = gon.parent_category = Category.find_by(id: parent_id).name
+    set_category_child_array(parent_name)
+
+    # バイナリデータをbase64でエンコードする
+    require 'base64'
+    require 'aws-sdk-s3'
+
+    gon.item_images_binary_datas = []
+    if Rails.env.production?
+      client = Aws::S3::Client.new(
+                              region: 'ap-northeast-1',
+                              access_key_id: Rails.application.credentials.aws[:access_key_id],
+                              secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+                              )
+      @item.item_images.each do |image|
+        binary_data = client.get_object(bucket: 'upload-image3')
+        gon.item_images_binary_datas << Base64.strict_encode64(binary_data)
+      end
+    else
+      @item.item_images.each do |image|
+        # image.image.file.fileでファイルの絶対パスを取得
+        # binary_data = File.read(image.image.file.file)
+        # gon.item_images_binary_datas << Base64.strict_encode64(binary_data)
+        gon.item_images_binary_datas << image.image_url
+      end
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    # # 登録済画像のidの配列を生成
+    # ids = @item.item_images.map{|image| image.id}
+    # # 登録済画像のうち、編集後も残っている画像のidの配列を生成
+    # exist_ids = registered_image_params[:ids].map(&:to_i)
+    # # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
+    # exist_ids.clear if exist_ids[0] == 0
+
+    # if (exist_ids.length != 0 || new_image_params[:images][0] != " ") && @item.update(create_params)
+
+    #   # 登録済画像のうち削除ボタンが押された画像を削除
+    #   unless ids.length == exist_ids.length
+    #     # 削除する画像のidの配列を生成
+    #     delete_ids = ids - exist_ids
+    #     delete_ids.each do |id|
+    #       @item.item_images.find(id).destroy
+    #     end
+    #   end
+
+    #   unless new_image_params[:images][0] == " "
+    #     new_image_params[:images].each do |image|
+    #       @item.item_images.create(image_url: image, item_id: @item.id)
+    #     end
+    #   end
+    # end
   end
 
   def show
@@ -70,6 +137,21 @@ class ItemsController < ApplicationController
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
+  end 
+
+  def set_category_child_array(parent_name)
+    @category_child_array = ["---"]
+    @category_child_id = []
+    Category.find_by(name: parent_name, ancestry: nil).children.each do |child|
+      @category_child_array << [child.name, child.id]
+    end
+  end
+
+  def set_category_grandchild_array(child_id)
+    @category_grandchild_array = ["---"]
+    Category.find_by(id: child_id).children.each do |grandchild|
+      @category_grandchild_array << grandchild.name
+    end
   end
 
   def get_deliver_method
@@ -97,4 +179,8 @@ class ItemsController < ApplicationController
   def get_item
     @item = Item.find(params[:id]).decorate
   end
+
+  # def registered_image_params
+  #   params.require(:registered_images_ids).permit({ids: []})
+  # end
 end
