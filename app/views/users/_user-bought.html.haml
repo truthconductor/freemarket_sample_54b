@@ -9,16 +9,8 @@
   #user-in-transaction-page.user-tabcontent__page.user-tabcontent__page
     - if current_user.buyer_deals.in_progress.count > 0
       %ul.user-notification
-        - current_user.buyer_deals.in_progress.recent(5).each do |deal|
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag deal.item.item_images.first.image.url, class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  = "「#{deal.item.name}」を購入しました。"
-                %span.user-notification__item__headline--time
-                  = deal.deal_state.state
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+        -# 直近の取引中商品を５点表示
+        = render partial: "users/bought-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
       .user-notification__footer
         = link_to "#", class: "user-notification__footer__button" do
           一覧を見る
@@ -27,16 +19,8 @@
   #user-past-transaction-page.user-tabcontent__page--none
     - if current_user.buyer_deals.finished.count > 0
       %ul.user-notification
-        - current_user.buyer_deals.finished.recent(5).each do |deal|
-          = link_to "#" do
-            %li.user-notification__item
-              = image_tag deal.item.item_images.first.image.url, class: "user-notification__item__image"
-              .user-notification__item__headline
-                %p.user-notification__item__headline--title
-                  = "「#{deal.item.name}」を購入しました。取引が完了しました。"
-                %span.user-notification__item__headline--time
-                  = deal.deal_state.state
-              = fa_icon 'angle-right 2x', class: "user-notification__item__icon"
+        -# 直近の取引完了商品を５点表示
+        = render partial: "users/bought-list-item", collection: current_user.buyer_deals.includes(:item).finished.recent(5).includes(:item), as: "deal"
       .user-notification__footer
         = link_to "#", class: "user-notification__footer__button" do
           一覧を見る

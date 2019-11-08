@@ -6,7 +6,7 @@
     - breadcrumb symbol
   %nav.user-breadcrumb
     %ul.user-breadcrumb__list
-      - breadcrumbs do |links|
+      - breadcrumbs.tap do |links|
         - links.each do |link|
           %li.user-breadcrumb__item
             - if link.current?
