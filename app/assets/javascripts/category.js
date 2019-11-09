@@ -29,12 +29,71 @@ $(document).on('turbolinks:load', function() {
   function appendBrandInputBox() {
     var brandInputHTML = $(`<div class='items-sell-container__form__field' id='brand_wrapper'>
                               <div class="items-sell-container__form__description__label">
-                                <label for="item_brand">ブランド</label>
+                                <label for="item_brand_input">ブランド</label>
                                 <span class="form--optional">任意</span>
                               </div>
-                              <input placeholder="例）シャネル" class="items-sell-container__form__field__input-field" type="text" name="item[brand_name]" id="item_brand">
+                              <input placeholder="例）シャネル" class="items-sell-container__form__field__input-field" type="text" name="item[brand_name]" id="item_brand_input" autocomplete="off">
                             </div>`);
     $('#items-sell-container-category').after(brandInputHTML);
+
+    // インクリメンタルサーチ処理を追加
+    $("#item_brand_input").on("keyup", function() {
+      var input = $("#item_brand_input").val();
+      if (input.length == 0)
+      {
+         $("#brand-incremental-search-results").remove();
+        return;
+      }
+      // ブランド名をインクリメンタルサーチ
+      $.ajax({
+        type: "get",
+        url: location.origin + "/api/brands/search",
+        data: { keyword: input },
+        dataType: "json"
+      })
+      .done(function(brands) {
+        // 検索結果を表示（ヒットしなかった時は結果リストを消去）
+        if (brands.length > 0) {
+          appendBrandSearchResults(brands);
+        }
+        else {
+          $("#brand-incremental-search-results").remove();
+        }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        alert('ブランド検索に失敗しました');
+      });
+    });
+  }
+
+    // インクリメンタルサーチ結果を入れるリストのマークアップを取得、無ければ作成して追加する
+  function appendBrandSearchResults(brands) {
+    // 検索結果を入れるリストの用意
+    var search_results_list = $("#brand-incremental-search-results");
+    if (search_results_list.length == 0) {
+      search_results_list = $(`<li id="brand-incremental-search-results" class="brand-incremental-search-results"></li>`);
+      // ブランド名入力エリアの下にインクリメンタルサーチ結果表示エリアを追加
+      $('#item_brand_input').after(search_results_list);
+    }
+    else
+    {
+      // 直前の検索結果を消去
+      search_results_list.empty();
+    }
+
+    // インクリメンタルサーチ結果のブランド名を追加
+    brands.forEach(function(brand) {
+      var insertListItem = $(`<ul class="brand-incremental-search-results__item">
+                            ${brand.name}
+                          </ul>`);
+      // クリックした検索結果を入力欄に追加
+      insertListItem.on('click', function(e) {
+        $("#item_brand_input").val(e.target.innerText);
+        $("#brand-incremental-search-results").remove();
+      });
+      search_results_list.append(insertListItem);
+    });
+
   }
 
   // 親カテゴリー選択後のイベント
@@ -62,7 +121,7 @@ $(document).on('turbolinks:load', function() {
       .fail(function() {
         alert('カテゴリー取得に失敗しました');
       })
-    } 
+    }
   });
 
   // 子カテゴリー選択後のイベント

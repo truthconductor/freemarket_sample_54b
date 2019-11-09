@@ -50,4 +50,13 @@ Rails.application.routes.draw do
       resources :deals_delivery_addresses, only: [:new, :create, :edit, :update], path: "transaction/delivery_addresses", as: :purchase_delivery_addresses
     end
   end
+
+  namespace :api do
+    resources :brands, only: [] do
+      collection do
+        # ブランドインクリメンタルサーチ
+        get 'search', defaults: { format: 'json' }
+      end
+    end
+  end
 end
