@@ -27,17 +27,26 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     gon.item = @item
     gon.item_images = @item.item_images
-    gon.grandchild_category = Category.find_by(id: @item.category_id).name
-
     # 子カテゴリの取得
-    get_ancestry = Category.find_by(id: @item.category_id).ancestry
-    child_id = gon.child_id = get_ancestry[get_ancestry.index("/") + 1..get_ancestry.length - 1]
+    child_id = gon.child_id = Category.find_by(id: @item.category_id).parent_id
     set_category_grandchild_array(child_id)
 
     # 親カテゴリの取得
-    parent_id = get_ancestry[0..get_ancestry.index("/") - 1]
-    parent_name = gon.parent_category = Category.find_by(id: parent_id).name
+    unless Category.find_by(id: @item.category_id).parent.parent.nil?
+      parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.parent.name
+      gon.grandchild_category = @item.category_id
+    else
+      parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.name
+      gon.child_id = @item.category_id
+    end
     set_category_child_array(parent_name)
+
+    # 1=送料込み、2=着払い
+    if @item.deliver_expend_id == 1
+      get_deliver_method
+    else
+      get_deliver_method_cash_on_delivery
+    end
 
     # バイナリデータをbase64でエンコードする
     require 'base64'
@@ -140,17 +149,16 @@ class ItemsController < ApplicationController
   end 
 
   def set_category_child_array(parent_name)
-    @category_child_array = ["---"]
-    @category_child_id = []
+    @category_child_array = [["---", "---"]]
     Category.find_by(name: parent_name, ancestry: nil).children.each do |child|
       @category_child_array << [child.name, child.id]
     end
   end
 
   def set_category_grandchild_array(child_id)
-    @category_grandchild_array = ["---"]
+    @category_grandchild_array = [["---", "---"]]
     Category.find_by(id: child_id).children.each do |grandchild|
-      @category_grandchild_array << grandchild.name
+      @category_grandchild_array << [grandchild.name, grandchild.id]
     end
   end
 

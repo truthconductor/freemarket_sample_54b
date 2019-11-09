@@ -78,7 +78,7 @@ $(document).on('turbolinks:load', function() {
       })
     }
     else {
-      $('#grandchildren_wrpper').remove();
+      $('#grandchildren_wrapper').remove();
     }
   });
 });

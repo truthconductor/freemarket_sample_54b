@@ -59,7 +59,10 @@
                     - @category_child_array.each do |c|
                       = content_tag(:option, c.first, value: c.last)
                 .items-sell-container__form__field-detail#grandchildren_wrapper
-                  = f.select :category, @category_grandchild_array, {}, id:"grandchild_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'
+                  %div{id: "#{Category.find_by(id: @item.category_id).parent.parent.nil? ? "none" : "grandchildren_wrapper"}"}
+                    = f.select :category, {}, {}, {id:"grandchild_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'} do
+                      - @category_grandchild_array.each do |c|
+                        = content_tag(:option, c.first, value: c.last)
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :item_state_id, "商品の状態"
@@ -83,6 +86,14 @@
               - if @item.errors.full_messages_for(:deliver_expend).present?
                 %p 選択してください
             #items-sell-delivery-method
+              .items-sell-container__form__field#deliver_method
+                .items-sell-container__form__field__label
+                  = f.label :deliver_method_id, "配送の方法"
+                  %span.form--required
+                    必須
+                = f.collection_select :deliver_method_id, @deliver_methods, :id, :method, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
+                - if @item.errors.full_messages_for(:deliver_method).present?
+                  %p 選択してください
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :prefecture_id, "発送元の地域"

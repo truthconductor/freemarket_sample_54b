@@ -3,13 +3,15 @@ $(document).on("ready", function() {
   var input_area = $(".input_area")
   var preview = $(".preview")
 
-  function appendOption(category) {
-    var html = `<option value="${category.id}">${category.name}</option>`;
-    return html;
-  }
   $("#parent_category").val(gon.parent_category);
   $("#child_category").val(gon.child_id);
   $("#grandchild_category").val(gon.grandchild_category);
+  // if (gon.grandchild_category.val == 0) {
+  //   $('#grandchildren_wrapper').remove();
+  // }
+  // else {
+  //   $("#grandchild_category").val(gon.grandchild_category);
+  // };
 
   // 登録済画像データのidを格納する配列を作成
   // ブラウザ上で削除された画像のidをコントローラへ送り返す。
@@ -103,62 +105,8 @@ $(document).on("ready", function() {
   });
 });  
 
-// $(window).on('load', function() {
-//   debugger
-//   $("#child_category").val(gon.child_category)
+// $(document).on("change", "#grandchild_category", function() {
+//   if($("#grandchild_category").selectedindex == -1) {
+//     $('#grandchildren_wrapper').remove();
+//   }
 // });
-// $("#child_caory").ready(function() {
-//   debugger
-//   $("#child_category").val(gon.child_category)
-// })
-  
-//   var parentCategory = $('#parent_category').val();
-//   if (parentCategory != "---") {
-//     $.ajax({
-//       url: '/items/get_category_children',
-//       type: 'GET',
-//       data: { parent_name: parentCategory},
-//       dataType: 'json'
-//     })
-//     .done(function(children) {
-//       $('#children_wrapper').remove();
-//       $('#grandchildren_wrapper').remove();
-//       var insertHTML = '';
-//       children.forEach(function(child) {
-//         insertHTML += appendOption(child);
-//       });
-//       appendChildrenBox(insertHTML);
-//     })
-//     .fail(function() {
-//       alert('カテゴリー取得に失敗しました');
-//     })
-//   } 
-//   $("#child_category").val(gon.child_category)
-
-
-// var childId = $('#child_category option:selected').val();
-// if (childId != "---") {
-//   $.ajax ({
-//     url: '/items/get_category_grandchildren',
-//     type: 'GET',
-//     data: { child_id: childId },
-//     dataType: 'json'
-//   })
-//   .done(function(grandchildren){
-//     if (grandchildren.length != 0) {
-//       $('#grandchildren_wrapper').remove();
-//       var insertHTML = '';
-//       grandchildren.forEach(function(grandchild) {
-//         insertHTML += appendOption(grandchild);
-//       });
-//       appendGrandchildrenBox(insertHTML);
-//     }
-//   })
-//   .fail(function() {
-//     alert('カテゴリー取得に失敗しました');
-//   })
-// }
-// else {
-//   $('#grandchildren_wrpper').remove();
-// }
-
