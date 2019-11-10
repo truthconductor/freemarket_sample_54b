@@ -1,2 +1,10 @@
-%h1 Mypage::Purchase::Dealing#index
-%p Find me in app/views/mypage/purchase/dealing/index.html.haml
+= render 'joint/header'
+= render 'users/user-breadcrumb', {symbol: :mypage_purchase_dealing_index}
+.user-wrapper
+  %main.user-main
+    -# TODO: 取引中の購入商品をリスト表示する
+    -# ナビゲーションバー
+    = render 'users/user-navigation'
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'

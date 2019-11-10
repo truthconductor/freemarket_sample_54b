@@ -1,2 +1,10 @@
-%h1 Mypage::Sale::Closed#index
-%p Find me in app/views/mypage/sale/closed/index.html.haml
+= render 'joint/header'
+= render 'users/user-breadcrumb', {symbol: :mypage_sale_closed_index}
+.user-wrapper
+  %main.user-main
+    -# TODO: 販売済み商品をリスト表示する
+    -# ナビゲーションバー
+    = render 'users/user-navigation'
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'
