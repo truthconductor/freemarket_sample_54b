@@ -10,7 +10,7 @@
     - if current_user.buyer_deals.in_progress.count > 0
       %ul.user-notification
         -# 直近の取引中商品を５点表示
-        = render partial: "users/purchase-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
+        = render partial: "users/deal-purchase-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
       .user-notification__footer
         = link_to mypage_purchase_dealing_index_path, class: "user-notification__footer__button" do
           一覧を見る
@@ -20,7 +20,7 @@
     - if current_user.buyer_deals.closed.count > 0
       %ul.user-notification
         -# 直近の取引完了商品を５点表示
-        = render partial: "users/purchase-list-item", collection: current_user.buyer_deals.closed.recent(5).includes(:item), as: "deal"
+        = render partial: "users/deal-purchase-list-item", collection: current_user.buyer_deals.closed.recent(5).includes(:item), as: "deal"
       .user-notification__footer
         = link_to mypage_purchase_closed_index_path, class: "user-notification__footer__button" do
           一覧を見る

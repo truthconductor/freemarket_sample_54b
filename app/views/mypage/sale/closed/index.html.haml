@@ -2,7 +2,27 @@
 = render 'users/user-breadcrumb', {symbol: :mypage_sale_closed_index}
 .user-wrapper
   %main.user-main
-    -# TODO: 販売済み商品をリスト表示する
+    .user-container
+      .h2.user-tab-headline
+        出品した商品
+      .user-tabcontent__tabbar
+        = link_to mypage_sale_selling_index_path, class:"user-tabcontent__tabbar--link" do
+          .user-tabcontent__tabbar__tab3
+            出品中
+        = link_to mypage_sale_dealing_index_path, class:"user-tabcontent__tabbar--link" do
+          .user-tabcontent__tabbar__tab3
+            取引中
+        = link_to mypage_sale_closed_index_path, class:"user-tabcontent__tabbar--link" do
+          .user-tabcontent__tabbar__tab3.user-tabcontent__tabbar__tab3--active
+            売却済み
+      .user-tabcontent__page
+        - if @deals.count > 0
+          %ul.user-notification
+            -# 直近の販売済み商品を表示
+            = render partial: "users/deal-sale-list-item", collection: @deals, as: "deal"
+          -# Todo: 販売済み商品が一定数以上の時にページネーションが必要になるが現時点では非対応とした
+        - else
+          = render "users/nolist-item", { text: '販売済みの商品がありません' }
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'

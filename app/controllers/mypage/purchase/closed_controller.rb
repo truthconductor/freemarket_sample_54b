@@ -3,7 +3,7 @@ class Mypage::Purchase::ClosedController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # 取引完了の購入商品を全て取得
+    # 取引済みの購入情報を全て取得
     @deals = current_user.buyer_deals.closed().order(id: :desc).includes(:item)
   end
 end
