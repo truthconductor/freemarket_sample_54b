@@ -22,7 +22,7 @@
             = render partial: "users/deal-sale-list-item", collection: @deals, as: "deal"
           -# Todo: 販売済み商品が一定数以上の時にページネーションが必要になるが現時点では非対応とした
         - else
-          = render "users/nolist-item", { text: '販売済みの商品がありません' }
+          = render "users/nolist-item", { text: '売却済みの商品がありません' }
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'
