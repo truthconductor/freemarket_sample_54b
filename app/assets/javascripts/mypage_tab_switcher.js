@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', function() {
-  // マイページのタブクリックに応じて表示を切り替える
-  // マイページ以外で処理を行わせない
-  if(!document.URL.match('/mypage')) {
+  // マイページトップ画面のタブをクリックで切り替える
+  // 正規表現を使いマイページ以外で処理を行わせないようにする
+  var re = new RegExp('/mypage$');
+  if(!re.test(location.pathname)) {
     return;
   }
 
