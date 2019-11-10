@@ -15,6 +15,15 @@ Rails.application.routes.draw do
       get :logout
     end
     scope module: :mypage do
+      namespace :sale do
+        resources :selling, only: [:index]
+        resources :dealing, only: [:index]
+        resources :closed, only: [:index]
+      end
+      namespace :purchase do
+        resources :dealing, only: [:index]
+        resources :closed, only: [:index]
+      end
       resource :profiles, only:[:new, :create, :edit, :update]
       resource :personals, only:[:new, :create, :edit, :update]
       resources :mypage_payjp_cards, only:[:index, :new, :create, :destroy], path: "cards", as: :cards

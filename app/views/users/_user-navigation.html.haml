@@ -5,11 +5,11 @@
     = render 'users/nav-item', { path: '#', text: 'やることリスト', active: false }
     = render 'users/nav-item', { path: '#', text: 'いいね！一覧', active: false }
     = render 'users/nav-item', { path: new_item_path, text: '出品する', active: false }
-    = render 'users/nav-item', { path: '#', text: '出品した商品 - 出品中', active: false }
-    = render 'users/nav-item', { path: '#', text: '出品した商品 - 取引中', active: false }
-    = render 'users/nav-item', { path: '#', text: '出品した商品 - 売却済み', active: false }
-    = render 'users/nav-item', { path: '#', text: '購入した商品 - 取引中', active: false }
-    = render 'users/nav-item', { path: '#', text: '購入した商品 - 過去の取引', active: false }
+    = render 'users/nav-item', { path: mypage_sale_selling_index_path, text: '出品した商品 - 出品中', active: current_page?(mypage_sale_selling_index_path) }
+    = render 'users/nav-item', { path: mypage_sale_dealing_index_path, text: '出品した商品 - 取引中', active: current_page?(mypage_sale_dealing_index_path) }
+    = render 'users/nav-item', { path: mypage_sale_closed_index_path, text: '出品した商品 - 売却済み', active: current_page?(mypage_sale_closed_index_path) }
+    = render 'users/nav-item', { path: mypage_purchase_dealing_index_path, text: '購入した商品 - 取引中', active: current_page?(mypage_purchase_dealing_index_path) }
+    = render 'users/nav-item', { path: mypage_purchase_closed_index_path, text: '購入した商品 - 過去の取引', active: current_page?(mypage_purchase_closed_index_path) }
     = render 'users/nav-item', { path: '#', text: 'ニュース一覧', active: false }
     = render 'users/nav-item', { path: '#', text: '評価一覧', active: false }
     = render 'users/nav-item', { path: '#', text: 'ガイド', active: false }
