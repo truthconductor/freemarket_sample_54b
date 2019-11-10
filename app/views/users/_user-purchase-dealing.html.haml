@@ -1,0 +1,18 @@
+.user-tabcontent
+  .h2.user-tab-headline
+    購入した商品
+  .user-tabcontent__tabbar
+    = link_to mypage_purchase_dealing_index_path, class:"user-tabcontent__tabbar--link" do
+      #user-in-transaction-tab.user-tabcontent__tabbar__tab.user-tabcontent__tabbar__tab--active
+        取引中
+    = link_to mypage_purchase_closed_index_path, class:"user-tabcontent__tabbar--link" do
+      #user-past-transaction-tab.user-tabcontent__tabbar__tab
+        過去の取引
+  #user-in-transaction-page.user-tabcontent__page
+    - if deals.count > 0
+      %ul.user-notification
+        -# 直近の取引中商品を表示
+        = render partial: "users/purchase-list-item", collection: deals, as: "deal"
+      -# Todo: 取引中商品が一定数以上の時にページネーションが必要になるが現時点では非対応とした
+    - else
+      = render "users/nolist-item", { text: '取引中の商品がありません' }

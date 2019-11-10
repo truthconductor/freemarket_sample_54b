@@ -2,7 +2,9 @@
 = render 'users/user-breadcrumb', {symbol: :mypage_purchase_closed_index}
 .user-wrapper
   %main.user-main
-    -# TODO: 購入完了商品をリスト表示する
+    .user-container
+      -# 購入完了した商品をリスト表示
+      = render 'users/user-purchase-closed', {deals: @deals}
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'

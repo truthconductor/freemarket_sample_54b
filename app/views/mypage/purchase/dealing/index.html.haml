@@ -2,7 +2,9 @@
 = render 'users/user-breadcrumb', {symbol: :mypage_purchase_dealing_index}
 .user-wrapper
   %main.user-main
-    -# TODO: 取引中の購入商品をリスト表示する
+    .user-container
+      -# 購入した取引中商品をリスト表示
+      = render 'users/user-purchase-dealing', {deals: @deals}
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'

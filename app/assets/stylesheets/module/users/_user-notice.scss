@@ -27,6 +27,10 @@
         }
       }
     }
+    &--link {
+      color: $text-deepgray;
+      text-decoration: none;
+    }
   }
   &__page {
     width: 700px;

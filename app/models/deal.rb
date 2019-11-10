@@ -14,5 +14,5 @@ class Deal < ApplicationRecord
   # 取引中（状態が取引完了でない）の取引を取得
   scope :in_progress, -> { where.not(deal_state_id: 5) }
   # 取引済み（状態が取引完了）の取引を取得
-  scope :finished, -> { where(deal_state_id: 5) }
+  scope :closed, -> { where(deal_state_id: 5) }
 end

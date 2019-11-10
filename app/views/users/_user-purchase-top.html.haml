@@ -10,19 +10,19 @@
     - if current_user.buyer_deals.in_progress.count > 0
       %ul.user-notification
         -# 直近の取引中商品を５点表示
-        = render partial: "users/bought-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
+        = render partial: "users/purchase-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
       .user-notification__footer
-        = link_to "#", class: "user-notification__footer__button" do
+        = link_to mypage_purchase_dealing_index_path, class: "user-notification__footer__button" do
           一覧を見る
     - else
       = render "users/nolist-item", { text: '取引中の商品がありません' }
   #user-past-transaction-page.user-tabcontent__page--none
-    - if current_user.buyer_deals.finished.count > 0
+    - if current_user.buyer_deals.closed.count > 0
       %ul.user-notification
         -# 直近の取引完了商品を５点表示
-        = render partial: "users/bought-list-item", collection: current_user.buyer_deals.includes(:item).finished.recent(5).includes(:item), as: "deal"
+        = render partial: "users/purchase-list-item", collection: current_user.buyer_deals.closed.recent(5).includes(:item), as: "deal"
       .user-notification__footer
-        = link_to "#", class: "user-notification__footer__button" do
+        = link_to mypage_purchase_closed_index_path, class: "user-notification__footer__button" do
           一覧を見る
     - else
       = render "users/nolist-item", { text: '過去に取引した商品がありません' }
