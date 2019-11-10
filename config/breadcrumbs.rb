@@ -40,6 +40,12 @@ crumb :mypage_purchase_closed_index do
 end
 
 # トップページ > マイページ > プロフィール
+crumb :new_mypage_profiles do
+  link "プロフィール", new_mypage_profiles_path
+  parent :mypage
+end
+
+# トップページ > マイページ > プロフィール
 crumb :edit_mypage_profiles do
   link "プロフィール", edit_mypage_profiles_path
   parent :mypage
