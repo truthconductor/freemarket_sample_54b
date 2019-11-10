@@ -13,7 +13,7 @@
             XX
           出品数
           %span.profile-container__top__status--rcount
-            XX
+            = @user.items.showable.count
       .profile-container__review
         = fa_icon "smile-o 2x", class:"profile-container__review__icon profile-container__review__icon--smile"
         %span.profile-container__review--score

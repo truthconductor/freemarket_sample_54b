@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Deal do
   describe '#create' do
     # 必要なデータをletで用意
-    let(:seller) { create(:user, id: 1) }
-    let(:buyer) { create(:user, id: 2) }
+    let(:seller) { create(:user, id: 1, confirmed_at:Date.today) }
+    let(:buyer) { create(:user, id: 2, confirmed_at:Date.today) }
     let(:item) {
       item = build(:item,
             id: 1,

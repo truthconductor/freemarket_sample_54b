@@ -1,4 +1,3 @@
-
 = render 'joint/header'
 = render 'users/user-breadcrumb', {symbol: :mypage}
 .user-wrapper
@@ -15,11 +14,11 @@
               XX
             出品数
             %span.user-intro__link__user-status--count
-              XX
+              = current_user.items.showable.count
       -# お知らせ・やることリスト
       = render 'users/user-notice'
       -# 購入した商品
-      = render 'users/user-bought'
+      = render 'users/user-purchase-top'
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'

@@ -9,6 +9,36 @@ crumb :mypage do
   parent :root
 end
 
+# トップページ > マイページ > 出品した商品 - 出品中
+crumb :mypage_sale_selling_index do
+  link "出品した商品 - 出品中", mypage_sale_selling_index_path
+  parent :mypage
+end
+
+# トップページ > マイページ > 出品した商品 - 取引中
+crumb :mypage_sale_dealing_index do
+  link "出品した商品 - 取引中", mypage_sale_dealing_index_path
+  parent :mypage
+end
+
+# トップページ > マイページ > 出品した商品 - 売却済み
+crumb :mypage_sale_closed_index do
+  link "出品した商品 - 売却済み", mypage_sale_closed_index_path
+  parent :mypage
+end
+
+# トップページ > マイページ >  購入した商品 - 取引中
+crumb :mypage_purchase_dealing_index do
+  link " 購入した商品 - 取引中", mypage_purchase_dealing_index_path
+  parent :mypage
+end
+
+# トップページ > マイページ > 購入した商品 - 過去の取引
+crumb :mypage_purchase_closed_index do
+  link "購入した商品 - 過去の取引", mypage_purchase_closed_index_path
+  parent :mypage
+end
+
 # トップページ > マイページ > プロフィール
 crumb :new_mypage_profiles do
   link "プロフィール", new_mypage_profiles_path
