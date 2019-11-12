@@ -114,8 +114,8 @@
           ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
         %p.registration-form-caution-text
           「次へ進む」のボタンを押すことにより、
-          %span 
-            =link_to "利用規約","https://www.yahoo.co.jp",class:"registration-form-right--link" 
+          %span
+            =link_to "利用規約", "", class:"registration-form-right--link"
           に同意したものとみなします
         %div
           .registration-actions
@@ -125,4 +125,4 @@
             本人情報の登録について
             = fa_icon "angle-right", class: "registration-form-right--link"
   .registration-footer
-  = render 'deals/footer' 
+  = render 'deals/footer'

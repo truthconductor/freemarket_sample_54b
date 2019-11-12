@@ -23,8 +23,14 @@ ja:
         first_name_kana: 名（カナ）
         last_name_kana: 姓（カナ）
         birthdate: 生年月日
+        zip_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        building: 建物名
+        cellular_phone_number: 携帯電話の番号
       user/profile:
-         nickname: ニックネーム        
+         nickname: ニックネーム
       profile:
         nickname: ニックネーム
         introduction: プロフィール文
@@ -43,7 +49,7 @@ ja:
         deal: 取引状況
         seller: 出品者
         item_images: 画像
-      item/item_images: 
+      item/item_images:
         image: ''
       delivery_address:
         last_name: お名前（姓）

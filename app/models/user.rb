@@ -2,8 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,:confirmable 
-
+         :recoverable, :rememberable, :validatable, :confirmable
+  #Association
   has_one :profile, dependent: :destroy
   has_one :personal, dependent: :destroy
   accepts_nested_attributes_for :personal
@@ -17,8 +17,6 @@ class User < ApplicationRecord
   has_many :item_comments
   has_many :item_likes
   has_one :credit_card, dependent: :destroy
-
-  validates :password,    length: { minimum: 7 }
 
   # 購入可能な情報を保持しているか判定する
   def can_purchase?
