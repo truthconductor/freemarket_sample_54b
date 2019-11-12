@@ -1,25 +1,25 @@
-.zip-code-wrapper{
+.home_address-wrapper{
   background-color:$background-smokewhite;
 }
 
-.zip-code-contents{
+.home_address-contents{
   max-width:700px;
   margin:0 auto;
   background-color:$background-white ;
 }
 
-.zip-code-title{
+.home_address-title{
   padding: 16px;
   font-size: 18px;
   line-height: 1.5;
   text-align: center;
 }
 
-.zip-code-section{
+.home_address-section{
   margin-top:32px;
 }
 
-.zip-code-form{
+.home_address-form{
   border-top: 1px solid #f5f5f5;
   max-width: 343px;
   margin:0 auto;
@@ -43,7 +43,7 @@
   }
 }
 
-.zip-code-caution{
+.home_address-caution{
   font-size:14px;
   margin: 8px 0 0;
   line-height: 1.5;

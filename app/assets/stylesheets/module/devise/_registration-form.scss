@@ -9,7 +9,7 @@
   background-color:$background-white ;
 }
 
-.registration_title{
+.registration-title{
   padding: 16px;
   font-size: 18px;
   line-height: 1.5;
@@ -21,23 +21,22 @@
   max-width: 343px;
   margin:0 auto;
   padding: 24px 16px 80px;
-  &__center__text{
+  &-center__text{
     margin-top:24px;
+    &--form__caution{
+      line-height: 1.5;
+      margin: 8px 0 0;
+      font-size:14px;
+    }
   }
-  &__field{
+  &-field{
     margin: 24px 0 0;
     label{
       font-size:14px;
       font-weight:800;
     }
   }
-  &__center__text--form__caution{
-    line-height: 1.5;
-    margin: 8px 0 0;
-    font-size:14px;
-  }
-
-  &__caution{
+  &-caution{
     font-size:14px;
     color: #888;
     &__text{
@@ -46,7 +45,7 @@
       text-align: center;
     }
   }
-  &__right{
+  &-right{
     text-align:right;
     margin-top: 32px;
     &--link{
@@ -54,16 +53,11 @@
       text-decoration: none;
       font-size:14px;
     }
-    &--icon{
-      color: #0099e8;
-      text-decoration: none;
-      font-size:14px;
-    }
   }
-  &--personal{
+  &-personal{
     font-size:0px;
     margin-top:24px;
-    &__label{
+    &-label{
       font-size:14px;
       font-weight:800;
     }
@@ -73,7 +67,7 @@
       font-size:16px;
     }
   }
-  &__select{
+  &-select{
     margin-top:8px;
   }
 }
@@ -107,7 +101,7 @@
 }
 
 
- .registration-personal__input{
+ .registration-personal-input{
   display:inline-block;
   width:calc(100% - 8px);
   box-sizing:border-box;
@@ -155,18 +149,18 @@
   
   .registration-form{
     padding: 40px 40px 80px;
-    &__center__text{
+    &-center__text{
       margin-top:32px;
     }
-    &__field{
+    &-field{
       max-width:343px;
       margin:0 auto;
       margin-top: 32px;
     }
-    &__caution__text {
+    &-caution-text {
       margin-top: 32px;
     }
-    &--personal{
+    &-personal{
       font-size:0px;
       margin-top: 32px;
     }

@@ -1,59 +1,59 @@
 = render partial: 'devise/registrations/registrations-header'
-.zip-code-wrapper
-  .zip-code-contents
+.home_address-wrapper
+  .home_address-contents
     %h2.registration_title お届け先住所入力
-    = form_with model: resource,as: resource_name,local: true, url: step4_path(resource_name), method: :get, id: "zip-code-form", class: "zip-code-form" do |f|
-      .zip-code-section
+    = form_with model: resource,as: resource_name,local: true, url: step4_path(resource_name), method: :get, id: "home_address-form", class: "home_address-form" do |f|
+      .home_address-section
         =f.label "郵便番号"
         %span.form--required
           必須
         %br
-        = f.text_field :zip_code, placeholder: "例)123-456", maxlength:16, class: "zip-code-form__input"
+        = f.text_field :zip_code, placeholder: "例)123-456", maxlength:16, class: "home_address-form__input"
         %br/
         - if resource.errors.full_messages_for(:"personal.zip_code").any?
           %ul
             - resource.errors.full_messages_for(:"personal.zip_code").each do |msg|
               %li.validation-error__text
                 =msg
-      .zip-code-section
+      .home_address-section
         =f.label "都道府県"
         %span.form--required
           必須
         %br
-        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "---"}, {class: "zip-code-form__input"}  
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "---"}, {class: "home_address-form__input"}  
         %br/
         - if resource.errors.full_messages_for(:"personal.prefecture_id").any?
           %ul
             - resource.errors.full_messages_for(:"personal.prefecture_id").each do |msg|
               %li.validation-error__text
                 =msg
-      .zip-code-section
+      .home_address-section
         =f.label "市区町村"
         %span.form--required
           必須
         %br
-        = f.text_field :city, placeholder: "名古屋市", maxlength:16, class: "zip-code-form__input"
+        = f.text_field :city, placeholder: "名古屋市", maxlength:50, class: "home_address-form__input"
         %br/
         - if resource.errors.full_messages_for(:"personal.city").any?
           %ul
             - resource.errors.full_messages_for(:"personal.city").each do |msg|
               %li.validation-error__text
                 =msg
-      .zip-code-section
+      .home_address-section
         =f.label "番地"
         %span.form--required
           必須
         %br
-        = f.text_field :address, placeholder: "栄", maxlength:16, class: "zip-code-form__input"
+        = f.text_field :address, placeholder: "栄", maxlength:100, class: "home_address-form__input"
         %br/
         - if resource.errors.full_messages_for(:"personal.address").any?
           %ul
             - resource.errors.full_messages_for(:"personal.address").each do |msg|
               %li.validation-error__text
                 =msg
-      .zip-code-section
+      .home_address-section
         =f.label "建物名"
         %br
-        = f.text_field :building, placeholder: "○○ビル", maxlength:16, class: "zip-code-form__input"
+        = f.text_field :building, placeholder: "○○ビル", maxlength:100, class: "home_address-form__input"
       = f.submit "次へ進む",class:"registration-btn"
   = render 'deals/footer'  

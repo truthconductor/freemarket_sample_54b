@@ -9,7 +9,6 @@ Rails.application.routes.draw do
       get 'step4' => 'users/registrations#step4'
   end
   
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :joint,only:[:index]
   root to: 'joint#index'
@@ -23,7 +22,6 @@ Rails.application.routes.draw do
   resources :test,only:[:index]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
 
   resources :items do
     # 商品購入ページ

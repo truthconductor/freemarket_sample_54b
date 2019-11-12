@@ -30,69 +30,64 @@
  padding-top:32px;
 }
 
-.registration-top-section--mail{
-  margin: 16px 0 0;
-  text-align: center;
-  position:relative;
-  border-radius: 4px;
-  @include  red-button
-}
-
-.registration-top-section--facebook{
-  margin: 16px 0 0;
-  text-align: center;
-  position:relative;
-  cursor: pointer;
-  color: #fff;
-  background: #385185;
-  color: #fff;
-  width: 100%;
-  font-size: 14px;
-  line-height: 48px;
-  border-radius: 4px;
-}
-
-.registration-top-section--google{
-  margin: 16px 0 0;
-  text-align: center;
-  position:relative;
-  cursor: pointer;
-  color: #333;
-  background: #fff;
-  width: 100%;
-  font-size: 14px;
-  line-height: 48px;
-  border: #979797 solid 1px;
-  border-radius: 4px;
-}
-
-
-.registration-top-section__item{
-  text-decoration:none;
-  color:white;
+.registration-top-section{
+  &--mail{
+    margin: 16px 0 0;
+    text-align: center;
+    position:relative;
+    border-radius: 4px;
+    @include  red-button
+  }
+  &--facebook{
+    margin: 16px 0 0;
+    text-align: center;
+    position:relative;
+    cursor: pointer;
+    color: #fff;
+    background: #385185;
+    color: #fff;
+    width: 100%;
+    font-size: 14px;
+    line-height: 48px;
+    border-radius: 4px;
+  }
   &--google{
-    color:#333;
+    margin: 16px 0 0;
+    text-align: center;
+    position:relative;
+    cursor: pointer;
+    color: #333;
+    background: #fff;
+    width: 100%;
+    font-size: 14px;
+    line-height: 48px;
+    border: #979797 solid 1px;
+    border-radius: 4px;
+  }
+  &__item{
+    text-decoration:none;
+    color:white;
+    &--google{
+      color:#333;
+    }
+  }
+  &__icon{
+    &--mail{
+      position:absolute;
+      top: 30%;
+      left: 16px;
+      font-size: 16px;
+    }
+    &--facebook{
+      position:absolute;
+      top: 30%;
+      left: 10px;
+      font-size: 26px;
+    }
+    &--google{
+      position:absolute;
+      left:0px;
+      font-size: 26px;
+    }
   }
 }
-
-.registration-top-section__icon--mail{
-  position:absolute;
-  top: 30%;
-  left: 16px;
-  font-size: 16px;
-}
-
-.registration-top-section__icon--facebook{
-  position:absolute;
-  top: 30%;
-  left: 10px;
-  font-size: 26px;
-}
-    
-.registration-top-section__icon--google{
-  position:absolute;
-  left:0px;
-  font-size: 26px;
-}
-
-

@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validates_step2, only: :step3 
   before_action :validates_step3, only: :step4 
 
-  before_action :set_api_key, only:[:step4,:create, :destroy]
+  before_action :set_api_key, only:[:step4,:create]
 
   require "date"
 
@@ -39,11 +39,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:first_name]= sign_up_params[:personal_attributes][:first_name]
     session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
     session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
-    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i) unless sign_up_params[:personal_attributes][:"birthdate(1i)"].blank? || sign_up_params[:personal_attributes][:"birthdate(2i)"].blank? || sign_up_params[:personal_attributes][:"birthdate(3i)"].blank? 
+    year = sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i
+    month = sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i
+    day = sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i
+    session[:birthdate] = Date.new(year,month, day) if Date.valid_date?(year,month, day)
     build_resource
     @user.build_personal
     @user.build_profile
-    binding.pry
   end
   
   def step3
@@ -51,7 +53,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
    build_resource
    @user.build_personal
    @user.build_profile
-   binding.pry
   end
 
   def step4
@@ -64,9 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.build_personal
     @user.build_profile
     @payjp_card = PayjpCard.new
-    binding.pry
   end
-
 
   #POST /resource
   def create
@@ -92,27 +91,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
       building: session[:building]
     )
 
-    binding.pry
-
     resource.save
     
     # formのパラメータとpayjp.jsのカードtokenを取得
     @payjp_card = PayjpCard.new(payjp_card_params)
     card_token = token_params[:card_token]
-    binding.pry
-    # PAY.JPの顧客情報IDを既にデータベースに登録しているかチェック
-    
-    binding.pry
+
     customer = Payjp::Customer.create(card: card_token)
-    #card = customer.cards.create(card: card_token)
     @credit_card = CreditCard.new(customer_id: customer[:id], user_id: @user.id)
     @credit_card.save
     unless @credit_card.save
       render :new
       return
     end
-   
-    
+
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -131,9 +123,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-
-  
-
 
   # GET /resource/edit
   # def edit
@@ -195,7 +184,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:first_name]= sign_up_params[:personal_attributes][:first_name]
     session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
     session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
-    session[:birthdate]=Date.new(sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i,sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i)
+    year = sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i
+    month = sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i
+    day = sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i
+    session[:birthdate] = Date.new(year,month, day) if Date.valid_date?(year,month, day)
     @user = User.new(
       email: session[:email],
       password: session[:password],
