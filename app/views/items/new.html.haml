@@ -14,7 +14,7 @@
                 必須
             %p.image-upload-explanation 最大10枚までアップロードできます
             = f.fields_for :item_images do |item_image|
-              #preview
+              .preview
                 = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
                   .input_area.items-sell-container__dropzone0
                     %p.image-upload-text ここをクリックして画像をアップロード
@@ -47,12 +47,14 @@
         %section.items-sell-content__section.clearfix
           %h3.item__heading 商品の詳細
           .items-sell-container__box
-            .items-sell-container__form__field
+            .items-sell-container__form__field#items-sell-container-category
               .items-sell-container__form__field__label
                 = f.label :category_id, "カテゴリー"
                 %span.form--required
                   必須
-              = f.select :category_id, @category_parent_array, {}, class:"items-sell-container__form__field__input-field"
+              = f.select :category, @category_parent_array, {}, id:"parent_category", class:"items-sell-container__form__field__input-field"
+              .items-sell-detail__category
+
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :item_state_id, "商品の状態"
@@ -75,14 +77,7 @@
               = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
               - if @item.errors.full_messages_for(:deliver_expend).present?
                 %p 選択してください
-            .items-sell-container__form__field
-              .items-sell-container__form__field__label
-                = f.label :deliver_method_id, "配送の方法"
-                %span.form--required
-                  必須
-              = f.collection_select :deliver_method_id, DeliverMethod.all, :id, :method, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
-              - if @item.errors.full_messages_for(:deliver_method).present?
-                %p 選択してください
+            #items-sell-delivery-method
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :prefecture_id, "発送元の地域"

@@ -24,9 +24,10 @@ ja:
         last_name_kana: 姓（カナ）
         birthdate: 生年月日
       user/profile:
-         nickname: ニックネーム
-     
-        
+         nickname: ニックネーム        
+      profile:
+        nickname: ニックネーム
+        introduction: プロフィール文
       item:
         name: 商品名
         description: 商品の説明

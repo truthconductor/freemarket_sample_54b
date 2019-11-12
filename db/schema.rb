@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_060200) do
+ActiveRecord::Schema.define(version: 2019_11_07_131737) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
+    t.string "first_letter", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_060200) do
     t.datetime "date", null: false
     t.bigint "buyer_id", null: false
     t.bigint "seller_id", null: false
+    t.integer "deal_state_id", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["buyer_id"], name: "index_deals_on_buyer_id"
@@ -159,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_060200) do
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
-    t.string "introduction"
+    t.text "introduction"
     t.string "avatar"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -196,7 +198,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_060200) do
   add_foreign_key "deals", "users", column: "buyer_id"
   add_foreign_key "deals", "users", column: "seller_id"
   add_foreign_key "delivery_addresses", "users"
-  add_foreign_key "item_images", "items"
+  add_foreign_key "item_images", "items", on_delete: :cascade
   add_foreign_key "items", "brands"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "deals"

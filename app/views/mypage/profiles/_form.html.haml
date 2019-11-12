@@ -1,0 +1,18 @@
+.profile-edit-container__form__icon
+  .profile-edit-container__form__icon__flexbox
+    = image_tag "user/user_photo_noimage.png", class: "profile-edit-container__form__icon__flexbox__avator"
+    = f.text_field :nickname, class: "profile-edit-container__form__icon__flexbox__nickname",
+      placeholder: "例）AYA☆セール中", maxlength: 20
+  - if f.object.errors.full_messages_for(:nickname).any?
+    - f.object.errors.full_messages_for(:nickname).each do |msg|
+      .validation-error__text--center 
+        = msg
+.profile-edit-container__form__info
+  = f.text_area :introduction, class: "profile-edit-container__form__info__introduction",
+    placeholder: "例）こんにちは☆ ご覧いただきありがとうございます！かわいいものやきれいめオフィスカジュアル中心に出品しています。服のサイズは主に9号です。気持ちよくお取引できるよう心がけていますので、商品や発送方法などご質問がありましたらお気軽にどうぞ♪"
+  - if f.object.errors.full_messages_for(:introduction).any?
+    - f.object.errors.full_messages_for(:introduction).each do |msg|
+      .validation-error__text
+        = msg
+.profile-edit-container__form__footer
+  = f.submit "変更する", class: "profile-edit-container__form__footer__button"

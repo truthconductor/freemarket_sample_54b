@@ -1,10 +1,19 @@
-%nav.user-breadcrumb
-  %ul.user-breadcrumb__list
-    %li.user-breadcrumb__item
-      = link_to root_path do
-        %span.user-breadcrumb__item--parent
-          メルカリ
-      = fa_icon 'angle-right 1x', class: 'user-breadcrumb__item__icon'
-    %li.user-breadcrumb__item
-      %span.user-breadcrumb__item--leaf
-        マイページ
+- if defined? symbol
+  -# シンボルとモデルに応じたパンくず作成
+  - if defined? model
+    - breadcrumb symbol, model
+  - else
+    - breadcrumb symbol
+  %nav.user-breadcrumb
+    %ul.user-breadcrumb__list
+      - breadcrumbs.tap do |links|
+        - links.each do |link|
+          %li.user-breadcrumb__item
+            - if link.current?
+              %span.user-breadcrumb__item--leaf
+                = link.text
+            - else
+              = link_to link.url do
+                %span.user-breadcrumb__item--parent
+                  = link.text
+              = fa_icon 'angle-right 1x', class: 'user-breadcrumb__item__icon'

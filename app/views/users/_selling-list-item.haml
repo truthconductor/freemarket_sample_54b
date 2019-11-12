@@ -1,0 +1,9 @@
+= link_to item_path(item) do
+  %li.user-notification__item
+    = image_tag item.item_images.first.image.url, class: "user-notification__item__image"
+    .user-notification__item__headline
+      %p.user-notification__item__headline--title
+        = item.name
+      %span.user-notification__item__headline--time
+        = item.sales_state.state
+    = fa_icon 'angle-right 2x', class: "user-notification__item__icon"

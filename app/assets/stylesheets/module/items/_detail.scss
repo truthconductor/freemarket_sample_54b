@@ -33,6 +33,45 @@
         position: relative;
         width: 300px;
         height: 300px;
+        &::before {
+          content: "";
+          top: 0;
+          left: 0;
+          border-bottom: 100px solid transparent;
+          position: absolute;
+          z-index: 2;
+        }
+        &::after {
+          display: block;
+          width: 100px;
+          height: 70px;
+          left: -15px;
+          line-height: 70px;
+          font-weight: 600;
+          text-align: center;
+          transform: rotate(-45deg);
+          color: $text-white;
+          position: absolute;
+          z-index: 3;
+        }
+        &--soldout {
+          &::before {
+            border-left: 100px solid #ea352d;
+          }
+          &::after {
+            font-size: 24px;
+            content: "SOLD";
+          }
+        }
+        &--suspension {
+          &::before {
+            border-left: 100px solid #888888;
+          }
+          &::after {
+            font-size: 16px;
+            content: "公開停止中";
+          }
+        }
         &__image {
           position: absolute;
           top: 50%;
@@ -71,6 +110,7 @@
     &__table {
       float: right;
       min-width: 300px;
+      max-width: 300px;
       border: 1px $table-border solid;
       &__th {
         text-align: left;
@@ -118,14 +158,8 @@
     margin: 0 0 32px;
     &__button {
       &--enable {
-        border: none;
-        width: 100%;
-        font-size: 14px;
-        line-height: 48px;
+        @include red-button;
         text-align: center;
-        cursor: pointer;
-        color: $text-white;
-        background: $button-background-red;
         font-weight: 600;
         &:hover {
           background: #F28A86;
@@ -133,14 +167,8 @@
         }
       }
       &--disenable {
-        border: none;
-        width: 100%;
-        font-size: 14px;
-        line-height: 48px;
+        @include gray-button-disenable;
         text-align: center;
-        cursor: not-allowed;
-        color: $text-white;
-        background: #888;
         font-weight: 600;
       }
     }
@@ -201,30 +229,18 @@
   }
   &__button {
     &--enable {
-      border: none;
+      @include red-button;
       margin: 0 0 16px;
-      width: 100%;
-      font-size: 14px;
-      line-height: 48px;
       text-align: center;
-      cursor: pointer;
-      color: $text-white;
-      background: $button-background-red;
-      font-weight: 500;
       &:hover {
         background: #F28A86;
         transition: background 0.3s;
       }
     }
     &--disenable {
-      border: none;
+      @include gray-button;
       margin: 0 0 16px;
-      width: 100%;
-      font-size: 14px;
-      line-height: 48px;
       text-align: center;
-      color: $text-white;
-      background: #888;
     }
   }
 }
@@ -257,14 +273,8 @@
   }
   &__button {
     &--enable {
-      border: none;
-      width: 100%;
-      font-size: 14px;
-      line-height: 48px;
+      @include red-button;
       text-align: center;
-      cursor: pointer;
-      color: $text-white;
-      background: $button-background-red;
       font-weight: 600;
       &:hover {
         background: #F28A86;
@@ -272,14 +282,8 @@
       }
     }
     &--disenable {
-      border: none;
-      width: 100%;
-      font-size: 14px;
-      line-height: 48px;
+      @include gray-button-disenable;
       text-align: center;
-      cursor: not-allowed;
-      color: $text-white;
-      background: #888;
       font-weight: 600;
     }
   }

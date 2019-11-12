@@ -13,6 +13,7 @@
       font-size: 16px;
       font-weight: 600;
       background: $background-lightgray;
+      cursor: pointer;
       &:hover {
         background: #f0f0f0;
         color: #666;
@@ -25,6 +26,32 @@
           background: $background-white;
         }
       }
+    }
+    &__tab3 {
+      width: 233.33px;
+      height: 72px;
+      line-height: 72px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      background: $background-lightgray;
+      cursor: pointer;
+      &:hover {
+        background: #f0f0f0;
+        color: #666;
+      }
+      &--active {
+        border-top: 2px solid #ea352d;
+        background: $background-white;
+        &:hover {
+          border-top: 2px solid #ED5D58;
+          background: $background-white;
+        }
+      }
+    }
+    &--link {
+      color: $text-deepgray;
+      text-decoration: none;
     }
   }
   &__page {

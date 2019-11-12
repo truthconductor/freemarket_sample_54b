@@ -4,6 +4,7 @@ FactoryBot.define do
     date              {Faker::Date.forward(days: 30)}
     buyer             {}
     seller            {}
+    deal_state_id     {2}
     item              {}
     payment           {}
   end

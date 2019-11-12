@@ -7,15 +7,28 @@
       .root-campaign__slider
         %span.root-campaign__slider1
         %span.root-campaign__slider2
+    -# 人気のカテゴリー表示
     .root-category__box
       .root-category__box--popular
         人気のカテゴリー
       %ul.root-category__box__list
-        - @categolies.each do |category|
+        - @category_datas.each do |category_data|
           %li.root-category__box__list--label
-            = category
-    = render partial: 'itembox'
+            = category_data[:category].name
+    -# 表示するカテゴリーの数だけ繰り返し処理
+    - @category_datas.each do |category_data|
+      = render partial: 'itembox', locals: { category: category_data[:category], items: category_data[:items] }
+    -# 人気のブランドー表示
+    .root-category__box
+      .root-category__box--popular
+        人気のブランド
+      %ul.root-category__box__list
+        - @brand_datas.each do |brand_data|
+          %li.root-category__box__list--label
+            = brand_data[:brand].name
+    -# 表示するブランドの数だけ繰り返し処理
+    - @brand_datas.each do |brand_data|
+      = render partial: 'itembox_brand', locals: { brand: brand_data[:brand], items: brand_data[:items] }
   = render partial: 'app__dl'
   = render partial: 'footer'
   = render partial: 'exhibit__button'
-  

@@ -96,6 +96,8 @@ gem 'ancestry'
 gem 'jquery-rails'
 # Use pay.jp
 gem 'payjp'
+# create breadcrumbs
+gem 'gretel'
 
 gem 'font-awesome-rails'
 gem 'mini_magick'

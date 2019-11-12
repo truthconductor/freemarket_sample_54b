@@ -1,8 +1,9 @@
 %header.root-menu
   .root-menu__box
     .root-menu__box__upper
-      .root-menu__box__upper__icon 
-        = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
+      .root-menu__box__upper__icon
+        = link_to root_path do
+          = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
       .root-menu__box__upper__form
         %input.root-menu__box__upper--text
         %button.root-menu__box__upper--button
@@ -10,18 +11,24 @@
     .root-menu__box__lower
       .root-menu__box__lower__left
         .root-menu__box__lower__left--category
-          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--category" do
+          =link_to "" ,class: "root-menu__box__lower__left--category" do
             = fa_icon "list-ul", class: "root-menu__box__lower__left--category__icon"
             カテゴリーから探す
         .root-menu__box__lower__left--brand
-          =link_to "https://www.yahoo.co.jp",class: "root-menu__box__lower__left--brand" do
+          =link_to "" ,class: "root-menu__box__lower__left--brand" do
             = fa_icon "tag", class: "root-menu__box__lower__left--category__icon"
             ブランドから探す
       .root-menu__box__lower__right
-        =link_to new_user_registration_path,class: "root-menu__box__lower__right--sign-in" do
-          新規会員登録
-        =link_to new_user_session_path,class: "root-menu__box__lower__right--log-in" do
-          ログイン
+        - if user_signed_in?
+          = link_to mypage_path, class: "root-menu__box__lower__right__mypage" do
+            = image_tag 'user/user_photo_noimage.png', height: '32', width: '32', align: "middle", class: 'root-menu__box__lower__right__mypage__avator'
+            .root-menu__box__lower__right__mypage__text
+              マイページ
+        - else
+          =link_to new_user_registration_path,class: "root-menu__box__lower__right--sign-in" do
+            新規会員登録
+          =link_to new_user_session_path,class: "root-menu__box__lower__right--log-in" do
+            ログイン
 
   .root-short-menu
     .root-short-menu__box
@@ -29,18 +36,22 @@
         .root-short-menu__box__upper--left
           = image_tag "logo-acdd90ac4f472d5a6f7a330d33ab1225.svg", size: "134x36"
         .root-short-menu__box__upper__right
-          =link_to new_user_registration_path,class: "root-short-menu__box__upper__right--sign-in" do
-            新規会員登録
-          =link_to new_user_session_path,class: "root-short-menu__box__upper__right--log-in" do
-            ログイン
+          - if user_signed_in?
+            = link_to mypage_path, class: "root-menu__box__lower__right__mypage" do
+              = image_tag 'user/user_photo_noimage.png', height: '32', width: '32', align: "middle", class: 'root-menu__box__lower__right__mypage__avator'
+          - else
+            =link_to new_user_registration_path,class: "root-short-menu__box__upper__right--sign-in" do
+              新規会員登録
+            =link_to new_user_session_path,class: "root-short-menu__box__upper__right--log-in" do
+              ログイン
       .root-short-menu__box__center
         %input.root-short-menu__box__center--text
         .root-short-menu__box__upper--button
           = fa_icon "search", class: "root-short-menu__box__upper__button__icon"
       .root-short-menu__box__lower
-        =link_to "https://www.yahoo.co.jp",class: "root-short-menu__box__lower--category" do
+        =link_to "", class: "root-short-menu__box__lower--category" do
           = fa_icon "list-ul", class: "root-menu__box__lower__left--category__icon"
           カテゴリーから探す
-        =link_to "https://news.yahoo.co.jp/",class: "root-short-menu__box__lower--brand" do
+        =link_to "", class: "root-short-menu__box__lower--brand" do
           = fa_icon "tag", class: "root-menu__box__lower__left--category__icon"
           ブランドから探す

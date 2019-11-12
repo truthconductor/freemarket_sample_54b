@@ -20,6 +20,10 @@ extend ActiveHash::Associations::ActiveRecordExtensions
   accepts_nested_attributes_for :item_images, allow_destroy: true
   # scope
   scope :recent, -> (count) { order(id: :desc).limit(count) }
+  # 商品一覧表示の時に表示される商品の絞り込み（出品中・完売）
+  scope :showable, -> { where(sales_state: [1, 3])}
+  # ユーザーページの出品中で表示される商品の絞り込み（出品中・一時停止中）
+  scope :user_selling, -> { where(sales_state: [1, 2])}
 
   private
   def check_image

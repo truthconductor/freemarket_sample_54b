@@ -2,11 +2,11 @@
   = render 'deals/header'
   %main.deals-main
     = form_with model: @payjp_card, local: true, url: item_purchase_card_index_path, method: :post, id: "card_form", class: "deals-content" do |f|
-      %section.deals-content__section
+      .deals-content__section
         .deals-content__section__w320
           %h2.deals-content__section__w320__headline
             支払い方法
-      %section.deals-content__section
+      .deals-content__section
         .card-container__form
           .card-container__form__field
             .card-container__form__field__label
