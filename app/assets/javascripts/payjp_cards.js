@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   // jQueryとpayjp.jsによるカード情報のトークン化
   // Railsの通常設定では全てのページでjavascriptが読み込まれるため、
   // カード情報に関わるページ以外で処理を行わせない
-  if(!document.URL.match('/cards/')) {
+  if(!document.URL.match(/cards/) && !document.URL.match(/step4/)){
     return;
   }
   // 自身の公開鍵をセット(テスト公開鍵)

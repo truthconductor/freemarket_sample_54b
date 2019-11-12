@@ -114,3 +114,4 @@ gem 'phonelib'
 
 gem 'draper'
 
+gem 'whiny_validation'

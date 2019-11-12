@@ -1,0 +1,44 @@
+= form_with model: payjp_card, local: true, url: user_registration_path, method: :post, id: "card_form", class: "card-container__form" do |f|
+  .card-container__form__field
+    .card-container__form__field__label
+      = f.label :number
+      %span.form--required
+        必須
+    = f.text_field :number, placeholder: "半角数字のみ", maxlength:16, class: "card-container__form__field__text_field"
+    %ul.card-container__form__field__cardlist
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/visa.svg", class: "card-container__form__field__cardlist__carditem__image"
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/master-card.svg", class: "card-container__form__field__cardlist__carditem__image"
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/saison-card.svg", class: "card-container__form__field__cardlist__carditem__image"
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/jcb.svg", class: "card-container__form__field__cardlist__carditem__image"
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/dinersclub.svg", class: "card-container__form__field__cardlist__carditem__image"
+      %li.card-container__form__field__cardlist__carditem
+        = image_tag "cards/discover.svg", class: "card-container__form__field__cardlist__carditem__image"
+  .card-container__form__field
+    .card-container__form__field__label
+      = f.label "有効期限"
+      %span.form--required
+        必須
+    .card-container__form__field__date
+      = f.select :month, payjp_card.month_select, {}, {class: "card-container__form__field__date__select"}
+      = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
+      = f.label :month, class: "card-container__form__field__date__text"
+      = f.select :year, payjp_card.year_select, {}, {class: "card-container__form__field__date__select"}
+      = fa_icon 'angle-down', class: "card-container__form__field__date__icon"
+      = f.label :year, class: "card-container__form__field__date__text"
+  .card-container__form__field
+    .card-container__form__field__label
+      = f.label :cvc
+      %span.form--required
+        必須
+    = f.text_field :cvc, placeholder: "カード背面4桁もしくは3桁の番号", maxlength:4, class: "card-container__form__field__text_field"
+    %p.card-container__form__field__help
+      = link_to "#", class: "card-container__form__field__help--link" do
+        = fa_icon 'question-circle'
+        カード裏面の番号とは？
+  .card-container__form__field
+    = f.submit "追加する", class: "card-container__form__field__button"

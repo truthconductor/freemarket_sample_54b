@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_one :personal, dependent: :destroy
   accepts_nested_attributes_for :personal
+  accepts_nested_attributes_for :profile
   validates :personal, associated: true
   has_one :deliver_address, dependent: :destroy
   has_one :delivery_address, dependent: :destroy
@@ -16,6 +17,8 @@ class User < ApplicationRecord
   has_many :item_comments
   has_many :item_likes
   has_one :credit_card, dependent: :destroy
+
+  validates :password,    length: { minimum: 7 }
 
   # 購入可能な情報を保持しているか判定する
   def can_purchase?
