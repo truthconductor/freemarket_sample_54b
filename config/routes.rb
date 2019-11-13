@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users,controllers: {
     registrations: 'users/registrations',
+    omniauth_callbacks: "users/omniauth_callbacks"
   } 
   devise_scope :user do
-      get 'step1' => 'users/registrations#step1'
-      get 'step2' => 'users/registrations#step2'
-      get 'step3' => 'users/registrations#step3'
-      get 'step4' => 'users/registrations#step4'
+      get 'personal_name_google' => 'users/registrations#personal_name_google'
+      get 'phone_number_google' => 'users/registrations#phone_number_google'
+      get 'personal_name' => 'users/registrations#personal_name'
+      get 'phone_number' => 'users/registrations#phone_number'
+      get 'address' => 'users/registrations#address'
+      get 'creditcard' => 'users/registrations#creditcard'
   end
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
