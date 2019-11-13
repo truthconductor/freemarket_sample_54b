@@ -26,6 +26,7 @@ class DeliveryAddress < ApplicationRecord
   belongs_to :user
   belongs_to_active_hash :prefecture
 
+  # 都道府県入力バリデーション
   def check_prefecture
     if prefecture_id.nil?
       errors.add(:prefecture_id, "を選択してください")
