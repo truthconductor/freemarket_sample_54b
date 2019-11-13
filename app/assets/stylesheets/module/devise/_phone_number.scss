@@ -1,5 +1,6 @@
 .phone_number-wrapper{
   background-color:$background-smokewhite;
+  min-height: calc(100vh - 128px);
 }
 
 .phone_number-contents{
