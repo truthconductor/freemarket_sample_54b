@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     respond_with resource
   end
 
-  def personai_name_google
+  def personal_name_google
     build_resource
     @user.build_personal
     @user.build_profile

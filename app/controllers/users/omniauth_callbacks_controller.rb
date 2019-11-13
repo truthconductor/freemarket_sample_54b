@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:provider] = @user.provider
       session[:uid] = @user.uid
-      redirect_to step1_google_path
+      redirect_to personal_name_google_path
     end
   end
 
