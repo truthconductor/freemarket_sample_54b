@@ -31,8 +31,8 @@
 # Rubocop
 .rubocop_todo.yml
 
-.server.crt
+server.crt
 
-.server.csr
+server.csr
 
-.server.key
+server.key
