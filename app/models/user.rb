@@ -43,7 +43,6 @@ class User < ApplicationRecord
         #パスワードにnull制約があるためFakerで適当に作ったものを突っ込んでいます
         password: Faker::Internet.password(min_length: 7,max_length: 128)
       )
-      binding.pry
       return new_user
     end
   end

@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #before_action :to_katakana,only: [:create]
   #GET /resource/sign_up
   before_action :validates_step1, only: :step2 
+  before_action :validates_step1_google, only: :step2_google 
   before_action :validates_step2, only: :step3 
   before_action :validates_step3, only: :step4 
 
@@ -70,7 +71,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
     @user.build_personal
     @user.build_profile
-    binding.pry
   end
   
   def step3
@@ -94,7 +94,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-    binding.pry
     build_resource(
       email: session[:email],
       password: session[:password],
@@ -242,6 +241,46 @@ class Users::RegistrationsController < Devise::RegistrationsController
     )
     render action: :step1 unless @user.valid?
   end
+
+
+  def validates_step1_google
+    # step1で入力された値をsessionに保存
+    session[:nickname]=sign_up_params[:profile_attributes][:nickname]
+    session[:email] = Faker::Internet.email
+    session[:password] = Faker::Internet.password(min_length: 7,max_length: 128)
+    session[:password_confirmation]= session[:password]
+    session[:last_name]= sign_up_params[:personal_attributes][:last_name]
+    session[:first_name]= sign_up_params[:personal_attributes][:first_name]
+    session[:last_name_kana]= sign_up_params[:personal_attributes][:last_name_kana]
+    session[:first_name_kana]= sign_up_params[:personal_attributes][:first_name_kana]
+    year = sign_up_params[:personal_attributes][:"birthdate(1i)"].to_i
+    month = sign_up_params[:personal_attributes][:"birthdate(2i)"].to_i
+    day = sign_up_params[:personal_attributes][:"birthdate(3i)"].to_i
+    session[:birthdate] = Date.new(year,month, day) if Date.valid_date?(year,month, day)
+    @user = User.new(
+      email: session[:email],
+      password: session[:password],
+      password_confirmation: session[:password_confirmation]
+    )
+    @profile=@user.build_profile(
+      nickname: session[:nickname]
+  )
+    @personal=@user.build_personal(
+      last_name: session[:last_name], 
+      first_name: session[:first_name], 
+      last_name_kana: session[:last_name_kana], 
+      first_name_kana: session[:first_name_kana],
+      birthdate: session[:birthdate], 
+      cellular_phone_number: "08012129090",
+      zip_code: "あ",
+      prefecture_id: "1",
+      city: "あ",
+      address: "あ",
+      building: "あ"
+    )
+    render action: :step1_google unless @user.valid?
+  end
+
 
   def validates_step2
     session[:phone_number]=params[:user][:cellular_phone_number]
