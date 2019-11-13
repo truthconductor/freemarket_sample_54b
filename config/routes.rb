@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   } 
   devise_scope :user do
+      get 'step1_google' => 'users/registrations#step1_google'
+      get 'step2_google' => 'users/registrations#step2_google'
       get 'step1' => 'users/registrations#step1'
       get 'step2' => 'users/registrations#step2'
       get 'step3' => 'users/registrations#step3'

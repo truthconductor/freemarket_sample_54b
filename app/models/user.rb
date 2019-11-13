@@ -27,6 +27,7 @@ class User < ApplicationRecord
     return delivery_address != nil && credit_card&.getPayjpDefaultCard != nil
   end
 
+  # sns認証後、ユーザーの有無に応じて挙動を変更する
   def self.from_omniauth(auth)
     # uidとproviderでユーザーを検索
     user = User.find_by(uid: auth.uid, provider: auth.provider)
@@ -37,12 +38,12 @@ class User < ApplicationRecord
       #いなかった場合はnewします。
       new_user = User.new(
         email: auth.info.email,
-        nickname: auth.info.name,
         uid: auth.uid,
         provider: auth.provider,
         #パスワードにnull制約があるためFakerで適当に作ったものを突っ込んでいます
-        password: Faker::Internet.password(min_length: 8,max_length: 128)
+        password: Faker::Internet.password(min_length: 7,max_length: 128)
       )
+      binding.pry
       return new_user
     end
   end

@@ -9,11 +9,11 @@
           = fa_icon "envelope-o", class: "registration-top-section__icon--mail"
           メールアドレスで登録する
       .registration-top-section--facebook
-        = link_to user_facebook_omniauth_authorize_path, class:"registration-top-section__item" do
+        = link_to user_facebook_omniauth_authorize_path, method: :post, class:"registration-top-section__item" do
           = fa_icon "facebook-official", class: "registration-top-section__icon--facebook"
           Facebookで登録する
       .registration-top-section--google   
-        = link_to user_google_oauth2_omniauth_authorize_path, class:"registration-top-section__item--google" do
+        = link_to  user_google_oauth2_omniauth_authorize_path, method: :post, class:"registration-top-section__item--google" do
           =embedded_svg("google.svg",class:"registration-top-section__icon--google")
           Googleで登録する
   = render 'deals/footer' 
