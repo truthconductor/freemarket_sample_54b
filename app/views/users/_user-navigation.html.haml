@@ -26,6 +26,6 @@
     = render 'users/nav-item', { path: '#', text: '発送元・お届け先住所変更', active: false }
     = render 'users/nav-item', { path: mypage_cards_path, text: '支払い方法', active: current_page?(mypage_cards_path) || current_page?(new_mypage_card_path) }
     = render 'users/nav-item', { path: '#', text: 'メール/パスワード', active: false }
-    = render 'users/nav-item', { path: current_user.personal ? edit_mypage_personals_path : new_mypage_personals_path, text: '本人情報', active: current_page?(new_mypage_personals_path) || current_page?(edit_mypage_personals_path) }
+    = render 'users/nav-item', { path: edit_mypage_personals_path, text: '本人情報', active: current_page?(edit_mypage_personals_path) }
     = render 'users/nav-item', { path: '#', text: '電話番号の変更', active: false }
     = render 'users/nav-item', { path: logout_mypage_path, text: 'ログアウト', active: current_page?(logout_mypage_path) }

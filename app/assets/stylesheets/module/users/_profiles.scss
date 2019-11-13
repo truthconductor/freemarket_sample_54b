@@ -110,14 +110,6 @@
 // プロフィール編集ページコンテナ
 .profile-edit-container {
   width: 700px;
-  &__header {
-    background: $background-white;
-    &__headline {
-      text-align: center;
-      font-size: 24px;
-      padding: 12px 24px;
-    }
-  }
   &__form {
     background: $background-white;
     &__icon {

@@ -2,7 +2,83 @@
 = render 'users/user-breadcrumb', {symbol: :edit_mypage_personals}
 .user-wrapper
   %main.user-main
-    -# TODO: パンくず確認用に未実装ページのビューを作成、別タスクで実装する
+    .user-container
+      .user-container__header
+        %h2.user-container__header__headline
+          本人情報の登録
+      .personal-container__form
+        %p.personal-container__form__request
+          お客さまの本人情報をご登録ください。
+          %br
+          登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
+          %br
+          = link_to "", class: "personal-container__form__request__link" do
+            本人確認書類のアップロードについて
+            = fa_icon 'angle-right lg', class: 'card-container__list__help__link__icon'
+
+        = form_with model: @personal, local: true, url: mypage_personals_path, method: :patch do |f|
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label "お名前"
+            .personal-container__form__field__text
+              = @personal.last_name + " " + @personal.first_name
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label "お名前カナ"
+            .personal-container__form__field__text
+              = @personal.last_name_kana + " " + @personal.first_name_kana
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :birthdate
+            .personal-container__form__field__text
+              = @personal.birthdate.strftime("%Y/%m/%d")
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :zip_code, "郵便番号"
+              %span.form--optional
+                任意
+            = f.text_field :zip_code, placeholder: "例)123-4567", class:"personal-container__form__field__text_field"
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :prefecture_id, "都道府県"
+              %span.form--optional
+                任意
+            .personal-container__form__field__prefecture
+              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, {class: "personal-container__form__field__prefecture__select"}
+              = fa_icon 'angle-down', class: "personal-container__form__field__prefecture__icon"
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :city, "市区町村"
+              %span.form--optional
+                任意
+            = f.text_field :city, placeholder: "例)横浜市緑区", class:"personal-container__form__field__text_field"
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :address, "番地"
+              %span.form--optional
+                任意
+            = f.text_field :address, placeholder: "例)青山1-1-1", class:"personal-container__form__field__text_field"
+
+          .personal-container__form__field
+            .personal-container__form__field__label
+              = f.label :building, "建物名"
+              %span.form--optional
+                任意
+            = f.text_field :building, placeholder: "例)柳ビル103", class:"personal-container__form__field__text_field"
+
+          .personal-container__form__field
+            = f.submit "登録する", class: "personal-container__form__field__button"
+
+        %p.personal-container__form__request
+          = link_to "", class: "personal-container__form__request__link" do
+            本人情報の登録について
+            = fa_icon 'angle-right lg', class: 'card-container__list__help__link__icon'
     -# ナビゲーションバー
     = render 'users/user-navigation'
 = render 'joint/app__dl'

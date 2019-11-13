@@ -30,7 +30,7 @@ Rails.application.routes.draw do
         resources :closed, only: [:index]
       end
       resource :profiles, only:[:new, :create, :edit, :update]
-      resource :personals, only:[:new, :create, :edit, :update]
+      resource :personals, only:[:edit, :update]
       resources :mypage_payjp_cards, only:[:index, :new, :create, :destroy], path: "cards", as: :cards
     end
   end
