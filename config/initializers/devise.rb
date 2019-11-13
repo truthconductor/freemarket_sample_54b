@@ -264,7 +264,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, Rails.application.credentials.facebook[:facebook_client_id],Rails.application.credentials.facebook[:facebook_client_secret]
   config.omniauth :google_oauth2, Rails.application.credentials.google[:google_client_id],Rails.application.credentials.google[:google_client_secret]
-  #{:provider_ignores_state => true}
+  {:provider_ignores_state => true}
   
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
