@@ -2,7 +2,7 @@
 .phone_number-wrapper
   .phone_number-contents
     %h2.registration_title 電話番号の確認
-    = form_with model: resource.personal, as: resource_name, local: true, url: step3_path(resource_name), method: :get, id: "phone_number-form", class: "phone_number-form" do |f|
+    = form_with model: resource.personal, as: resource_name, local: true, url: address_path(resource_name), method: :get, id: "phone_number-form", class: "phone_number-form" do |f|
       .phone_number__section
         =f.label "携帯電話の番号"
         %br

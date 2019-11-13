@@ -5,12 +5,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   #before_action :to_katakana,only: [:create]
   #GET /resource/sign_up
-  before_action :validates_step1, only: :step2 
-  before_action :validates_step1_google, only: :step2_google 
-  before_action :validates_step2, only: :step3 
-  before_action :validates_step3, only: :step4 
+  before_action :validates_personal_name, only: :phone_number 
+  before_action :validates_personal_name_google, only: :phone_number_google 
+  before_action :validates_phone_number, only: :address 
+  before_action :validates_address, only: :creditcard
 
-  before_action :set_api_key, only:[:step4,:create]
+  before_action :set_api_key, only:[:creditcard,:create]
 
   require "date"
 
@@ -25,25 +25,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     respond_with resource
   end
 
-  def step1_google
+  def personai_name_google
     build_resource
     @user.build_personal
     @user.build_profile
   end
 
-  def step1
+  def personal_name
     build_resource
     @user.build_personal
     @user.build_profile
   end
 
-  def step2
+  def phone_number
     build_resource
     @user.build_personal
     @user.build_profile
   end
 
-  def step2_google
+  def phone_number_google
     session[:nickname]=sign_up_params[:profile_attributes][:nickname]
     session[:email] = Faker::Internet.email
     session[:password] = Faker::Internet.password(min_length: 7,max_length: 128)
@@ -61,13 +61,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.build_profile
   end
   
-  def step3
+  def address
    build_resource
    @user.build_personal
    @user.build_profile
   end
 
-  def step4
+  def creditcard
     build_resource
     @user.build_personal
     @user.build_profile
@@ -186,8 +186,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  def validates_step1
-    # step1で入力された値をsessionに保存
+  def validates_personal_name
     session[:nickname]=sign_up_params[:profile_attributes][:nickname]
     session[:email] = sign_up_params[:email]
     session[:password] = sign_up_params[:password]
@@ -221,12 +220,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       city: "札幌市",
       address: "中央区北1条西2丁目"
     )
-    render action: :step1 unless @user.valid?
+    render action: :personal_name unless @user.valid?
   end
 
 
-  def validates_step1_google
-    # step1で入力された値をsessionに保存
+  def validates_personal_name_google
     session[:nickname]=sign_up_params[:profile_attributes][:nickname]
     session[:email] = Faker::Internet.email
     session[:password] = Faker::Internet.password(min_length: 7,max_length: 128)
@@ -260,11 +258,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       address: "あ",
       building: "あ"
     )
-    render action: :step1_google unless @user.valid?
+    render action: :personal_name_google unless @user.valid?
   end
 
 
-  def validates_step2
+  def validates_phone_number
     session[:phone_number]=params[:personal][:cellular_phone_number]
     @user = User.new(
       email: session[:email],
@@ -286,10 +284,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       city: "札幌市",
       address: "中央区北1条西2丁目"
     )
-    render action: :step2  unless @user.valid?
+    render action: :phone_number  unless @user.valid?
   end
 
-  def validates_step3
+  def validates_address
     session[:zip_code]=params[:personal][:zip_code]
     session[:prefecture_id]=params[:personal][:prefecture_id]
     session[:city]=params[:personal][:city]
@@ -316,7 +314,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       address: session[:address],
       building: session[:building]
     )
-    render action: :step3 unless @user.valid?
+    render action: :address unless @user.valid?
   end
 
   # PAY.JP APIの秘密鍵をセット

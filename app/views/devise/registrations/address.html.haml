@@ -2,7 +2,7 @@
 .home_address-wrapper
   .home_address-contents
     %h2.registration_title お届け先住所入力
-    = form_with model: resource.personal, as: resource_name,local: true, url: step4_path(resource_name), method: :get, id: "home_address-form", class: "home_address-form" do |f|
+    = form_with model: resource.personal, as: resource_name,local: true, url: creditcard_path(resource_name), method: :get, id: "home_address-form", class: "home_address-form" do |f|
       .home_address-section
         =f.label "郵便番号"
         %span.form--required
