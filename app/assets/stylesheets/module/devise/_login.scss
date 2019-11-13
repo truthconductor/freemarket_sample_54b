@@ -1,6 +1,11 @@
+.login-wrapper{
+  background-color:$background-smokewhite;
+  min-height: calc(100vh - 128px);
+}
+
 .login-contents{
   text-align:center;
-  max-width:700px;
+  max-width:456px;
   margin: 0 auto;
   background-color:$background-white ;
 }
@@ -8,19 +13,29 @@
 .login-create{
   max-width:343px;
   margin:0 auto;
+  padding: 40px 64px;
+  text-align:center;
 }
 
 .login-title{
-  padding: 12px;
   font-size: 14px;
-  line-height: 1.5;
-  text-align: center;
+}
+
+.login-registration{
+  &__button{
+    display: block;
+    margin: 8px 0 0;
+    border: 1px solid #0099e8;
+    background: #0099e8;
+    color: #fff;
+    line-height: 40px;
+  }
 }
 
 .login-form{
   max-width:343px;
   margin:0 auto;
-  margin-top:80px;
+  margin-top:32px;
 }
 
 .login-field{
@@ -29,22 +44,35 @@
 }
 .login-actions{
   width:100%;
-}
-.login-top-section--mail{
-  margin: 16px 0 0;
-  text-align: center;
-  position: relative;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #fff;
-  background: #ea352d;
-  border: none;
-  width: 100%;
-  font-size: 14px;
-  line-height: 48px;
+  padding-bottom:32px;
 }
 
-.login-top-section__item {
-  text-decoration: none;
-  color: white;
+.login-caution{
+  padding-bottom:32px;
+  text-align:left;
+  margin-bottom:50px;
+  &__text{
+    text-decoration: none;
+    color: #0099e8;
+  }
+}
+
+.login-top-section{
+  &--mail{
+    margin: 16px 0 0;
+    text-align: center;
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background: #ea352d;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    line-height: 48px;
+  }
+  &__item{
+    text-decoration: none;
+    color: white;
+  }
 }
