@@ -44,11 +44,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
       redirect_to root_path
     else
-      #今回は複数ページに渡る登録項目があるため、情報をsessionに保存し、他のページにも持ち越せるように
-      #この辺りの値は用途に合わせてアレンジしてください。
-      #session[:email]=Faker::Internet.email(max_length: 30)
-      #session[:password] =  Faker::Internet.password(min_length: 7,max_length: 128)
-      #session[:password_confirmation] =  Faker::Internet.password(min_length: 7,max_length: 128)
       session[:provider] = @user.provider
       session[:uid] = @user.uid
       redirect_to step1_google_path

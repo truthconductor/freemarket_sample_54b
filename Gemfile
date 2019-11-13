@@ -119,8 +119,6 @@ gem 'whiny_validation'
 
 gem "omniauth"
 
-gem "omniauth-twitter"
-
 gem "omniauth-facebook"
 
 gem "omniauth-rails_csrf_protection"
