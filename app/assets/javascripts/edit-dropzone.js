@@ -35,7 +35,6 @@ $(document).on("turbolinks:load", function() {
     // 登録済画像データをsrcプロパティへ付与
     img.find("img").attr({
       src: binary_data
-      // src: "data:image/jpeg;base64," + binary_data
     });
 
     // 登録済画像データのidを配列へ格納
@@ -107,7 +106,9 @@ $(document).on("turbolinks:load", function() {
   $(document).on('click', '.btn-delete', function() {
     // イベントが発生したimage_viewのオブジェクトとidを取得する
     var target_image = $(this).parent().parent();
+
     var remove_id = target_image.data('image');
+
     // 同じidのinputを取得する
     var remove_input = $(`input[data-image=${remove_id}]`);
 
@@ -151,6 +152,7 @@ $(document).on("turbolinks:load", function() {
       });
       $(input).prop('disabled', index >= 10);
     })
+    debugger
     $('.img-view').each(function(index, image) {
       $(image).attr('data-image', index);
     });
@@ -168,9 +170,6 @@ $(document).on("turbolinks:load", function() {
         name: 'item[item_registered_images][' + index + '][image]',
       });
     })
-    $('.img-view').each(function(index, image) {
-      $(image).attr('data-image', index);
-    });
   }
 
   // 編集後のデータ送信(submitボタンを指定してもイベントは発火しない)
@@ -194,7 +193,7 @@ $(document).on("turbolinks:load", function() {
         formData.append("registered_images_ids[ids][]", registered_image)
       });
     }
-    console.log(...formData.entries());
+
     $.ajax({
       url: '/items/' + gon.item.id,
       type: "PATCH",
