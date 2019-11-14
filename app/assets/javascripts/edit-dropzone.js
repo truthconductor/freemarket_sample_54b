@@ -155,17 +155,17 @@ $(document).on("turbolinks:load", function() {
       $(image).attr('data-image', index);
     });
     //dropzone-boxに対応するinputを末尾のinputに再割り当て
-    $('.dropzone-box').attr('for','upload-image-' + ($('input[name^="item"]').length - 1));
-    $('.items-sell-container__dropzone' + ($('input[name^="item"]').length)).attr('class', 'items-sell-container__dropzone' + ($('input[name^="item"]').length - 1));
+    debugger
+    $('.dropzone-box').attr('for','upload-image-' + ($('input[name^="item[item_"]').length - 1));
+    $('.items-sell-container__dropzone' + ($('input[name^="item[item_"]').length)).attr('class', 'items-sell-container__dropzone' + ($('input[name^="item[item_"]').length - 1));
   }
 
   function reorder_uploaded_data_image() {
     //input,image_viewそれぞれにindexを再割り当て
     $('input[id^="item_item_images_attributes"]').each(function(index, input) {
-      debugger
       $(input).attr({
         'data-image': index,
-        name: 'item[registered_images][' + index + '][image]',
+        name: 'item[item_registered_images][' + index + '][image]',
       });
     })
     $('.img-view').each(function(index, image) {
