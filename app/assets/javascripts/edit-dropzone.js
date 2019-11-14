@@ -18,10 +18,8 @@ $(document).on("turbolinks:load", function() {
   preview = $('.preview');
 
   // 登録済画像データのidを格納する配列を作成
-  // ブラウザ上で削除された画像のidをコントローラへ送り返す
+  // ブラウザ上で削除されていない画像のidをコントローラへ送り返す
   var registered_images_ids = [];
-  // 新規追加画像データ用の配列(DB用)
-  var new_image_files = [];
 
   gon.item_images.forEach(function(image, index) {
     var img = $(`<div class = "img-view">
@@ -47,7 +45,6 @@ $(document).on("turbolinks:load", function() {
   });
 
   add_data_image();
-  var all_inputs = $('input[name^="item[item_images_attributes]"]')
   // プレビュー表示されている画像の枚数に応じて、ラベルの大きさを調整
   inputs_length = $('input[name^="item[item_images_attributes]"]').length;
   $(`.items-sell-container__dropzone0`).attr('class',`items-sell-container__dropzone${inputs_length - 1}`);
@@ -113,6 +110,17 @@ $(document).on("turbolinks:load", function() {
     var remove_id = target_image.data('image');
     // 同じidのinputを取得する
     var remove_input = $(`input[data-image=${remove_id}]`);
+
+    // 削除された登録済み画像のIDを配列から削除する
+    var removed_image_id = remove_input[0].value
+    $.each(registered_images_ids, 
+      function(index) {
+        debugger
+        if (Number($(this)[0]) == Number(removed_image_id)) {
+          registered_images_ids.splice(index, 1);
+        }
+      }
+    );
     //input,image_view消去
     remove_input.remove();
     target_image.remove();
@@ -124,7 +132,6 @@ $(document).on("turbolinks:load", function() {
   // hidden_fieldへdata-imageを付与
   function add_data_image() {
     $('input[id^="item_item_images_attributes"]').each(function(index) {
-      debugger
       $(this).attr({
         'data-image': index,
       });
@@ -148,19 +155,17 @@ $(document).on("turbolinks:load", function() {
       $(image).attr('data-image', index);
     });
     //dropzone-boxに対応するinputを末尾のinputに再割り当て
-    $('.dropzone-box').attr('for','upload-image-' + ($('input[name^="item[item_images_attributes]"]').length - 1));
-    debugger
-    $('.items-sell-container__dropzone' + ($('input[name^="item[item_images_attributes]"]').length)).attr('class', 'items-sell-container__dropzone' + ($('input[name^="item[item_images_attributes]"]').length - 1));
+    $('.dropzone-box').attr('for','upload-image-' + ($('input[name^="item"]').length - 1));
+    $('.items-sell-container__dropzone' + ($('input[name^="item"]').length)).attr('class', 'items-sell-container__dropzone' + ($('input[name^="item"]').length - 1));
   }
 
   function reorder_uploaded_data_image() {
     //input,image_viewそれぞれにindexを再割り当て
-    $('[type="file"].upload-image').each(function(index, input) {
+    $('input[id^="item_item_images_attributes"]').each(function(index, input) {
       debugger
       $(input).attr({
         'data-image': index,
-        id: 'upload-image-' + index,
-        name: 'item[item_images_attributes][' + index + '][image]',
+        name: 'item[registered_images][' + index + '][image]',
       });
     })
     $('.img-view').each(function(index, image) {
@@ -179,8 +184,6 @@ $(document).on("turbolinks:load", function() {
     var formElement = $('#item-dropzone').get(0)
     var formData = new FormData(formElement);
 
-    $('.file_fields').remove();
-
     // 登録済画像が残っていない場合は便宜的に0を入れる
     if (registered_images_ids.length == 0) {
       formData.append("registered_images_ids[ids][]", 0)
@@ -191,8 +194,7 @@ $(document).on("turbolinks:load", function() {
         formData.append("registered_images_ids[ids][]", registered_image)
       });
     }
-    // コンソールへformdataの中身を表示する
-    for(item of formData) console.log(item);
+    console.log(...formData.entries());
     $.ajax({
       url: '/items/' + gon.item.id,
       type: "PATCH",

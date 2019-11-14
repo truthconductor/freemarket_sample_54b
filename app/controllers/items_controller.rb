@@ -65,9 +65,6 @@ class ItemsController < ApplicationController
       end
     else
       @item.item_images.each do |image|
-        # image.image.file.fileでファイルの絶対パスを取得
-        # binary_data = File.read(image.image.file.file)
-        # gon.item_images_binary_datas << Base64.strict_encode64(binary_data)
         gon.item_images_binary_datas << image.image_url
       end
     end
@@ -81,24 +78,17 @@ class ItemsController < ApplicationController
     exist_ids = registered_image_params[:ids].map(&:to_i)
     # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
     exist_ids.clear if exist_ids[0] == 0
-    # get_item_images
-    binding.pry
-    if (exist_ids.length != 0 || new_image_params[:images][0] != " ") && @item.update!(create_params)
 
+    if (exist_ids.length != 0 || params[:item][:item_images_attributes].nil?) && @item.update!(create_params)
       # 登録済画像のうち削除ボタンが押された画像を削除
       unless ids.length == exist_ids.length
+        binding.pry
         # 削除する画像のidの配列を生成
         delete_ids = ids - exist_ids
         delete_ids.each do |id|
           @item.item_images.find(id).destroy
         end
       end
-
-      # unless new_image_params[:images][0] == " "
-      #   new_image_params[:images].each do |image|
-      #     @item.item_images.create(image_url: image, item_id: @item.id)
-      #   end
-      # end
     end
   end
 
@@ -191,13 +181,7 @@ class ItemsController < ApplicationController
   end
 
   def registered_image_params
+    binding.pry
     params.require(:registered_images_ids).permit({ids: []})
   end
-
-  # def get_item_images
-  #   params.require(:item_images).permit(:image)
-  # end
-  # def new_image_params
-  #   params.require(:new_images).permit({images: []})
-  # end
 end
