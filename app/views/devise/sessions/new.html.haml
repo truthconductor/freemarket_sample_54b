@@ -1,11 +1,11 @@
-.registration-top-wrapper
-  %header.registaration-top-header
+.login-wrapper
+  %header.registaration-header
     =link_to image_tag("logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class:"registaration-header__image")
   .login-contents
     .login-create
       %p.login-title アカウントをお持ちではない方はこちら
-      .login-top-section--mail
-        = link_to personal_name_path, class:"login-top-section__item" do
+      .login-registration
+        = link_to personal_name_path, class:"login-registration__button" do
           新規会員登録
     .registration-top-btn
       .registration-top-section--facebook
@@ -19,13 +19,11 @@
     .login-form
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .login-field
-          = f.label :email
-          %br/
           = f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "メールアドレス",class:"registration-input"
         .login-field
-          = f.label :password
-          %br/
           = f.password_field :password, autocomplete: "current-password",placeholder: "パスワード",class:"registration-input"
         .login-actions
-          = f.submit "Log in",class:"registration-btn"
-
+          = f.submit "ログイン",class:"registration-btn"
+      .login-caution
+        =link_to "パスワードをお忘れの方","#",class:"login-caution__text"
+  = render 'deals/footer'
