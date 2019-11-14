@@ -48,8 +48,8 @@ class ItemsController < ApplicationController
       get_deliver_method_cash_on_delivery
     end
 
-    # バイナリデータをbase64でエンコードする
-    require 'base64'
+    # バイナリデータをbase64でエンコードする←おそらく不要
+    # require 'base64'
     require 'aws-sdk-s3'
 
     gon.item_images_binary_datas = []
@@ -75,31 +75,31 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    # 登録済画像のidの配列を生成
+    ids = @item.item_images.map{|image| image.id}
+    # 登録済画像のうち、編集後も残っている画像のidの配列を生成
+    exist_ids = registered_image_params[:ids].map(&:to_i)
+    # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
+    exist_ids.clear if exist_ids[0] == 0
+    # get_item_images
+    binding.pry
+    if (exist_ids.length != 0 || new_image_params[:images][0] != " ") && @item.update!(create_params)
 
-    # # 登録済画像のidの配列を生成
-    # ids = @item.item_images.map{|image| image.id}
-    # # 登録済画像のうち、編集後も残っている画像のidの配列を生成
-    # exist_ids = registered_image_params[:ids].map(&:to_i)
-    # # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
-    # exist_ids.clear if exist_ids[0] == 0
+      # 登録済画像のうち削除ボタンが押された画像を削除
+      unless ids.length == exist_ids.length
+        # 削除する画像のidの配列を生成
+        delete_ids = ids - exist_ids
+        delete_ids.each do |id|
+          @item.item_images.find(id).destroy
+        end
+      end
 
-    # if (exist_ids.length != 0 || new_image_params[:images][0] != " ") && @item.update(create_params)
-
-    #   # 登録済画像のうち削除ボタンが押された画像を削除
-    #   unless ids.length == exist_ids.length
-    #     # 削除する画像のidの配列を生成
-    #     delete_ids = ids - exist_ids
-    #     delete_ids.each do |id|
-    #       @item.item_images.find(id).destroy
-    #     end
-    #   end
-
-    #   unless new_image_params[:images][0] == " "
-    #     new_image_params[:images].each do |image|
-    #       @item.item_images.create(image_url: image, item_id: @item.id)
-    #     end
-    #   end
-    # end
+      # unless new_image_params[:images][0] == " "
+      #   new_image_params[:images].each do |image|
+      #     @item.item_images.create(image_url: image, item_id: @item.id)
+      #   end
+      # end
+    end
   end
 
   def show
@@ -181,14 +181,23 @@ class ItemsController < ApplicationController
   private
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
+    # params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount)
   end
+
 
   # 商品を取得する
   def get_item
     @item = Item.find(params[:id]).decorate
   end
 
-  # def registered_image_params
-  #   params.require(:registered_images_ids).permit({ids: []})
+  def registered_image_params
+    params.require(:registered_images_ids).permit({ids: []})
+  end
+
+  # def get_item_images
+  #   params.require(:item_images).permit(:image)
+  # end
+  # def new_image_params
+  #   params.require(:new_images).permit({images: []})
   # end
 end

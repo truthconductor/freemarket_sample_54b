@@ -13,12 +13,13 @@
               %span.form--required
                 必須
             %p.image-upload-explanation 最大10枚までアップロードできます
-            = f.fields_for :item_images do |item_image|
+            = f.fields_for :item_images, class: "fields_for" do |item_image|
               .preview
-                = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
+                = item_image.label :image, class: "dropzone-box", for: "upload-image-#{@item.item_images.length}" do
                   .input_area.items-sell-container__dropzone0
                     %p.image-upload-text ここをクリックして画像をアップロード
-                    = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image {validation-error if @item.errors.full_messages_for(:item_images).present?}", 'data-image': 0
+                    = item_image.file_field :image, style: "display: none;", name: "item[item_images_attributes][#{@item.item_images.length}][image]", id: "upload-image-#{@item.item_images.length}", class: "upload-image", 'data-image': @item.item_images.length
+                    -# = item_image.file_field :image, style: "display: none;", name: "item[item_images_attributes][0][image]", id: "upload-image-0", class: "upload-image {validation-error if @item.errors.full_messages_for(:item_images).present?}", 'data-image': 0
                   - if @item.errors.full_messages_for(:item_images).length == 2
                     = @item.errors.full_messages_for(:item_images)[1]
                   - else
@@ -139,7 +140,6 @@
             またブランド品でシリアルナンバー等がある場合はご記載ください。偽ブランドの販売は犯罪であり処罰される可能性があります。
             %br
             また、出品をもちまして加盟店規約に同意したことになります。
-          = f.hidden_field "test", value: [3]
           = f.submit "出品する", class: "submit", id: "edit_item"
           = link_to root_path, class: "return" do
             もどる
