@@ -9,7 +9,7 @@ class Mypage::PersonalsController < ApplicationController
 
   def update
     if @personal.update(profile_param)
-      redirect_to :edit
+      redirect_to edit_mypage_personals_path
     else
       render :edit
     end
