@@ -53,7 +53,7 @@
       必須
   = f.text_field :address, placeholder: "例)青山1-1-1", class:"delivery-address-container__form__field__text_field"
   - if delivery_address.errors.include?(:address).present?
-    = render 'delivery_addresses/error_message', {errors: delivery_address.errors, symbol: :city}
+    = render 'delivery_addresses/error_message', {errors: delivery_address.errors, symbol: :address}
 .delivery-address-container__form__field
   .delivery-address-container__form__field__label
     = f.label :building, "建物名"
