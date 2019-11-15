@@ -322,7 +322,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       prefecture_id: session[:prefecture_id],
       city: session[:city],
       address: session[:address],
-      building: session[:building]
+      building: session[:building],
+      phone_number: session[:phone_number]
     )
     render action: :address unless @user.valid?
   end
