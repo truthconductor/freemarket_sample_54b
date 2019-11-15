@@ -36,6 +36,17 @@
               %td.item-detail__infomation__table__td
                 = link_to user_path(@item.seller), class: "item-detail__infomation__table__td__link" do
                   = @item.seller.profile&.nickname
+                %br
+                .item-detail__infomation__table__td__review
+                  = fa_icon "smile-o lg", class:"item-detail__infomation__table__td__review__icon item-detail__infomation__table__td__review__icon--smile"
+                  %span.item-detail__infomation__table__td__review--score
+                    XX
+                  = fa_icon "meh-o lg", class:"item-detail__infomation__table__td__review__icon item-detail__infomation__table__td__review__icon--meh"
+                  %span.item-detail__infomation__table__td__review--score
+                    XX
+                  = fa_icon "frown-o lg", class:"item-detail__infomation__table__td__review__icon item-detail__infomation__table__td__review__icon--frown"
+                  %span.item-detail__infomation__table__td__review--score
+                    XX
             %tr
               %th.item-detail__infomation__table__th
                 カテゴリー
@@ -83,9 +94,7 @@
               %th.item-detail__infomation__table__th
                 配送日の目安
               %td.item-detail__infomation__table__td
-                %p
-                  = link_to "", class: "item-detail__infomation__table__td__link" do
-                    = @item.deliver_day.day
+                = @item.deliver_day.day
       -# 商品金額
       .item-detail__amount
         %span.item-detail__amount--amount
