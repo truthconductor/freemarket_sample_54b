@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :personal, associated: true
   has_one :deliver_address, dependent: :destroy
   has_one :delivery_address, dependent: :destroy
+  accepts_nested_attributes_for :delivery_address
   has_many :items, class_name: 'Item', foreign_key: 'seller_id'
   has_many :buyer_deals, class_name: 'Deal', foreign_key: 'buyer_id'
   has_many :seller_deals, class_name: 'Deal', foreign_key: 'seller_id'

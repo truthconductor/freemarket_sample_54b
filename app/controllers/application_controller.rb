@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:provider,:uid])
     devise_parameter_sanitizer.permit(:sign_up, keys: [profile_attributes: [:nickname]])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [personal_attributes: [:last_name,:first_name,:last_name_kana,:first_name_kana,:zip_code,:prefecture_id,:city,:adress,:building,:cellular_phone_number,:birthdate]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [delivery_address_attributes: [:zip_code,:prefecture_id,:city,:adress,:building,:phone_number]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [personal_attributes: [:last_name,:first_name,:last_name_kana,:first_name_kana,:cellular_phone_number,:birthdate]])
   end
 end

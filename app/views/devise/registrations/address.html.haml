@@ -2,7 +2,7 @@
 .home_address-wrapper
   .home_address-contents
     %h2.registration_title お届け先住所入力
-    = form_with model: resource.personal, as: resource_name,local: true, url: creditcard_path(resource_name), method: :get, id: "home_address-form", class: "home_address-form" do |f|
+    = form_with model: resource.delivery_address , as: resource_name,local: true, url: creditcard_path(resource_name), method: :get, id: "home_address-form", class: "home_address-form" do |f|
       .home_address-section
         =f.label "郵便番号"
         %span.form--required
@@ -10,9 +10,9 @@
         %br
         = f.text_field :zip_code, placeholder: "例)123-4567", maxlength:8, class: "home_address-form__input"
         %br/
-        - if resource.errors.full_messages_for(:"personal.zip_code").any?
+        - if resource.errors.full_messages_for(:"delivery_address.zip_code").any?
           %ul
-            - resource.errors.full_messages_for(:"personal.zip_code").each do |msg|
+            - resource.errors.full_messages_for(:"delivery_address.zip_code").each do |msg|
               %li.validation-error__text
                 =msg
       .home_address-section
@@ -22,9 +22,9 @@
         %br
         = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "---"}, {class: "home_address-form__input"}  
         %br/
-        - if resource.errors.full_messages_for(:"personal.prefecture_id").any?
+        - if resource.errors.full_messages_for(:"delivery_address.prefecture_id").any?
           %ul
-            - resource.errors.full_messages_for(:"personal.prefecture_id").each do |msg|
+            - resource.errors.full_messages_for(:"delivery_address.prefecture_id").each do |msg|
               %li.validation-error__text
                 =msg
       .home_address-section
@@ -34,9 +34,9 @@
         %br
         = f.text_field :city, placeholder: "例）横浜市緑区", maxlength:50, class: "home_address-form__input"
         %br/
-        - if resource.errors.full_messages_for(:"personal.city").any?
+        - if resource.errors.full_messages_for(:"delivery_address.city").any?
           %ul
-            - resource.errors.full_messages_for(:"personal.city").each do |msg|
+            - resource.errors.full_messages_for(:"delivery_address.city").each do |msg|
               %li.validation-error__text
                 =msg
       .home_address-section
@@ -46,9 +46,9 @@
         %br
         = f.text_field :address, placeholder: "例）青山1-1-1", maxlength:100, class: "home_address-form__input"
         %br/
-        - if resource.errors.full_messages_for(:"personal.address").any?
+        - if resource.errors.full_messages_for(:"delivery_address.address").any?
           %ul
-            - resource.errors.full_messages_for(:"personal.address").each do |msg|
+            - resource.errors.full_messages_for(:"delivery_address.address").each do |msg|
               %li.validation-error__text
                 =msg
       .home_address-section
