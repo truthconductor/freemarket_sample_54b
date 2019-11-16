@@ -34,6 +34,14 @@ ja:
       profile:
         nickname: ニックネーム
         introduction: プロフィール文
+      personal:
+        birthdate: 生年月日
+        zip_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        building: 建物名
+        cellular_phone_number: 携帯電話の番号
       item:
         name: 商品名
         description: 商品の説明

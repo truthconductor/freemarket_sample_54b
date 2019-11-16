@@ -28,6 +28,10 @@
     font-size: 14px;
     &--parent {
       color: $text-deepgray;
+      &:hover {
+        color: #888;
+        text-decoration: underline;
+      }
     }
     &--leaf {
       font-weight: 600;

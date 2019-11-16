@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update, :destroy]
   # 商品を取得する
-  before_action :get_item, only:[:show, :destroy, :activate, :deactivate]
+  before_action :get_item, only:[:show, :destroy, :activate, :deactivate, :update, :edit]
   def new
     @item = Item.new
     @item.item_images.build
@@ -26,6 +26,83 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # 商品が販売済なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.sales_state_id == 3
+    # 他人の出品商品なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.seller != current_user
+    gon.item = @item
+    gon.item_images = @item.item_images
+    # 子カテゴリの取得
+    child_id = gon.child_id = Category.find_by(id: @item.category_id).parent_id
+    set_category_grandchild_array(child_id)
+
+    # 親カテゴリの取得
+    unless Category.find_by(id: @item.category_id).parent.parent.nil?
+      parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.parent.name
+      gon.grandchild_category = @item.category_id
+    else
+      parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.name
+      gon.child_id = @item.category_id
+    end
+    set_category_child_array(parent_name)
+
+    # 1=送料込み、2=着払い
+    if @item.deliver_expend_id == 1
+      get_deliver_method
+    else
+      get_deliver_method_cash_on_delivery
+    end
+
+    # バイナリデータをbase64でエンコードする←おそらく不要
+    # require 'base64'
+    require 'aws-sdk-s3'
+
+    gon.item_images_binary_datas = []
+    if Rails.env.production?
+      client = Aws::S3::Client.new(
+                              region: 'ap-northeast-1',
+                              access_key_id: Rails.application.credentials.aws[:access_key_id],
+                              secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+                              )
+      @item.item_images.each do |image|
+        gon.item_images_binary_datas << image.image_url
+      end
+    else
+      @item.item_images.each do |image|
+        gon.item_images_binary_datas << image.image_url
+      end
+    end
+  end
+
+  def update
+    # 商品が販売済なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.sales_state_id == 3
+    # 他人の出品商品なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.seller != current_user
+    # 登録済画像のidの配列を生成
+    ids = @item.item_images.map{|image| image.id}
+    # 登録済画像のうち、編集後も残っている画像のidの配列を生成
+    exist_ids = registered_image_params[:ids].map(&:to_i)
+    # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
+    exist_ids.clear if exist_ids[0] == 0
+    #入力されたブランド名がbrandsテーブルに存在する場合、ブランドをセット
+    @item.brand = Brand.find_by(name:brand_name_params[:brand_name]) unless brand_name_params.empty?
+
+    # 新規登録、登録済画像が1枚も残っていない場合は、元の画面がredirectする
+    unless exist_ids.length == 0 && params[:item][:item_images_attributes].nil?
+      @item.update!(create_params)
+      # 登録済画像のうち削除ボタンが押された画像を削除
+      unless ids.length == exist_ids.length
+        # 削除する画像のidの配列を生成
+        delete_ids = ids - exist_ids
+        delete_ids.each do |id|
+          @item.item_images.find(id).destroy
+        end
+      end
+      redirect_to item_path(@item), data: {turbolinks: false}
+    else
+      redirect_back(fallback_location: root_path)
+    end 
   end
 
   def show
@@ -72,6 +149,20 @@ class ItemsController < ApplicationController
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
+  end 
+
+  def set_category_child_array(parent_name)
+    @category_child_array = [["---", "---"]]
+    Category.find_by(name: parent_name, ancestry: nil).children.each do |child|
+      @category_child_array << [child.name, child.id]
+    end
+  end
+
+  def set_category_grandchild_array(child_id)
+    @category_grandchild_array = [["---", "---"]]
+    Category.find_by(id: child_id).children.each do |grandchild|
+      @category_grandchild_array << [grandchild.name, grandchild.id]
+    end
   end
 
   def get_deliver_method
@@ -93,8 +184,9 @@ class ItemsController < ApplicationController
   private
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
+    # params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount)
   end
-
+  
   def brand_name_params
     params.require(:item).permit(:brand_name)
   end
@@ -102,5 +194,9 @@ class ItemsController < ApplicationController
   # 商品を取得する
   def get_item
     @item = Item.find(params[:id]).decorate
+  end
+
+  def registered_image_params
+    params.require(:registered_images_ids).permit({ids: []})
   end
 end

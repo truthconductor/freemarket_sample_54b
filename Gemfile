@@ -114,6 +114,11 @@ gem 'phonelib'
 
 gem 'draper'
 
+
+gem 'gon'
+
+gem 'aws-sdk-s3'
+
 gem 'whiny_validation'
 
 

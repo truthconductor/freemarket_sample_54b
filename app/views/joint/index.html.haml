@@ -13,7 +13,7 @@
         人気のカテゴリー
       %ul.root-category__box__list
         - @category_datas.each do |category_data|
-          %li.root-category__box__list--label
+          %li.root-category__box__list--label.popular_category_label{data: {category_id: category_data[:category].id }}
             = category_data[:category].name
     -# 表示するカテゴリーの数だけ繰り返し処理
     - @category_datas.each do |category_data|
@@ -24,7 +24,7 @@
         人気のブランド
       %ul.root-category__box__list
         - @brand_datas.each do |brand_data|
-          %li.root-category__box__list--label
+          %li.root-category__box__list--label.popular_brand_label{ data: {brand_id: brand_data[:brand].id }}
             = brand_data[:brand].name
     -# 表示するブランドの数だけ繰り返し処理
     - @brand_datas.each do |brand_data|

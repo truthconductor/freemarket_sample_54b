@@ -260,11 +260,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_name_kana: session[:first_name_kana],
       birthdate: session[:birthdate], 
       cellular_phone_number: "08012129090",
-      zip_code: "あ",
+      zip_code: "123-4567",
       prefecture_id: "1",
-      city: "あ",
-      address: "あ",
-      building: "あ"
+      city: "札幌市",
+      address: "中央区北1条西2丁目"
     )
     render action: :personal_name_google unless @user.valid?
   end

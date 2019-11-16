@@ -52,12 +52,6 @@ crumb :edit_mypage_profiles do
 end
 
 # トップページ > マイページ >  本人情報の登録
-crumb :new_mypage_personals do
-  link " 本人情報の登録", new_mypage_personals_path
-  parent :mypage
-end
-
-# トップページ > マイページ >  本人情報の登録
 crumb :edit_mypage_personals do
   link " 本人情報の登録", edit_mypage_personals_path
   parent :mypage

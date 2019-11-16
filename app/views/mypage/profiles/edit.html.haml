@@ -2,9 +2,9 @@
 = render 'users/user-breadcrumb', {symbol: :edit_mypage_profiles}
 .user-wrapper
   %main.user-main
-    .profile-edit-container
-      .profile-edit-container__header
-        %h2.profile-edit-container__header__headline
+    .user-container
+      .user-container__header
+        %h2.user-container__header__headline
           プロフィール
       .profile-edit-container__form
         = form_with model: @profile, local: true, url: mypage_profiles_path, method: :patch do |f|
