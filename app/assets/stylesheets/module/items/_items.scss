@@ -38,10 +38,13 @@
 
 .preview {
   display: inline-block;
+  height: 100%;
   width: 100%;
 }
 
 .preview img {
+  object-fit: contain;
+  height: calc(100% - 44px);
   width: 100%;
   float: left;
   cursor: move;
@@ -52,8 +55,8 @@
 }
 
 .img-view {
-  width: 116px;
   height: 162px;
+  width: 116px;
   margin: 0 10px 10px 0;
   display: inline-block;
 }
