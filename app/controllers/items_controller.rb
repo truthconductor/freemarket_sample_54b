@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, :set_category_parent_array, only: [:new, :create, :edit, :update, :destroy]
   # 商品を取得する
-  before_action :get_item, only:[:show, :destroy, :activate, :deactivate]
+  before_action :get_item, only:[:show, :destroy, :activate, :deactivate, :update, :edit]
   def new
     @item = Item.new
     @item.item_images.build
@@ -24,7 +24,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     gon.item = @item
     gon.item_images = @item.item_images
     # 子カテゴリの取得
@@ -70,7 +69,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     # 登録済画像のidの配列を生成
     ids = @item.item_images.map{|image| image.id}
     # 登録済画像のうち、編集後も残っている画像のidの配列を生成
