@@ -127,11 +127,11 @@
             .margin-calculation
               販売手数料(10%)
               .margin-calculation__result
-                \-
+                ¥#{(@item.amount / 10).to_s(:delimited)}
             .profit-calculation
               販売利益
               .profit-calculation__result
-                \-
+                ¥#{(@item.amount - @item.amount / 10).to_s(:delimited)}
         %section.items-sell-content__section.clearfix
           %p 
             禁止されている出品、行為を必ずご確認ください。
