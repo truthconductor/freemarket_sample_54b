@@ -1,17 +1,29 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.login-wrapper
+  %header.registaration-header
+    =link_to image_tag("logo-acdd90ac4f472d5a6f7a330d33ab1225.svg",class:"registaration-header__image")
+  .login-contents
+    .login-create
+      %p.login-title アカウントをお持ちではない方はこちら
+      .login-registration
+        = link_to personal_name_path, class:"login-registration__button" do
+          新規会員登録
+    .registration-top-btn
+      .registration-top-section--facebook
+        = link_to user_facebook_omniauth_authorize_path, method: :post, class:"registration-top-section__item" do
+          = fa_icon "facebook-official", class: "registration-top-section__icon--facebook"
+          Facebookでログイン
+      .registration-top-section--google   
+        = link_to  user_google_oauth2_omniauth_authorize_path, method: :post, class:"registration-top-section__item--google" do
+          =embedded_svg("google.svg",class:"registration-top-section__icon--google")
+          Googleでログイン
+    .login-form
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .login-field
+          = f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "メールアドレス",class:"registration-input"
+        .login-field
+          = f.password_field :password, autocomplete: "current-password",placeholder: "パスワード",class:"registration-input"
+        .login-actions
+          = f.submit "ログイン",class:"registration-btn"
+      .login-caution
+        =link_to "パスワードをお忘れの方","#",class:"login-caution__text"
+  = render 'deals/footer'

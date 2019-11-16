@@ -119,6 +119,27 @@
             color:white;
           }
         }
+        &__mypage {
+          color: $text-deepgray;
+          height: 36px;
+          line-height: 36px;
+          box-sizing: border-box;
+          text-decoration: none;
+          &__avator {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin: 0 8px 0 0;
+          }
+          &__text
+          {
+            font-size: 14px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+          &:hover{
+            color: $link-hover;
+          }
+        }
       }
     }
   }
@@ -172,6 +193,15 @@
           &:hover{
             background-color: $link-hover;
             color:white;
+          }
+        }
+        &__mypage {
+          height: 36px;
+          line-height: 36px;
+          box-sizing: border-box;
+          &__avator {
+            vertical-align: middle;
+            border-radius: 50%;
           }
         }
       }

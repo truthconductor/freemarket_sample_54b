@@ -1,0 +1,28 @@
+.user-tabcontent
+  .h2.user-tab-headline
+    購入した商品
+  .user-tabcontent__tabbar
+    #user-in-transaction-tab.user-tabcontent__tabbar__tab.user-tabcontent__tabbar__tab--active
+      取引中
+    #user-past-transaction-tab.user-tabcontent__tabbar__tab
+      過去の取引
+  #user-in-transaction-page.user-tabcontent__page.user-tabcontent__page
+    - if current_user.buyer_deals.in_progress.count > 0
+      %ul.user-notification
+        -# 直近の取引中商品を５点表示
+        = render partial: "users/deal-purchase-list-item", collection: current_user.buyer_deals.in_progress.recent(5).includes(:item), as: "deal"
+      .user-notification__footer
+        = link_to mypage_purchase_dealing_index_path, class: "user-notification__footer__button" do
+          一覧を見る
+    - else
+      = render "users/nolist-item", { text: '取引中の商品がありません' }
+  #user-past-transaction-page.user-tabcontent__page--none
+    - if current_user.buyer_deals.closed.count > 0
+      %ul.user-notification
+        -# 直近の取引完了商品を５点表示
+        = render partial: "users/deal-purchase-list-item", collection: current_user.buyer_deals.closed.recent(5).includes(:item), as: "deal"
+      .user-notification__footer
+        = link_to mypage_purchase_closed_index_path, class: "user-notification__footer__button" do
+          一覧を見る
+    - else
+      = render "users/nolist-item", { text: '過去に取引した商品がありません' }

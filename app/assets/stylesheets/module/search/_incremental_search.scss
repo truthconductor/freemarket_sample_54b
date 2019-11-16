@@ -1,0 +1,21 @@
+.brand-incremental-search-results {
+  margin-top: 1px;
+  width: 100%;
+  max-height: 256px;
+  background: $background-white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px gray;
+  overflow: scroll;
+  &__item {
+    cursor: pointer;
+    padding: 15px 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    &:hover {
+      color: $text-white;
+      background: $form-focus;
+    }
+  }
+}

@@ -35,13 +35,11 @@
     }
   }
   &__box__group{
-    
     &__list{
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 20px 20px;
       &__box{
-        visibility: visible;
         opacity: 1;
         background-color: #fff;
         box-shadow: 0 2px 4px rgba(0,0,0,.18);
@@ -50,43 +48,48 @@
         z-index: 0;
         text-decoration:none;
       }
+      &__imagebox {
+        position: relative;
+        width: 188px;
+        height: 188px;
+        &--image {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          max-width: 188px;
+          max-height: 188px;
+          overflow:hidden;
+        }
+      }
+      &--price {
+        position:absolute;
+        bottom:10px;
+        &--span{
+          overflow: hidden;
+          align-items: center;
+          background: rgba(0,0,0,.4);
+          border-radius: 0 14px 14px 0;
+          color: #fff;
+          display: inline-flex;
+          font-size: 17px;
+          height: 28px;
+          letter-spacing: .02em;
+          margin: 0;
+          padding: 0 12px;
+          z-index: 2;
+        }
+      }
+      &--text {
+        color: #222;
+        font-size: 14px;
+        height: 64px;
+        line-height: 1.4em;
+        padding: 0 12px;
+        white-space: normal;
+        word-break: break-word;
+        overflow: hidden;
+      }
     }
   }
-}
-
-.root-new__production__box__group__list--image{
-  position:relative;
-}
-
-.root-new__production__box__group__list--price{
-  position:absolute;
-  bottom:10px;
-  &--span{
-  overflow: hidden;
-  align-items: center;
-  background: rgba(0,0,0,.4);
-  border-radius: 0 14px 14px 0;
-  color: #fff;
-  display: inline-flex;
-  font-size: 17px;
-  height: 28px;
-  letter-spacing: .02em;
-  margin: 0;
-  padding: 0 12px;
-  z-index: 2;
-}}
-
-.root-new__production__box__group__list--text{
-  color: #222;
-  font-size: 14px;
-  height: 64px;
-  line-height: 1.4em;
-  padding: 0 12px;
-  white-space: normal;
-  word-break: break-word;
-  overflow: hidden;
-}
-
-.root-new__production__box__group__list--image{
-  overflow:hidden;
 }

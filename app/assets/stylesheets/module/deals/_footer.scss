@@ -1,6 +1,7 @@
 .deals-footer {
+  box-sizing:border-box;
   text-align: center;
-  width: 700px;
+  max-width: 700px;
   height: 150px;
   margin: 0 auto;
   &__agreement{
@@ -12,15 +13,15 @@
     }
   }
   &__logo {
-    display: block;
-    margin: 0 0 8px;
-    &__image {
-      height: 65px;
-      box-sizing: border-box;
+    margin: 20px auto 0;
+    &--image{
+      height:65px;
+      width:80px;
     }
   }
   &__copyright {
     font-size: 12px;
     color: $text-deepgray;
+    margin: 8px 0 0;
   }
 }

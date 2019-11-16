@@ -96,6 +96,8 @@ gem 'ancestry'
 gem 'jquery-rails'
 # Use pay.jp
 gem 'payjp'
+# create breadcrumbs
+gem 'gretel'
 
 gem 'font-awesome-rails'
 gem 'mini_magick'
@@ -112,6 +114,19 @@ gem 'phonelib'
 
 gem 'draper'
 
+
 gem 'gon'
 
 gem 'aws-sdk-s3'
+
+gem 'whiny_validation'
+
+
+gem "omniauth"
+
+gem "omniauth-facebook"
+
+gem "omniauth-rails_csrf_protection"
+
+gem 'omniauth-google-oauth2'
+

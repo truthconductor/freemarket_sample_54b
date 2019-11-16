@@ -1,0 +1,43 @@
+.registration-create-wrapper{
+  background-color:$background-smokewhite;
+  min-height: calc(100vh - 128px);
+}
+
+.registration-create-contents{
+  max-width:700px;
+  margin:0 auto;
+  background-color:$background-white ;
+  padding-bottom:60px;
+  margin-bottom:50px;
+}
+
+.registration-create-title{
+  padding: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.registration-create-text{
+  margin-top:32px;
+  line-height:1.5;
+  text-align: center;
+  padding-bottom:32px;
+}
+
+
+.registration-create-btn{
+  display: block;
+  margin:0 auto;
+  max-width: 343px;
+  line-height: 48px;
+  font-size: 14px;
+  transition: all ease-out .3s;
+  cursor: pointer;
+  text-align: center;
+  background: $button-background-red;
+  border: 1px solid $button-background-red;
+  color:$text-white;
+  margin-top: 32px;
+}

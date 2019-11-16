@@ -1,0 +1,50 @@
+.home_address-wrapper{
+  background-color:$background-smokewhite;
+}
+
+.home_address-contents{
+  max-width:700px;
+  margin:0 auto;
+  background-color:$background-white ;
+}
+
+.home_address-title{
+  padding: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.home_address-section{
+  margin-top:32px;
+}
+
+.home_address-form{
+  border-top: 1px solid #f5f5f5;
+  max-width: 343px;
+  margin:0 auto;
+  padding: 24px 16px 80px;
+  margin-top:32px;
+  label{
+    font-weight:600;
+    font-size:14px;
+  }
+  &__input{
+    box-sizing:border-box;
+    width:100%;
+    margin: 8px 0 0;
+    height: 48px;
+    padding: 10px 16px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+}
+
+.home_address-caution{
+  font-size:14px;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}

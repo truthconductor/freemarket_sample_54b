@@ -110,6 +110,7 @@
     &__table {
       float: right;
       min-width: 300px;
+      max-width: 300px;
       border: 1px $table-border solid;
       &__th {
         text-align: left;

@@ -9,6 +9,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(create_params)
+    #入力されたブランドがbrandsテーブルに存在する場合、ブランド情報をセット
+    @item.brand = Brand.find_by(name:brand_name_params[:brand_name]) unless brand_name_params.empty?
     #ステータスを販売中にする。
     @item.sales_state_id = 1
     @item.seller_id = current_user.id
@@ -176,7 +178,10 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
     # params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount)
   end
-
+  
+  def brand_name_params
+    params.require(:item).permit(:brand_name)
+  end
 
   # 商品を取得する
   def get_item
