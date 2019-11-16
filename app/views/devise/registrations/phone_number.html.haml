@@ -1,0 +1,19 @@
+= render partial: 'devise/registrations/registrations-header'
+.phone_number-wrapper
+  .phone_number-contents
+    %h2.registration_title 電話番号の確認
+    = form_with model: resource.personal, as: resource_name, local: true, url: address_path(resource_name), method: :get, id: "phone_number-form", class: "phone_number-form" do |f|
+      .phone_number__section
+        =f.label "携帯電話の番号"
+        %br
+        = f.text_field :cellular_phone_number, placeholder: "携帯電話の番号を入力", maxlength:35, class: "phone_number-form__input"
+        %br
+        - if resource.errors.full_messages_for(:"personal.cellular_phone_number").any?
+          %ul
+            - resource.errors.full_messages_for(:"personal.cellular_phone_number").each do |msg|
+              %li.validation-error__text
+                =msg
+        %p.phone_number-caution 本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
+      = f.submit "SMSを送信する",class:"registration-btn"
+      %p.phone_number-caution※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。
+  = render 'deals/footer'

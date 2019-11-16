@@ -1,0 +1,12 @@
+= render partial: 'devise/registrations/registrations-header'
+.registration-create-wrapper
+  .registration-create-contents
+    %h2.registration-create-title
+      会員登録完了
+    %p.registration-create-text
+      ありがとうございます。
+      %br
+      会員登録が完了しました。
+    =link_to root_path ,class:"registration-create-btn"do
+      メルカリをはじめる
+  = render partial: 'deals/footer'

@@ -1,0 +1,7 @@
+= render partial: 'devise/registrations/registrations-header'
+.zip-code-wrapper
+  .zip-code-contents
+    %h2.registration_title 
+      支払い方法
+    = render 'payjp_cards/devise_form', {payjp_card: @payjp_card}
+  = render 'deals/footer'  

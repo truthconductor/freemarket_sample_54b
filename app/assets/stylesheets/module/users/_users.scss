@@ -10,6 +10,15 @@
 // マイページ詳細情報エリア
 .user-container {
   width: 700px;
+  &__header {
+    background: $background-white;
+    &__headline {
+      color: $text-deepgray;
+      text-align: center;
+      font-size: 24px;
+      padding: 12px 24px;
+    }
+  }
 }
 
 // 中サイズ

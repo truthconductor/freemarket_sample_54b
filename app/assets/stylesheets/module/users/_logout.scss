@@ -1,0 +1,13 @@
+.user-logout {
+  background: $background-white;
+  padding: 64px 192px;
+  box-sizing: border-box;
+  &__button {
+    @include red-button;
+    text-align: center;
+    &:hover {
+      background: #F28A86;
+      transition: background 0.3s;
+    }
+  }
+}

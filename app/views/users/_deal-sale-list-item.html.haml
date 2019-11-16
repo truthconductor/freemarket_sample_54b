@@ -1,0 +1,11 @@
+= link_to "#" do
+  %li.user-notification__item
+    = image_tag deal.item.item_images.first.image.url, class: "user-notification__item__image"
+    .user-notification__item__headline
+      %p.user-notification__item__headline--title
+        = "「#{deal.item.name}」が購入されました。"
+        - if deal.deal_state_id == 5
+          取引が完了しました
+      %span.user-notification__item__headline--time
+        = deal.deal_state.state
+    = fa_icon 'angle-right 2x', class: "user-notification__item__icon"

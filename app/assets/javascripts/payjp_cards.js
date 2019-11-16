@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   // jQueryとpayjp.jsによるカード情報のトークン化
   // Railsの通常設定では全てのページでjavascriptが読み込まれるため、
   // カード情報に関わるページ以外で処理を行わせない
-  if(!document.URL.match('/cards/')) {
+  if(!document.URL.match(/cards/) && !document.URL.match(/step4/)){
     return;
   }
   // 自身の公開鍵をセット(テスト公開鍵)
@@ -21,6 +21,13 @@ $(document).on('turbolinks:load', function() {
     };
     //エラーメッセージ消去
     removeErrorMessage();
+    // javascriptによるバリデーション（簡易チェック）
+    if(!cardValid(card)) {
+      // preventDefaultによるdisableがメソッドを抜けないと有効にならないので少し経ってからdisableを消去する
+      setTimeout(function() {
+        form.find('.card-container__form__field__button').prop('disabled', false)}, 500);
+      return;
+    }
     // トークンを取得
     Payjp.createToken(card, function(s, response) {
       // トークン取得エラー
@@ -45,6 +52,9 @@ $(document).on('turbolinks:load', function() {
         var token = response.id;
         // payjp.jsから送られたカードトークンをformに追加してサーバーへPOST
         form.append($('<input type="hidden" name="card_token" />').val(token));
+        // カード情報をサーバーサイドに送らないためにカード情報入力をクリア
+        $('#payjp_card_number').val('');
+        $('#payjp_card_cvc').val('');
         form.get(0).submit();
       }
       //ボタン有効化
@@ -52,10 +62,37 @@ $(document).on('turbolinks:load', function() {
     });
   });
 
-
   // エラーメッセージ消去
   function removeErrorMessage() {
     $(".card-error_message").remove();
+  }
+
+  //カードバリデーション
+  function cardValid(card) {
+    var valid = true;
+    // カード番号
+    var cardRe = new RegExp('[0-9]{12,20}');
+    if (!cardRe.test(card.number))
+    {
+      valid = false;
+      buildInvalidNumberErrorMessage();
+    }
+    // 有効期限
+    var now = new Date();
+    if(parseInt(card.exp_year) < now.getFullYear()
+      || (parseInt(card.exp_year) === now.getFullYear() && parseInt(card.exp_month) < now.getMonth() + 1))
+    {
+      valid = false;
+      buildInvalidExpiredErrorMessage();
+    }
+    // セキュリティーコード
+    var cvcRe = new RegExp('[0-9]{3,4}');
+    if (!cvcRe.test(card.cvc))
+    {
+      valid = false;
+      buildInvalidCVCErrorMessage();
+    }
+    return valid;
   }
 
   // エラーメッセージ表示（カード番号）

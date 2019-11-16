@@ -1,0 +1,14 @@
+= render 'joint/header'
+= render 'users/user-breadcrumb', {symbol: :logout_mypage}
+.user-wrapper
+  %main.user-main
+    .user-container
+      .user-logout
+        = link_to destroy_user_session_path, method: :delete do
+          .user-logout__button
+            ログアウト
+    -# ナビゲーションバー
+    = render 'users/user-navigation'
+= render 'joint/app__dl'
+= render 'joint/footer'
+= render 'joint/exhibit__button'

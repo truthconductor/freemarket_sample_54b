@@ -1,0 +1,46 @@
+.phone_number-wrapper{
+  background-color:$background-smokewhite;
+  min-height: calc(100vh - 128px);
+}
+
+.phone_number-contents{
+  max-width:700px;
+  margin:0 auto;
+  background-color:$background-white ;
+}
+
+.phone_number-title{
+  padding: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.phone_number-form{
+  border-top: 1px solid #f5f5f5;
+  max-width: 343px;
+  margin:0 auto;
+  padding: 24px 16px 80px;
+  label{
+    font-weight:600;
+    font-size:14px;
+  }
+  &__input{
+    box-sizing:border-box;
+    width:100%;
+    margin: 8px 0 0;
+    height: 48px;
+    padding: 10px 16px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+}
+
+.phone_number-caution{
+  font-size:14px;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}

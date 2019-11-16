@@ -16,8 +16,7 @@ class PayjpCardsController < ApplicationController
   end
 
   def create
-    # formのパラメータとpayjp.jsのカードtokenを取得
-    @payjp_card = PayjpCard.new(payjp_card_params)
+    # payjp.jsのカードtokenを取得
     card_token = token_params[:card_token]
     # PAY.JPの顧客情報IDを既にデータベースに登録しているかチェック
     @credit_card = current_user.credit_card
