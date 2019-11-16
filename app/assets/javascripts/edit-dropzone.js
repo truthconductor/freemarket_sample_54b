@@ -108,8 +108,7 @@ $(document).on("turbolinks:load", function() {
   $(document).on('click', '.btn-delete', function() {
     // イベントが発生したimage_viewのオブジェクトとidを取得する
     var target_image = $(this).parent().parent();
-
-    var remove_id = target_image.data('image');
+    var remove_id = Number($(this).parent().parent()[0].getAttribute('data-image'));
 
     // 同じidのinputを取得する
     var remove_input = $(`input[data-image=${remove_id}]`);
@@ -118,7 +117,7 @@ $(document).on("turbolinks:load", function() {
     var removed_image_id = remove_input[0].value
     $.each(registered_images_ids, 
       function(index) {
-        if (Number($(this)[0]) == Number(removed_image_id)) {
+        if (Number($(this)[0]) === Number(removed_image_id)) {
           registered_images_ids.splice(index, 1);
         }
       }
@@ -143,7 +142,7 @@ $(document).on("turbolinks:load", function() {
   function add_data_image() {
     $('input[id^="item_item_images_attributes"]').each(function(index) {
       $(this).attr({
-        'data-image': index,
+        'data-image': String(index),
       });
     })
   };
@@ -155,14 +154,14 @@ $(document).on("turbolinks:load", function() {
       // 登録済み画像の枚数を足した数からeachをスタートする
       var image_number =  index + $('input[id^="item_item_images_attributes"]').length;
       $(input).attr({
-        'data-image': image_number,
+        'data-image': String(image_number),
         id: 'upload-image-' + image_number,
         name: 'item[item_images_attributes][' + image_number + '][image]',
       });
       $(input).prop('disabled', index >= 10);
     })
     $('.img-view').each(function(index, image) {
-      $(image).attr('data-image', index);
+      $(image).attr('data-image', String(index));
     });
   }
 
@@ -170,7 +169,7 @@ $(document).on("turbolinks:load", function() {
     // input,image_viewそれぞれにindexを再割り当て
     $('input[id^="item_item_images_attributes"]').each(function(index, input) {
       $(input).attr({
-        'data-image': index,
+        'data-image': String(index),
         name: 'item[item_registered_images][' + index + '][image]',
       });
     })

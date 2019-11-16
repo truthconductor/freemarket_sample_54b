@@ -130,7 +130,7 @@
     -# 出品者のみ商品状態変更ボタンを表示
     - if @item.seller == current_user && @item.sales_state_id != 3
       .item-seller-edit
-        = link_to edit_item_path(@item) do
+        = link_to edit_item_path(@item), data: {"turbolinks": false} do
           .item-seller-edit__button--enable
             商品の編集
         .item-seller-edit__or
