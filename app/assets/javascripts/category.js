@@ -160,6 +160,8 @@ $(document).on('turbolinks:load', function() {
         alert('カテゴリー取得に失敗しました');
       })
     }
+    else {
+      $('#grandchildren_wrapper').remove();
   });
 
   // 孫カテゴリー選択後のイベント

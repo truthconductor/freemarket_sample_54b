@@ -114,6 +114,11 @@ gem 'phonelib'
 
 gem 'draper'
 
+
+gem 'gon'
+
+gem 'aws-sdk-s3'
+
 gem 'whiny_validation'
 
 
@@ -124,3 +129,4 @@ gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
 
 gem 'omniauth-google-oauth2'
+

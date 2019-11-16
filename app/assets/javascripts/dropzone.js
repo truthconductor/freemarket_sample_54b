@@ -1,4 +1,10 @@
 $(document).on('turbolinks:load', function() {
+  // 商品出品ページでのみ発火するように正規表現で条件分岐
+  var re = new RegExp('/items/new|/items$');
+  if(!re.test(location.pathname)) {
+   return;
+  }
+
   var preview = $('.preview');
   var input_area = $('.input_area');
 
@@ -40,6 +46,7 @@ $(document).on('turbolinks:load', function() {
       preview.append(image_view);
     }
     
+    // プレビュー画像の表示をラベル要素の前に移動させる
     $('.dropzone-box').before($('.img-view'))
 
     //input,image_viewそれぞれにindexを再割り当て
