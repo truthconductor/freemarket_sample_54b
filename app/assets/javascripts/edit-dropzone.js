@@ -109,7 +109,6 @@ $(document).on("turbolinks:load", function() {
     // イベントが発生したimage_viewのオブジェクトとidを取得する
     var target_image = $(this).parent().parent();
     var remove_id = Number($(this).parent().parent()[0].getAttribute('data-image'));
-    // var remove_id = target_image.data('image');
 
     // 同じidのinputを取得する
     var remove_input = $(`input[data-image=${remove_id}]`);
