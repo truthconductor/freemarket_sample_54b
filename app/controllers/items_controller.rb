@@ -60,8 +60,7 @@ class ItemsController < ApplicationController
                               secret_access_key: Rails.application.credentials.aws[:secret_access_key],
                               )
       @item.item_images.each do |image|
-        binary_data = client.get_object(bucket: 'upload-image3')
-        gon.item_images_binary_datas << Base64.strict_encode64(binary_data)
+        gon.item_images_binary_datas << image.image_url
       end
     else
       @item.item_images.each do |image|
@@ -79,17 +78,21 @@ class ItemsController < ApplicationController
     # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
     exist_ids.clear if exist_ids[0] == 0
 
-    if (exist_ids.length != 0 || params[:item][:item_images_attributes].nil?) && @item.update!(create_params)
+    # 新規登録、登録済画像が1枚も残っていない場合は、元の画面がredirectする
+    unless exist_ids.length == 0 && params[:item][:item_images_attributes].nil?
+      @item.update!(create_params)
       # 登録済画像のうち削除ボタンが押された画像を削除
       unless ids.length == exist_ids.length
-        binding.pry
         # 削除する画像のidの配列を生成
         delete_ids = ids - exist_ids
         delete_ids.each do |id|
           @item.item_images.find(id).destroy
         end
       end
-    end
+      redirect_to item_path(@item), data: {turbolinks: false}
+    else
+      redirect_back(fallback_location: root_path)
+    end 
   end
 
   def show
@@ -181,7 +184,6 @@ class ItemsController < ApplicationController
   end
 
   def registered_image_params
-    binding.pry
     params.require(:registered_images_ids).permit({ids: []})
   end
 end

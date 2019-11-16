@@ -84,7 +84,6 @@ $(document).on('turbolinks:load', function() {
   function reorder_data_image() {
     //input,image_viewそれぞれにindexを再割り当て
     $('[type="file"].upload-image').each(function(index, input) {
-      debugger
       $(input).attr({
         'data-image': index,
         id: 'upload-image-' + index,

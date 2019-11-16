@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", function() {
   var registered_images_ids = [];
 
   gon.item_images.forEach(function(image, index) {
-    var img = $(`<div class = "img-view">
+    var img = $(`<div class = "img-view" data-image = "${index}">
                    <img>
                    <div class="btn-wrapper">
                      <div class="btn-edit">編集</div><!--
@@ -45,7 +45,7 @@ $(document).on("turbolinks:load", function() {
 
   add_data_image();
   // プレビュー表示されている画像の枚数に応じて、ラベルの大きさを調整
-  inputs_length = $('input[name^="item[item_images_attributes]"]').length;
+  inputs_length = $('input[name^="item[item_"]').length;
   $(`.items-sell-container__dropzone0`).attr('class',`items-sell-container__dropzone${inputs_length - 1}`);
 
   // プレビュー画像の表示をラベル要素の前に移動させる
@@ -59,13 +59,15 @@ $(document).on("turbolinks:load", function() {
     changed_input = $(this);
     changed_id = changed_input.data('image');
     // 現時点でのfile用inputタグを全取得する
-    inputs_length = $('input[name^="item[item_images_attributes]"]').length;
+    inputs_length = $('input[name^="item[item_"]').length;
     //画像が10枚より少ない場合、inputを更に追加
     if(inputs_length <= 10) {
       var new_input = $(`<input class="upload-image" type="file" style="display: none;" name="item[item_images_attributes][${inputs_length}][image]" id="upload-image-${inputs_length}">`);
       input_area.append(new_input);
     }
 
+    // ラベルのサイズ調整
+    $('.dropzone-box').attr('for',`upload-image-${inputs_length}`);
     $(`.items-sell-container__dropzone${inputs_length - 1}`).attr('class',`items-sell-container__dropzone${inputs_length}`);
 
     //変更されたidに対応するimg-viewを取得
@@ -116,7 +118,6 @@ $(document).on("turbolinks:load", function() {
     var removed_image_id = remove_input[0].value
     $.each(registered_images_ids, 
       function(index) {
-        debugger
         if (Number($(this)[0]) == Number(removed_image_id)) {
           registered_images_ids.splice(index, 1);
         }
@@ -125,6 +126,14 @@ $(document).on("turbolinks:load", function() {
     //input,image_view消去
     remove_input.remove();
     target_image.remove();
+
+    // 現時点でのfile用inputタグを全取得する
+    inputs_length = $('input[name^="item[item_"]').length;
+
+    // ラベルのサイズ調整
+    $('.dropzone-box').attr('for',`upload-image-${inputs_length - 1}`);
+    $(`.items-sell-container__dropzone${inputs_length}`).attr('class',`items-sell-container__dropzone${inputs_length - 1}`);
+    
     //input,image_viewそれぞれにindexを再割り当て
     reorder_uploaded_data_image();
     reorder_new_data_image();
@@ -141,7 +150,7 @@ $(document).on("turbolinks:load", function() {
 
   // data-imageをの番号を再割り当てする
   function reorder_new_data_image() {
-    //input,image_viewそれぞれにindexを再割り当て
+    // input,image_viewそれぞれにindexを再割り当て
     $('input[id^="upload-image"]').each(function(index, input) {
       // 登録済み画像の枚数を足した数からeachをスタートする
       var image_number =  index + $('input[id^="item_item_images_attributes"]').length;
@@ -152,18 +161,13 @@ $(document).on("turbolinks:load", function() {
       });
       $(input).prop('disabled', index >= 10);
     })
-    debugger
     $('.img-view').each(function(index, image) {
       $(image).attr('data-image', index);
     });
-    //dropzone-boxに対応するinputを末尾のinputに再割り当て
-    debugger
-    $('.dropzone-box').attr('for','upload-image-' + ($('input[name^="item[item_"]').length - 1));
-    $('.items-sell-container__dropzone' + ($('input[name^="item[item_"]').length)).attr('class', 'items-sell-container__dropzone' + ($('input[name^="item[item_"]').length - 1));
   }
 
   function reorder_uploaded_data_image() {
-    //input,image_viewそれぞれにindexを再割り当て
+    // input,image_viewそれぞれにindexを再割り当て
     $('input[id^="item_item_images_attributes"]').each(function(index, input) {
       $(input).attr({
         'data-image': index,
