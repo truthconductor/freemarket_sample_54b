@@ -162,6 +162,7 @@ $(document).on('turbolinks:load', function() {
     }
     else {
       $('#grandchildren_wrapper').remove();
+    }
   });
 
   // 孫カテゴリー選択後のイベント
