@@ -47,7 +47,7 @@
         %section.items-sell-content__section.clearfix
           %h3.item__heading 商品の詳細
           .items-sell-container__box
-            .items-sell-container__form__field
+            .items-sell-container__form__field#items-sell-container-category
               .items-sell-container__form__field__label
                 = f.label :category_id, "カテゴリー"
                 %span.form--required
@@ -63,6 +63,13 @@
                     = f.select :category, {}, {}, {id:"grandchild_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'} do
                       - @category_grandchild_array.each do |c|
                         = content_tag(:option, c.first, value: c.last)
+            .items-sell-container__form__field#brand_wrapper
+              .items-sell-container__form__field__label
+                = f.label :brand_name, "ブランド"
+                %span.form--optional
+                  任意
+              = f.text_field :brand_name, value: @item.brand&.name, placeholder: "例）シャネル", id:"item_brand_input", class:"items-sell-container__form__field__input-field", autocomplete: "off"
+            
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :item_state_id, "商品の状態"
