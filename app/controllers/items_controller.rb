@@ -26,6 +26,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # 商品が販売済なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.sales_state_id == 3
+    # 他人の出品商品なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.seller != current_user
     gon.item = @item
     gon.item_images = @item.item_images
     # 子カテゴリの取得
@@ -71,6 +75,10 @@ class ItemsController < ApplicationController
   end
 
   def update
+    # 商品が販売済なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.sales_state_id == 3
+    # 他人の出品商品なのに編集リクエストが来た時商品詳細ページへリダイレクト
+    return redirect_to item_path(@item) if @item.seller != current_user
     # 登録済画像のidの配列を生成
     ids = @item.item_images.map{|image| image.id}
     # 登録済画像のうち、編集後も残っている画像のidの配列を生成

@@ -1,5 +1,5 @@
 .root-exhibit__button
-  =link_to new_item_path ,class: "root-exhibit__button" do
+  =link_to new_item_path ,class: "root-exhibit__button", data: {"turbolinks": false} do
     .root-exhibit__button--text
       出品
       = fa_icon "camera 3x", class: "root-exhibit__button__icon"
