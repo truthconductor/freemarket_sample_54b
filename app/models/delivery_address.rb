@@ -7,13 +7,13 @@ class DeliveryAddress < ApplicationRecord
   validates :first_name, length: {maximum: 35}
   validates :last_name_kana, presence: true
   validates :last_name_kana, length: {maximum: 35}
-  validates :last_name_kana, format: {message: "を全角カナで入力してください", with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }
+  validates :last_name_kana, format: {message: "を全角カナで入力してください", with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }, allow_blank: true
   validates :first_name_kana, presence: true
   validates :first_name_kana, length: {maximum: 35}
-  validates :first_name_kana, format: {message: "を全角カナで入力してください", with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }
+  validates :first_name_kana, format: {message: "を全角カナで入力してください", with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ }, allow_blank: true
   validates :zip_code, presence: true
   validates :zip_code, length: {maximum: 8}
-  validates :zip_code, format: {message: "を正しく入力してください", with: /\A[0-9]{3}-[0-9]{4}\z/}
+  validates :zip_code, format: {message: "を正しく入力してください", with: /\A[0-9]{3}-[0-9]{4}\z/}, allow_blank: true
   validate :check_prefecture
   validates :city, presence: true
   validates :city, length: {maximum: 50}

@@ -113,11 +113,13 @@
       max-width: 300px;
       border: 1px $table-border solid;
       &__th {
+        width: 100px;
         text-align: left;
         font-size: 14px;
         line-height: 18px;
         font-weight: 500;
         padding: 16px 8px;
+        vertical-align: middle;
         border: 1px $table-border solid;
         background: #fafafa;
       }
@@ -128,6 +130,26 @@
         border: 1px $table-border solid;
         &__link {
           color: $link-hover;
+        }
+        &__review {
+          padding: 5px 0 0;
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          &__icon {
+            &--smile {
+              color: #ef5185;
+            }
+            &--meh {
+              color: #fba933;
+            }
+            &--frown {
+              color: #6ab5d8;
+            }
+          }
+          &--score {
+            margin: 0 10px 0 2px;
+          }
         }
         &__caterogy {
           display: flex;
