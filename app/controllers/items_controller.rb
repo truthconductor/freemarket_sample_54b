@@ -85,6 +85,8 @@ class ItemsController < ApplicationController
     exist_ids = registered_image_params[:ids].map(&:to_i)
     # 登録済画像が残っていない場合(配列に0が格納されている)、配列を空にする
     exist_ids.clear if exist_ids[0] == 0
+    #入力されたブランド名がbrandsテーブルに存在する場合、ブランドをセット
+    @item.brand = Brand.find_by(name:brand_name_params[:brand_name]) unless brand_name_params.empty?
 
     # 新規登録、登録済画像が1枚も残っていない場合は、元の画面がredirectする
     unless exist_ids.length == 0 && params[:item][:item_images_attributes].nil?

@@ -1,4 +1,12 @@
 $(document).on('turbolinks:load', function() {
+
+  //商品編集ページの時既にブランド入力エリアが存在するので、
+  //インクリメンタルサーチ機能を追加する
+  var re = new RegExp('/items/[0-9]+/edit$');
+  if(re.test(location.pathname)) {
+    addIncrementalSearch();
+  }
+
   function appendOption(category) {
     var html = `<option value="${category.id}">${category.name}</option>`;
     return html;
@@ -37,6 +45,11 @@ $(document).on('turbolinks:load', function() {
     $('#items-sell-container-category').after(brandInputHTML);
 
     // インクリメンタルサーチ処理を追加
+    addIncrementalSearch();
+  }
+
+  // インクリメンタルサーチ処理を追加
+  function addIncrementalSearch() {
     $("#item_brand_input").on("keyup", function() {
       var input = $("#item_brand_input").val();
       if (input.length == 0)
@@ -66,7 +79,7 @@ $(document).on('turbolinks:load', function() {
     });
   }
 
-    // インクリメンタルサーチ結果を入れるリストのマークアップを取得、無ければ作成して追加する
+  // インクリメンタルサーチ結果を入れるリストのマークアップを取得、無ければ作成して追加する
   function appendBrandSearchResults(brands) {
     // 検索結果を入れるリストの用意
     var search_results_list = $("#brand-incremental-search-results");
