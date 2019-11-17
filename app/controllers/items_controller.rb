@@ -16,10 +16,11 @@ class ItemsController < ApplicationController
     @item.seller_id = current_user.id
     respond_to do |format|
       if @item.save
-        format.html{redirect_to root_path}
+        format.html{redirect_to root_path, notice: "#{@item.name}を出品しました"}
       else
         #画像がアップロードされずにRollbackした場合、ネストしているitem_imagesモデルが消えるため、新たにbuildする。
         @item.item_images.build if @item.item_images.empty?
+        flash.now[:alert] = '入力内容に不備があります'
         format.html{render action: 'new'}
       end
     end
@@ -90,17 +91,22 @@ class ItemsController < ApplicationController
 
     # 新規登録、登録済画像が1枚も残っていない場合は、元の画面がredirectする
     unless exist_ids.length == 0 && params[:item][:item_images_attributes].nil?
-      @item.update!(create_params)
-      # 登録済画像のうち削除ボタンが押された画像を削除
-      unless ids.length == exist_ids.length
-        # 削除する画像のidの配列を生成
-        delete_ids = ids - exist_ids
-        delete_ids.each do |id|
-          @item.item_images.find(id).destroy
+      if @item.update(create_params)
+        # 登録済画像のうち削除ボタンが押された画像を削除
+        unless ids.length == exist_ids.length
+          # 削除する画像のidの配列を生成
+          delete_ids = ids - exist_ids
+          delete_ids.each do |id|
+            @item.item_images.find(id).destroy
+          end
         end
+        redirect_to item_path(@item), notice: "#{@item.name}を編集しました", data: {turbolinks: false}
+      else
+        flash[:alert] = '入力内容に不備があります'
+        redirect_back(fallback_location: root_path)
       end
-      redirect_to item_path(@item), data: {turbolinks: false}
     else
+      flash[:alert] = '入力内容に不備があります'
       redirect_back(fallback_location: root_path)
     end 
   end

@@ -207,3 +207,17 @@
   
 }
 
+// フラッシュメッセージのデザイン
+.notification {
+  .notice {
+    background-color: #38aef0;
+    color: white;
+    text-align: center
+  }
+
+  .alert {
+    background-color: #F35500;
+    color: white;
+    text-align: center;
+  }
+}
