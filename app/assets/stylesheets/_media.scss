@@ -209,15 +209,15 @@
 
 // フラッシュメッセージのデザイン
 .notification {
+  text-align: center;
+  color: $text-white;
+  font-size: 20px;
   .notice {
     background-color: #38aef0;
-    color: white;
-    text-align: center
+    padding: 10px 0;
   }
-
   .alert {
     background-color: #F35500;
-    color: white;
-    text-align: center;
+    padding: 10px 0;
   }
 }
