@@ -10,5 +10,7 @@
     = include_gon
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    .header.container
+      =render partial: "layouts/flash"
     =yield
    
