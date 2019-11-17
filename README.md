@@ -225,7 +225,7 @@
 
 - has_many :items
 
-## sales_states [ActiveHash]（販売状態）
+## sales_states(販売状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -278,13 +278,14 @@
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 - belongs_to_active_hash :deal_state
 
-## deals_state [ActiveHash]（取引）
+## deal_state [ActiveHash]（取引）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |取引状態|prefecture|string|null: false|
 
 ### Association
+
 - has_many :deals
 
 ## paymentsテーブル（支払い）
