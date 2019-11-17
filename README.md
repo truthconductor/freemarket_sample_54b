@@ -33,7 +33,7 @@
 |ニックネーム|nickname|string|null: false, limit:20|
 |紹介文|introduction|text|limit:1000|
 |プロフィール画像|avatar|string||
-|ユーザー|user_id|reference|null: false, foreign_key: true|
+|ユーザーid|user_id|reference|null: false, foreign_key: true|
 
 ### Association
 
@@ -55,7 +55,7 @@
 |番地|address|string|limit:100|
 |建物名|building|string|limit:100|
 |携帯番号|cellular_phone_number|string|limit:35|
-|ユーザー|user_id|reference|null: false, foreign_key: true|
+|ユーザーid|user_id|reference|null: false, foreign_key: true|
 
 ### Association
 
@@ -76,7 +76,7 @@
 |番地|address|string|null: false, limit:100|
 |建物名|building|string|limit:100|
 |電話|phone_number|string|limit:35|
-|ユーザー|user_id|reference|null: false, foreign_key: true|
+|販売者id|user_id|reference|null: false, foreign_key: true|
 
 ### Association
 
@@ -140,6 +140,7 @@
 |販売状態id|sales_state_id|reference|null: false, foreign_key: true|
 |カテゴリid|category_id|reference|null: false, foreign_key: true|
 |ブランドid|brand_id|reference|foreign_key: true|
+|販売者id|seller_id|reference|foreign_key: true|
 
 ### index
 
@@ -225,7 +226,7 @@
 
 - has_many :items
 
-## sales_states(販売状態）
+## sales_statesテーブル（販売状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -266,8 +267,8 @@
 |属性|Column|Type|Options|
 |---|---|---|---|
 |取引日|date|datetime|null: false|
-|購入者|buyer_id|reference|null: false|
-|販売者|seller_id|reference|null: false|
+|購入者id|buyer_id|reference|null: false|
+|販売者id|seller_id|reference|null: false|
 |取引状態id|deal_state_id|null: false|
 
 ### Association
@@ -278,11 +279,11 @@
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 - belongs_to_active_hash :deal_state
 
-## deal_state [ActiveHash]（取引）
+## deal_states [ActiveHash]（取引状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
-|取引状態|prefecture|string|null: false|
+|取引状態|state|string|null: false|
 
 ### Association
 
@@ -304,7 +305,7 @@
 
 |属性|Column|Type|Options|
 |---|---|---|---|
-|顧客id(pay.jp)|customer_id|string|null: false|
+|顧客id(PAY.JP)|customer_id|string|null: false|
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 
 ### Association
