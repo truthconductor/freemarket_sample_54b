@@ -6,6 +6,8 @@
 |---|---|---|---|
 |メールアドレス|email|string|null: false, unique: true|
 |パスワード|encrypted_password|string|null: false|
+|認証プロバイダ|provider|string||
+|UID|uid|string||
 
 ### index
 
@@ -13,16 +15,16 @@
 
 ### Association
 
+- belongs_to :user
 - has_one :profile, dependent: :destroy
 - has_one :personal, dependent: :destroy
-- has_one :deliver_address, dependent: :destroy
-- has_many :providers, dependent: :destroy
-- has_many :items, foreign_key: 'seller_id'
+- has_one :delivery_address, dependent: :destroy
+- has_one :credit_card, dependent: :destroy
+- has_many :items, class_name: 'Item', foreign_key: 'seller_id'
 - has_many :buyer_deals, class_name: 'Deal', foreign_key: 'buyer_id'
 - has_many :seller_deals, class_name: 'Deal', foreign_key: 'seller_id'
 - has_many :item_comments
 - has_many :item_likes
-- has_one :credit_card
 
 ## profilesテーブル（プロフィール）
 
@@ -36,6 +38,7 @@
 ### Association
 
 - belongs_to :user
+- belongs_to_active_hash :prefecture
 
 ## personalsテーブル（本人情報）
 
@@ -45,6 +48,7 @@
 |名|first_name|string|null: false, limit:35|
 |セイ|last_name_kana|string|null: false, limit:35|
 |メイ|first_name_kana|string|null: false, limit:35|
+|誕生日|birthdate|date||
 |郵便番号|zip-code|string|limit:8|
 |都道府県|prefecture_id|integer||
 |市区町村|city|string|limit:50|
@@ -58,7 +62,7 @@
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## deliver_addressesテーブル（発送元・お届け先）
+## delivery_addressesテーブル（発送元・お届け先）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -79,18 +83,9 @@
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## providersテーブル（SNS認証プロバイダ）
-
-|属性|Column|Type|Options|
-|---|---|---|---|
-|認証プロバイダ|provider|string|null: false|
-|UID|uid|string|null: false|
-|ユーザー|user_id|reference|null: false, foreign_key: true|
-
-- belongs_to :user
-
 ## categoriesテーブル（カテゴリー）
 
+経路列挙モデル
 |属性|Column|Type|Options|
 |---|---|---|---|
 |カテゴリ名|name|string|null: false|
@@ -102,6 +97,7 @@
 
 ### Association
 
+- has_many :categories_brands
 - has_many :brands, through: :categories_brands
 - has_many :items
 
@@ -110,9 +106,11 @@
 |属性|Column|Type|Options|
 |---|---|---|---|
 |ブランド名|name|string|null: false|
+|頭文字|name|first_letter|null: false|
 
 ### Association
 
+- has_many :categories_brands
 - has_many :categories, through: :categories_brands
 - has_many :items
 
@@ -161,6 +159,7 @@
 - belongs_to :category
 - belongs_to :brand
 - belongs_to :deal
+- belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 
 ## item_imagesテーブル（出品画像）
 
@@ -214,7 +213,7 @@
 
 - has_many :items
 - has_many :personals
-- has_many :deliver_addresses
+- has_many :delivery_addresses
 
 ## deliver_daysテーブル（発送日数）
 
@@ -226,7 +225,7 @@
 
 - has_many :items
 
-## sales_statesテーブル（販売状態）
+## sales_states [ActiveHash]（販売状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -269,13 +268,24 @@
 |取引日|date|datetime|null: false|
 |購入者|buyer_id|reference|null: false|
 |販売者|seller_id|reference|null: false|
+|取引状態id|deal_state_id|null: false|
 
 ### Association
 
 - has_one :item
-- has_one :payment
+- has_one :payment, dependent: :destroy
 - belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
+- belongs_to_active_hash :deal_state
+
+## deals_state [ActiveHash]（取引）
+
+|属性|Column|Type|Options|
+|---|---|---|---|
+|取引状態|prefecture|string|null: false|
+
+### Association
+- has_many :deals
 
 ## paymentsテーブル（支払い）
 
