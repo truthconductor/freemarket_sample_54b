@@ -24,11 +24,14 @@ class PayjpCardsController < ApplicationController
       # PAY.JPにカード情報を追加登録
       customer = Payjp::Customer.retrieve(@credit_card.customer_id)
       if card_token.blank?
+        set_card_regist_error
+        render :new
         return
       end
       card = customer.cards.create(card: card_token)
       # エラーレスポンスを含んでいないか確認
       if card.respond_to? :error
+        set_card_regist_error
         render :new
         return
       end
@@ -37,18 +40,20 @@ class PayjpCardsController < ApplicationController
       customer = Payjp::Customer.create(email: current_user.email, card: card_token)
       # エラーレスポンスを含んでいないか確認
       if customer.respond_to? :error
+        set_card_regist_error
         render :new
         return
       end
       # PayJP顧客情報をユーザー情報と紐づけてデータベース登録
       @credit_card = CreditCard.new(customer_id: customer[:id], user_id: current_user.id)
       unless @credit_card.save
+        set_card_regist_error
         render :new
         return
       end
     end
     # カード一覧画面に戻る
-    redirect_to action: :index
+    redirect_to({action: :index}, notice: "カード情報を登録しました")
   end
 
   def destroy
@@ -63,7 +68,7 @@ class PayjpCardsController < ApplicationController
       render :index
     else
       # カード一覧画面に戻る
-      redirect_to action: :index
+      redirect_to({action: :index}, notice: "カード登録情報を削除しました")
     end
   end
 
@@ -72,6 +77,12 @@ class PayjpCardsController < ApplicationController
   def set_api_key
     require "payjp"
     Payjp.api_key = Rails.application.credentials.payjp[:api_key]
+  end
+
+  # PAY.JPカード登録エラー情報のセット
+  def set_card_regist_error
+    @payjp_card = PayjpCard.new
+    flash.now[:alert] = 'カード情報を登録できませんでした、申し訳ありませんがもう一度登録をしてください'
   end
 
   def payjp_card_params

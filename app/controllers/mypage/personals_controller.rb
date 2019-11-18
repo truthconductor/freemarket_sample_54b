@@ -9,8 +9,9 @@ class Mypage::PersonalsController < ApplicationController
 
   def update
     if @personal.update(profile_param)
-      redirect_to edit_mypage_personals_path
+      redirect_to(mypage_path, notice: "本人情報を登録しました")
     else
+      flash[:alert] = '入力内容に不備があります'
       render :edit
     end
   end

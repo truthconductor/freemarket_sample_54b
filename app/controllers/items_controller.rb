@@ -108,10 +108,12 @@ class ItemsController < ApplicationController
     else
       flash[:alert] = '入力内容に不備があります'
       redirect_back(fallback_location: root_path)
-    end 
+    end
   end
 
   def show
+    # 販売者以外は一時停止中の商品を見れないようにトップページへリダイレクト
+    return redirect_to root_path if @item.sales_state_id == 2 && @item.seller != current_user
   end
 
   def destroy
@@ -120,9 +122,9 @@ class ItemsController < ApplicationController
     # 商品が購入済なのに削除リクエストが来た時商品詳細ページへリダイレクト
     return redirect_to item_path(@item) if @item.sales_state_id == 3
     # 商品を消去したらマイページへリダイレクト
-    return redirect_to mypage_path if @item.delete
+    return redirect_to(mypage_path, notice: "#{@item.name}を消去しました") if @item.delete
     # 消去に失敗した時商品詳細ページリダイレクト
-    render redirect_to item_path(@item)
+    redirect_to(item_path(@item), alert: "#{@item.name}を消去ができませんでした。申し訳ありませんがもう一度操作してください")
   end
 
   # 商品販売状態を販売中にする
@@ -133,7 +135,11 @@ class ItemsController < ApplicationController
     return redirect_to item_path(@item) unless @item.sales_state_id == 2
     # 商品を公開中に切り替えて保存する
     @item.sales_state_id = 1
-    @item.save
+    if @item.save
+      flash[:notice] = "#{@item.name}の出品を再開しました"
+    else
+      flash[:alert] = "#{@item.name}の出品を再開できませんでした。申し訳ありませんがもう一度操作してください"
+    end
     redirect_to item_path(@item)
   end
 
@@ -145,7 +151,11 @@ class ItemsController < ApplicationController
     return redirect_to item_path(@item) unless @item.sales_state_id == 1
     # 商品を一旦停止中に切り替えて保存する
     @item.sales_state_id = 2
-    @item.save
+    if @item.save
+      flash[:notice] = "#{@item.name}の出品を一旦停止しました。出品を再開するをクリックすると出品を再開できます"
+    else
+      flash[:alert] = "#{@item.name}の出品を一旦停止できませんでした。申し訳ありませんがもう一度操作してください"
+    end
     redirect_to item_path(@item)
   end
 
@@ -192,7 +202,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
     # params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount)
   end
-  
+
   def brand_name_params
     params.require(:item).permit(:brand_name)
   end

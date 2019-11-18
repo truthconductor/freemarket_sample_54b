@@ -10,4 +10,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'https://js.pay.jp/'
   %body
+    .header.container
+      = render partial: "layouts/flash"
     = yield

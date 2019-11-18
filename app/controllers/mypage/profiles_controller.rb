@@ -15,8 +15,9 @@ class Mypage::ProfilesController < ApplicationController
     return redirect_to edit_mypage_profiles_path if current_user.profile
     @profile = current_user.build_profile(profile_param)
     if @profile.save
-      redirect_to mypage_path
+      redirect_to(mypage_path, notice: "プロフィールを作成しました")
     else
+      flash[:alert] = '入力内容に不備があります'
       render :new
     end
   end
@@ -30,9 +31,10 @@ class Mypage::ProfilesController < ApplicationController
     # プロフィールを作成していないのに編集リクエストが来た際にはnewアクションにリダイレクト
     return redirect_to new_mypage_profiles_path unless @profile
     if @profile.update(profile_param)
-      redirect_to mypage_path
+      redirect_to(mypage_path, notice: "プロフィールを更新しました")
     else
-      render :new
+      flash[:alert] = '入力内容に不備があります'
+      render :edit
     end
   end
 

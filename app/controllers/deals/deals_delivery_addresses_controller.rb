@@ -13,8 +13,9 @@ class Deals::DealsDeliveryAddressesController < DeliveryAddressesController
     @delivery_address = DeliveryAddress.new(address_params)
     @delivery_address.user = current_user
     if @delivery_address.save
-      redirect_to new_item_purchase_path
+      redirect_to(new_item_purchase_path, notice: "配送先を登録しました")
     else
+      flash[:alert] = '入力内容に不備があります'
       render :new
     end
   end
@@ -24,8 +25,9 @@ class Deals::DealsDeliveryAddressesController < DeliveryAddressesController
     @delivery_address = DeliveryAddress.find(params[:id])
     if @delivery_address.user_id == current_user.id
       if @delivery_address.update(address_params)
-        redirect_to new_item_purchase_path
+        redirect_to(new_item_purchase_path, notice: "配送先を変更しました")
       else
+        flash[:alert] = '入力内容に不備があります'
         render :new
       end
     end
