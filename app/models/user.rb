@@ -11,7 +11,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :personal
   accepts_nested_attributes_for :profile
   validates :personal, associated: true
-  has_one :deliver_address, dependent: :destroy
   has_one :delivery_address, dependent: :destroy
   has_many :items, class_name: 'Item', foreign_key: 'seller_id'
   has_many :buyer_deals, class_name: 'Deal', foreign_key: 'buyer_id'

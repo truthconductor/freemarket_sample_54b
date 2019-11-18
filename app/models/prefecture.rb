@@ -20,5 +20,5 @@ class Prefecture < ActiveHash::Base
   ]
   has_many :personals
   has_many :items
-  has_many :deliver_addresses
+  has_many :delivery_addresses
 end
