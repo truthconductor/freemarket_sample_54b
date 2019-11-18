@@ -76,7 +76,7 @@
 |番地|address|string|null: false, limit:100|
 |建物名|building|string|limit:100|
 |電話|phone_number|string|limit:35|
-|販売者id|user_id|reference|null: false, foreign_key: true|
+|ユーザーid|user_id|reference|null: false, foreign_key: true|
 
 ### Association
 
@@ -269,7 +269,7 @@
 |取引日|date|datetime|null: false|
 |購入者id|buyer_id|reference|null: false|
 |販売者id|seller_id|reference|null: false|
-|取引状態id|deal_state_id|null: false|
+|取引状態id|deal_state_id|reference|null: false|
 
 ### Association
 
@@ -295,7 +295,7 @@
 |---|---|---|---|
 |金額|amount|integer|null: false|
 |ポイント|point|integer|null: false|
-|取引id|buyer_id|reference|null: false, foreign_key: true|
+|取引id|deal_id|reference|null: false, foreign_key: true|
 
 ### Association
 
