@@ -8,12 +8,12 @@
         = link_to personal_name_path, class:"login-registration__button" do
           新規会員登録
     .registration-top-btn
-      .registration-top-section--facebook
-        = link_to user_facebook_omniauth_authorize_path, method: :post, class:"registration-top-section__item" do
+      = link_to user_facebook_omniauth_authorize_path, method: :post, class:"registration-top-section__item" do
+        .registration-top-section--facebook     
           = fa_icon "facebook-official", class: "registration-top-section__icon--facebook"
           Facebookでログイン
-      .registration-top-section--google   
-        = link_to  user_google_oauth2_omniauth_authorize_path, method: :post, class:"registration-top-section__item--google" do
+      = link_to  user_google_oauth2_omniauth_authorize_path, method: :post, class:"registration-top-section__item--google" do
+        .registration-top-section--google   
           =embedded_svg("google.svg",class:"registration-top-section__icon--google")
           Googleでログイン
     .login-form
