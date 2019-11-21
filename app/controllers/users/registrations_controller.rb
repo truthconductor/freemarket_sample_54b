@@ -230,8 +230,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       self.resource = resource_class.new sign_up_params
       resource.validate # Look for any other validation errors besides Recaptcha
       set_minimum_password_length
-      render action: :personal_name  unless @user.valid?
     end
+    render action: :personal_name  unless @user.valid?
   end
 
 
@@ -272,9 +272,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       self.resource = resource_class.new sign_up_params
       resource.validate # Look for any other validation errors besides Recaptcha
       set_minimum_password_length
-      render action: :personal_name_google unless @user.valid?
     end
-    
+    render action: :personal_name_google unless @user.valid?
   end
 
 
