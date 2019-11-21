@@ -12,8 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_action :set_api_key, only:[:creditcard,:create]
 
-  prepend_after_action :check_captcha, only: [:phone_number, :phone_number_google ]
-
   require "date"
 
   layout "registration"
@@ -296,7 +294,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       last_name_kana: session[:last_name_kana],
       first_name_kana: session[:first_name_kana],
       birthdate: session[:birthdate],
-      cellular_phone_number: session[:phone_number]
+      cellular_phone_number: session[:phone_number],
+      zip_code: "123-4567",
+      prefecture_id: "1",
+      city: "札幌市",
+      address: "中央区北1条西2丁目"
     )
     render action: :phone_number  unless @user.valid?
   end

@@ -12,7 +12,7 @@ class Personal < ApplicationRecord
   validates :first_name_kana, presence: true
   validates :zip_code,length: {maximum: 8}
   validates :zip_code,allow_blank: true, format: {message: "を正しく入力してください", with: /\A[0-9]{3}-[0-9]{4}\z/}
-  validates :check_prefecture,allow_blank: true,numericality: { only_integer: true }
+  validates :prefecture_id,presence: true,allow_blank: true
   validates :city,length: {maximum: 50}
   validates :address,length: {maximum: 100}
   validates :building,length: {maximum: 100}
@@ -28,12 +28,6 @@ class Personal < ApplicationRecord
   belongs_to :user
   belongs_to_active_hash :prefecture
 
-  # 都道府県入力バリデーション
-  def check_prefecture
-    if prefecture_id.nil?
-      errors.add(:prefecture_id, "を選択してください")
-    end
-  end
 
   def check_phone_number
     unless cellular_phone_number.blank? || Phonelib.valid_for_country?(cellular_phone_number, :jp)
