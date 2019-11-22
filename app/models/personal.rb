@@ -21,6 +21,7 @@ class Personal < ApplicationRecord
   validates :cellular_phone_number, presence: true
   validate :check_phone_number
   validates :birthdate, presence: true
+  validate :check_date
   #カタカナとひらがな以外のデータを制限
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "はひらがなかカタカナで入力してください"}
   validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "はひらがなかカタカナで入力してください"}
@@ -33,5 +34,10 @@ class Personal < ApplicationRecord
     unless cellular_phone_number.blank? || Phonelib.valid_for_country?(cellular_phone_number, :jp)
       errors.add(:cellular_phone_number, "を正しく入力してください")
     end
+  end
+
+  def check_date
+    self.birthdate == 0
+      errors.add(:birthdate,"を正しく入力して下さい")
   end
 end
