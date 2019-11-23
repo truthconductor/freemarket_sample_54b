@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  $(document).on('keyup', '.item-value', function(event) {
+  $(document).on('keyup change', '.item-value', function(event) {
     var price = $(this).val();
 
     if(price >= 300 && price <= 9999999) {
@@ -9,7 +9,6 @@ $(document).on('turbolinks:load', function() {
       profit = '¥' + String(profit).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,');
       $('.margin-calculation__result').html(margin);
       $('.profit-calculation__result').html(profit);
-
     } 
     else {
       $('.margin-calculation__result').html("-");

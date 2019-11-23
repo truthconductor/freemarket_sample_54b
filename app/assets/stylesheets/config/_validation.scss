@@ -2,6 +2,13 @@ input[type="text"].validation-error {
   border: solid 1px #ea352d;
 }
 
+input[type="number"].validation-error {
+  border: solid 1px #ea352d;
+}
+div.validation-error {
+  border: solid 1px #ea352d;
+}
+
 select.validation-error {
   border: solid 1px #ea352d;
 }

@@ -8,6 +8,13 @@ $(document).on('turbolinks:load', function() {
   var preview = $('.preview');
   var input_area = $('.input_area');
 
+  // カテゴリが既に入力されている場合、入力された値をビューへ渡す
+  if($("#grandchild_category").length !== 0) {
+    $("#parent_category").val(gon.parent_category);
+    $("#child_category").val(gon.child_id);
+    $("#grandchild_category").val(gon.grandchild_category);
+  };
+
   // DB保存に失敗(Rollback)した際に残っている、動的に生成したinputタグを削除する
   $(document).ready(function(){
     for (var i = preview.length; i > 1; i--) {
