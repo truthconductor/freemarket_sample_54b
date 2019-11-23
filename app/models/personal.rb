@@ -20,7 +20,8 @@ class Personal < ApplicationRecord
   validates :cellular_phone_number,length: {maximum: 35}
   validates :cellular_phone_number, presence: true
   validate :check_phone_number
-  validates :birthdate, presence: true
+  validates :birthdate, presence: true,format: {message: "を正しく入力してください", with: /\A[1-9]{1}[0-9]{3}-[0-9]{2}-[0-9]{2}\z/}
+  #validate :date_valid
   #カタカナとひらがな以外のデータを制限
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/  ,message: "はひらがなかカタカナで入力してください"}
   validates :last_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{hiragana}\p{blank}ー－]+\z/ ,message: "はひらがなかカタカナで入力してください"}
@@ -34,4 +35,5 @@ class Personal < ApplicationRecord
       errors.add(:cellular_phone_number, "を正しく入力してください")
     end
   end
+
 end
