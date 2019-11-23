@@ -1,11 +1,7 @@
 $(document).on('turbolinks:load', function() {
 
-  //商品編集ページの時既にブランド入力エリアが存在するので、
   //インクリメンタルサーチ機能を追加する
-  var re = new RegExp('/items/[0-9]+/edit$');
-  if(re.test(location.pathname)) {
-    addIncrementalSearch();
-  }
+  addIncrementalSearch();
 
   function appendOption(category) {
     var html = `<option value="${category.id}">${category.name}</option>`;

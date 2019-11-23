@@ -16,9 +16,15 @@
             = f.fields_for :item_images do |item_image|
               .preview
                 = item_image.label :image, class: "dropzone-box", for: "upload-image-0" do
-                  .input_area.items-sell-container__dropzone0
-                    %p.image-upload-text ここをクリックして画像をアップロード
-                    = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image {validation-error if @item.errors.full_messages_for(:item_images).present?}", 'data-image': 0
+                  - if @item.errors.full_messages_for(:item_images).present?
+                    .input_area.items-sell-container__dropzone0.validation-error
+                      %p.image-upload-text ここをクリックして画像をアップロード
+                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+                  - else
+                    .input_area.items-sell-container__dropzone0
+                      %p.image-upload-text ここをクリックして画像をアップロード
+                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+                .validation-error__text
                   - if @item.errors.full_messages_for(:item_images).length == 2
                     = @item.errors.full_messages_for(:item_images)[1]
                   - else
@@ -34,7 +40,7 @@
                 必須
             = f.text_field :name, placeholder: "商品名(必須 40文字まで)", class:"items-sell-container__form__field__input-field"
             - if @item.errors.full_messages_for(:name).present?
-              %p 入力してください
+              %p.validation-error__text 入力してください
           .items-sell-container__form__description
             .items-sell-container__form__description__label
               = f.label :description, "商品の説明"
@@ -42,7 +48,7 @@
                 必須
             = f.text_area :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class:"items-sell-container__form__description__text_field"
             - if @item.errors.full_messages_for(:description).present?
-              %p 入力してください
+              %p.validation-error__text 入力してください
 
         %section.items-sell-content__section.clearfix
           %h3.item__heading 商品の詳細
@@ -53,16 +59,36 @@
                 %span.form--required
                   必須
               = f.select :category, @category_parent_array, {}, id:"parent_category", class:"items-sell-container__form__field__input-field"
+              - if @item.errors.full_messages_for(:category).present?
+                %p.validation-error__text 選択してください
               .items-sell-detail__category
-
+                .items-sell-container__form__field-detail#children_wrapper
+                  - unless @item.category.nil?
+                    %div{id: "#{Category.find_by(id: @item.category_id).parent.nil? ? "none" : "children_wrapper"}"}
+                      = f.select :category, {}, {}, {id:"child_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'} do
+                        - @category_child_array.each do |c|
+                          = content_tag(:option, c.first, value: c.last)
+                .items-sell-container__form__field-detail#grandchildren_wrapper
+                  - unless @item.category.nil?
+                    %div{id: "#{Category.find_by(id: @item.category_id).parent.parent.nil? ? "none" : "grandchildren_wrapper"}"}
+                      = f.select :category, {}, {}, {id:"grandchild_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'} do
+                        - @category_grandchild_array.each do |c|
+                          = content_tag(:option, c.first, value: c.last)
+            - unless Category.find_by(id: @item.category_id)&.parent&.parent.nil?
+              .items-sell-container__form__field#brand_wrapper
+                .items-sell-container__form__field__label
+                  = f.label :brand_name, "ブランド"
+                  %span.form--optional
+                    任意
+                = f.text_field :brand_name, value: @item.brand&.name, placeholder: "例）シャネル", id:"item_brand_input", class:"items-sell-container__form__field__input-field", autocomplete: "off"
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :item_state_id, "商品の状態"
                 %span.form--required
                   必須
-              = f.collection_select :item_state_id, ItemState.all, :id, :state, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
+              = f.collection_select :item_state_id, ItemState.all, :id, :state, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field #{"validation-error" if @item.errors.full_messages_for(:item_state).present?}"}
               - if @item.errors.full_messages_for(:item_state).present?
-                %p 入力してください
+                %p.validation-error__text 入力してください
 
         %section.items-sell-content__section.clearfix
           %h3.delivery__heading 配送について
@@ -74,10 +100,19 @@
                 = f.label :deliver_expend_id, "配送料の負担"
                 %span.form--required
                   必須
-              = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
+              = f.collection_select :deliver_expend_id, DeliverExpend.all, :id, :expend, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field #{"validation-error" if @item.errors.full_messages_for(:deliver_expend).present?}"}
               - if @item.errors.full_messages_for(:deliver_expend).present?
-                %p 選択してください
+                %p.validation-error__text 選択してください
             #items-sell-delivery-method
+              - unless @item.deliver_expend.nil?
+                %div{class: "items-sell-container__form__field", id: @item.deliver_expend.nil? ? "none" : "deliver_method"}
+                  .items-sell-container__form__field__label
+                    = f.label :deliver_method_id, "配送の方法"
+                    %span.form--required
+                      必須
+                  = f.collection_select :deliver_method_id, @deliver_methods, :id, :method, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
+                  - if @item.errors.full_messages_for(:deliver_method).present?
+                    %p.validation-error__text 選択してください
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :prefecture_id, "発送元の地域"
@@ -85,15 +120,15 @@
                   必須
               = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
               - if @item.errors.full_messages_for(:prefecture_id).present?
-                %p 選択してください
+                %p.validation-error__text 選択してください
             .items-sell-container__form__field
               .items-sell-container__form__field__label
                 = f.label :deliver_day_id, "発送までの日数"
                 %span.form--required
                   必須
-              = f.collection_select :deliver_day_id, DeliverDay.all, :id, :day, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field"}
+              = f.collection_select :deliver_day_id, DeliverDay.all, :id, :day, {include_blank: "---"}, {class:"items-sell-container__form__field__input-field #{"validation-error" if @item.errors.full_messages_for(:deliver_day).present?}"}
               - if @item.errors.full_messages_for(:deliver_day).present?
-                %p 選択してください
+                %p.validation-error__text 選択してください
 
         %section.items-sell-content__section.clearfix
           %h3.price__heading 販売価格(300〜9,999,999)
@@ -105,17 +140,23 @@
                 = f.label :amount, "価格"
                 %span.form--required
                   必須
-              = f.number_field :amount, placeholder: "例）300", class: "items-sell-container__form__field__input-field item-value"
+              = f.number_field :amount, placeholder: "例）300", class: "items-sell-container__form__field__input-field item-value #{"validation-error" if @item.errors.full_messages_for(:amount).present?}", max: 9999999
               - if @item.errors.full_messages_for(:amount).present?
-                %p 300以上9999999以下で入力してください
+                %p.validation-error__text 300以上9999999以下で入力してください
             .margin-calculation
               販売手数料(10%)
               .margin-calculation__result
-                \-
+                - unless @item.amount.nil?
+                  ¥#{(@item.amount / 10).to_s(:delimited)}
+                - else 
+                  \-
             .profit-calculation
               販売利益
               .profit-calculation__result
-                \-
+                - unless @item.amount.nil?
+                  ¥#{(@item.amount - @item.amount / 10).to_s(:delimited)}
+                - else
+                  \-
         %section.items-sell-content__section.clearfix
           %p 
             禁止されている出品、行為を必ずご確認ください。

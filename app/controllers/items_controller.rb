@@ -20,6 +20,30 @@ class ItemsController < ApplicationController
       else
         #画像がアップロードされずにRollbackした場合、ネストしているitem_imagesモデルが消えるため、新たにbuildする。
         @item.item_images.build if @item.item_images.empty?
+
+        #render :newした際にカテゴリが入力されている場合、カテゴリデータを読み込む
+        unless Category.find_by(id: @item.category_id).nil?
+          child_id = gon.child_id = Category.find_by(id: @item.category_id).parent_id
+          set_category_grandchild_array(child_id)
+
+          unless Category.find_by(id: @item.category_id).parent.parent.nil?
+            parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.parent.name
+            gon.grandchild_category = @item.category_id
+          else
+            parent_name = gon.parent_category = Category.find_by(id: @item.category_id).parent.name
+            gon.child_id = @item.category_id
+          end
+          set_category_child_array(parent_name)
+        end
+
+        #配送方法が入力されていれば、支払い方法のフォームを表示する
+        unless @item.deliver_expend.nil?
+          if @item.deliver_expend_id == 1
+            get_deliver_method
+          else
+            get_deliver_method_cash_on_delivery
+          end
+        end
         flash.now[:alert] = '入力内容に不備があります'
         format.html{render action: 'new'}
       end
@@ -54,8 +78,7 @@ class ItemsController < ApplicationController
       get_deliver_method_cash_on_delivery
     end
 
-    # バイナリデータをbase64でエンコードする←おそらく不要
-    # require 'base64'
+    # S3から画像を引っ張るために導入
     require 'aws-sdk-s3'
 
     gon.item_images_binary_datas = []
@@ -200,7 +223,6 @@ class ItemsController < ApplicationController
   private
   def create_params
     params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount, item_images_attributes: [:image])
-    # params.require(:item).permit(:name, :description, :category_id, :item_state_id, :deliver_expend_id, :deliver_method_id, :prefecture_id, :deliver_day_id, :amount)
   end
 
   def brand_name_params
