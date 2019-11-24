@@ -200,7 +200,8 @@ $(document).on("turbolinks:load", function() {
   $('.edit_item').on('submit', function(e) {
     e.preventDefault();
     // 画像が一枚もアップロードされていない時はajax送信しないように条件分岐
-    if($('[type=file]').length + $('[type=file]').length > 3) {
+    // アップロードされている画像が0枚の状態で、type = hidden(3) + type = file(1) = inputが4つ存在する
+    if($('[type=hidden]').length + $('[type=file]').length > 4) {
       // 登録済み画像の入っているhidden_fieldを削除する
       $('input[id^="item_item_images_attributes"]').remove();
 
