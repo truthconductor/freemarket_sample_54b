@@ -175,35 +175,40 @@ $(document).on("turbolinks:load", function() {
     })
   }
 
-  // 編集後のデータ送信(submitボタンを指定してもイベントは発火しない)
   $('.edit_item').on('submit', function(e) {
     e.preventDefault();
+    // 画像が一枚もアップロードされていない時はajax送信しないように条件分岐
+    if($('[type=file]').length + $('[type=file]').length > 3) {
+      // 登録済み画像の入っているhidden_fieldを削除する
+      $('input[id^="item_item_images_attributes"]').remove();
 
-    // 登録済み画像の入っているhidden_fieldを削除する
-    $('input[id^="item_item_images_attributes"]').remove();
+      // form情報をformDataに追加
+      var formElement = $('#item-dropzone').get(0)
+      var formData = new FormData(formElement);
 
-    // form情報をformDataに追加
-    var formElement = $('#item-dropzone').get(0)
-    var formData = new FormData(formElement);
+      // 登録済画像が残っていない場合は便宜的に0を入れる
+      if (registered_images_ids.length == 0) {
+        formData.append("registered_images_ids[ids][]", 0)
+      // 登録済画像で、まだ残っている画像があればidをformDataに追加していく
+      }
+      else {
+        registered_images_ids.forEach(function(registered_image) {
+          formData.append("registered_images_ids[ids][]", registered_image)
+        });
+      }
 
-    // 登録済画像が残っていない場合は便宜的に0を入れる
-    if (registered_images_ids.length == 0) {
-      formData.append("registered_images_ids[ids][]", 0)
-    // 登録済画像で、まだ残っている画像があればidをformDataに追加していく
+      $.ajax({
+        url: '/items/' + gon.item.id,
+        type: "PATCH",
+        data: formData,
+        contentType: false,
+        processData: false,
+      })
     }
     else {
-      registered_images_ids.forEach(function(registered_image) {
-        formData.append("registered_images_ids[ids][]", registered_image)
-      });
+      alert('画像が選択されていません');
+      return false;
     }
-
-    $.ajax({
-      url: '/items/' + gon.item.id,
-      type: "PATCH",
-      data: formData,
-      contentType: false,
-      processData: false,
-    })
   });
 });  
 

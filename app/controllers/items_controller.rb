@@ -184,21 +184,21 @@ class ItemsController < ApplicationController
 
   #エラー回避のため、newだけでなくcreateにも持たせる必要がある。
   def set_category_parent_array
-    @category_parent_array = ["---"]
+    @category_parent_array = []
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
   end 
 
   def set_category_child_array(parent_name)
-    @category_child_array = [["---", "---"]]
+    @category_child_array = []
     Category.find_by(name: parent_name, ancestry: nil).children.each do |child|
       @category_child_array << [child.name, child.id]
     end
   end
 
   def set_category_grandchild_array(child_id)
-    @category_grandchild_array = [["---", "---"]]
+    @category_grandchild_array = []
     Category.find_by(id: child_id).children.each do |grandchild|
       @category_grandchild_array << [grandchild.name, grandchild.id]
     end
