@@ -37,7 +37,6 @@ $(document).on('turbolinks:load', function() {
     // ファイル拡張子を制限
     var img_name_splt = this.files[0].name.toLowerCase().split(".");
     img_extension = img_name_splt[img_name_splt.length - 1]
-    console.log(img_extension);
     switch (img_extension) {
       case 'jpg':
       case 'jpeg':
