@@ -18,7 +18,7 @@
                 = item_image.label :image, class: "dropzone-box", for: "upload-image-#{@item.item_images.length}" do
                   .input_area.items-sell-container__dropzone0
                     %p.image-upload-text ここをクリックして画像をアップロード
-                    = item_image.file_field :image, style: "display: none;", name: "item[item_images_attributes][#{@item.item_images.length}][image]", id: "upload-image-#{@item.item_images.length}", class: "upload-image", 'data-image': @item.item_images.length
+                    = item_image.file_field :image, style: "display: none;", name: "item[item_images_attributes][#{@item.item_images.length}][image]", id: "upload-image-#{@item.item_images.length}", class: "upload-image", 'data-image': @item.item_images.length, accept: "image/jpg,image/jpeg,image/png"
                   - if @item.errors.full_messages_for(:item_images).length == 2
                     = @item.errors.full_messages_for(:item_images)[1]
                   - else

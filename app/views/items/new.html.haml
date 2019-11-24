@@ -19,11 +19,11 @@
                   - if @item.errors.full_messages_for(:item_images).present?
                     .input_area.items-sell-container__dropzone0.validation-error
                       %p.image-upload-text ここをクリックして画像をアップロード
-                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0, accept: "image/jpg,image/jpeg,image/png"
                   - else
                     .input_area.items-sell-container__dropzone0
                       %p.image-upload-text ここをクリックして画像をアップロード
-                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0
+                      = item_image.file_field :image, style: "display: none;", name: 'item[item_images_attributes][0][image]', id: "upload-image-0", class: "upload-image", 'data-image': 0, accept: "image/jpg,image/jpeg,image/png"
                 .validation-error__text
                   - if @item.errors.full_messages_for(:item_images).length == 2
                     = @item.errors.full_messages_for(:item_images)[1]

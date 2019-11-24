@@ -55,6 +55,29 @@ $(document).on("turbolinks:load", function() {
   // inputの中身の変更時に発生
   $(document).on('change', '[type="file"].upload-image', function(event) {
 
+    // ファイルサイズを制限
+    var img_size = this.files[0].size;
+    if (img_size >= 3000000) {
+      alert("画像のファイルサイズは3MB以下にしてください");
+      $(this).val("")
+      return false
+    }
+
+    // ファイル拡張子を制限
+    var img_name_splt = this.files[0].name.toLowerCase().split(".");
+    img_extension = img_name_splt[img_name_splt.length - 1]
+    console.log(img_extension);
+    switch (img_extension) {
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+        break;
+      default:
+        alert("画像ファイルの拡張子は、.jpg / .jpeg / .pngのいずれかにしてください");
+        $(this).val("")
+        return false
+    }
+
     // 変更を行ったinputを取得する
     changed_input = $(this);
     changed_id = changed_input.data('image');
@@ -62,7 +85,7 @@ $(document).on("turbolinks:load", function() {
     inputs_length = $('input[name^="item[item_"]').length;
     //画像が10枚より少ない場合、inputを更に追加
     if(inputs_length <= 10) {
-      var new_input = $(`<input class="upload-image" type="file" style="display: none;" name="item[item_images_attributes][${inputs_length}][image]" id="upload-image-${inputs_length}">`);
+      var new_input = $(`<input class="upload-image" type="file" style="display: none;" name="item[item_images_attributes][${inputs_length}][image]" id="upload-image-${inputs_length}" accept="image/jpg,image/jpeg,image/png">`);
       input_area.append(new_input);
     }
 
