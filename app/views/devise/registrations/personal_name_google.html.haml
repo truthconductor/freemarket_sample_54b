@@ -33,12 +33,14 @@
               %br/
             .registration-form-personal--section
               = personal.text_field :first_name, autocomplete: "off",class:"registration-personal-input",placeholder: "例)彩"
-              %br/
-            - if resource.errors.full_messages_for((:"personal.first_name")||(:"personal.last_name")).any?
+            %br/
+            - if resource.errors.full_messages_for(:"personal.first_name").any?
               %ul
                 - resource.errors.full_messages_for(:"personal.first_name").each do |msg|
                   %li.validation-error__text
                     = msg
+            %br/
+            - if resource.errors.full_messages_for(:"personal.last_name").any?
               %ul
                 - resource.errors.full_messages_for(:"personal.last_name").each do |msg|
                   %li.validation-error__text
@@ -52,15 +54,18 @@
               = personal.text_field :last_name_kana, autocomplete: "off",class:"registration-personal-input",placeholder: "例)ヤマダ"
             .registration-form-personal--section
               = personal.text_field :first_name_kana, autocomplete: "off",class:"registration-personal-input",placeholder: "例)アヤ"
-            - if resource.errors.full_messages_for((:"personal.first_name_kana")||(:"personal.last_name_kana")).any?
-              %ul
-                - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
-                  %li.validation-error__text
-                    = msg
-              %ul
-                - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
-                  %li.validation-error__text
-                    = msg
+          %br/  
+          - if resource.errors.full_messages_for(:"personal.first_name_kana").any?
+            %ul
+              - resource.errors.full_messages_for(:"personal.first_name_kana").each do |msg|
+                %li.validation-error__text
+                  = msg
+          %br/
+          - if resource.errors.full_messages_for(:"personal.last_name_kana").any?
+            %ul
+              - resource.errors.full_messages_for(:"personal.last_name_kana").each do |msg|
+                %li.validation-error__text
+                  = msg
           .registration-form-field
             = personal.label "生年月日"
             %span.form--required
@@ -81,6 +86,7 @@
           %span 
             =link_to "利用規約", "" ,class:"registration-form-right--link" 
           に同意したものとみなします
+        = recaptcha_tags
         %div
           .registration-actions
             = f.submit "次へ進む",class:"registration-btn"

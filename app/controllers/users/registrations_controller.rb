@@ -63,8 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def address
    build_resource
-   @user.build_personal
-   @user.build_profile
+   @user.build_delivery_address
   end
 
   def creditcard
@@ -95,12 +94,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_name_kana: session[:first_name_kana],
       last_name_kana: session[:last_name_kana],
       birthdate: session[:birthdate],
-      cellular_phone_number: session[:phone_number].to_s,
+      cellular_phone_number: session[:phone_number].to_s
+    )
+    resource.build_delivery_address(
+      first_name: session[:first_name],
+      last_name: session[:last_name],
+      first_name_kana: session[:first_name_kana],
+      last_name_kana: session[:last_name_kana],
       zip_code: session[:zip_code],
       prefecture_id: session[:prefecture_id],
       city: session[:city],
       address: session[:address],
-      building: session[:building]
+      building: session[:building],
+      phone_number: session[:phone_number].to_s
     )
 
     resource.skip_confirmation! if session[:provider].present?
@@ -220,7 +226,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       city: "札幌市",
       address: "中央区北1条西2丁目"
     )
-    render action: :personal_name unless @user.valid?
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      resource.validate # Look for any other validation errors besides Recaptcha
+      set_minimum_password_length
+    end
+    render action: :personal_name  unless @user.valid?
   end
 
 
@@ -257,6 +268,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       city: "札幌市",
       address: "中央区北1条西2丁目"
     )
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      resource.validate # Look for any other validation errors besides Recaptcha
+      set_minimum_password_length
+    end
     render action: :personal_name_google unless @user.valid?
   end
 
@@ -287,11 +303,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def validates_address
-    session[:zip_code]=params[:personal][:zip_code]
-    session[:prefecture_id]=params[:personal][:prefecture_id]
-    session[:city]=params[:personal][:city]
-    session[:address]=params[:personal][:address]
-    session[:building]=params[:personal][:building]
+    session[:zip_code]=params[:delivery_address][:zip_code]
+    session[:prefecture_id]=params[:delivery_address][:prefecture_id]
+    session[:city]=params[:delivery_address][:city]
+    session[:address]=params[:delivery_address][:address]
+    session[:building]=params[:delivery_address][:building]
     @user = User.new(
       email: session[:email],
       password: session[:password],
@@ -306,12 +322,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       last_name_kana: session[:last_name_kana],
       first_name_kana: session[:first_name_kana],
       birthdate: session[:birthdate],
-      cellular_phone_number: session[:phone_number],
+      cellular_phone_number: session[:phone_number]
+    )
+    @delivery_address=@user.build_delivery_address(
+      last_name: session[:last_name],
+      first_name: session[:first_name],
+      last_name_kana: session[:last_name_kana],
+      first_name_kana: session[:first_name_kana],
       zip_code: session[:zip_code],
       prefecture_id: session[:prefecture_id],
       city: session[:city],
       address: session[:address],
-      building: session[:building]
+      building: session[:building],
+      phone_number: session[:phone_number]
     )
     render action: :address unless @user.valid?
   end
@@ -328,6 +351,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def token_params
     params.permit(:card_token)
-  end
-
+  end 
 end
