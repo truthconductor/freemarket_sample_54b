@@ -11,8 +11,8 @@ $(document).on('turbolinks:load', function() {
   // 子カテゴリーの表示を作成する
   function appendChildrenBox(insertHTML) {
     var childSelectHtml = $(`<div class='items-sell-container__form__field-detail' id='children_wrapper'>
-                               <select class='items-sell-container__form__field__input-field' id='child_category' name='item[category_id]'>
-                                 <option value="---">---</option>
+                               <select class='items-sell-container__form__field__input-field' id='child_category' name='item[category_id]' required='required'>
+                                 <option value="">---</option>
                                  ${insertHTML}
                                </select>
                              </div>`);
@@ -21,8 +21,8 @@ $(document).on('turbolinks:load', function() {
   // 孫カテゴリーの表示を作成する
   function appendGrandchildrenBox(insertHTML) {
     var grandchildSelectHTML = $(`<div class='items-sell-container__form__field-detail' id='grandchildren_wrapper'>
-                                    <select class='items-sell-container__form__field__input-field' id='grandchild_category' name='item[category_id]'>
-                                      <option value="---">---</option>
+                                    <select class='items-sell-container__form__field__input-field' id='grandchild_category' name='item[category_id]' required='required'>
+                                      <option value="">---</option>
                                       ${insertHTML}
                                     </select>
                                   </div>`);
@@ -113,7 +113,7 @@ $(document).on('turbolinks:load', function() {
     $('#brand_wrapper').remove();
     // 選択したカテゴリーを取得
     var parentCategory = $('#parent_category').val();
-    if (parentCategory != "---") {
+    if (parentCategory != "") {
       $.ajax({
         url: '/items/get_category_children',
         type: 'GET',
@@ -140,7 +140,7 @@ $(document).on('turbolinks:load', function() {
     $('#brand_wrapper').remove();
     // 選択したカテゴリーを取得
     var childId = $('#child_category option:selected').val();
-    if (childId != "---") {
+    if (childId != "") {
       $.ajax ({
         url: '/items/get_category_grandchildren',
         type: 'GET',
@@ -177,7 +177,7 @@ $(document).on('turbolinks:load', function() {
   // 孫カテゴリー選択後のイベント
   $('.items-sell-detail__category').on('change', '#grandchild_category', function() {
     var grandchildId = $('#grandchild_category option:selected').val();
-    if (grandchildId != "---") {
+    if (grandchildId != "") {
       if($('#brand_wrapper').length == 0) {
         // 孫カテゴリー選択後ブランド入力を追加
         // TODO:ブランド入力が可能なカテゴリーかを非同期通信で判断し追加する条件分岐が必要

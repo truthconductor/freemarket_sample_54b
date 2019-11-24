@@ -11,8 +11,8 @@ $(document).on('turbolinks:load', function() {
                                    <label for='deliver_method_id'>配送の方法</label>
                                    <span class='form--required'>必須</span>
                                  </div>
-                                 <select class='items-sell-container__form__field__input-field' id='deliver_method' name='item[deliver_method_id]'>
-                                   <option value="---">---</option>
+                                 <select class='items-sell-container__form__field__input-field' id='deliver_method' name='item[deliver_method_id]' required='required'>
+                                   <option value="">---</option>
                                    ${insertHTML}
                                  </select>
                                </div>`);

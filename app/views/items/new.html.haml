@@ -38,7 +38,7 @@
               = f.label :name, "商品名"
               %span.form--required
                 必須
-            = f.text_field :name, placeholder: "商品名(必須 40文字まで)", class:"items-sell-container__form__field__input-field"
+            = f.text_field :name, placeholder: "商品名(必須 40文字まで)", class:"items-sell-container__form__field__input-field", maxlength: 40
             - if @item.errors.full_messages_for(:name).present?
               %p.validation-error__text 入力してください
           .items-sell-container__form__description
@@ -46,7 +46,7 @@
               = f.label :description, "商品の説明"
               %span.form--required
                 必須
-            = f.text_area :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class:"items-sell-container__form__description__text_field"
+            = f.text_area :description, placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class:"items-sell-container__form__description__text_field", maxlength: 1000
             - if @item.errors.full_messages_for(:description).present?
               %p.validation-error__text 入力してください
 
@@ -58,9 +58,7 @@
                 = f.label :category_id, "カテゴリー"
                 %span.form--required
                   必須
-              = f.select :category, @category_parent_array, {}, id:"parent_category", class:"items-sell-container__form__field__input-field"
-              - if @item.errors.full_messages_for(:category).present?
-                %p.validation-error__text 選択してください
+              = f.select :category, @category_parent_array, {include_blank: "---"}, id:"parent_category", class:"items-sell-container__form__field__input-field"
               .items-sell-detail__category
                 .items-sell-container__form__field-detail#children_wrapper
                   - unless @item.category.nil?
@@ -74,6 +72,8 @@
                       = f.select :category, {}, {}, {id:"grandchild_category", class:"items-sell-container__form__field__input-field", name:'item[category_id]'} do
                         - @category_grandchild_array.each do |c|
                           = content_tag(:option, c.first, value: c.last)
+              - if @item.errors.full_messages_for(:category).present?
+                %p.validation-error__text 選択してください
             - unless Category.find_by(id: @item.category_id)&.parent&.parent.nil?
               .items-sell-container__form__field#brand_wrapper
                 .items-sell-container__form__field__label
