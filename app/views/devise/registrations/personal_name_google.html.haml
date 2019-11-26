@@ -86,7 +86,8 @@
           %span 
             =link_to "利用規約", "" ,class:"registration-form-right--link" 
           に同意したものとみなします
-        = recaptcha_tags
+        = if Rails.env.development? 
+          = recaptcha_tags
         %div
           .registration-actions
             = f.submit "次へ進む",class:"registration-btn"
