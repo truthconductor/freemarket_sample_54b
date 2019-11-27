@@ -226,10 +226,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       city: "札幌市",
       address: "中央区北1条西2丁目"
     )
-    unless verify_recaptcha
-      self.resource = resource_class.new sign_up_params
-      resource.validate # Look for any other validation errors besides Recaptcha
-      set_minimum_password_length
+    if Rails.env.development? 
+      unless verify_recaptcha
+        self.resource = resource_class.new sign_up_params
+        resource.validate # Look for any other validation errors besides Recaptcha
+        set_minimum_password_length
+      end
     end
     render action: :personal_name  unless @user.valid?
   end
