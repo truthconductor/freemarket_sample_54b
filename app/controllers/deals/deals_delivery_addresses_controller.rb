@@ -28,7 +28,7 @@ class Deals::DealsDeliveryAddressesController < DeliveryAddressesController
         redirect_to(new_item_purchase_path, notice: "配送先を変更しました")
       else
         flash[:alert] = '入力内容に不備があります'
-        render :new
+        render :edit
       end
     end
   end
