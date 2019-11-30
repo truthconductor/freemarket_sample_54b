@@ -85,49 +85,51 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'carrierwave'
-gem 'fog-aws'
-gem 'devise'
-gem 'haml-rails'
-gem 'erb2haml'
-gem 'active_hash'
-gem 'ancestry'
-# Use jquery as the JavaScript library
+
+# JavaScript library
 gem 'jquery-rails'
-# Use pay.jp
-gem 'payjp'
-# create breadcrumbs
-gem 'gretel'
+gem 'gon'
 
-gem 'font-awesome-rails'
-gem 'mini_magick'
-gem 'nokogiri'
-
-gem 'autoprefixer-rails'
-
+# devise
+gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
-gem 'nokogiri'
-
-gem 'phonelib'
-
-gem 'draper'
-
-
-gem 'gon'
-
-gem 'aws-sdk-s3'
-
-gem 'whiny_validation'
-
-
+# omniauth
 gem "omniauth"
-
 gem "omniauth-facebook"
-
+gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 
-gem 'omniauth-google-oauth2'
+# markup
+gem 'autoprefixer-rails'
+gem 'erb2haml'
+gem 'font-awesome-rails'
+gem 'haml-rails'
 
+# extend view
+gem 'draper'
+gem 'nokogiri'
+
+# AWS image upload/download
+gem 'aws-sdk-s3'
+gem 'carrierwave'
+gem 'fog-aws'
+gem 'mini_magick'
+
+# Database
+gem 'active_hash'
+gem 'ancestry'
+
+# validation
+gem 'phonelib'
+gem 'whiny_validation'
+
+# create breadcrumbs
+gem 'gretel'
+
+# Use pay.jp
+gem 'payjp'
+
+# Use recaptcha
 gem "recaptcha", require: "recaptcha/rails"
