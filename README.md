@@ -85,7 +85,8 @@
 
 ## categoriesテーブル（カテゴリー）
 
-経路列挙モデル
+経路列挙モデルテーブル(gem ancestry)を使用
+
 |属性|Column|Type|Options|
 |---|---|---|---|
 |カテゴリ名|name|string|null: false|
