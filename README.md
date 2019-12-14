@@ -1,6 +1,8 @@
 # README
 
-## usersテーブル（ユーザー）
+## DB設計
+
+### usersテーブル（ユーザー）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -9,11 +11,11 @@
 |認証プロバイダ|provider|string||
 |UID|uid|string||
 
-### index
+#### index
 
 - add_index :users, :nickname
 
-### Association
+#### Association
 
 - belongs_to :user
 - has_one :profile, dependent: :destroy
@@ -26,7 +28,7 @@
 - has_many :item_comments
 - has_many :item_likes
 
-## profilesテーブル（プロフィール）
+### profilesテーブル（プロフィール）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -35,12 +37,12 @@
 |プロフィール画像|avatar|string||
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## personalsテーブル（本人情報）
+### personalsテーブル（本人情報）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -57,12 +59,12 @@
 |携帯番号|cellular_phone_number|string|limit:35|
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## delivery_addressesテーブル（発送元・お届け先）
+### delivery_addressesテーブル（発送元・お届け先）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -78,12 +80,12 @@
 |電話|phone_number|string|limit:35|
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## categoriesテーブル（カテゴリー）
+### categoriesテーブル（カテゴリー）
 
 経路列挙モデルテーブル(gem ancestry)を使用
 
@@ -92,42 +94,42 @@
 |カテゴリ名|name|string|null: false|
 |経路|ancestry|string||
 
-### index
+#### index
 
 - add_index :categories, :ancestry
 
-### Association
+#### Association
 
 - has_many :categories_brands
 - has_many :brands, through: :categories_brands
 - has_many :items
 
-## brandsテーブル（ブランド）
+### brandsテーブル（ブランド）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |ブランド名|name|string|null: false|
 |頭文字|name|first_letter|null: false|
 
-### Association
+#### Association
 
 - has_many :categories_brands
 - has_many :categories, through: :categories_brands
 - has_many :items
 
-## categories_brandsテーブル（中間テーブル）
+### categories_brandsテーブル（中間テーブル）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |カテゴリーid|category_id|reference|null: false, foreign_key: true|
 |ブランドid|brand_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :category
 - belongs_to :brand
 
-## itemsテーブル（商品）
+### itemsテーブル（商品）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -143,12 +145,12 @@
 |ブランドid|brand_id|reference|foreign_key: true|
 |販売者id|seller_id|reference|foreign_key: true|
 
-### index
+#### index
 
 - add_index :items, :name
 - add_index :items, :amount
 
-### Association
+#### Association
 
 - has_many :item_images
 - has_many :item_messages
@@ -163,81 +165,81 @@
 - belongs_to :deal
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 
-## item_imagesテーブル（出品画像）
+### item_imagesテーブル（出品画像）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |画像|image|string|null: false|
 |商品id|item_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :item
 
-## item_statesテーブル（商品状態）
+### item_statesテーブル（商品状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |状態|state|string|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 
-## deliver_expendsテーブル（配送料負担先）
+### deliver_expendsテーブル（配送料負担先）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |負担先|expend|string|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 
-## deliver_methodsテーブル（配送方法）
+### deliver_methodsテーブル（配送方法）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |配送方法|method|string|null: false|
 |着払い可|cash_on_delivery|boolean|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 
-## prefectures [ActiveHash]（都道府県）
+### prefectures [ActiveHash]（都道府県）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |都道府県|prefecture|string|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 - has_many :personals
 - has_many :delivery_addresses
 
-## deliver_daysテーブル（発送日数）
+### deliver_daysテーブル（発送日数）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |発送日数|day|string|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 
-## sales_statesテーブル（販売状態）
+### sales_statesテーブル（販売状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |販売状態|state|string|null: false|
 
-### Association
+#### Association
 
 - has_many :items
 
-## item_comments（商品コメント）
+### item_comments（商品コメント）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -246,24 +248,24 @@
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 |商品id|item_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to :item
 
-## item_likesテーブル（商品いいね）
+### item_likesテーブル（商品いいね）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 |商品id|item_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to :item
 
-## dealsテーブル（取引）
+### dealsテーブル（取引）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -272,7 +274,7 @@
 |販売者id|seller_id|reference|null: false|
 |取引状態id|deal_state_id|reference|null: false|
 
-### Association
+#### Association
 
 - has_one :item
 - has_one :payment, dependent: :destroy
@@ -280,17 +282,17 @@
 - belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
 - belongs_to_active_hash :deal_state
 
-## deal_states [ActiveHash]（取引状態）
+### deal_states [ActiveHash]（取引状態）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |取引状態|state|string|null: false|
 
-### Association
+#### Association
 
 - has_many :deals
 
-## paymentsテーブル（支払い）
+### paymentsテーブル（支払い）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
@@ -298,17 +300,17 @@
 |ポイント|point|integer|null: false|
 |取引id|deal_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :deal
 
-## credit_cardsテーブル（クレジットカード）
+### credit_cardsテーブル（クレジットカード）
 
 |属性|Column|Type|Options|
 |---|---|---|---|
 |顧客id(PAY.JP)|customer_id|string|null: false|
 |ユーザーid|user_id|reference|null: false, foreign_key: true|
 
-### Association
+#### Association
 
 - belongs_to :user
