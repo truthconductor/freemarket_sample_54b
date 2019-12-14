@@ -6,7 +6,7 @@ app_path = File.expand_path('../../', __FILE__)
 worker_processes 1
 
 # Railsアプリケーションの設置されているディレクトリを指定
-working_directory "app_path"
+working_directory app_path
 
 # それぞれ、sharedの中を参照するよう変更
 # Unicornの起動に生成されるpidファイルの設置場所を指定
