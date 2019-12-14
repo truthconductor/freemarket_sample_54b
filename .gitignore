@@ -32,7 +32,7 @@
 .rubocop_todo.yml
 
 server.crt
-
 server.csr
-
 server.key
+
+user/*csv
